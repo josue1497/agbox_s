@@ -30,7 +30,7 @@
       <!-- Divider -->
 		<hr class="sidebar-divider"> 
 	   <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item  active" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAjustes" aria-expanded="true" aria-controls="collapseAjustes">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Ajustes</span>

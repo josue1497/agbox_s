@@ -75,7 +75,7 @@ class Menu extends Model{
 		
 		return $menu_array;
 	}
-	
+
 	public function sort_by_key($arr,$key){
 		$len = count($arr);
 		for($i=0;$i<$len-1;$i++){

@@ -3,31 +3,11 @@
 		<title>Login Form</title>
 		<link rel="stylesheet" type="text/css" href="{{ base_url }}Views/Layouts/styles/style.css">
 		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway' rel='stylesheet' type='text/css'>
-		<style>
-			.bg-login-image2{
-				background-image:url('{{ base_url }}/Views/Layouts/imgs/int_2.jpg');
-				background-position:center;
-				background-size:cover;
-			}
-		</style>
 	</head>
 	<body>
-		<!----
-		<?php
-		if (isset($logout_message)) {
-			echo "<div class='message'>";
-			echo $logout_message;
-			echo "</div>";
-		}
-		?>
-		<?php
-		if (isset($message_display)) {
-			echo "<div class='message'>";
-			echo $message_display;
-			echo "</div>";
-		}
-		?>
-		---->
+
+		{{ app_message }}
+		
   <div class="container">
 
     <!-- Outer Row -->
@@ -39,23 +19,19 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image2"></div>
+              <div class="col-lg-6 d-none d-lg-block bg-login-image2r">
+              		<img src="{{ base_url }}Views/Layouts/imgs/int_2.jpg"
+              			 style="height:100%;width:100%;"/>
+              	</div>
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
                   </div>
                   <form class="user" action="#" method="post" id="form_log_in">
-                  	<!---
-				<?php
-				echo "<div class='error_msg'>";
-				if (isset($error_message)) {
-					echo $error_message;
-				}
-				echo validation_errors();
-				echo "</div>";
-				?>
-				--->
+
+                  	{{ error_message }}
+                  	
 				  <input type="hidden" name="login_user" value="1"/>
                     <div class="form-group">
 					<!--type email-->

@@ -1,5 +1,6 @@
 <?php
 	require_once(ROOT.'Models/Menu.php');
+	require_once(ROOT.'Models/Nivel_Usuario.php');
 	
     class Controller{
         var $vars = array();
@@ -10,57 +11,19 @@
         function set($d){
             $this->vars = array_merge($this->vars, $d);
         }
-		
-		function get_file_content($file_url){
-			if(is_file($file_url))
-				return file_get_contents($file_url);
-			return '';
-		}
-		
-		function get_template_file_content($file_url=''){
-			return $this->get_file_content(
-				ROOT . "Views/Layouts/" . 
-					$this->layout . 
-					(($file_url!='')?('/'.$file_url):'') .
-					'.php'
-			);
-		}
-		
-		function get_view_file_content($file_name){
-			return $this->get_file_content(
-				ROOT . "Views/" . 
-					ucfirst(str_replace('Controller', '', get_class($this))) . '/' . 
-					$file_name . 
-					'.php'
-				);
-		}
-		
-		function validate_user_session(){
-			if (Session::check('logged_in')) {
-				$username = Session::get('username');
-				$email =Session::get('email');
-			} else {
-				header("location: ".base_url()."index/login");
-			}
-		}
 
 		function build_view($html_topbar,$html_side,$html_content){
-			$html_view = $this->get_template_file_content('');
+			$html_view = CoreUtils::get_layout_template_content('',$this->layout);
 
 			$html_view =  str_replace(
 					'{{ '.$this->layout.'_styles }}',
-					$this->get_template_file_content('styles'),
+					CoreUtils::get_layout_template_content('styles',$this->layout),
 					$html_view);
 			
 			/* establecer nombre de usuarioen topbar */
 			$user_name='';
 			if(Session::get('user_email')){
-				/*$row = (new Usuario())
-					->get_by_property(array('nombre_usuario'=>Session::get('user_email')));
-					
-				$user_name = $row['nombre_usuario'];
-				*/
-				$user_name=Session::get('user_email');
+				$user_name = Session::get('user_email');
 			}
 			$html_topbar = str_replace('{{ user_name }}',$user_name,$html_topbar);
 
@@ -81,12 +44,12 @@
 			
 			$html_view =  str_replace(
 					'{{ '.$this->layout.'_scripts }}',
-					$this->get_template_file_content('scripts'),
+					CoreUtils::get_layout_template_content('scripts',$this->layout),
 					$html_view);
 			
 			$html_view =  str_replace(
 					'{{ '.$this->layout.'_footer }}',
-					$this->get_template_file_content('footer'),
+					CoreUtils::get_layout_template_content('footer',$this->layout),
 					$html_view);
 
 			return $html_view;
@@ -98,10 +61,15 @@
 			$html_side = '';
 			$html_content='';
 			if(Session::get('log_out')){
-				$html_content=$this->get_file_content(ROOT . "Views/Index/login.php");
+				$html_content=CoreUtils::get_file_content(ROOT . "Views/Index/login.php");
 			}else{
-				$html_topbar = $this->get_template_file_content('topbar');
-				$html_side = $this->get_template_file_content('side');	
+				$tmp = CoreUtils::get_user_permissions_by_controller($this,$filename);
+				if(isset($tmp) && isset($tmp['id_permiso'])){
+					$this->model->crud_config = $tmp;
+				}
+
+				$html_topbar = CoreUtils::get_layout_template_content('topbar',$this->layout);
+				$html_side = CoreUtils::get_layout_template_content('side',$this->layout);	
 				if($auto_build){
 					if($filename == 'index'){
 						$html_content = $this->view->auto_build_list($this->view->auto_build_list_content($records),$records);
@@ -109,9 +77,10 @@
 						$html_content = $this->view->auto_build_form($this->view->auto_build_form_content($record),$record);
 					}
 				}else{
-					$html_content = $this->get_view_file_content($filename);
-					if($html_content=='')
-						$html_content = $this->get_file_content(ROOT . "Views/Index/index");
+					$html_content = CoreUtils::get_view_file_content($filename,$this);
+					if($html_content==''){
+						$html_content = CoreUtils::get_file_content(ROOT . "Views/Index/index");
+					}
 					else{
 						if(isset($this->view)){
 							$html_content = str_replace(
@@ -123,23 +92,9 @@
 				}
 			}
 			
-			/* las vistas del controlador index se genraran sin card*/
+			/* las vistas del controlador index se genraran sin card */
 			if(get_class($this)!='indexController')
-				$html_content='
-					<div class="container">
-						<div class="col-md-8 col-md-offset-2">
-							<div class="card shadow mb-4">
-								<div class="card-header py-3">
-								 <h6 class="m-0 font-weight-bold text-primary">{{ title_module }}</h6>
-								</div>
-								<div class="card-body">
-									<div id="dynamic_content">
-										'.$html_content.'
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>';
+				$html_content = CoreUtils::put_in_card($html_content,"{{ title_module }}");
 			
 			$html_view = $this->build_view(
 					$html_topbar,
@@ -173,7 +128,24 @@
 					'{{ base_url }}',
 					base_url(),
 					$html_view);
-			
+
+			$html_view = str_replace(
+					'{{ error_message }}',
+					(isset($this->record)&& isset($this->record['error_message'])?
+						'<div class="error_msg">'.
+							$this->record['error_message'].
+						'</div>':''),
+					$html_view);
+
+			$html_view = str_replace(
+					'{{ app_message }}',
+					(isset($this->record)&& isset($this->record['app_message'])?
+						'<div class="message">'.
+							$this->record['app_message'].
+						'</div>':''),
+					$html_view);
+			 $html_view = 
+			 	CoreUtils::set_buttons_permissions($this,$filename,$html_view);
 			
 			/* render */
 			echo $html_view;
@@ -184,9 +156,13 @@
 			$menu_data = (new Menu())->get_menu_data();
 			$i=0;
 			foreach($menu_data as $parent){
+				$parent_permission = 
+					CoreUtils::get_user_permissions_by_menu_id($parent['id_menu']);
+				if(!isset($parent_permission) || 
+					(isset($parent_permission) && $parent_permission['can_read'])){
 $i++;
 $html_menu.='<hr class="sidebar-divider">
-<li class="nav-item">
+<li class="nav-item  active">
 	<a class="nav-link collapsed" href="#" data-toggle="collapse" 
 		data-target="#collapse_'.$i.'" 
 		aria-expanded="true" aria-controls="collapse_'.$i.'">
@@ -201,37 +177,33 @@ $html_menu.='<hr class="sidebar-divider">
 $childs = $parent['childs'];
 if(is_array($childs))
 	foreach($childs as $child){
-		$html_menu.='<a class="collapse-item" href="{{ base_url }}'.
+		$child_permission = 
+					CoreUtils::get_user_permissions_by_menu_id($child['id_menu']);
+		if(!isset($child_permission) || 
+			(isset($child_permission) && $child_permission['can_read'])){
+					$html_menu.='<a class="collapse-item" href="{{ base_url }}'.
 			$child['url_menu'].'">'.$child['titulo_menu'].'</a>';
+		}
+		/* end child permission check */
 	}
 		
 $html_menu.='</div>
 	</div>
 </li>';
+}
+/*end parent permission check*/
 			}
 		return $html_menu;
 		}
 		
-        private function secure_input($data){
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
-
-        protected function secure_form($form){
-            foreach ($form as $key => $value){
-                $form[$key] = $this->secure_input($value);
-            }
-        }
-		
+       
 		/*******************************************************/
 		
 		/**
 		* acciones genericas de controlador
 		*/
 		public function init($obj){
-			$this->validate_user_session();
+			CoreUtils::validate_user_session();
 			$this->model = $obj;
 			$this->view = new View($this->model);
 		}

@@ -3,6 +3,8 @@
 	define('TEMPLATE_NAME','intelix_todo');
 	define('APP_NAME','.:: A B X ::.');
 	define('APP_FOLDER','abx_app');
+	define('VIEWS_DIR', ROOT . "Views/");
+	define('LAYOUT_DIR', VIEWS_DIR . "Layouts/");
 
 	/* constantes de la db */
 	define('DB_HOST','localhost');
@@ -11,29 +13,32 @@
 	define('DB_PASS','12345678');
 
 	/* manejador de sesion */
-	require(ROOT . "Core/Session.php");
+	require_once(ROOT . "Core/Session.php");
 	
 	/* manejo de framerwork, carga de controladores, parseo de url, etc */
-	require(ROOT . 'Config/Framework/router.php');
-	require(ROOT . 'Config/Framework/request.php');
-	require(ROOT . 'Config/Framework/dispatcher.php');
+	require_once(ROOT . 'Config/Framework/router.php');
+	require_once(ROOT . 'Config/Framework/request.php');
+	require_once(ROOT . 'Config/Framework/dispatcher.php');
 	
 	/* configuracion de la db */
-	require(ROOT . "Core/DB.php");
+	require_once(ROOT . "Core/DB.php");
 	
 	/* creacion de componentes html */
-	require(ROOT . "Core/Component.php");
+	require_once(ROOT . "Core/Component.php");
 	
 	/* columnas de los modelos */
-	require(ROOT . "Core/Column.php");
+	require_once(ROOT . "Core/Column.php");
 	
 	/* modelo base*/
-	require(ROOT . "Core/Model.php");
-	
-	/* controlador base */
-	require(ROOT . "Core/Controller.php");
+	require_once(ROOT . "Core/Model.php");
 	
 	/* manejador de vista base */
-	require(ROOT . "Core/View.php");
+	require_once(ROOT . "Core/View.php");
+
+	/* utilitarios base */
+	require_once(ROOT . "Core/CoreUtils.php");
+	
+	/* controlador base */
+	require_once(ROOT . "Core/Controller.php");
 	
 ?>
