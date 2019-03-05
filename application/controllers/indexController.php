@@ -18,8 +18,8 @@ class indexController extends Controller{
 	 * @return type
 	 */
 	function login(){
+		$this->model=new Usuario();
 		if(isset($_POST['login_user'])){
-			$this->model=new Usuario();
 			$this->record = array();
 
 			$row = $this->model->get_by_property(array('nombre_usuario'=>$_POST['email']));
@@ -36,8 +36,6 @@ class indexController extends Controller{
 		}else{
 			Session::unset_user_session_data();
 		}
-
-		
 		$this->render("login");	
 	}
 }
