@@ -114,7 +114,6 @@
 		 * @param string $label 
 		 * @return column
 		 */
-		/
 		public function set_label($label){
 			$this->column_label=$label;
 			$this->field_help=$label;
