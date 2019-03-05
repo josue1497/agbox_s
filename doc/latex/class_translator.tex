@@ -1,0 +1,90 @@
+\hypertarget{class_translator}{}\section{Referencia de la Clase Translator}
+\label{class_translator}\index{Translator@{Translator}}
+\subsection*{Métodos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_translator_a359e93b0f7c7037893c54e5c1df94a79}{get\+\_\+lan\+\_\+file}} (\$lan)
+\item 
+static \mbox{\hyperlink{class_translator_a58b9a1f4ddada4fcd2a0a302f902f791}{get\+\_\+translation\+\_\+for\+\_\+view}} (\$lan\+\_\+obj, \$url\+\_\+menu)
+\item 
+static \mbox{\hyperlink{class_translator_a9304be95639cc658a31a56dbfdd5ac7b}{translate}} (\$url, \$html\+\_\+view)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+
+
+Definición en la línea 5 del archivo Translator.\+php.
+
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{class_translator_a359e93b0f7c7037893c54e5c1df94a79}\label{class_translator_a359e93b0f7c7037893c54e5c1df94a79}} 
+\index{Translator@{Translator}!get\_lan\_file@{get\_lan\_file}}
+\index{get\_lan\_file@{get\_lan\_file}!Translator@{Translator}}
+\subsubsection{\texorpdfstring{get\_lan\_file()}{get\_lan\_file()}}
+{\footnotesize\ttfamily static Translator\+::get\+\_\+lan\+\_\+file (\begin{DoxyParamCaption}\item[{}]{\$lan }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para obtener el archivo de traducciones segun el idioma con el que el usuario ha iniciado sesion. por defecto devuelve el idioma ingles
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$lan} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 15 del archivo Translator.\+php.
+
+\mbox{\Hypertarget{class_translator_a58b9a1f4ddada4fcd2a0a302f902f791}\label{class_translator_a58b9a1f4ddada4fcd2a0a302f902f791}} 
+\index{Translator@{Translator}!get\_translation\_for\_view@{get\_translation\_for\_view}}
+\index{get\_translation\_for\_view@{get\_translation\_for\_view}!Translator@{Translator}}
+\subsubsection{\texorpdfstring{get\_translation\_for\_view()}{get\_translation\_for\_view()}}
+{\footnotesize\ttfamily static Translator\+::get\+\_\+translation\+\_\+for\+\_\+view (\begin{DoxyParamCaption}\item[{}]{\$lan\+\_\+obj,  }\item[{}]{\$url\+\_\+menu }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo que devuelve array de traducciones para una vista especifica
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$lan\+\_\+obj} & \\
+\hline
+type & {\em \$url\+\_\+menu} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 37 del archivo Translator.\+php.
+
+\mbox{\Hypertarget{class_translator_a9304be95639cc658a31a56dbfdd5ac7b}\label{class_translator_a9304be95639cc658a31a56dbfdd5ac7b}} 
+\index{Translator@{Translator}!translate@{translate}}
+\index{translate@{translate}!Translator@{Translator}}
+\subsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily static Translator\+::translate (\begin{DoxyParamCaption}\item[{}]{\$url,  }\item[{}]{\$html\+\_\+view }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para traducir el contenido generado de una vista
+
+
+\begin{DoxyParams}[1]{Parámetros}
+ & {\em \$url} & ruta de menu del controlador/ista (index/login) \\
+\hline
+string & {\em \$html\+\_\+view} & contenido generado de la vista \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+string ista generada traducida 
+\end{DoxyReturn}
+
+
+Definición en la línea 51 del archivo Translator.\+php.
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+system/core/Translator.\+php\end{DoxyCompactItemize}

@@ -102,8 +102,9 @@ Métodos públicos estáticos</h2></td></tr>
 <tr class="separator:adcf62251d03ae5b1095544507fb63375"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
-<div class="textblock">
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00002">2</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<div class="textblock"><p>clase de metodos utilitarios </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00005">5</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 </div><h2 class="groupheader">Documentación de las funciones miembro</h2>
 <a id="adcf62251d03ae5b1095544507fb63375"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adcf62251d03ae5b1095544507fb63375">&#9670;&nbsp;</a></span>base_url()</h2>
@@ -127,7 +128,8 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="section return"><dt>Devuelve</dt><dd>type / public static function get_models_to_sql(){ $models = array(); $tables = array();</dd></dl>
+<p>metodo para generar todo el sql a partir de la informacion de los modelos</p>
+<dl class="section return"><dt>Devuelve</dt><dd>type / public static function get_models_to_sql(){ $models = array(); $tables = array();</dd></dl>
 <p>$files = <a class="el" href="class_core_utils.html#a10ac6261e9a04457430db1f22d2321f9">CoreUtils::get_models()</a>; foreach($files as $file){ $file_name = MODELS_DIR . $file;</p>
 <p>$class_name = str_replace('.php', '', $file);</p>
 <p>if(is_file($file_name)) @require_once($file_name);</p>
@@ -135,9 +137,10 @@ Métodos públicos estáticos</h2></td></tr>
 <p>$models[] = $model; $tables[] = $model-&gt;table_name; }</p>
 <p>$tables_sql=""; foreach($models as $model){ $tables_sql.= "Drop Table if Exists ". $model-&gt;table_name.";"; $tables_sql.= "Create Table ". $model-&gt;table_name."(";</p>
 <p>foreach($model-&gt;table_fields as $table_field){ /* en proceso*** / } $tables_sql.= ")". "ENGINE=InnoDB DEFAULT CHARSET=utf8;"; }</p>
-<p>} </p>
+<p>}metodo para generar el url base de la aplicacion independientemente de la ruta en la que se encuentre el cursor en ese momento</p>
+<dl class="section return"><dt>Devuelve</dt><dd>string url </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00244">244</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00269">269</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -164,15 +167,16 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>metodo para obtener el nombre de un controlador</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramtype">type</td><td class="paramname">$controller_class</td><td></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
+<dl class="section return"><dt>Devuelve</dt><dd>string nombre del controlador </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00031">31</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00037">37</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -199,7 +203,8 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>metodo para obtener contenido de archivo si existe </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>metodo para obtener contenido de archivo si existe.</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramtype">string</td><td class="paramname">$file_url</td><td></td></tr>
   </table>
@@ -207,7 +212,7 @@ Métodos públicos estáticos</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>string file content parse to string or '' </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00009">9</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00013">13</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -244,7 +249,8 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>get file layout template content </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>metodo para obtener el contenido de una platilla</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramtype">type</td><td class="paramname">$file_url</td><td></td></tr>
     <tr><td class="paramtype">type</td><td class="paramname">$template_name</td><td></td></tr>
@@ -253,7 +259,7 @@ Métodos públicos estáticos</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>string </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00021">21</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00026">26</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -279,9 +285,10 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
+<p>metodo para obtener todos los modelos</p>
+<dl class="section return"><dt>Devuelve</dt><dd>array de modelos </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00200">200</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00218">218</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -308,15 +315,16 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>obtener permisos de un usuario segun una ruta de menu</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">type</td><td class="paramname">$url</td><td></td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$url</td><td>rita de menu "controler/view" </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
+<dl class="section return"><dt>Devuelve</dt><dd>array de permisos </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00132">132</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00146">146</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -353,16 +361,17 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>obtiene los permisos de un usuario segun un controlador y una vista</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramtype">type</td><td class="paramname">$controller</td><td></td></tr>
-    <tr><td class="paramtype">type</td><td class="paramname">$action</td><td></td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$action</td><td>vista </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
+<dl class="section return"><dt>Devuelve</dt><dd>array de permisos </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00149">149</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00164">164</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -389,15 +398,16 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>obtiene los permisos del usuario logeado en el menu indicado</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramtype">type</td><td class="paramname">$menu_id</td><td></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
+<dl class="section return"><dt>Devuelve</dt><dd>array de permisos </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00110">110</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00123">123</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -434,16 +444,17 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>get content of a view file </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>obtiene el contenido del archivo de una vista</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">type</td><td class="paramname">$file_url</td><td></td></tr>
-    <tr><td class="paramtype">type</td><td class="paramname">$controller</td><td></td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$file_url</td><td>nombre de la vista </td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$controller</td><td>nombre de controlador </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Devuelve</dt><dd>string </dd></dl>
+<dl class="section return"><dt>Devuelve</dt><dd>string contenido de la vista </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00040">40</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00047">47</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -480,16 +491,17 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>coloca un contenido html en un card</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">type</td><td class="paramname">$content</td><td></td></tr>
-    <tr><td class="paramtype">type&#160;|&#160;null</td><td class="paramname">$title</td><td></td></tr>
+    <tr><td class="paramtype">string</td><td class="paramname">$content</td><td>contenido html </td></tr>
+    <tr><td class="paramtype">string&#160;|&#160;null</td><td class="paramname">$title</td><td>titulo del card </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00086">86</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00098">98</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -516,7 +528,8 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>sanitiza la informacion de los input de un formulario</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramtype">type</td><td class="paramname">$form</td><td></td></tr>
   </table>
@@ -524,7 +537,7 @@ Métodos públicos estáticos</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00074">74</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00085">85</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -551,7 +564,8 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>metodo para sanitizar la informacion de un inpit element</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramtype">type</td><td class="paramname">$data</td><td></td></tr>
   </table>
@@ -559,7 +573,7 @@ Métodos públicos estáticos</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00062">62</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00072">72</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -602,17 +616,18 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>habilita o inhabilita los botones de accion segun los permisos del usuario logeado</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">type</td><td class="paramname">$controller</td><td></td></tr>
-    <tr><td class="paramtype">type</td><td class="paramname">$action</td><td></td></tr>
-    <tr><td class="paramtype">type</td><td class="paramname">$html_view</td><td></td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$controller</td><td>controlador </td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$action</td><td>vista </td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$html_view</td><td>contenido generado </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
+<dl class="section return"><dt>Devuelve</dt><dd>type contenido generado actualizado </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00161">161</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00178">178</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>
@@ -638,9 +653,10 @@ Métodos públicos estáticos</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Description </p><dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
+<p>verifica si el usuario actual ha iniciado sesion, sino redirecciona a la vista de autenticacion</p>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00050">50</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_core_utils_8php_source.html#l00059">59</a> del archivo <a class="el" href="_core_utils_8php_source.html">CoreUtils.php</a>.</p>
 
 </div>
 </div>

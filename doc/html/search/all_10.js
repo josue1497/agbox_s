@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['usuario',['Usuario',['../class_usuario.html',1,'']]],
-  ['usuariocontroller',['usuarioController',['../classusuario_controller.html',1,'']]]
+  ['translate',['translate',['../class_translator.html#a9304be95639cc658a31a56dbfdd5ac7b',1,'Translator']]],
+  ['translator',['Translator',['../class_translator.html',1,'']]]
 ];
