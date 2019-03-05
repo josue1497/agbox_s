@@ -26,7 +26,7 @@ class indexController extends Controller{
 			Session::unset_user_session_data();
 		}
 
-		
+		$this->model=new Usuario();
 		$this->render("login");	
 	}
 }

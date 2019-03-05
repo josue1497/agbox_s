@@ -73,7 +73,7 @@
 		 */
         public static function secure_form($form){
             foreach ($form as $key => $value){
-                $form[$key] = $this->secure_input($value);
+                $form[$key] = CoreUtils::secure_input($value);
             }
         }
 		

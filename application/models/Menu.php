@@ -80,12 +80,14 @@ class Menu extends Model{
 	public function sort_by_key($arr,$key){
 		$len = count($arr);
 		for($i=0;$i<$len-1;$i++){
+			if (isset($arr) && isset($arr[$key])) {
 			if($arr[$i][$key]>$arr[$i+1][$key]){
 				$aux = $arr[$i];
 				$arr[$i] = $arr[$i+1];
 				$arr[$i+1] = $aux;
 			}
 		}
+	}
 		return $arr; 
 	}
 }
