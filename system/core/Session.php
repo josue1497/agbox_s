@@ -34,6 +34,7 @@ class Session {
 		Session::set('user_id',$user_record['id_usuario']);
 		Session::set('user_email',$user_record['nombre_usuario']);
 		Session::set('role_id',$user_record['id_nivel_usuario']);
+		Session::set('lan',$user_record['lan']);
     }
 
     public static function unset_user_session_data(){
@@ -42,6 +43,7 @@ class Session {
 		Session::getNdelete('user_id');
 		Session::getNdelete('role_id');
 		Session::getNdelete('user_email');
+		Session::getNdelete('lan');
     }
 
 }

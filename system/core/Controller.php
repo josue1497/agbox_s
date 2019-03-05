@@ -147,6 +147,10 @@
 			 $html_view = 
 			 	CoreUtils::set_buttons_permissions($this,$filename,$html_view);
 			
+			$html_view = Translator::translate(
+				CoreUtils::get_controller_name($this) . '/' . $filename,
+				$html_view);
+
 			/* render */
 			echo $html_view;
         }

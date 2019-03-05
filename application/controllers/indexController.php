@@ -25,6 +25,7 @@ class indexController extends Controller{
 			$row = $this->model->get_by_property(array('nombre_usuario'=>$_POST['email']));
 			if(isset($row) && isset($row['id_usuario'])){
 				if($row['clave_usuario'] == $_POST['password']){
+					$row['lan']=$_POST['language'];
 					Session::set_user_session_data($row);
 					header('location: '.CoreUtils::base_url().'index/index');
 				}else{
