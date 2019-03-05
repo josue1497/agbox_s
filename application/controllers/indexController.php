@@ -1,11 +1,12 @@
 <?php
 /**
- * 
+ * controlador de incio de sesion y dashboard
  */
 class indexController extends Controller{
 	/**
-	 * Description
-	 * @return type
+	 * metodo accion dashboard
+	 * 
+	 * @return void
 	 */
     function index(){
 		$this->model=new Usuario();
@@ -14,8 +15,9 @@ class indexController extends Controller{
     }
 
 	/**
-	 * Description
-	 * @return type
+	 * metodo daccion inicio de sesion 
+	 * 
+	 * @return void
 	 */
 	function login(){
 		$this->model=new Usuario();
@@ -29,10 +31,10 @@ class indexController extends Controller{
 					Session::set_user_session_data($row);
 					header('location: '.CoreUtils::base_url().'index/index');
 				}else{
-					$this->record['error_message']='La contrase&ntilde;a ingresada es incorrecta.';
+					$this->record['error_message']='error_msg_password';
 				}
 			}else{
-				$this->record['error_message']='El email ingresado no esta registrado.';
+				$this->record['error_message']='error_msg_email';
 			}
 		}else{
 			Session::unset_user_session_data();

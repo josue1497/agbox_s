@@ -23,7 +23,10 @@
 					'forgot_password_trl'=>'Forgot Password?',
 					'select_lan_trl'=>'Select language',
 					'select_en_trl'=>'English',
-					'select_es_trl'=>'Espa&ntilde;ol'
+					'select_es_trl'=>'Espa&ntilde;ol',
+					'error_msg_password'=>'The password entered is incorrect.',
+					'error_msg_email'=>'The email entered is not registered.'
+
 				)
 			);
 		}
