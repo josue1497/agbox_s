@@ -1,0 +1,237 @@
+\hypertarget{class_model}{}\section{Referencia de la Clase Model}
+\label{class_model}\index{Model@{Model}}
+Diagrama de herencias de Model\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=9.000000cm]{class_model}
+\end{center}
+\end{figure}
+\subsection*{Métodos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_model_a186f8fcbe8092f888ba40e4ecef9f6a5}\label{class_model_a186f8fcbe8092f888ba40e4ecef9f6a5}} 
+{\bfseries \+\_\+\+\_\+construct} (\$table\+\_\+name=null)
+\item 
+\mbox{\Hypertarget{class_model_ab42dfa81494651af8757f81051d03faa}\label{class_model_ab42dfa81494651af8757f81051d03faa}} 
+{\bfseries add\+\_\+column} (\$column)
+\item 
+\mbox{\Hypertarget{class_model_a8adf2b2c067639350b28d8058a384ac8}\label{class_model_a8adf2b2c067639350b28d8058a384ac8}} 
+{\bfseries add\+\_\+columns} (\$columns)
+\item 
+\mbox{\Hypertarget{class_model_a907f3b1c1439c21be8fd9656bc834f38}\label{class_model_a907f3b1c1439c21be8fd9656bc834f38}} 
+{\bfseries init} ()
+\item 
+\mbox{\hyperlink{class_model_a067c962b5ac1b38809aba6c8b7af46b1}{find\+By\+Poperty}} (\$properties)
+\item 
+\mbox{\Hypertarget{class_model_a7d41415102cf7f720d7f1bff3ce68242}\label{class_model_a7d41415102cf7f720d7f1bff3ce68242}} 
+{\bfseries get\+\_\+by\+\_\+property} (\$properties)
+\item 
+\mbox{\hyperlink{class_model_a708a0fc588b55e650ea0847da98f7b80}{get\+\_\+by\+\_\+id}} (\$id)
+\item 
+\mbox{\hyperlink{class_model_aca3b0fcfd538c6f2d0f1a05dfcea87ae}{get\+\_\+fk\+\_\+by\+\_\+id}} (\$id, \$fk\+\_\+obj)
+\item 
+\mbox{\hyperlink{class_model_af5ccad2ad89087e4454e71787163a6ba}{get\+\_\+fk2\+\_\+by\+\_\+id}} (\$id, \$fk1\+\_\+obj, \$fk2\+\_\+obj)
+\item 
+\mbox{\hyperlink{class_model_a7b1ac1e4fdca6e471ad62e21416c9ee7}{show\+All\+Records}} ()
+\item 
+\mbox{\hyperlink{class_model_ae045fb57af57685c24f2dbe5fbd7f684}{delete}} (\$id)
+\item 
+\mbox{\hyperlink{class_model_a62dd5265f2009c4111dc8117f815eb27}{get\+\_\+array\+\_\+data}} (\$id=null)
+\item 
+\mbox{\hyperlink{class_model_a85f2794443673870da8d4e34e1e3a307}{get\+\_\+select\+\_\+data}} (\$id=null)
+\item 
+\mbox{\Hypertarget{class_model_a1465d4c58a91ed329132e52e60238ead}\label{class_model_a1465d4c58a91ed329132e52e60238ead}} 
+{\bfseries map\+\_\+name\+\_\+value} (\$row)
+\item 
+\mbox{\hyperlink{class_model_afbf5f640ebb15823608a233cc3f2e8f5}{exist\+\_\+unike\+\_\+keys}} (\$params)
+\item 
+\mbox{\hyperlink{class_model_ab85f7264cd89a8180cacda746a089e9e}{create}} (\$params)
+\item 
+\mbox{\hyperlink{class_model_adae5eb27d36ae799ef4fa23dec88d302}{edit}} (\$id, \$params)
+\end{DoxyCompactItemize}
+\subsection*{Métodos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_model_a740d72b25fc3721184b8e304ab1d5c50}{save\+\_\+record}} (\$model, \$data)
+\end{DoxyCompactItemize}
+\subsection*{Atributos públicos}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_model_a62f67587e29b2aa93736f38c97c56c65}\label{class_model_a62f67587e29b2aa93736f38c97c56c65}} 
+{\bfseries \$table\+\_\+name}
+\item 
+\mbox{\Hypertarget{class_model_ace211b9f546fe7d6bc2ea14cbcfbedce}\label{class_model_ace211b9f546fe7d6bc2ea14cbcfbedce}} 
+{\bfseries \$table\+\_\+label}
+\item 
+\mbox{\Hypertarget{class_model_aae5dcd1ecd7548a6a494a6807e28cc07}\label{class_model_aae5dcd1ecd7548a6a494a6807e28cc07}} 
+{\bfseries \$table\+\_\+fields} = array()
+\item 
+\mbox{\Hypertarget{class_model_a3d6b4d251b99d01427ce9f9d9e7cbbb3}\label{class_model_a3d6b4d251b99d01427ce9f9d9e7cbbb3}} 
+{\bfseries \$id\+\_\+field}
+\item 
+\mbox{\Hypertarget{class_model_aac464bb0d649295a3b89456954116001}\label{class_model_aac464bb0d649295a3b89456954116001}} 
+{\bfseries \$name\+\_\+fields} =array()
+\item 
+\mbox{\Hypertarget{class_model_a4758f4b279f7fcb936bc191235f0d269}\label{class_model_a4758f4b279f7fcb936bc191235f0d269}} 
+{\bfseries \$unike\+\_\+keys} = array()
+\item 
+{\bfseries \$crud\+\_\+config}
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+
+
+Definición en la línea 2 del archivo Model.\+php.
+
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{class_model_ab85f7264cd89a8180cacda746a089e9e}\label{class_model_ab85f7264cd89a8180cacda746a089e9e}} 
+\index{Model@{Model}!create@{create}}
+\index{create@{create}!Model@{Model}}
+\subsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily Model\+::create (\begin{DoxyParamCaption}\item[{}]{\$params }\end{DoxyParamCaption})}
+
+metodo para insertar un nuevo registro 
+
+Definición en la línea 196 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_ae045fb57af57685c24f2dbe5fbd7f684}\label{class_model_ae045fb57af57685c24f2dbe5fbd7f684}} 
+\index{Model@{Model}!delete@{delete}}
+\index{delete@{delete}!Model@{Model}}
+\subsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily Model\+::delete (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+metodo para eliminar un registro segun id 
+
+Definición en la línea 127 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_adae5eb27d36ae799ef4fa23dec88d302}\label{class_model_adae5eb27d36ae799ef4fa23dec88d302}} 
+\index{Model@{Model}!edit@{edit}}
+\index{edit@{edit}!Model@{Model}}
+\subsubsection{\texorpdfstring{edit()}{edit()}}
+{\footnotesize\ttfamily Model\+::edit (\begin{DoxyParamCaption}\item[{}]{\$id,  }\item[{}]{\$params }\end{DoxyParamCaption})}
+
+metodo para actualizar un registro existente 
+
+Definición en la línea 230 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_afbf5f640ebb15823608a233cc3f2e8f5}\label{class_model_afbf5f640ebb15823608a233cc3f2e8f5}} 
+\index{Model@{Model}!exist\_unike\_keys@{exist\_unike\_keys}}
+\index{exist\_unike\_keys@{exist\_unike\_keys}!Model@{Model}}
+\subsubsection{\texorpdfstring{exist\_unike\_keys()}{exist\_unike\_keys()}}
+{\footnotesize\ttfamily Model\+::exist\+\_\+unike\+\_\+keys (\begin{DoxyParamCaption}\item[{}]{\$params }\end{DoxyParamCaption})}
+
+metodo para verificar si ya existe un registro con los valores unicos especificados 
+
+Definición en la línea 174 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_a067c962b5ac1b38809aba6c8b7af46b1}\label{class_model_a067c962b5ac1b38809aba6c8b7af46b1}} 
+\index{Model@{Model}!findByPoperty@{findByPoperty}}
+\index{findByPoperty@{findByPoperty}!Model@{Model}}
+\subsubsection{\texorpdfstring{findByPoperty()}{findByPoperty()}}
+{\footnotesize\ttfamily Model\+::find\+By\+Poperty (\begin{DoxyParamCaption}\item[{}]{\$properties }\end{DoxyParamCaption})}
+
+metodo para buscar registros segun algun atributo(array (column\+\_\+name =$>$ value, ...)) 
+
+Definición en la línea 68 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_a62dd5265f2009c4111dc8117f815eb27}\label{class_model_a62dd5265f2009c4111dc8117f815eb27}} 
+\index{Model@{Model}!get\_array\_data@{get\_array\_data}}
+\index{get\_array\_data@{get\_array\_data}!Model@{Model}}
+\subsubsection{\texorpdfstring{get\_array\_data()}{get\_array\_data()}}
+{\footnotesize\ttfamily Model\+::get\+\_\+array\+\_\+data (\begin{DoxyParamCaption}\item[{}]{\$id = {\ttfamily null} }\end{DoxyParamCaption})}
+
+metodo para obtener array de registros segun id opcional 
+
+Definición en la línea 137 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_a708a0fc588b55e650ea0847da98f7b80}\label{class_model_a708a0fc588b55e650ea0847da98f7b80}} 
+\index{Model@{Model}!get\_by\_id@{get\_by\_id}}
+\index{get\_by\_id@{get\_by\_id}!Model@{Model}}
+\subsubsection{\texorpdfstring{get\_by\_id()}{get\_by\_id()}}
+{\footnotesize\ttfamily Model\+::get\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{}]{\$id }\end{DoxyParamCaption})}
+
+metodo adaptados para obtener un registro de la entidad por id 
+
+Definición en la línea 93 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_af5ccad2ad89087e4454e71787163a6ba}\label{class_model_af5ccad2ad89087e4454e71787163a6ba}} 
+\index{Model@{Model}!get\_fk2\_by\_id@{get\_fk2\_by\_id}}
+\index{get\_fk2\_by\_id@{get\_fk2\_by\_id}!Model@{Model}}
+\subsubsection{\texorpdfstring{get\_fk2\_by\_id()}{get\_fk2\_by\_id()}}
+{\footnotesize\ttfamily Model\+::get\+\_\+fk2\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{}]{\$id,  }\item[{}]{\$fk1\+\_\+obj,  }\item[{}]{\$fk2\+\_\+obj }\end{DoxyParamCaption})}
+
+metodo para obtener un registro de una tercera tabla relacionda a la segunda 
+
+Definición en la línea 108 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_aca3b0fcfd538c6f2d0f1a05dfcea87ae}\label{class_model_aca3b0fcfd538c6f2d0f1a05dfcea87ae}} 
+\index{Model@{Model}!get\_fk\_by\_id@{get\_fk\_by\_id}}
+\index{get\_fk\_by\_id@{get\_fk\_by\_id}!Model@{Model}}
+\subsubsection{\texorpdfstring{get\_fk\_by\_id()}{get\_fk\_by\_id()}}
+{\footnotesize\ttfamily Model\+::get\+\_\+fk\+\_\+by\+\_\+id (\begin{DoxyParamCaption}\item[{}]{\$id,  }\item[{}]{\$fk\+\_\+obj }\end{DoxyParamCaption})}
+
+metodo para obtener un registro de una segunda tabla relacionada a la primera 
+
+Definición en la línea 100 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_a85f2794443673870da8d4e34e1e3a307}\label{class_model_a85f2794443673870da8d4e34e1e3a307}} 
+\index{Model@{Model}!get\_select\_data@{get\_select\_data}}
+\index{get\_select\_data@{get\_select\_data}!Model@{Model}}
+\subsubsection{\texorpdfstring{get\_select\_data()}{get\_select\_data()}}
+{\footnotesize\ttfamily Model\+::get\+\_\+select\+\_\+data (\begin{DoxyParamCaption}\item[{}]{\$id = {\ttfamily null} }\end{DoxyParamCaption})}
+
+metodo para obtener registros y mapearlos para combo generico 
+
+Definición en la línea 150 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_a740d72b25fc3721184b8e304ab1d5c50}\label{class_model_a740d72b25fc3721184b8e304ab1d5c50}} 
+\index{Model@{Model}!save\_record@{save\_record}}
+\index{save\_record@{save\_record}!Model@{Model}}
+\subsubsection{\texorpdfstring{save\_record()}{save\_record()}}
+{\footnotesize\ttfamily static Model\+::save\+\_\+record (\begin{DoxyParamCaption}\item[{}]{\$model,  }\item[{}]{\$data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo generico deberia ser estatic y esta en model 
+
+Definición en la línea 253 del archivo Model.\+php.
+
+\mbox{\Hypertarget{class_model_a7b1ac1e4fdca6e471ad62e21416c9ee7}\label{class_model_a7b1ac1e4fdca6e471ad62e21416c9ee7}} 
+\index{Model@{Model}!showAllRecords@{showAllRecords}}
+\index{showAllRecords@{showAllRecords}!Model@{Model}}
+\subsubsection{\texorpdfstring{showAllRecords()}{showAllRecords()}}
+{\footnotesize\ttfamily Model\+::show\+All\+Records (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+metodo para mostrar todos los registros retorna un array(filas) de arrays(columnas) 
+
+Definición en la línea 117 del archivo Model.\+php.
+
+
+
+\subsection{Documentación de los datos miembro}
+\mbox{\Hypertarget{class_model_a179bbacf6ce5df100c666db362b8ed44}\label{class_model_a179bbacf6ce5df100c666db362b8ed44}} 
+\index{Model@{Model}!\$crud\_config@{\$crud\_config}}
+\index{\$crud\_config@{\$crud\_config}!Model@{Model}}
+\subsubsection{\texorpdfstring{\$crud\_config}{$crud\_config}}
+{\footnotesize\ttfamily Model\+::\$crud\+\_\+config}
+
+{\bfseries Valor inicial\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= array(}
+\DoxyCodeLine{            \textcolor{stringliteral}{'can\_create'}=>\textcolor{keyword}{true},}
+\DoxyCodeLine{            \textcolor{stringliteral}{'can\_read'}=>\textcolor{keyword}{true},}
+\DoxyCodeLine{            \textcolor{stringliteral}{'can\_update'}=>\textcolor{keyword}{true},}
+\DoxyCodeLine{            \textcolor{stringliteral}{'can\_delete'}=>\textcolor{keyword}{true}}
+\DoxyCodeLine{        )}
+
+\end{DoxyCode}
+
+
+Definición en la línea 17 del archivo Model.\+php.
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+system/core/Model.\+php\end{DoxyCompactItemize}

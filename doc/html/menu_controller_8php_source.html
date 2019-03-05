@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ABX App: Fichero Fuente application/controllers/menuController.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">ABX App
+   &#160;<span id="projectnumber">0.1.2</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d75c23162a2652451dce46d2e7e8aead.html">application</a></li><li class="navelem"><a class="el" href="dir_43b5954026bbfd25898ac90541bc48cf.html">controllers</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">menuController.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;&lt;?php</div><div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="classmenu_controller.html">    5</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmenu_controller.html">menuController</a> <span class="keyword">extends</span> <a class="code" href="class_controller.html">Controller</a>{</div><div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classmenu_controller.html#a2b51402e97607111f6674ca41be2e77a">   10</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="classmenu_controller.html#a2b51402e97607111f6674ca41be2e77a">index</a>(){</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        $this-&gt;action_index(<span class="keyword">new</span> <a class="code" href="class_menu.html">Menu</a>(),<span class="keyword">true</span>);</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    }</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    </div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classmenu_controller.html#a9de27fd704a75ea2e20f1897efbe50fa">   18</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="classmenu_controller.html#a9de27fd704a75ea2e20f1897efbe50fa">create</a>(){</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        $this-&gt;action_create(<span class="keyword">new</span> <a class="code" href="class_menu.html">Menu</a>(),$_POST,<span class="keyword">true</span>);</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    </div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classmenu_controller.html#a302abc24e5cf18433bffd1b3eae79dd1">   26</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="classmenu_controller.html#a302abc24e5cf18433bffd1b3eae79dd1">edit</a>($id){</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        $this-&gt;action_edit($id,<span class="keyword">new</span> <a class="code" href="class_menu.html">Menu</a>(),$_POST,<span class="keyword">true</span>);</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classmenu_controller.html#a3e835912cd6cdd07fd0eb71bac19c675">   34</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <span class="keyword">delete</span>($id){</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        $this-&gt;action_delete($id,<span class="keyword">new</span> <a class="code" href="class_menu.html">Menu</a>());</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;?&gt;</div><div class="ttc" id="class_menu_html"><div class="ttname"><a href="class_menu.html">Menu</a></div><div class="ttdef"><b>Definition:</b> <a href="_menu_8php_source.html#l00003">Menu.php:3</a></div></div>
+<div class="ttc" id="classmenu_controller_html_a302abc24e5cf18433bffd1b3eae79dd1"><div class="ttname"><a href="classmenu_controller.html#a302abc24e5cf18433bffd1b3eae79dd1">menuController\edit</a></div><div class="ttdeci">edit($id)</div><div class="ttdef"><b>Definition:</b> <a href="menu_controller_8php_source.html#l00026">menuController.php:26</a></div></div>
+<div class="ttc" id="classmenu_controller_html"><div class="ttname"><a href="classmenu_controller.html">menuController</a></div><div class="ttdef"><b>Definition:</b> <a href="menu_controller_8php_source.html#l00005">menuController.php:5</a></div></div>
+<div class="ttc" id="class_controller_html"><div class="ttname"><a href="class_controller.html">Controller</a></div><div class="ttdef"><b>Definition:</b> <a href="_controller_8php_source.html#l00005">Controller.php:5</a></div></div>
+<div class="ttc" id="classmenu_controller_html_a2b51402e97607111f6674ca41be2e77a"><div class="ttname"><a href="classmenu_controller.html#a2b51402e97607111f6674ca41be2e77a">menuController\index</a></div><div class="ttdeci">index()</div><div class="ttdef"><b>Definition:</b> <a href="menu_controller_8php_source.html#l00010">menuController.php:10</a></div></div>
+<div class="ttc" id="classmenu_controller_html_a9de27fd704a75ea2e20f1897efbe50fa"><div class="ttname"><a href="classmenu_controller.html#a9de27fd704a75ea2e20f1897efbe50fa">menuController\create</a></div><div class="ttdeci">create()</div><div class="ttdef"><b>Definition:</b> <a href="menu_controller_8php_source.html#l00018">menuController.php:18</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.15
+</small></address>
+</body>
+</html>
