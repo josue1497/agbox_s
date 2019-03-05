@@ -1,11 +1,22 @@
 <?php
+/**
+ * 
+ */
 class indexController extends Controller{
+	/**
+	 * Description
+	 * @return type
+	 */
     function index(){
 		$this->model=new Usuario();
 		$this->model->table_label='Dashboard';
 		$this->render("index");
     }
-	
+
+	/**
+	 * Description
+	 * @return type
+	 */
 	function login(){
 		if(isset($_POST['login_user'])){
 			$this->model=new Usuario();
