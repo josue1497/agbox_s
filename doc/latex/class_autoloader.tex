@@ -3,18 +3,56 @@
 \subsection*{Métodos públicos estáticos}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_autoloader_ad1af7fdc61b9d8e6607ac59019adaa41}\label{class_autoloader_ad1af7fdc61b9d8e6607ac59019adaa41}} 
-static {\bfseries app\+\_\+dirs} ()
+static \mbox{\hyperlink{class_autoloader_ad1af7fdc61b9d8e6607ac59019adaa41}{app\+\_\+dirs}} ()
 \item 
-\mbox{\Hypertarget{class_autoloader_a818817cb215d74d3c65e4855898b8902}\label{class_autoloader_a818817cb215d74d3c65e4855898b8902}} 
-static {\bfseries register} ()
+static \mbox{\hyperlink{class_autoloader_a818817cb215d74d3c65e4855898b8902}{register}} ()
 \end{DoxyCompactItemize}
 
 
 \subsection{Descripción detallada}
+clase que genera la carga automatica de dependencias. si las cases a cargar estan en un arhivo con su mismo nombre, y en las ubicaciones indicadas en el metodo app\+\_\+dirs, no se necesitaran require o includes para poder instanciarlas. 
+
+Definición en la línea 8 del archivo Autoloader.\+php.
 
 
-Definición en la línea 2 del archivo Autoloader.\+php.
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{class_autoloader_ad1af7fdc61b9d8e6607ac59019adaa41}\label{class_autoloader_ad1af7fdc61b9d8e6607ac59019adaa41}} 
+\index{Autoloader@{Autoloader}!app\_dirs@{app\_dirs}}
+\index{app\_dirs@{app\_dirs}!Autoloader@{Autoloader}}
+\subsubsection{\texorpdfstring{app\_dirs()}{app\_dirs()}}
+{\footnotesize\ttfamily static Autoloader\+::app\+\_\+dirs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo estatico que devuelve un array con los nombres de los directorios a incluir en la carga automatica.
+
+\begin{DoxyReturn}{Devuelve}
+array de strings 
+\end{DoxyReturn}
+
+
+Definición en la línea 15 del archivo Autoloader.\+php.
+
+\mbox{\Hypertarget{class_autoloader_a818817cb215d74d3c65e4855898b8902}\label{class_autoloader_a818817cb215d74d3c65e4855898b8902}} 
+\index{Autoloader@{Autoloader}!register@{register}}
+\index{register@{register}!Autoloader@{Autoloader}}
+\subsubsection{\texorpdfstring{register()}{register()}}
+{\footnotesize\ttfamily static Autoloader\+::register (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo estatico que mediante la funcion spl\+\_\+autoload\+\_\+register de php y haciendo uso de un metodo anonimo, registra todas las rutas devueltas por el metodo app\+\_\+dirs en la carga automatica de la aplicacion,
+
+de modo que si se intenta instanciar una clase en cualquier nivel de la aplicacion, se buscaran en todas las rutas indicadas, y de existir el archivo con dicha clase, se incluira mediante un require\+\_\+once y luego se instanciara el objeto de dicha clase.
+
+\begin{DoxyReturn}{Devuelve}
+boolean 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Excepciones}
+{\em Exception} & mensaje de clase no encontrada \\
+\hline
+\end{DoxyExceptions}
+
+
+Definición en la línea 42 del archivo Autoloader.\+php.
 
 
 

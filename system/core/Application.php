@@ -1,6 +1,4 @@
 <?php
-//namespace App;
-/* constantes de la app */
 define('TEMPLATE_NAME','intelix_todo');
 define('APP_NAME','.:: A B X ::.');
 define('APP_FOLDER','abx_app');
@@ -18,18 +16,6 @@ define('DB_NAME','abx_db');
 define('DB_USER','root');
 define('DB_PASS','12345678');
 
-//require_once(ROOT.'system/core/Autoloader.php');
-
-//use App\Config\Core;
-//use App\Config\Framework\Router;
-//use App\Config\Framework\Request;
-//use App\Config\Framework\Dispatcher;
-
-	//require(ROOT . 'Config/core.php');
-
-	//session_start();
-
-	//$dispatch = new Dispatcher();
-	//$dispatch->dispatch();
-
+require_once(ROOT.'system/core/Autoloader.php');
+Autoloader::register();
 ?>

@@ -72,17 +72,82 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Métodos públicos estáticos</h2></td></tr>
-<tr class="memitem:ad1af7fdc61b9d8e6607ac59019adaa41"><td class="memItemLeft" align="right" valign="top"><a id="ad1af7fdc61b9d8e6607ac59019adaa41"></a>
-static&#160;</td><td class="memItemRight" valign="bottom"><b>app_dirs</b> ()</td></tr>
+<tr class="memitem:ad1af7fdc61b9d8e6607ac59019adaa41"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_autoloader.html#ad1af7fdc61b9d8e6607ac59019adaa41">app_dirs</a> ()</td></tr>
 <tr class="separator:ad1af7fdc61b9d8e6607ac59019adaa41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a818817cb215d74d3c65e4855898b8902"><td class="memItemLeft" align="right" valign="top"><a id="a818817cb215d74d3c65e4855898b8902"></a>
-static&#160;</td><td class="memItemRight" valign="bottom"><b>register</b> ()</td></tr>
+<tr class="memitem:a818817cb215d74d3c65e4855898b8902"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_autoloader.html#a818817cb215d74d3c65e4855898b8902">register</a> ()</td></tr>
 <tr class="separator:a818817cb215d74d3c65e4855898b8902"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
-<div class="textblock">
-<p class="definition">Definición en la línea <a class="el" href="_autoloader_8php_source.html#l00002">2</a> del archivo <a class="el" href="_autoloader_8php_source.html">Autoloader.php</a>.</p>
-</div><hr/>La documentación para esta clase fue generada a partir del siguiente fichero:<ul>
+<div class="textblock"><p>clase que genera la carga automatica de dependencias. si las cases a cargar estan en un arhivo con su mismo nombre, y en las ubicaciones indicadas en el metodo app_dirs, no se necesitaran require o includes para poder instanciarlas. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_autoloader_8php_source.html#l00008">8</a> del archivo <a class="el" href="_autoloader_8php_source.html">Autoloader.php</a>.</p>
+</div><h2 class="groupheader">Documentación de las funciones miembro</h2>
+<a id="ad1af7fdc61b9d8e6607ac59019adaa41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1af7fdc61b9d8e6607ac59019adaa41">&#9670;&nbsp;</a></span>app_dirs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Autoloader::app_dirs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>metodo estatico que devuelve un array con los nombres de los directorios a incluir en la carga automatica.</p>
+<dl class="section return"><dt>Devuelve</dt><dd>array de strings </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="_autoloader_8php_source.html#l00015">15</a> del archivo <a class="el" href="_autoloader_8php_source.html">Autoloader.php</a>.</p>
+
+</div>
+</div>
+<a id="a818817cb215d74d3c65e4855898b8902"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a818817cb215d74d3c65e4855898b8902">&#9670;&nbsp;</a></span>register()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Autoloader::register </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>metodo estatico que mediante la funcion spl_autoload_register de php y haciendo uso de un metodo anonimo, registra todas las rutas devueltas por el metodo app_dirs en la carga automatica de la aplicacion,</p>
+<p>de modo que si se intenta instanciar una clase en cualquier nivel de la aplicacion, se buscaran en todas las rutas indicadas, y de existir el archivo con dicha clase, se incluira mediante un require_once y luego se instanciara el objeto de dicha clase.</p>
+<dl class="section return"><dt>Devuelve</dt><dd>boolean </dd></dl>
+<dl class="exception"><dt>Excepciones</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">Exception</td><td>mensaje de clase no encontrada </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="_autoloader_8php_source.html#l00042">42</a> del archivo <a class="el" href="_autoloader_8php_source.html">Autoloader.php</a>.</p>
+
+</div>
+</div>
+<hr/>La documentación para esta clase fue generada a partir del siguiente fichero:<ul>
 <li>system/core/<a class="el" href="_autoloader_8php_source.html">Autoloader.php</a></li>
 </ul>
 </div><!-- contents -->
