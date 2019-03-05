@@ -64,7 +64,7 @@
 				$html_content=CoreUtils::get_view_file_content('login',$this);
 			}else{
 				$tmp = CoreUtils::get_user_permissions_by_controller($this,$filename);
-				if(isset($tmp) && isset($tmp['id_permiso'])){
+				if(isset($tmp) && isset($tmp['id'])){
 					$this->model->crud_config = $tmp;
 				}
 
@@ -157,7 +157,7 @@
 			$i=0;
 			foreach($menu_data as $parent){
 				$parent_permission = 
-					CoreUtils::get_user_permissions_by_menu_id($parent['id_menu']);
+					CoreUtils::get_user_permissions_by_menu_id($parent['menu_id']);
 				if(!isset($parent_permission) || 
 					(isset($parent_permission) && $parent_permission['can_read'])){
 $i++;
@@ -167,22 +167,22 @@ $html_menu.='<hr class="sidebar-divider">
 		data-target="#collapse_'.$i.'" 
 		aria-expanded="true" aria-controls="collapse_'.$i.'">
 		<i class="'.$parent['icon_menu'].'"></i>
-		<span>'.$parent['titulo_menu'].'</span>
+		<span>'.$parent['title_menu'].'</span>
 	</a>
 
 	<div id="collapse_'.$i.'" class="collapse" 
-		aria-labelledby="heading_'.$parent['titulo_menu'].'" data-parent="#accordionSidebar">
+		aria-labelledby="heading_'.$parent['title_menu'].'" data-parent="#accordionSidebar">
 	  <div class="bg-white py-2 collapse-inner rounded">';
 
 $childs = $parent['childs'];
 if(is_array($childs))
 	foreach($childs as $child){
 		$child_permission = 
-					CoreUtils::get_user_permissions_by_menu_id($child['id_menu']);
+					CoreUtils::get_user_permissions_by_menu_id($child['menu_id']);
 		if(!isset($child_permission) || 
 			(isset($child_permission) && $child_permission['can_read'])){
 					$html_menu.='<a class="collapse-item" href="{{ base_url }}'.
-			$child['url_menu'].'">'.$child['titulo_menu'].'</a>';
+			$child['url_menu'].'">'.$child['title_menu'].'</a>';
 		}
 		/* end child permission check */
 	}

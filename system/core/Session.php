@@ -31,9 +31,9 @@ class Session {
     public static function set_user_session_data($user_record){
 		Session::getNdelete('log_out');
 		Session::set('logged_in',true);
-		Session::set('user_id',$user_record['id_usuario']);
-		Session::set('user_email',$user_record['nombre_usuario']);
-		Session::set('role_id',$user_record['id_nivel_usuario']);
+		Session::set('user_id',$user_record['id']);
+		Session::set('user_email',$user_record['username']);
+		Session::set('role_id',$user_record['user_level_id']);
     }
 
     public static function unset_user_session_data(){

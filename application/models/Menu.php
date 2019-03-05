@@ -9,24 +9,24 @@ class Menu extends Model{
 		
 		$this->add_columns(
 			array(
-				(new Column('id_menu'))
+				(new Column('menu_id'))
 				->set_label('Id del Menu')
 				->set_primary_key()
 				->set_auto_increment()
 				->set_visible_grid(false)
 				->set_visible_form(false),
 				
-				(new Column('titulo_menu'))
+				(new Column('title_menu'))
 				->set_label('Titulo del Menu')
 				->set_name_key()
 				->set_unike_key(),
 				
-				(new Column('descripcion_menu'))
+				(new Column('description_menu'))
 				->set_label('Descripcion del Menu')
 				->set_type(Column::$COLUMN_TYPE_TEXTAREA)
 				->set_visible_grid(false),
 				
-				(new Column('id_menu_padre'))
+				(new Column('parent_menu_id'))
 				->set_label('Menu Padre')
 				->set_type(Column::$COLUMN_TYPE_SELECT)
 				->set_fk_entity($this)
@@ -36,7 +36,7 @@ class Menu extends Model{
 				->set_label('Icono del Menu')
 				->set_type(Column::$COLUMN_TYPE_ICONPICKER),
 				
-				(new Column('orden_menu'))
+				(new Column('menu_order'))
 				->set_label('Orden de Menu')
 				->set_type(Column::$COLUMN_TYPE_NUMBER)
 				->set_visible_grid(false),
@@ -60,7 +60,7 @@ class Menu extends Model{
 		$menu_list = $this->sort_by_key($this->get_array_data(),'order_menu');
 		
 		foreach($menu_list as $row){
-			if(isset($row['id_menu_padre']) && $row['id_menu_padre']>0){
+			if(isset($row['parent_menu_id']) && $row['parent_menu_id']>0){
 				$menu_childs[] = $row;
 			}else{
 				$menu_parents[] = $row;
@@ -69,7 +69,7 @@ class Menu extends Model{
 		
 		foreach($menu_parents as $parent){
 			foreach($menu_childs as $child)
-				if($child['id_menu_padre']==$parent['id_menu'])
+				if($child['parent_menu_id']==$parent['menu_id'])
 					$parent['childs'][]=$child;
 			$menu_array[]=$parent;
 		}

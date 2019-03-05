@@ -110,16 +110,16 @@
 		public static function get_user_permissions_by_menu_id($menu_id){
 			$role_id = Session::get('role_id');
 
-			$row = (new Permiso())->get_by_property(
-        		array('id_nivel_usuario'=>$role_id,'id_menu'=>$menu_id));
+			$row = (new Permission())->get_by_property(
+        		array('level_user_id'=>$role_id,'menu_id'=>$menu_id));
 
-        	if(!isset($row) || !isset($row['id_permiso']))
+        	if(!isset($row) || !isset($row['id']))
 				return null;
 			
-			$row['can_read'] = ($row['leer_permiso']=='Yes');
-			$row['can_create'] = ($row['escribir_permiso']=='Yes');
-			$row['can_update'] = ($row['editar_permiso']=='Yes');
-			$row['can_delete'] = ($row['eliminar_permiso']=='Yes');
+			$row['can_read'] = ($row['can_read']=='Yes');
+			$row['can_create'] = ($row['can_write']=='Yes');
+			$row['can_update'] = ($row['can_edit']=='Yes');
+			$row['can_delete'] = ($row['can_delete']=='Yes');
 
 			return $row;
 		}

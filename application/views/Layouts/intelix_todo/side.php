@@ -40,9 +40,9 @@
             <a class="collapse-item" href="#">Preferencias</a>
             <a class="collapse-item" href="#">Ajustes</a>
             <a class="collapse-item" href="{{ base_url }}menu/index">Menu</a>
-            <a class="collapse-item" href="{{ base_url }}permiso/index">Permisos</a>
-            <a class="collapse-item" href="{{ base_url }}usuario/index">Usuarios</a>
-            <a class="collapse-item" href="{{ base_url }}nivel_usuario/index">Roles</a>
+            <a class="collapse-item" href="{{ base_url }}permission/index">Permisos</a>
+            <a class="collapse-item" href="{{ base_url }}user/index">Usuarios</a>
+            <a class="collapse-item" href="{{ base_url }}user_level/index">Roles</a>
 
           </div>
         </div>
