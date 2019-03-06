@@ -97,8 +97,9 @@ Atributos públicos</h2></td></tr>
 <tr class="separator:aee47ec7896001294011782441f74e771"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
-<div class="textblock">
-<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00002">2</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
+<div class="textblock"><p>clase base para gestionar la construccion de vistas </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00005">5</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
 </div><h2 class="groupheader">Documentación del constructor y destructor</h2>
 <a id="a946a646ca1bb866acdbde73a28f33993"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a946a646ca1bb866acdbde73a28f33993">&#9670;&nbsp;</a></span>__construct()</h2>
@@ -115,9 +116,16 @@ Atributos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>constructor usa modelo para construir vista, a partir de configuraciones del modelo </p>
+<p>constructor usa modelo para construir vista, a partir de configuraciones del modelo</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">model</td><td class="paramname">$model</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00009">9</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00015">15</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
 
 </div>
 </div>
@@ -147,9 +155,17 @@ Atributos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>metodo para construir vista de formulario automaticamente, desde los datos del modelo </p>
+<p>metodo para construir vista de formulario automaticamente, desde los datos del modelo</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">type</td><td class="paramname">$form_content</td><td></td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00017">17</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00027">27</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
 
 </div>
 </div>
@@ -168,9 +184,16 @@ Atributos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>metodo para construir contenido de la vista de formulario automaticamente, desde los datos del modelo </p>
+<p>metodo para construir contenido de la vista de formulario automaticamente, desde los datos del modelo</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">type</td><td class="paramname">$data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00029">29</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00042">42</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
 
 </div>
 </div>
@@ -199,9 +222,17 @@ Atributos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>metodo para construir vista de listado automaticamente, desde los datos del modelo </p>
+<p>metodo para construir vista de listado automaticamente, desde los datos del modelo</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">type</td><td class="paramname">$list_content</td><td></td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00045">45</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00062">62</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
 
 </div>
 </div>
@@ -220,9 +251,16 @@ Atributos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>metodo para construir contenido de la vista de listado automaticamente, desde los datos del modelo </p>
+<p>metodo para construir contenido de la vista de listado automaticamente, desde los datos del modelo</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">type</td><td class="paramname">$data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00058">58</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00077">77</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
 
 </div>
 </div>
@@ -241,9 +279,16 @@ Atributos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>metodo para construir cuerpo del contenido de la vista de listado automaticamente, desde los datos del modelo </p>
+<p>metodo para construir cuerpo del contenido de la vista de listado automaticamente, desde los datos del modelo</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">type</td><td class="paramname">$data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00087">87</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00111">111</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
 
 </div>
 </div>
@@ -261,9 +306,10 @@ Atributos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>metodo para construir cabecera del contenido de la vista de listado automaticamente, desde los datos del modelo </p>
+<p>metodo para construir cabecera del contenido de la vista de listado automaticamente, desde los datos del modelo</p>
+<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00067">67</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00088">88</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
 
 </div>
 </div>
@@ -292,9 +338,17 @@ Atributos públicos</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>metodo para construir elementos de la vista, desde las especificaciones del modelo </p>
+<p>metodo para construir elementos de la vista, desde las especificaciones del modelo</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">type</td><td class="paramname">$form_field</td><td></td></tr>
+    <tr><td class="paramtype">type</td><td class="paramname">$data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>type </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00124">124</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_view_8php_source.html#l00152">152</a> del archivo <a class="el" href="_view_8php_source.html">View.php</a>.</p>
 
 </div>
 </div>

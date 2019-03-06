@@ -30,7 +30,7 @@ class Domain extends Model
                 (new Column('license'))
                     ->set_label('Domain License')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
-                    ->set_visible_grid(false),
+                    ->set_visible_grid(false)
 
 
             )

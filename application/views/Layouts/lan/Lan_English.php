@@ -7,7 +7,7 @@
 		 * metodo que devuelve aray de traducciones para 
 		 * cada vista de cada controlador
 		 * 
-		 * @return type
+		 * @return array de traducciones de cada vista
 		 */
 		public function get_translation(){
 			return  array(

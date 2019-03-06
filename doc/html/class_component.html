@@ -72,8 +72,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Métodos públicos estáticos</h2></td></tr>
-<tr class="memitem:ae064083382c242e7e97acc9295e594a1"><td class="memItemLeft" align="right" valign="top"><a id="ae064083382c242e7e97acc9295e594a1"></a>
-static&#160;</td><td class="memItemRight" valign="bottom"><b>get_escolaridad_array</b> ($limit)</td></tr>
+<tr class="memitem:ae064083382c242e7e97acc9295e594a1"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component.html#ae064083382c242e7e97acc9295e594a1">get_escolaridad_array</a> ($limit)</td></tr>
 <tr class="separator:ae064083382c242e7e97acc9295e594a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a04038f1b63585dd71fd8fdef85a256a7"><td class="memItemLeft" align="right" valign="top"><a id="a04038f1b63585dd71fd8fdef85a256a7"></a>
 static&#160;</td><td class="memItemRight" valign="bottom"><b>array_from_to</b> ($from, $to)</td></tr>
@@ -155,9 +154,46 @@ static&#160;</td><td class="memItemRight" valign="bottom"><b>alert_message</b> (
 <tr class="separator:a1fecda46a9e46fdcf102ab6cffb262aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
-<div class="textblock">
-<p class="definition">Definición en la línea <a class="el" href="_component_8php_source.html#l00002">2</a> del archivo <a class="el" href="_component_8php_source.html">Component.php</a>.</p>
+<div class="textblock"><p>clase que genera comonentes html. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_component_8php_source.html#l00005">5</a> del archivo <a class="el" href="_component_8php_source.html">Component.php</a>.</p>
 </div><h2 class="groupheader">Documentación de las funciones miembro</h2>
+<a id="ae064083382c242e7e97acc9295e594a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae064083382c242e7e97acc9295e594a1">&#9670;&nbsp;</a></span>get_escolaridad_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Component::get_escolaridad_array </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$limit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>genera un array de (año_actual - año_ctual+1)</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">int</td><td class="paramname">$limit</td><td>numero de años previos al actual </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>array </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="_component_8php_source.html#l00012">12</a> del archivo <a class="el" href="_component_8php_source.html">Component.php</a>.</p>
+
+</div>
+</div>
 <a id="af653678b68f3c0a105ee403a242c2958"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af653678b68f3c0a105ee403a242c2958">&#9670;&nbsp;</a></span>map_arrays()</h2>
 
@@ -209,7 +245,8 @@ static&#160;</td><td class="memItemRight" valign="bottom"><b>alert_message</b> (
   </tr>
 </table>
 </div><div class="memdoc">
-<p>metodo utilitario copy array_b in array_a the return array_a </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>metodo utilitario copy array_b in array_a the return array_a</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">$array_a</td><td>es el array inicial que puede o no estar vacio </td></tr>
     <tr><td class="paramname">$array_b</td><td>es el array del cual se tomaran los valores y se copiaran en el inicial </td></tr>
@@ -220,7 +257,7 @@ static&#160;</td><td class="memItemRight" valign="bottom"><b>alert_message</b> (
   </dd>
 </dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_component_8php_source.html#l00186">186</a> del archivo <a class="el" href="_component_8php_source.html">Component.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_component_8php_source.html#l00195">195</a> del archivo <a class="el" href="_component_8php_source.html">Component.php</a>.</p>
 
 </div>
 </div>
@@ -247,7 +284,8 @@ static&#160;</td><td class="memItemRight" valign="bottom"><b>alert_message</b> (
   </tr>
 </table>
 </div><div class="memdoc">
-<p>metodo auxiliar para usar el metodo map_arrays con mas de 2 arrays </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>metodo auxiliar para usar el metodo map_arrays con mas de 2 arrays</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">array_of_arrays</td><td>array con todos los array de entrada </td></tr>
   </table>
@@ -255,7 +293,7 @@ static&#160;</td><td class="memItemRight" valign="bottom"><b>alert_message</b> (
 </dl>
 <dl class="section return"><dt>Devuelve</dt><dd>$array_result array resultante </dd></dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_component_8php_source.html#l00218">218</a> del archivo <a class="el" href="_component_8php_source.html">Component.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_component_8php_source.html#l00228">228</a> del archivo <a class="el" href="_component_8php_source.html">Component.php</a>.</p>
 
 </div>
 </div>
@@ -298,7 +336,8 @@ static&#160;</td><td class="memItemRight" valign="bottom"><b>alert_message</b> (
   </tr>
 </table>
 </div><div class="memdoc">
-<p>function para remplazar la ultima aparicion de una cadena en otra </p><dl class="params"><dt>Parámetros</dt><dd>
+<p>function para remplazar la ultima aparicion de una cadena en otra</p>
+<dl class="params"><dt>Parámetros</dt><dd>
   <table class="params">
     <tr><td class="paramname">search</td><td>subcadena a sustituir </td></tr>
     <tr><td class="paramname">replace</td><td>subcadena nueva </td></tr>
@@ -307,7 +346,7 @@ static&#160;</td><td class="memItemRight" valign="bottom"><b>alert_message</b> (
   </dd>
 </dl>
 
-<p class="definition">Definición en la línea <a class="el" href="_component_8php_source.html#l00235">235</a> del archivo <a class="el" href="_component_8php_source.html">Component.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_component_8php_source.html#l00246">246</a> del archivo <a class="el" href="_component_8php_source.html">Component.php</a>.</p>
 
 </div>
 </div>

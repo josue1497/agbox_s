@@ -1,4 +1,7 @@
 <?php
+/**
+ * clase base que gestiona las funcionalidades de los modelos
+ */
     class Model{
 		
 		/* nombre de la tabla */
@@ -21,7 +24,13 @@
 			'can_delete'=>true
 		);
 		
-		/* constructor de la clase */
+		/**
+		  * constructor de la clase por defecto, recibe 
+		  * el nombre de la tabla a cargar
+		  *
+		  * @param type|null $table_name 
+		  * @return void
+		  */
 		public function __construct($table_name=null){
 			if($table_name!=null){
 				$this->table_name=$table_name;

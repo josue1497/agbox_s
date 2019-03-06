@@ -1,10 +1,12 @@
 var searchData=
 [
+  ['get',['get',['../class_session.html#a555ab9c7731c0103b16baf165e34efe8',1,'Session']]],
   ['get_5farray_5fdata',['get_array_data',['../class_model.html#a62dd5265f2009c4111dc8117f815eb27',1,'Model']]],
   ['get_5fauto_5fincrement',['get_auto_increment',['../class_column.html#ac3da460a7c41cfc906f2ea3e8b37280f',1,'Column']]],
   ['get_5fby_5fid',['get_by_id',['../class_model.html#a708a0fc588b55e650ea0847da98f7b80',1,'Model']]],
   ['get_5fcolumn_5fin_5fdb',['get_column_in_db',['../class_column.html#ac730ad2d5ffed1e805200bf0cdc15064',1,'Column']]],
   ['get_5fcontroller_5fname',['get_controller_name',['../class_core_utils.html#ada9d6950d7ad8d0199d823939b727479',1,'CoreUtils']]],
+  ['get_5fescolaridad_5farray',['get_escolaridad_array',['../class_component.html#ae064083382c242e7e97acc9295e594a1',1,'Component']]],
   ['get_5ffield_5fhelp',['get_field_help',['../class_column.html#a1fe455614c5937aec57db013d23df078',1,'Column']]],
   ['get_5ffield_5fhtml',['get_field_html',['../class_column.html#aac0bf1664721d84626a1fc9eca321488',1,'Column']]],
   ['get_5ffile_5fcontent',['get_file_content',['../class_core_utils.html#a53e64d1ce4c4369cdc8bf4176ebce031',1,'CoreUtils']]],
@@ -32,5 +34,7 @@ var searchData=
   ['get_5fview_5ffile_5fcontent',['get_view_file_content',['../class_core_utils.html#a6de0f13d487f0d6d55183343925bfba0',1,'CoreUtils']]],
   ['get_5fvisible_5fform',['get_visible_form',['../class_column.html#a58959194643294bb27c06cf13584f79a',1,'Column']]],
   ['get_5fvisible_5fgrid',['get_visible_grid',['../class_column.html#a1ebf50eb00d5c65b0087cf13c1ceb8fd',1,'Column']]],
+  ['getbdd',['getBdd',['../class_database.html#aa9a1dcc0705102af94199c656a3086ce',1,'Database']]],
+  ['getndelete',['getNdelete',['../class_session.html#a894fdbe24e887cc604178f0234355440',1,'Session']]],
   ['group',['Group',['../class_group.html',1,'']]]
 ];

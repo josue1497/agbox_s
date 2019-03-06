@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * 
+	 * clase para gestionar traducciones en la aplicacion
 	 */
 	class Translator{
 		

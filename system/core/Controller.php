@@ -1,7 +1,8 @@
 <?php
-	//require_once(ROOT.'Models/Menu.php');
-	//require_once(ROOT.'Models/Nivel_Usuario.php');
-	
+/**
+ * clase base de controlador que gestiona las acciones, 
+ * carga y usa los modelos, y genera las vistas
+ */
     class Controller{
         var $vars = array();
         var $layout = TEMPLATE_NAME;

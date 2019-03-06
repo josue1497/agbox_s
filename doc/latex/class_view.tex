@@ -28,9 +28,9 @@
 
 
 \subsection{Descripción detallada}
+clase base para gestionar la construccion de vistas 
 
-
-Definición en la línea 2 del archivo View.\+php.
+Definición en la línea 5 del archivo View.\+php.
 
 
 
@@ -41,9 +41,19 @@ Definición en la línea 2 del archivo View.\+php.
 \subsubsection{\texorpdfstring{\_\_construct()}{\_\_construct()}}
 {\footnotesize\ttfamily View\+::\+\_\+\+\_\+construct (\begin{DoxyParamCaption}\item[{}]{\$model }\end{DoxyParamCaption})}
 
-constructor usa modelo para construir vista, a partir de configuraciones del modelo 
+constructor usa modelo para construir vista, a partir de configuraciones del modelo
 
-Definición en la línea 9 del archivo View.\+php.
+
+\begin{DoxyParams}[1]{Parámetros}
+model & {\em \$model} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+void 
+\end{DoxyReturn}
+
+
+Definición en la línea 15 del archivo View.\+php.
 
 
 
@@ -54,9 +64,21 @@ Definición en la línea 9 del archivo View.\+php.
 \subsubsection{\texorpdfstring{auto\_build\_form()}{auto\_build\_form()}}
 {\footnotesize\ttfamily View\+::auto\+\_\+build\+\_\+form (\begin{DoxyParamCaption}\item[{}]{\$form\+\_\+content,  }\item[{}]{\$data }\end{DoxyParamCaption})}
 
-metodo para construir vista de formulario automaticamente, desde los datos del modelo 
+metodo para construir vista de formulario automaticamente, desde los datos del modelo
 
-Definición en la línea 17 del archivo View.\+php.
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$form\+\_\+content} & \\
+\hline
+type & {\em \$data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 27 del archivo View.\+php.
 
 \mbox{\Hypertarget{class_view_a8ab136103e7ca8c850c409e2b7dd92e2}\label{class_view_a8ab136103e7ca8c850c409e2b7dd92e2}} 
 \index{View@{View}!auto\_build\_form\_content@{auto\_build\_form\_content}}
@@ -64,9 +86,19 @@ Definición en la línea 17 del archivo View.\+php.
 \subsubsection{\texorpdfstring{auto\_build\_form\_content()}{auto\_build\_form\_content()}}
 {\footnotesize\ttfamily View\+::auto\+\_\+build\+\_\+form\+\_\+content (\begin{DoxyParamCaption}\item[{}]{\$data }\end{DoxyParamCaption})}
 
-metodo para construir contenido de la vista de formulario automaticamente, desde los datos del modelo 
+metodo para construir contenido de la vista de formulario automaticamente, desde los datos del modelo
 
-Definición en la línea 29 del archivo View.\+php.
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 42 del archivo View.\+php.
 
 \mbox{\Hypertarget{class_view_afff2bf095f5152f4b9074da8c656581f}\label{class_view_afff2bf095f5152f4b9074da8c656581f}} 
 \index{View@{View}!auto\_build\_list@{auto\_build\_list}}
@@ -74,9 +106,21 @@ Definición en la línea 29 del archivo View.\+php.
 \subsubsection{\texorpdfstring{auto\_build\_list()}{auto\_build\_list()}}
 {\footnotesize\ttfamily View\+::auto\+\_\+build\+\_\+list (\begin{DoxyParamCaption}\item[{}]{\$list\+\_\+content,  }\item[{}]{\$data }\end{DoxyParamCaption})}
 
-metodo para construir vista de listado automaticamente, desde los datos del modelo 
+metodo para construir vista de listado automaticamente, desde los datos del modelo
 
-Definición en la línea 45 del archivo View.\+php.
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$list\+\_\+content} & \\
+\hline
+type & {\em \$data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 62 del archivo View.\+php.
 
 \mbox{\Hypertarget{class_view_a74d1701b5981346a27394c9b7002cb06}\label{class_view_a74d1701b5981346a27394c9b7002cb06}} 
 \index{View@{View}!auto\_build\_list\_content@{auto\_build\_list\_content}}
@@ -84,9 +128,19 @@ Definición en la línea 45 del archivo View.\+php.
 \subsubsection{\texorpdfstring{auto\_build\_list\_content()}{auto\_build\_list\_content()}}
 {\footnotesize\ttfamily View\+::auto\+\_\+build\+\_\+list\+\_\+content (\begin{DoxyParamCaption}\item[{}]{\$data }\end{DoxyParamCaption})}
 
-metodo para construir contenido de la vista de listado automaticamente, desde los datos del modelo 
+metodo para construir contenido de la vista de listado automaticamente, desde los datos del modelo
 
-Definición en la línea 58 del archivo View.\+php.
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 77 del archivo View.\+php.
 
 \mbox{\Hypertarget{class_view_aaf8b264482d9d19af83177579be7ba3e}\label{class_view_aaf8b264482d9d19af83177579be7ba3e}} 
 \index{View@{View}!auto\_build\_list\_tbody@{auto\_build\_list\_tbody}}
@@ -94,9 +148,19 @@ Definición en la línea 58 del archivo View.\+php.
 \subsubsection{\texorpdfstring{auto\_build\_list\_tbody()}{auto\_build\_list\_tbody()}}
 {\footnotesize\ttfamily View\+::auto\+\_\+build\+\_\+list\+\_\+tbody (\begin{DoxyParamCaption}\item[{}]{\$data }\end{DoxyParamCaption})}
 
-metodo para construir cuerpo del contenido de la vista de listado automaticamente, desde los datos del modelo 
+metodo para construir cuerpo del contenido de la vista de listado automaticamente, desde los datos del modelo
 
-Definición en la línea 87 del archivo View.\+php.
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 111 del archivo View.\+php.
 
 \mbox{\Hypertarget{class_view_ac55cd1801295517a7f9fad0d41ddf6d1}\label{class_view_ac55cd1801295517a7f9fad0d41ddf6d1}} 
 \index{View@{View}!auto\_build\_list\_thead@{auto\_build\_list\_thead}}
@@ -104,9 +168,14 @@ Definición en la línea 87 del archivo View.\+php.
 \subsubsection{\texorpdfstring{auto\_build\_list\_thead()}{auto\_build\_list\_thead()}}
 {\footnotesize\ttfamily View\+::auto\+\_\+build\+\_\+list\+\_\+thead (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-metodo para construir cabecera del contenido de la vista de listado automaticamente, desde los datos del modelo 
+metodo para construir cabecera del contenido de la vista de listado automaticamente, desde los datos del modelo
 
-Definición en la línea 67 del archivo View.\+php.
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 88 del archivo View.\+php.
 
 \mbox{\Hypertarget{class_view_ab2f8d0f1c16e7971856e5535d9fc286e}\label{class_view_ab2f8d0f1c16e7971856e5535d9fc286e}} 
 \index{View@{View}!build\_element@{build\_element}}
@@ -114,9 +183,21 @@ Definición en la línea 67 del archivo View.\+php.
 \subsubsection{\texorpdfstring{build\_element()}{build\_element()}}
 {\footnotesize\ttfamily View\+::build\+\_\+element (\begin{DoxyParamCaption}\item[{}]{\$form\+\_\+field,  }\item[{}]{\$data }\end{DoxyParamCaption})}
 
-metodo para construir elementos de la vista, desde las especificaciones del modelo 
+metodo para construir elementos de la vista, desde las especificaciones del modelo
 
-Definición en la línea 124 del archivo View.\+php.
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$form\+\_\+field} & \\
+\hline
+type & {\em \$data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 152 del archivo View.\+php.
 
 
 

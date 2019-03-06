@@ -1,6 +1,14 @@
 <?php
+/**
+ * clase que genera comonentes html. 
+ */
 	class Component{
-		
+		/**
+		 * genera un array de (año_actual - año_ctual+1) 
+		 * 
+		 * @param int $limit numero de años previos al actual
+		 * @return array
+		 */
 		public static function get_escolaridad_array($limit){
 			$e = array();
 			for($i=0;$i<$limit;$i++)
@@ -174,6 +182,7 @@
 		
 		/**
 		* metodo utilitario copy array_b in array_a the return array_a
+		* 
 		* @param $array_a es el array inicial que puede o no estar vacio 
 		* @param $array_b es el array del cual se tomaran los valores y se copiaran en el inicial
 		* @param $old_suffix sufijo de clave a reemplazar,
@@ -212,6 +221,7 @@
 		
 		/**
 		* metodo auxiliar para usar el metodo map_arrays con mas de 2 arrays
+		* 
 		* @param array_of_arrays array con todos los array de entrada
 		* @return $array_result array resultante
 		*/
@@ -227,6 +237,7 @@
 		
 		/**
 		* function para remplazar la ultima aparicion de una cadena en otra
+		* 
 		* @param search subcadena a sustituir
 		* @param replace subcadena nueva
 		* @param str cadena completa

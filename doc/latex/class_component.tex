@@ -3,8 +3,7 @@
 \subsection*{Métodos públicos estáticos}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_component_ae064083382c242e7e97acc9295e594a1}\label{class_component_ae064083382c242e7e97acc9295e594a1}} 
-static {\bfseries get\+\_\+escolaridad\+\_\+array} (\$limit)
+static \mbox{\hyperlink{class_component_ae064083382c242e7e97acc9295e594a1}{get\+\_\+escolaridad\+\_\+array}} (\$limit)
 \item 
 \mbox{\Hypertarget{class_component_a04038f1b63585dd71fd8fdef85a256a7}\label{class_component_a04038f1b63585dd71fd8fdef85a256a7}} 
 static {\bfseries array\+\_\+from\+\_\+to} (\$from, \$to)
@@ -87,20 +86,42 @@ static \mbox{\hyperlink{class_component_a1fecda46a9e46fdcf102ab6cffb262aa}{str\+
 
 
 \subsection{Descripción detallada}
+clase que genera comonentes html. 
 
-
-Definición en la línea 2 del archivo Component.\+php.
+Definición en la línea 5 del archivo Component.\+php.
 
 
 
 \subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{class_component_ae064083382c242e7e97acc9295e594a1}\label{class_component_ae064083382c242e7e97acc9295e594a1}} 
+\index{Component@{Component}!get\_escolaridad\_array@{get\_escolaridad\_array}}
+\index{get\_escolaridad\_array@{get\_escolaridad\_array}!Component@{Component}}
+\subsubsection{\texorpdfstring{get\_escolaridad\_array()}{get\_escolaridad\_array()}}
+{\footnotesize\ttfamily static Component\+::get\+\_\+escolaridad\+\_\+array (\begin{DoxyParamCaption}\item[{}]{\$limit }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+genera un array de (año\+\_\+actual -\/ año\+\_\+ctual+1)
+
+
+\begin{DoxyParams}[1]{Parámetros}
+int & {\em \$limit} & numero de años previos al actual \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+array 
+\end{DoxyReturn}
+
+
+Definición en la línea 12 del archivo Component.\+php.
+
 \mbox{\Hypertarget{class_component_af653678b68f3c0a105ee403a242c2958}\label{class_component_af653678b68f3c0a105ee403a242c2958}} 
 \index{Component@{Component}!map\_arrays@{map\_arrays}}
 \index{map\_arrays@{map\_arrays}!Component@{Component}}
 \subsubsection{\texorpdfstring{map\_arrays()}{map\_arrays()}}
 {\footnotesize\ttfamily static Component\+::map\+\_\+arrays (\begin{DoxyParamCaption}\item[{}]{\$array\+\_\+a,  }\item[{}]{\$array\+\_\+b,  }\item[{}]{\$old\+\_\+suffix = {\ttfamily null},  }\item[{}]{\$new\+\_\+suffix = {\ttfamily null},  }\item[{}]{\$only\+\_\+matched = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-metodo utilitario copy array\+\_\+b in array\+\_\+a the return array\+\_\+a 
+metodo utilitario copy array\+\_\+b in array\+\_\+a the return array\+\_\+a
+
+
 \begin{DoxyParams}{Parámetros}
 {\em \$array\+\_\+a} & es el array inicial que puede o no estar vacio \\
 \hline
@@ -115,7 +136,7 @@ metodo utilitario copy array\+\_\+b in array\+\_\+a the return array\+\_\+a
 \end{DoxyParams}
 
 
-Definición en la línea 186 del archivo Component.\+php.
+Definición en la línea 195 del archivo Component.\+php.
 
 \mbox{\Hypertarget{class_component_ab24893f7efe63552c37b7d35104f53c7}\label{class_component_ab24893f7efe63552c37b7d35104f53c7}} 
 \index{Component@{Component}!map\_many\_arrays@{map\_many\_arrays}}
@@ -123,7 +144,9 @@ Definición en la línea 186 del archivo Component.\+php.
 \subsubsection{\texorpdfstring{map\_many\_arrays()}{map\_many\_arrays()}}
 {\footnotesize\ttfamily static Component\+::map\+\_\+many\+\_\+arrays (\begin{DoxyParamCaption}\item[{}]{\$array\+\_\+of\+\_\+arrays }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-metodo auxiliar para usar el metodo map\+\_\+arrays con mas de 2 arrays 
+metodo auxiliar para usar el metodo map\+\_\+arrays con mas de 2 arrays
+
+
 \begin{DoxyParams}{Parámetros}
 {\em array\+\_\+of\+\_\+arrays} & array con todos los array de entrada \\
 \hline
@@ -133,7 +156,7 @@ metodo auxiliar para usar el metodo map\+\_\+arrays con mas de 2 arrays
 \end{DoxyReturn}
 
 
-Definición en la línea 218 del archivo Component.\+php.
+Definición en la línea 228 del archivo Component.\+php.
 
 \mbox{\Hypertarget{class_component_a1fecda46a9e46fdcf102ab6cffb262aa}\label{class_component_a1fecda46a9e46fdcf102ab6cffb262aa}} 
 \index{Component@{Component}!str\_last\_replace@{str\_last\_replace}}
@@ -141,7 +164,9 @@ Definición en la línea 218 del archivo Component.\+php.
 \subsubsection{\texorpdfstring{str\_last\_replace()}{str\_last\_replace()}}
 {\footnotesize\ttfamily static Component\+::str\+\_\+last\+\_\+replace (\begin{DoxyParamCaption}\item[{}]{\$search,  }\item[{}]{\$replace,  }\item[{}]{\$str }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-function para remplazar la ultima aparicion de una cadena en otra 
+function para remplazar la ultima aparicion de una cadena en otra
+
+
 \begin{DoxyParams}{Parámetros}
 {\em search} & subcadena a sustituir \\
 \hline
@@ -152,7 +177,7 @@ function para remplazar la ultima aparicion de una cadena en otra
 \end{DoxyParams}
 
 
-Definición en la línea 235 del archivo Component.\+php.
+Definición en la línea 246 del archivo Component.\+php.
 
 
 

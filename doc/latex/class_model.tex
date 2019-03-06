@@ -9,8 +9,7 @@ Diagrama de herencias de Model\begin{figure}[H]
 \subsection*{Métodos públicos}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_model_a186f8fcbe8092f888ba40e4ecef9f6a5}\label{class_model_a186f8fcbe8092f888ba40e4ecef9f6a5}} 
-{\bfseries \+\_\+\+\_\+construct} (\$table\+\_\+name=null)
+\mbox{\hyperlink{class_model_a186f8fcbe8092f888ba40e4ecef9f6a5}{\+\_\+\+\_\+construct}} (\$table\+\_\+name=null)
 \item 
 \mbox{\Hypertarget{class_model_ab42dfa81494651af8757f81051d03faa}\label{class_model_ab42dfa81494651af8757f81051d03faa}} 
 {\bfseries add\+\_\+column} (\$column)
@@ -80,9 +79,32 @@ static \mbox{\hyperlink{class_model_a740d72b25fc3721184b8e304ab1d5c50}{save\+\_\
 
 
 \subsection{Descripción detallada}
+clase base que gestiona las funcionalidades de los modelos 
+
+Definición en la línea 5 del archivo Model.\+php.
 
 
-Definición en la línea 2 del archivo Model.\+php.
+
+\subsection{Documentación del constructor y destructor}
+\mbox{\Hypertarget{class_model_a186f8fcbe8092f888ba40e4ecef9f6a5}\label{class_model_a186f8fcbe8092f888ba40e4ecef9f6a5}} 
+\index{Model@{Model}!\_\_construct@{\_\_construct}}
+\index{\_\_construct@{\_\_construct}!Model@{Model}}
+\subsubsection{\texorpdfstring{\_\_construct()}{\_\_construct()}}
+{\footnotesize\ttfamily Model\+::\+\_\+\+\_\+construct (\begin{DoxyParamCaption}\item[{}]{\$table\+\_\+name = {\ttfamily null} }\end{DoxyParamCaption})}
+
+constructor de la clase por defecto, recibe el nombre de la tabla a cargar
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type | null & {\em \$table\+\_\+name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+void 
+\end{DoxyReturn}
+
+
+Definición en la línea 34 del archivo Model.\+php.
 
 
 
@@ -95,7 +117,7 @@ Definición en la línea 2 del archivo Model.\+php.
 
 metodo para insertar un nuevo registro 
 
-Definición en la línea 196 del archivo Model.\+php.
+Definición en la línea 205 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_ae045fb57af57685c24f2dbe5fbd7f684}\label{class_model_ae045fb57af57685c24f2dbe5fbd7f684}} 
 \index{Model@{Model}!delete@{delete}}
@@ -105,7 +127,7 @@ Definición en la línea 196 del archivo Model.\+php.
 
 metodo para eliminar un registro segun id 
 
-Definición en la línea 127 del archivo Model.\+php.
+Definición en la línea 136 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_adae5eb27d36ae799ef4fa23dec88d302}\label{class_model_adae5eb27d36ae799ef4fa23dec88d302}} 
 \index{Model@{Model}!edit@{edit}}
@@ -115,7 +137,7 @@ Definición en la línea 127 del archivo Model.\+php.
 
 metodo para actualizar un registro existente 
 
-Definición en la línea 230 del archivo Model.\+php.
+Definición en la línea 239 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_afbf5f640ebb15823608a233cc3f2e8f5}\label{class_model_afbf5f640ebb15823608a233cc3f2e8f5}} 
 \index{Model@{Model}!exist\_unike\_keys@{exist\_unike\_keys}}
@@ -125,7 +147,7 @@ Definición en la línea 230 del archivo Model.\+php.
 
 metodo para verificar si ya existe un registro con los valores unicos especificados 
 
-Definición en la línea 174 del archivo Model.\+php.
+Definición en la línea 183 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_a067c962b5ac1b38809aba6c8b7af46b1}\label{class_model_a067c962b5ac1b38809aba6c8b7af46b1}} 
 \index{Model@{Model}!findByPoperty@{findByPoperty}}
@@ -135,7 +157,7 @@ Definición en la línea 174 del archivo Model.\+php.
 
 metodo para buscar registros segun algun atributo(array (column\+\_\+name =$>$ value, ...)) 
 
-Definición en la línea 68 del archivo Model.\+php.
+Definición en la línea 77 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_a62dd5265f2009c4111dc8117f815eb27}\label{class_model_a62dd5265f2009c4111dc8117f815eb27}} 
 \index{Model@{Model}!get\_array\_data@{get\_array\_data}}
@@ -145,7 +167,7 @@ Definición en la línea 68 del archivo Model.\+php.
 
 metodo para obtener array de registros segun id opcional 
 
-Definición en la línea 137 del archivo Model.\+php.
+Definición en la línea 146 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_a708a0fc588b55e650ea0847da98f7b80}\label{class_model_a708a0fc588b55e650ea0847da98f7b80}} 
 \index{Model@{Model}!get\_by\_id@{get\_by\_id}}
@@ -155,7 +177,7 @@ Definición en la línea 137 del archivo Model.\+php.
 
 metodo adaptados para obtener un registro de la entidad por id 
 
-Definición en la línea 93 del archivo Model.\+php.
+Definición en la línea 102 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_af5ccad2ad89087e4454e71787163a6ba}\label{class_model_af5ccad2ad89087e4454e71787163a6ba}} 
 \index{Model@{Model}!get\_fk2\_by\_id@{get\_fk2\_by\_id}}
@@ -165,7 +187,7 @@ Definición en la línea 93 del archivo Model.\+php.
 
 metodo para obtener un registro de una tercera tabla relacionda a la segunda 
 
-Definición en la línea 108 del archivo Model.\+php.
+Definición en la línea 117 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_aca3b0fcfd538c6f2d0f1a05dfcea87ae}\label{class_model_aca3b0fcfd538c6f2d0f1a05dfcea87ae}} 
 \index{Model@{Model}!get\_fk\_by\_id@{get\_fk\_by\_id}}
@@ -175,7 +197,7 @@ Definición en la línea 108 del archivo Model.\+php.
 
 metodo para obtener un registro de una segunda tabla relacionada a la primera 
 
-Definición en la línea 100 del archivo Model.\+php.
+Definición en la línea 109 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_a85f2794443673870da8d4e34e1e3a307}\label{class_model_a85f2794443673870da8d4e34e1e3a307}} 
 \index{Model@{Model}!get\_select\_data@{get\_select\_data}}
@@ -185,7 +207,7 @@ Definición en la línea 100 del archivo Model.\+php.
 
 metodo para obtener registros y mapearlos para combo generico 
 
-Definición en la línea 150 del archivo Model.\+php.
+Definición en la línea 159 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_a740d72b25fc3721184b8e304ab1d5c50}\label{class_model_a740d72b25fc3721184b8e304ab1d5c50}} 
 \index{Model@{Model}!save\_record@{save\_record}}
@@ -195,7 +217,7 @@ Definición en la línea 150 del archivo Model.\+php.
 
 metodo generico deberia ser estatic y esta en model 
 
-Definición en la línea 253 del archivo Model.\+php.
+Definición en la línea 262 del archivo Model.\+php.
 
 \mbox{\Hypertarget{class_model_a7b1ac1e4fdca6e471ad62e21416c9ee7}\label{class_model_a7b1ac1e4fdca6e471ad62e21416c9ee7}} 
 \index{Model@{Model}!showAllRecords@{showAllRecords}}
@@ -205,7 +227,7 @@ Definición en la línea 253 del archivo Model.\+php.
 
 metodo para mostrar todos los registros retorna un array(filas) de arrays(columnas) 
 
-Definición en la línea 117 del archivo Model.\+php.
+Definición en la línea 126 del archivo Model.\+php.
 
 
 
@@ -228,7 +250,7 @@ Definición en la línea 117 del archivo Model.\+php.
 \end{DoxyCode}
 
 
-Definición en la línea 17 del archivo Model.\+php.
+Definición en la línea 20 del archivo Model.\+php.
 
 
 

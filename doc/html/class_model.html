@@ -90,8 +90,7 @@ Diagrama de herencias de Model</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Métodos públicos</h2></td></tr>
-<tr class="memitem:a186f8fcbe8092f888ba40e4ecef9f6a5"><td class="memItemLeft" align="right" valign="top"><a id="a186f8fcbe8092f888ba40e4ecef9f6a5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>__construct</b> ($table_name=null)</td></tr>
+<tr class="memitem:a186f8fcbe8092f888ba40e4ecef9f6a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_model.html#a186f8fcbe8092f888ba40e4ecef9f6a5">__construct</a> ($table_name=null)</td></tr>
 <tr class="separator:a186f8fcbe8092f888ba40e4ecef9f6a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab42dfa81494651af8757f81051d03faa"><td class="memItemLeft" align="right" valign="top"><a id="ab42dfa81494651af8757f81051d03faa"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>add_column</b> ($column)</td></tr>
@@ -160,9 +159,39 @@ Atributos públicos</h2></td></tr>
 <tr class="separator:a179bbacf6ce5df100c666db362b8ed44"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
-<div class="textblock">
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00002">2</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
-</div><h2 class="groupheader">Documentación de las funciones miembro</h2>
+<div class="textblock"><p>clase base que gestiona las funcionalidades de los modelos </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00005">5</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+</div><h2 class="groupheader">Documentación del constructor y destructor</h2>
+<a id="a186f8fcbe8092f888ba40e4ecef9f6a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a186f8fcbe8092f888ba40e4ecef9f6a5">&#9670;&nbsp;</a></span>__construct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Model::__construct </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$table_name</em> = <code>null</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>constructor de la clase por defecto, recibe el nombre de la tabla a cargar</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">type&#160;|&#160;null</td><td class="paramname">$table_name</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
+
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00034">34</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones miembro</h2>
 <a id="ab85f7264cd89a8180cacda746a089e9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab85f7264cd89a8180cacda746a089e9e">&#9670;&nbsp;</a></span>create()</h2>
 
@@ -180,7 +209,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para insertar un nuevo registro </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00196">196</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00205">205</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -201,7 +230,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para eliminar un registro segun id </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00127">127</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00136">136</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -232,7 +261,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para actualizar un registro existente </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00230">230</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00239">239</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -253,7 +282,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para verificar si ya existe un registro con los valores unicos especificados </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00174">174</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00183">183</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -274,7 +303,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para buscar registros segun algun atributo(array (column_name =&gt; value, ...)) </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00068">68</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00077">77</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -295,7 +324,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para obtener array de registros segun id opcional </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00137">137</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00146">146</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -316,7 +345,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo adaptados para obtener un registro de la entidad por id </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00093">93</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00102">102</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -353,7 +382,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para obtener un registro de una tercera tabla relacionda a la segunda </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00108">108</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00117">117</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -384,7 +413,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para obtener un registro de una segunda tabla relacionada a la primera </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00100">100</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00109">109</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -405,7 +434,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para obtener registros y mapearlos para combo generico </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00150">150</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00159">159</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -444,7 +473,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo generico deberia ser estatic y esta en model </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00253">253</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00262">262</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -464,7 +493,7 @@ Atributos públicos</h2></td></tr>
 </div><div class="memdoc">
 <p>metodo para mostrar todos los registros retorna un array(filas) de arrays(columnas) </p>
 
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00117">117</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00126">126</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>
@@ -481,7 +510,7 @@ Atributos públicos</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Valor inicial:</b><div class="fragment"><div class="line">= array(</div><div class="line">            <span class="stringliteral">&#39;can_create&#39;</span>=&gt;<span class="keyword">true</span>,</div><div class="line">            <span class="stringliteral">&#39;can_read&#39;</span>=&gt;<span class="keyword">true</span>,</div><div class="line">            <span class="stringliteral">&#39;can_update&#39;</span>=&gt;<span class="keyword">true</span>,</div><div class="line">            <span class="stringliteral">&#39;can_delete&#39;</span>=&gt;<span class="keyword">true</span></div><div class="line">        )</div></div><!-- fragment -->
-<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00017">17</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
+<p class="definition">Definición en la línea <a class="el" href="_model_8php_source.html#l00020">20</a> del archivo <a class="el" href="_model_8php_source.html">Model.php</a>.</p>
 
 </div>
 </div>

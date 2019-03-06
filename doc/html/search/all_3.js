@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['check',['check',['../class_session.html#abbc453dff32fed9748e3873ab9093050',1,'Session']]],
   ['column',['Column',['../class_column.html',1,'']]],
   ['component',['Component',['../class_component.html',1,'']]],
   ['controller',['Controller',['../class_controller.html',1,'']]],
