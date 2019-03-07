@@ -154,10 +154,10 @@ class View
 		 * desde las especificaciones del modelo
 		 *
 		 * @param type $form_field 
-		 * @param type $data 
+		 * @param null|type $data 
 		 * @return type
 		 */
-	public function build_element($form_field, $data)
+	public function build_element($form_field, $data=null)
 	{
 		$res = '';
 		switch ($form_field->get_type()) {
