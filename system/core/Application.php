@@ -14,7 +14,7 @@ define('MODELS_DIR', ROOT . "application/models/");
 define('DB_HOST','localhost');
 define('DB_NAME','abx_db');
 define('DB_USER','root');
-define('DB_PASS','');
+define('DB_PASS','root');
 
 require_once(ROOT.'system/core/Autoloader.php');
 Autoloader::register();
