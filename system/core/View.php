@@ -1,19 +1,29 @@
 <?php 
+/**
+ * clase base para gestionar la construccion de vistas
+ */
 	class View{
 		public $model;
 		
 		/**
-		* constructor usa modelo para construir vista,
-		* a partir de configuraciones del modelo
-		*/
+		 * constructor usa modelo para construir vista,
+		 * a partir de configuraciones del modelo
+ 		 * 
+ 		 * @param model $model
+ 		 * @return void
+		 */
 		public function __construct($model){
 			$this->model=$model;
 		}
 		
 		/**
-		* metodo para construir vista de formulario automaticamente,
-		* desde los datos del modelo
-		*/
+		 *  metodo para construir vista de formulario automaticamente,
+		 * desde los datos del modelo
+		 *
+		 * @param type $form_content 
+		 * @param type $data 
+		 * @return type
+		 */
 		public function auto_build_form($form_content,$data){
 			return "<form method='post' action='#' ".
 				(isset($data['onsubmit'])?" onsubmit='".$data['onsubmit']."' ":"").
@@ -23,9 +33,12 @@
 		}
 		
 		/**
-		* metodo para construir contenido de la vista de formulario automaticamente,
-		* desde los datos del modelo
-		*/
+		 * metodo para construir contenido de la vista de formulario automaticamente,
+	  	 * desde los datos del modelo
+		 *
+		 * @param type $data 
+		 * @return type
+		 */
 		public function auto_build_form_content($data){
 			$form_content = '';
 			foreach($this->model->table_fields as $form_field)
@@ -39,11 +52,14 @@
 		
 		
 		/**
-		* metodo para construir vista de listado automaticamente,
-		* desde los datos del modelo
-		*/
+		 * metodo para construir vista de listado automaticamente,
+		 * desde los datos del modelo
+		 * 
+		 * @param type $list_content 
+		 * @param type $data 
+		 * @return type
+		 */
 		public function auto_build_list($list_content,$data){
-
 			return "<div class='row col-md-12 centered'>".
 				"<table class='table table-striped custab'>".
 				$list_content.
@@ -52,18 +68,23 @@
 		}
 		
 		/**
-		* metodo para construir contenido de la vista de listado automaticamente,
-		* desde los datos del modelo
-		*/
+		 * metodo para construir contenido de la vista de listado automaticamente,
+	 	 * desde los datos del modelo
+		 * 
+		 * @param type $data 
+		 * @return type
+		 */
 		public function auto_build_list_content($data){
 			return $this->auto_build_list_thead().
 				$this->auto_build_list_tbody($data);
 		}
 		
 		/**
-		* metodo para construir cabecera del contenido de la vista de listado automaticamente,
-		* desde los datos del modelo
-		*/
+		 * metodo para construir cabecera del contenido de la vista de listado automaticamente,
+		 * desde los datos del modelo
+		 *
+		 * @return type
+		 */
 		public function auto_build_list_thead(){
 			$list_thead = "<thead>".
 				($this->model->crud_config['can_create']? 
@@ -81,9 +102,12 @@
 		}
 		
 		/**
-		* metodo para construir cuerpo del contenido de la vista de listado automaticamente,
-		* desde los datos del modelo
-		*/
+		 * metodo para construir cuerpo del contenido de la vista de listado automaticamente,
+		 * desde los datos del modelo
+		 * 
+		 * @param type $data 
+		 * @return type
+		 */
 		public function auto_build_list_tbody($data){
 			$list_tbody="<tbody>";
 			$i=1;
@@ -118,9 +142,13 @@
 		}
 		
 		/**
-		* metodo para construir elementos de la vista,
-		* desde las especificaciones del modelo
-		*/
+		 *  metodo para construir elementos de la vista,
+		 * desde las especificaciones del modelo
+		 *
+		 * @param type $form_field 
+		 * @param type $data 
+		 * @return type
+		 */
 		public function build_element($form_field,$data){
 			$res = '';
 			switch($form_field->get_type()){

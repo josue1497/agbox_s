@@ -90,3 +90,118 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `clave_usuario`, `id_nivel_usuario`) VALUES
 (1, 'admin', 'admin', 1),
 (2, 'user', 'user', 2);
+
+
+-- ---
+-- Table 'domain'
+-- Table for Domain''s Information
+-- ---
+
+DROP TABLE IF EXISTS `domain`;
+		
+CREATE TABLE `domain` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `name` VARCHAR(60) NOT NULL,
+  `description` VARCHAR(256) NOT NULL,
+  `licence` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`)
+) COMMENT 'Table for Domain''s Information';
+
+-- ---
+-- Table 'group'
+-- Table for group''s information
+-- ---
+
+DROP TABLE IF EXISTS `group`;
+		
+CREATE TABLE `group` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `domain_id` INTEGER NOT NULL,
+  `parent_group_id` INTEGER NULL DEFAULT NULL,
+  `name` VARCHAR(60) NOT NULL,
+  `description` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`)
+) COMMENT 'Table for group''s information';
+
+-- ---
+-- Table 'affiliate'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `affiliate`;
+		
+CREATE TABLE `affiliate` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `group_id` INTEGER NOT NULL,
+  `user_id` INTEGER NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'user'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `user`;
+		
+CREATE TABLE `user` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `employee_id` INTEGER NOT NULL,
+  `names` VARCHAR(140) NOT NULL,
+  `lastnames` VARCHAR(140) NOT NULL,
+  `mail` VARCHAR(100) NOT NULL,
+  `username` VARCHAR(60) NOT NULL,
+  `password` VARCHAR(60) NOT NULL,
+  `user_level_id` INTEGER NOT NULL,
+  `is_visitor` VARCHAR(5) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+-- ---
+-- Table 'organization'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `organization`;
+		
+CREATE TABLE `organization` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `domain_id` INTEGER NOT NULL,
+  `name` VARCHAR(60) NOT NULL,
+  `description` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+-- ---
+-- Table 'position'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `position`;
+		
+CREATE TABLE `position` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `organization_id` INTEGER NOT NULL,
+  `name` VARCHAR(60) NOT NULL,
+  `description` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- ---
+-- Table 'employee'
+-- 
+-- ---
+
+DROP TABLE IF EXISTS `employee`;
+		
+CREATE TABLE `employee` (
+  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `position_id` INTEGER NOT NULL,
+  `name` VARCHAR(60) NOT NULL,
+  `description` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+

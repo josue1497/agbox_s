@@ -1,0 +1,344 @@
+\hypertarget{class_core_utils}{}\section{Referencia de la Clase Core\+Utils}
+\label{class_core_utils}\index{CoreUtils@{CoreUtils}}
+\subsection*{Métodos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_core_utils_a53e64d1ce4c4369cdc8bf4176ebce031}{get\+\_\+file\+\_\+content}} (\$file\+\_\+url)
+\item 
+static \mbox{\hyperlink{class_core_utils_a490278ea7bf81aedced314965479a4b1}{get\+\_\+layout\+\_\+template\+\_\+content}} (\$file\+\_\+url, \$template\+\_\+name)
+\item 
+static \mbox{\hyperlink{class_core_utils_ada9d6950d7ad8d0199d823939b727479}{get\+\_\+controller\+\_\+name}} (\$controller\+\_\+class)
+\item 
+static \mbox{\hyperlink{class_core_utils_a6de0f13d487f0d6d55183343925bfba0}{get\+\_\+view\+\_\+file\+\_\+content}} (\$file\+\_\+url, \$controller)
+\item 
+static \mbox{\hyperlink{class_core_utils_a701b4e73787e301fd7dc0d5a94f114ba}{validate\+\_\+user\+\_\+session}} ()
+\item 
+static \mbox{\hyperlink{class_core_utils_a712603fe257899a1fb36127c08ae6c3f}{secure\+\_\+input}} (\$data)
+\item 
+static \mbox{\hyperlink{class_core_utils_a0a55e05c60ee707245f0ee9605e5fa5c}{secure\+\_\+form}} (\$form)
+\item 
+static \mbox{\hyperlink{class_core_utils_a925c7e1c369c0d8421b32f4e7d09e2e6}{put\+\_\+in\+\_\+card}} (\$content, \$title=null)
+\item 
+static \mbox{\hyperlink{class_core_utils_ad0a0f31bcfb13e8e2e9c95a501e6dfc9}{get\+\_\+user\+\_\+permissions\+\_\+by\+\_\+menu\+\_\+id}} (\$menu\+\_\+id)
+\item 
+static \mbox{\hyperlink{class_core_utils_ae5603ae99ba9ffe573bca46e834e3c23}{get\+\_\+user\+\_\+permissions}} (\$url)
+\item 
+static \mbox{\hyperlink{class_core_utils_a10d5b2d56fd4d1109e8de78c5facaa7c}{get\+\_\+user\+\_\+permissions\+\_\+by\+\_\+controller}} (\$controller, \$action)
+\item 
+static \mbox{\hyperlink{class_core_utils_ac7ddc4fe9d11f5922beb99a21e01d716}{set\+\_\+buttons\+\_\+permissions}} (\$controller, \$action, \$html\+\_\+view)
+\item 
+static \mbox{\hyperlink{class_core_utils_a10ac6261e9a04457430db1f22d2321f9}{get\+\_\+models}} ()
+\item 
+static \mbox{\hyperlink{class_core_utils_adcf62251d03ae5b1095544507fb63375}{base\+\_\+url}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+clase de metodos utilitarios 
+
+Definición en la línea 5 del archivo Core\+Utils.\+php.
+
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{class_core_utils_adcf62251d03ae5b1095544507fb63375}\label{class_core_utils_adcf62251d03ae5b1095544507fb63375}} 
+\index{CoreUtils@{CoreUtils}!base\_url@{base\_url}}
+\index{base\_url@{base\_url}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{base\_url()}{base\_url()}}
+{\footnotesize\ttfamily static Core\+Utils\+::base\+\_\+url (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para generar todo el sql a partir de la informacion de los modelos
+
+\begin{DoxyReturn}{Devuelve}
+type / public static function get\+\_\+models\+\_\+to\+\_\+sql()\{ \$models = array(); \$tables = array();
+\end{DoxyReturn}
+\$files = \mbox{\hyperlink{class_core_utils_a10ac6261e9a04457430db1f22d2321f9}{Core\+Utils\+::get\+\_\+models()}}; foreach(\$files as \$file)\{ \$file\+\_\+name = M\+O\+D\+E\+L\+S\+\_\+\+D\+IR . \$file;
+
+\$class\+\_\+name = str\+\_\+replace(\textquotesingle{}.php\textquotesingle{}, \textquotesingle{}\textquotesingle{}, \$file);
+
+if(is\+\_\+file(\$file\+\_\+name)) @require\+\_\+once(\$file\+\_\+name);
+
+\$model = new \$class\+\_\+name();
+
+\$models\mbox{[}\mbox{]} = \$model; \$tables\mbox{[}\mbox{]} = \$model-\/$>$table\+\_\+name; \}
+
+\$tables\+\_\+sql=\char`\"{}\char`\"{}; foreach(\$models as \$model)\{ \$tables\+\_\+sql.= \char`\"{}\+Drop Table if Exists \char`\"{}. \$model-\/$>$table\+\_\+name.\char`\"{};\char`\"{}; \$tables\+\_\+sql.= \char`\"{}\+Create Table \char`\"{}. \$model-\/$>$table\+\_\+name.\char`\"{}(\char`\"{};
+
+foreach(\$model-\/$>$table\+\_\+fields as \$table\+\_\+field)\{ /$\ast$ en proceso$\ast$$\ast$$\ast$ / \} \$tables\+\_\+sql.= \char`\"{})\char`\"{}. \char`\"{}\+E\+N\+G\+I\+N\+E=\+Inno\+D\+B D\+E\+F\+A\+U\+L\+T C\+H\+A\+R\+S\+E\+T=utf8;\char`\"{}; \}
+
+\}metodo para generar el url base de la aplicacion independientemente de la ruta en la que se encuentre el cursor en ese momento
+
+\begin{DoxyReturn}{Devuelve}
+string url 
+\end{DoxyReturn}
+
+
+Definición en la línea 269 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_ada9d6950d7ad8d0199d823939b727479}\label{class_core_utils_ada9d6950d7ad8d0199d823939b727479}} 
+\index{CoreUtils@{CoreUtils}!get\_controller\_name@{get\_controller\_name}}
+\index{get\_controller\_name@{get\_controller\_name}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{get\_controller\_name()}{get\_controller\_name()}}
+{\footnotesize\ttfamily static Core\+Utils\+::get\+\_\+controller\+\_\+name (\begin{DoxyParamCaption}\item[{}]{\$controller\+\_\+class }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para obtener el nombre de un controlador
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$controller\+\_\+class} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+string nombre del controlador 
+\end{DoxyReturn}
+
+
+Definición en la línea 37 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_a53e64d1ce4c4369cdc8bf4176ebce031}\label{class_core_utils_a53e64d1ce4c4369cdc8bf4176ebce031}} 
+\index{CoreUtils@{CoreUtils}!get\_file\_content@{get\_file\_content}}
+\index{get\_file\_content@{get\_file\_content}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{get\_file\_content()}{get\_file\_content()}}
+{\footnotesize\ttfamily static Core\+Utils\+::get\+\_\+file\+\_\+content (\begin{DoxyParamCaption}\item[{}]{\$file\+\_\+url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para obtener contenido de archivo si existe.
+
+
+\begin{DoxyParams}[1]{Parámetros}
+string & {\em \$file\+\_\+url} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+string file content parse to string or \textquotesingle{}\textquotesingle{} 
+\end{DoxyReturn}
+
+
+Definición en la línea 13 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_a490278ea7bf81aedced314965479a4b1}\label{class_core_utils_a490278ea7bf81aedced314965479a4b1}} 
+\index{CoreUtils@{CoreUtils}!get\_layout\_template\_content@{get\_layout\_template\_content}}
+\index{get\_layout\_template\_content@{get\_layout\_template\_content}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{get\_layout\_template\_content()}{get\_layout\_template\_content()}}
+{\footnotesize\ttfamily static Core\+Utils\+::get\+\_\+layout\+\_\+template\+\_\+content (\begin{DoxyParamCaption}\item[{}]{\$file\+\_\+url,  }\item[{}]{\$template\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para obtener el contenido de una platilla
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$file\+\_\+url} & \\
+\hline
+type & {\em \$template\+\_\+name} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+string 
+\end{DoxyReturn}
+
+
+Definición en la línea 26 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_a10ac6261e9a04457430db1f22d2321f9}\label{class_core_utils_a10ac6261e9a04457430db1f22d2321f9}} 
+\index{CoreUtils@{CoreUtils}!get\_models@{get\_models}}
+\index{get\_models@{get\_models}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{get\_models()}{get\_models()}}
+{\footnotesize\ttfamily static Core\+Utils\+::get\+\_\+models (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para obtener todos los modelos
+
+\begin{DoxyReturn}{Devuelve}
+array de modelos 
+\end{DoxyReturn}
+
+
+Definición en la línea 218 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_ae5603ae99ba9ffe573bca46e834e3c23}\label{class_core_utils_ae5603ae99ba9ffe573bca46e834e3c23}} 
+\index{CoreUtils@{CoreUtils}!get\_user\_permissions@{get\_user\_permissions}}
+\index{get\_user\_permissions@{get\_user\_permissions}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{get\_user\_permissions()}{get\_user\_permissions()}}
+{\footnotesize\ttfamily static Core\+Utils\+::get\+\_\+user\+\_\+permissions (\begin{DoxyParamCaption}\item[{}]{\$url }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+obtener permisos de un usuario segun una ruta de menu
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$url} & rita de menu \char`\"{}controler/view\char`\"{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+array de permisos 
+\end{DoxyReturn}
+
+
+Definición en la línea 146 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_a10d5b2d56fd4d1109e8de78c5facaa7c}\label{class_core_utils_a10d5b2d56fd4d1109e8de78c5facaa7c}} 
+\index{CoreUtils@{CoreUtils}!get\_user\_permissions\_by\_controller@{get\_user\_permissions\_by\_controller}}
+\index{get\_user\_permissions\_by\_controller@{get\_user\_permissions\_by\_controller}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{get\_user\_permissions\_by\_controller()}{get\_user\_permissions\_by\_controller()}}
+{\footnotesize\ttfamily static Core\+Utils\+::get\+\_\+user\+\_\+permissions\+\_\+by\+\_\+controller (\begin{DoxyParamCaption}\item[{}]{\$controller,  }\item[{}]{\$action }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+obtiene los permisos de un usuario segun un controlador y una vista
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$controller} & \\
+\hline
+type & {\em \$action} & vista \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+array de permisos 
+\end{DoxyReturn}
+
+
+Definición en la línea 164 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_ad0a0f31bcfb13e8e2e9c95a501e6dfc9}\label{class_core_utils_ad0a0f31bcfb13e8e2e9c95a501e6dfc9}} 
+\index{CoreUtils@{CoreUtils}!get\_user\_permissions\_by\_menu\_id@{get\_user\_permissions\_by\_menu\_id}}
+\index{get\_user\_permissions\_by\_menu\_id@{get\_user\_permissions\_by\_menu\_id}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{get\_user\_permissions\_by\_menu\_id()}{get\_user\_permissions\_by\_menu\_id()}}
+{\footnotesize\ttfamily static Core\+Utils\+::get\+\_\+user\+\_\+permissions\+\_\+by\+\_\+menu\+\_\+id (\begin{DoxyParamCaption}\item[{}]{\$menu\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+obtiene los permisos del usuario logeado en el menu indicado
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$menu\+\_\+id} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+array de permisos 
+\end{DoxyReturn}
+
+
+Definición en la línea 123 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_a6de0f13d487f0d6d55183343925bfba0}\label{class_core_utils_a6de0f13d487f0d6d55183343925bfba0}} 
+\index{CoreUtils@{CoreUtils}!get\_view\_file\_content@{get\_view\_file\_content}}
+\index{get\_view\_file\_content@{get\_view\_file\_content}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{get\_view\_file\_content()}{get\_view\_file\_content()}}
+{\footnotesize\ttfamily static Core\+Utils\+::get\+\_\+view\+\_\+file\+\_\+content (\begin{DoxyParamCaption}\item[{}]{\$file\+\_\+url,  }\item[{}]{\$controller }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+obtiene el contenido del archivo de una vista
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$file\+\_\+url} & nombre de la vista \\
+\hline
+type & {\em \$controller} & nombre de controlador \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+string contenido de la vista 
+\end{DoxyReturn}
+
+
+Definición en la línea 47 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_a925c7e1c369c0d8421b32f4e7d09e2e6}\label{class_core_utils_a925c7e1c369c0d8421b32f4e7d09e2e6}} 
+\index{CoreUtils@{CoreUtils}!put\_in\_card@{put\_in\_card}}
+\index{put\_in\_card@{put\_in\_card}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{put\_in\_card()}{put\_in\_card()}}
+{\footnotesize\ttfamily static Core\+Utils\+::put\+\_\+in\+\_\+card (\begin{DoxyParamCaption}\item[{}]{\$content,  }\item[{}]{\$title = {\ttfamily null} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+coloca un contenido html en un card
+
+
+\begin{DoxyParams}[1]{Parámetros}
+string & {\em \$content} & contenido html \\
+\hline
+string | null & {\em \$title} & titulo del card \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 98 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_a0a55e05c60ee707245f0ee9605e5fa5c}\label{class_core_utils_a0a55e05c60ee707245f0ee9605e5fa5c}} 
+\index{CoreUtils@{CoreUtils}!secure\_form@{secure\_form}}
+\index{secure\_form@{secure\_form}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{secure\_form()}{secure\_form()}}
+{\footnotesize\ttfamily static Core\+Utils\+::secure\+\_\+form (\begin{DoxyParamCaption}\item[{}]{\$form }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+sanitiza la informacion de los input de un formulario
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$form} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 85 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_a712603fe257899a1fb36127c08ae6c3f}\label{class_core_utils_a712603fe257899a1fb36127c08ae6c3f}} 
+\index{CoreUtils@{CoreUtils}!secure\_input@{secure\_input}}
+\index{secure\_input@{secure\_input}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{secure\_input()}{secure\_input()}}
+{\footnotesize\ttfamily static Core\+Utils\+::secure\+\_\+input (\begin{DoxyParamCaption}\item[{}]{\$data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para sanitizar la informacion de un inpit element
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 72 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_ac7ddc4fe9d11f5922beb99a21e01d716}\label{class_core_utils_ac7ddc4fe9d11f5922beb99a21e01d716}} 
+\index{CoreUtils@{CoreUtils}!set\_buttons\_permissions@{set\_buttons\_permissions}}
+\index{set\_buttons\_permissions@{set\_buttons\_permissions}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{set\_buttons\_permissions()}{set\_buttons\_permissions()}}
+{\footnotesize\ttfamily static Core\+Utils\+::set\+\_\+buttons\+\_\+permissions (\begin{DoxyParamCaption}\item[{}]{\$controller,  }\item[{}]{\$action,  }\item[{}]{\$html\+\_\+view }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+habilita o inhabilita los botones de accion segun los permisos del usuario logeado
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$controller} & controlador \\
+\hline
+type & {\em \$action} & vista \\
+\hline
+type & {\em \$html\+\_\+view} & contenido generado \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type contenido generado actualizado 
+\end{DoxyReturn}
+
+
+Definición en la línea 178 del archivo Core\+Utils.\+php.
+
+\mbox{\Hypertarget{class_core_utils_a701b4e73787e301fd7dc0d5a94f114ba}\label{class_core_utils_a701b4e73787e301fd7dc0d5a94f114ba}} 
+\index{CoreUtils@{CoreUtils}!validate\_user\_session@{validate\_user\_session}}
+\index{validate\_user\_session@{validate\_user\_session}!CoreUtils@{CoreUtils}}
+\subsubsection{\texorpdfstring{validate\_user\_session()}{validate\_user\_session()}}
+{\footnotesize\ttfamily static Core\+Utils\+::validate\+\_\+user\+\_\+session (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+verifica si el usuario actual ha iniciado sesion, sino redirecciona a la vista de autenticacion
+
+\begin{DoxyReturn}{Devuelve}
+void 
+\end{DoxyReturn}
+
+
+Definición en la línea 59 del archivo Core\+Utils.\+php.
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+system/core/Core\+Utils.\+php\end{DoxyCompactItemize}

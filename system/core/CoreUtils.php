@@ -1,8 +1,12 @@
 <?php 
+	/**
+	 *  clase de metodos utilitarios
+	 */
 	class CoreUtils{
 
 		/**
-		 * metodo para obtener contenido de archivo si existe
+		 * metodo para obtener contenido de archivo si existe.
+		 *
 		 * @param string $file_url 
 		 * @return string file content parse to string or ''
 		 */
@@ -13,7 +17,8 @@
 		}
 		
 		/**
-		 * get file layout template content
+		 * metodo para obtener el contenido de una platilla
+		 * 
 		 * @param type $file_url 
 		 * @param type $template_name 
 		 * @return string
@@ -24,18 +29,20 @@
 		}
 		
 		/**
-		 * Description
+		 * metodo para obtener el nombre de un controlador
+		 * 
 		 * @param type $controller_class 
-		 * @return type
+		 * @return string nombre del controlador
 		 */
 		public static function get_controller_name($controller_class){
 			return ucfirst(str_replace('Controller', '', get_class($controller_class)));
 		}
 		/**
-		 * get content of a view file
-		 * @param type $file_url 
-		 * @param type $controller 
-		 * @return string
+		 * obtiene el contenido del archivo de una vista
+		 *
+		 * @param type $file_url nombre de la vista
+		 * @param type $controller nombre de controlador
+		 * @return string contenido de la vista
 		 */
 		public static function get_view_file_content($file_url,$controller){
 			return CoreUtils::get_file_content(VIEWS_DIR . 
@@ -44,8 +51,10 @@
 		}
 		
 		/**
-		 * Description
-		 * @return type
+		 * verifica si el usuario actual ha iniciado sesion,
+		 * sino redirecciona a la vista de autenticacion
+		 * 
+		 * @return void
 		 */
 		public static function validate_user_session(){
 			if (!Session::check('logged_in') && !Session::check('log_out')) {
@@ -55,7 +64,8 @@
 		}
 		
 		/**
-		 * Description
+		 * metodo para sanitizar la informacion de un inpit element
+		 * 
 		 * @param type $data 
 		 * @return type
 		 */
@@ -67,7 +77,8 @@
         }
 		
 		/**
-		 * Description
+		 * sanitiza la informacion de los input de un formulario
+		 * 
 		 * @param type $form 
 		 * @return type
 		 */
@@ -78,9 +89,10 @@
         }
 		
 		/**
-		 * Description
-		 * @param type $content 
-		 * @param type|null $title 
+		 * coloca un contenido html en un card
+		 * 
+		 * @param string $content contenido html
+		 * @param string|null $title titulo del card
 		 * @return type
 		 */
         public static function put_in_card($content,$title=null){
@@ -103,9 +115,10 @@
         }
 
 		/**
-		 * Description
+		 * obtiene los permisos del usuario logeado en el menu indicado
+		 * 
 		 * @param type $menu_id 
-		 * @return type
+		 * @return array de permisos
 		 */
 		public static function get_user_permissions_by_menu_id($menu_id){
 			$role_id = Session::get('role_id');
@@ -125,9 +138,10 @@
 		}
 		
 		/**
-		 * Description
-		 * @param type $url 
-		 * @return type
+		 * obtener permisos de un usuario segun una ruta de menu
+		 *
+		 * @param type $url rita de menu "controler/view"
+		 * @return array de permisos
 		 */
 		public static function get_user_permissions($url){
         	$row_menu = (new Menu())->get_by_property(
@@ -141,10 +155,11 @@
         	return CoreUtils::get_user_permissions_by_menu_id($row_menu['id_menu']);
 		}
 		/**
-		 * Description
+		 * obtiene los permisos de un usuario segun un controlador y una vista
+		 *
 		 * @param type $controller 
-		 * @param type $action 
-		 * @return type
+		 * @param type $action vista
+		 * @return array de permisos
 		 */
         public static function get_user_permissions_by_controller($controller,$action){
         	return CoreUtils::get_user_permissions(
@@ -152,11 +167,13 @@
         }
 
 		/**
-		 * Description
-		 * @param type $controller 
-		 * @param type $action 
-		 * @param type $html_view 
-		 * @return type
+		 * habilita o inhabilita los botones de accion segun los permisos del 
+		 * usuario logeado
+		 * 
+		 * @param type $controller controlador
+		 * @param type $action vista
+		 * @param type $html_view contenido generado
+		 * @return type contenido generado actualizado
 		 */
         public static function set_buttons_permissions($controller,$action,$html_view){
 			$row = CoreUtils::get_user_permissions(
@@ -165,7 +182,7 @@
 			if(!isset($row))
 				return $html_view;
         	
-        	/* desabilitar botones de accion segun permisos de rol en menu(controlador/vista) acual */
+        	/* deshabilitar botones de accion segun permisos de rol en menu(controlador/vista) acual */
 			if(isset($row['can_create']) && $row['can_create']==false){
 				$html_view .= '
 				<script>
@@ -194,15 +211,17 @@
         }
 		
 		/**
-		 * Description
-		 * @return type
+		 * metodo para obtener todos los modelos
+		 *
+		 * @return array de modelos
 		 */
         public static function get_models(){
         	return array_diff(scandir(MODELS_DIR), array('.', '..'));
         }
 
 		/**
-		 * Description
+		 * metodo para generar todo el sql a partir de la informacion de los modelos
+		 *
 		 * @return type
 		 * /
         public static function get_models_to_sql(){
@@ -240,7 +259,13 @@
 
         }
 		*/
-
+		
+		/**
+		 * metodo para generar el url base de la aplicacion independientemente 
+		 * de la ruta en la que se encuentre el cursor en ese momento
+		 *
+		 * @return string url
+		 */
 		public static function base_url(){
 			$r = new Request();
 			Router::parse($r->url, $r);

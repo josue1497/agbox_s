@@ -1,8 +1,18 @@
 <?php
-//namespace App\Config\Framework;
+/**
+ * clase que parsea la url y genera informacion de controlador, 
+ * metodo accion y parametros 
+ */
 class Router{
+	/**
+	 * obtiene la url y la peticion y genera un objeto parseado
+	 *
+	 * @param type $url 
+	 * @param type $request 
+	 * @return type
+	 */
     static public function parse($url, $request){
-       $url = trim($url);
+        $url = trim($url);
 		$explode_url = explode('/', $url);
 		$real_controller='';
 		$controller = 'index';

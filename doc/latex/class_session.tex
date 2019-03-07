@@ -1,0 +1,171 @@
+\hypertarget{class_session}{}\section{Referencia de la Clase Session}
+\label{class_session}\index{Session@{Session}}
+\subsection*{Métodos públicos estáticos}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_session_abbc453dff32fed9748e3873ab9093050}{check}} (\$key)
+\item 
+static \mbox{\hyperlink{class_session_a555ab9c7731c0103b16baf165e34efe8}{get}} (\$key)
+\item 
+static \mbox{\hyperlink{class_session_a894fdbe24e887cc604178f0234355440}{get\+Ndelete}} (\$key)
+\item 
+static \mbox{\hyperlink{class_session_a5c3bf67e192c10d185e759567df6782a}{set}} (\$key, \$value)
+\item 
+static \mbox{\hyperlink{class_session_a1661dab5f97e1fb80ba16a1098a73649}{delete}} (\$key)
+\item 
+static \mbox{\hyperlink{class_session_a1e8f0c2d0f7080ea93b738dba952c52f}{set\+\_\+user\+\_\+session\+\_\+data}} (\$user\+\_\+record)
+\item 
+static \mbox{\hyperlink{class_session_a9dac1e34e7d797173f4a977a83fb9dae}{unset\+\_\+user\+\_\+session\+\_\+data}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+clase para gestionar las sesiones de los usuarios, y los datos de sesion 
+
+Definición en la línea 5 del archivo Session.\+php.
+
+
+
+\subsection{Documentación de las funciones miembro}
+\mbox{\Hypertarget{class_session_abbc453dff32fed9748e3873ab9093050}\label{class_session_abbc453dff32fed9748e3873ab9093050}} 
+\index{Session@{Session}!check@{check}}
+\index{check@{check}!Session@{Session}}
+\subsubsection{\texorpdfstring{check()}{check()}}
+{\footnotesize\ttfamily static Session\+::check (\begin{DoxyParamCaption}\item[{}]{\$key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para comprobar si una clave existe en la sesion actual
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$key} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+boolean 
+\end{DoxyReturn}
+
+
+Definición en la línea 12 del archivo Session.\+php.
+
+\mbox{\Hypertarget{class_session_a1661dab5f97e1fb80ba16a1098a73649}\label{class_session_a1661dab5f97e1fb80ba16a1098a73649}} 
+\index{Session@{Session}!delete@{delete}}
+\index{delete@{delete}!Session@{Session}}
+\subsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily static Session\+::delete (\begin{DoxyParamCaption}\item[{}]{\$key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para eliminar una clave de la sesion actual
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$key} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+void 
+\end{DoxyReturn}
+
+
+Definición en la línea 63 del archivo Session.\+php.
+
+\mbox{\Hypertarget{class_session_a555ab9c7731c0103b16baf165e34efe8}\label{class_session_a555ab9c7731c0103b16baf165e34efe8}} 
+\index{Session@{Session}!get@{get}}
+\index{get@{get}!Session@{Session}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily static Session\+::get (\begin{DoxyParamCaption}\item[{}]{\$key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para obtener el valor de una clave en la sesion actual session(clave =$>$ valor)
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$key} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+valor o null 
+\end{DoxyReturn}
+
+
+Definición en la línea 26 del archivo Session.\+php.
+
+\mbox{\Hypertarget{class_session_a894fdbe24e887cc604178f0234355440}\label{class_session_a894fdbe24e887cc604178f0234355440}} 
+\index{Session@{Session}!getNdelete@{getNdelete}}
+\index{getNdelete@{getNdelete}!Session@{Session}}
+\subsubsection{\texorpdfstring{getNdelete()}{getNdelete()}}
+{\footnotesize\ttfamily static Session\+::get\+Ndelete (\begin{DoxyParamCaption}\item[{}]{\$key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para obtener y eliminar un valor de la sesion actual
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$key} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+valor o null 
+\end{DoxyReturn}
+
+
+Definición en la línea 40 del archivo Session.\+php.
+
+\mbox{\Hypertarget{class_session_a5c3bf67e192c10d185e759567df6782a}\label{class_session_a5c3bf67e192c10d185e759567df6782a}} 
+\index{Session@{Session}!set@{set}}
+\index{set@{set}!Session@{Session}}
+\subsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily static Session\+::set (\begin{DoxyParamCaption}\item[{}]{\$key,  }\item[{}]{\$value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para establecer el valor a una clave(nueva o no) en la sesion actual
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$key} & \\
+\hline
+type & {\em \$value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+void 
+\end{DoxyReturn}
+
+
+Definición en la línea 53 del archivo Session.\+php.
+
+\mbox{\Hypertarget{class_session_a1e8f0c2d0f7080ea93b738dba952c52f}\label{class_session_a1e8f0c2d0f7080ea93b738dba952c52f}} 
+\index{Session@{Session}!set\_user\_session\_data@{set\_user\_session\_data}}
+\index{set\_user\_session\_data@{set\_user\_session\_data}!Session@{Session}}
+\subsubsection{\texorpdfstring{set\_user\_session\_data()}{set\_user\_session\_data()}}
+{\footnotesize\ttfamily static Session\+::set\+\_\+user\+\_\+session\+\_\+data (\begin{DoxyParamCaption}\item[{}]{\$user\+\_\+record }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para establecer los datos de un usuario logeado en la sesion actual
+
+
+\begin{DoxyParams}[1]{Parámetros}
+type & {\em \$user\+\_\+record} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 75 del archivo Session.\+php.
+
+\mbox{\Hypertarget{class_session_a9dac1e34e7d797173f4a977a83fb9dae}\label{class_session_a9dac1e34e7d797173f4a977a83fb9dae}} 
+\index{Session@{Session}!unset\_user\_session\_data@{unset\_user\_session\_data}}
+\index{unset\_user\_session\_data@{unset\_user\_session\_data}!Session@{Session}}
+\subsubsection{\texorpdfstring{unset\_user\_session\_data()}{unset\_user\_session\_data()}}
+{\footnotesize\ttfamily static Session\+::unset\+\_\+user\+\_\+session\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+metodo para seliminar los datos de el usuario en la sesion actual
+
+\begin{DoxyReturn}{Devuelve}
+type 
+\end{DoxyReturn}
+
+
+Definición en la línea 89 del archivo Session.\+php.
+
+
+
+La documentación para esta clase fue generada a partir del siguiente fichero\+:\begin{DoxyCompactItemize}
+\item 
+system/core/Session.\+php\end{DoxyCompactItemize}
