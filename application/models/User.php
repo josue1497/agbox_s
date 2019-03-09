@@ -48,7 +48,7 @@ class User extends Model
 				(new Column('re_password'))
 					->set_label('Repita Clave')
 					->set_type(Column::$COLUMN_TYPE_PASS)
-					->set_table_field_name('password_r')
+					->set_table_field_name('password')
 					->set_column_in_db(false)
 					->set_visible_grid(false),
 
@@ -56,11 +56,6 @@ class User extends Model
 					->set_label('Nivel de Usuario')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
 					->set_fk_entity(new User_Level()),
-
-				(new Column('employee_id'))
-					->set_label('Employee')
-					->set_type(Column::$COLUMN_TYPE_SELECT)
-					->set_fk_entity(new Employee()),
 				
 					(new Column('is_visitor'))
 					->set_label('Is Visitor?')
