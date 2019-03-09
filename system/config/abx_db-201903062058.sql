@@ -1,129 +1,65 @@
--- MySQL dump 10.16  Distrib 10.3.9-MariaDB, for Win64 (AMD64)
+-- phpMyAdmin SQL Dump
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: abx_db
--- ------------------------------------------------------
--- Server version	10.1.37-MariaDB
+-- Servidor: localhost
+-- Tiempo de generación: 09-03-2019 a las 18:36:06
+-- Versión del servidor: 5.7.17-log
+-- Versión de PHP: 7.2.12
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 --
--- Table structure for table `affiliate`
+-- Base de datos: `abx_db`
 --
 
-DROP TABLE IF EXISTS `affiliate`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `affiliate`
+--
+
 CREATE TABLE `affiliate` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `approved` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `affiliate`
+-- Estructura de tabla para la tabla `group`
 --
 
-LOCK TABLES `affiliate` WRITE;
-/*!40000 ALTER TABLE `affiliate` DISABLE KEYS */;
-/*!40000 ALTER TABLE `affiliate` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `domain`
---
-
-DROP TABLE IF EXISTS `domain`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `domain` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) NOT NULL,
-  `description` varchar(256) NOT NULL,
-  `licence` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Table for Domain''s Information';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `domain`
---
-
-LOCK TABLES `domain` WRITE;
-/*!40000 ALTER TABLE `domain` DISABLE KEYS */;
-INSERT INTO `domain` VALUES (1,'Intelix Domain','Intelix Domain','123455677');
-/*!40000 ALTER TABLE `domain` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `employee`
---
-
-DROP TABLE IF EXISTS `employee`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `employee` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `position_id` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `description` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `employee`
---
-
-LOCK TABLES `employee` WRITE;
-/*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,1,'Applicacion Manager','Application Manager');
-/*!40000 ALTER TABLE `employee` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `group`
---
-
-DROP TABLE IF EXISTS `group`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `domain_id` int(11) NOT NULL,
   `parent_group_id` int(11) DEFAULT NULL,
   `name` varchar(60) NOT NULL,
-  `description` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
+  `description` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `group`
+-- Estructura de tabla para la tabla `group_user_role`
 --
 
-LOCK TABLES `group` WRITE;
-/*!40000 ALTER TABLE `group` DISABLE KEYS */;
-/*!40000 ALTER TABLE `group` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `group_user_role` (
+  `id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `menu`
+-- Estructura de tabla para la tabla `menu`
 --
 
-DROP TABLE IF EXISTS `menu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `menu` (
   `menu_id` int(5) NOT NULL,
   `title_menu` varchar(256) NOT NULL,
@@ -133,51 +69,110 @@ CREATE TABLE `menu` (
   `url_menu` varchar(256) NOT NULL,
   `parent_menu_id` int(5) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `menu`
+-- Volcado de datos para la tabla `menu`
 --
 
-LOCK TABLES `menu` WRITE;
-/*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (5,'menu padre','padre','fas fa-address-book',2,'',0),(6,'menu hijo2','menu hijo 2','fas fa-address-book',1,'',5);
-/*!40000 ALTER TABLE `menu` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `menu` (`menu_id`, `title_menu`, `description_menu`, `icon_menu`, `menu_order`, `url_menu`, `parent_menu_id`) VALUES
+(5, 'menu padre', 'padre', 'fas fa-address-book', 2, '', 0),
+(6, 'menu hijo2', 'menu hijo 2', 'fas fa-address-book', 1, '', 5);
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `organization`
+-- Estructura de tabla para la tabla `nivel_usuario`
 --
 
-DROP TABLE IF EXISTS `organization`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `organization` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `domain_id` int(11) NOT NULL,
+CREATE TABLE `nivel_usuario` (
+  `id_nivel_usuario` int(5) NOT NULL,
+  `nombre_nivel_usuario` varchar(50) DEFAULT NULL,
+  `acceso_nivel_usuario` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `nivel_usuario`
+--
+
+INSERT INTO `nivel_usuario` (`id_nivel_usuario`, `nombre_nivel_usuario`, `acceso_nivel_usuario`) VALUES
+(1, 'Administrador', 3),
+(2, 'Participante', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `note`
+--
+
+CREATE TABLE `note` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(140) NOT NULL,
+  `source_id` int(11) NOT NULL,
+  `summary` varchar(256) NOT NULL,
+  `agreement_type_id` int(11) NOT NULL,
+  `init_date` date DEFAULT NULL,
+  `finish_date` date DEFAULT NULL,
+  `status_id` int(11) NOT NULL,
+  `date_approved` date DEFAULT NULL,
+  `performer_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `note_approver`
+--
+
+CREATE TABLE `note_approver` (
+  `id` int(11) NOT NULL,
+  `note_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `choice` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `note_type`
+--
+
+CREATE TABLE `note_type` (
+  `id` int(11) NOT NULL,
   `name` varchar(60) NOT NULL,
-  `description` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `description` varchar(140) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `organization`
+-- Estructura de tabla para la tabla `permiso`
 --
 
-LOCK TABLES `organization` WRITE;
-/*!40000 ALTER TABLE `organization` DISABLE KEYS */;
-INSERT INTO `organization` VALUES (1,1,'Intelix Synergy C.A.','Intelix Corp.');
-/*!40000 ALTER TABLE `organization` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `permiso` (
+  `id_permiso` int(5) NOT NULL,
+  `id_menu` int(5) NOT NULL,
+  `id_nivel_usuario` int(5) NOT NULL,
+  `leer_permiso` varchar(3) NOT NULL,
+  `escribir_permiso` varchar(3) NOT NULL,
+  `editar_permiso` varchar(3) NOT NULL,
+  `eliminar_permiso` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Table structure for table `permission`
+-- Volcado de datos para la tabla `permiso`
 --
 
-DROP TABLE IF EXISTS `permission`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+INSERT INTO `permiso` (`id_permiso`, `id_menu`, `id_nivel_usuario`, `leer_permiso`, `escribir_permiso`, `editar_permiso`, `eliminar_permiso`) VALUES
+(1, 5, 1, 'Yes', 'No', 'Yes', 'No'),
+(2, 7, 1, 'Yes', 'Yes', 'Yes', 'Yes');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `permission`
+--
+
 CREATE TABLE `permission` (
   `id` int(5) NOT NULL,
   `menu_id` int(5) NOT NULL,
@@ -187,53 +182,58 @@ CREATE TABLE `permission` (
   `can_edit` varchar(3) NOT NULL,
   `can_delete` varchar(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `permission`
+-- Volcado de datos para la tabla `permission`
 --
 
-LOCK TABLES `permission` WRITE;
-/*!40000 ALTER TABLE `permission` DISABLE KEYS */;
-INSERT INTO `permission` VALUES (1,5,1,'Yes','No','Yes','No');
-/*!40000 ALTER TABLE `permission` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_write`, `can_edit`, `can_delete`) VALUES
+(1, 5, 1, 'Yes', 'No', 'Yes', 'No');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `position`
+-- Estructura de tabla para la tabla `role`
 --
 
-DROP TABLE IF EXISTS `position`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `position` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `organization_id` int(11) NOT NULL,
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL,
   `name` varchar(60) NOT NULL,
-  `description` varchar(256) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `description` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for Role''s Information';
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `position`
+-- Estructura de tabla para la tabla `source`
 --
 
-LOCK TABLES `position` WRITE;
-/*!40000 ALTER TABLE `position` DISABLE KEYS */;
-INSERT INTO `position` VALUES (1,1,'Manager','Manager');
-/*!40000 ALTER TABLE `position` ENABLE KEYS */;
-UNLOCK TABLES;
+CREATE TABLE `source` (
+  `id` int(11) NOT NULL,
+  `title` varchar(60) NOT NULL,
+  `description` varchar(140) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Estructura de tabla para la tabla `status`
 --
 
-DROP TABLE IF EXISTS `user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `description` varchar(140) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user`
+--
+
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL,
   `names` varchar(140) NOT NULL,
   `lastnames` varchar(140) NOT NULL,
@@ -241,45 +241,249 @@ CREATE TABLE `user` (
   `username` varchar(60) NOT NULL,
   `password` varchar(60) NOT NULL,
   `user_level_id` int(11) NOT NULL,
-  `is_visitor` varchar(5) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `is_visitor` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Volcado de datos para la tabla `user`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,1,'Administrador','Intelix','jmartinezm@intelix.biz','admin','admin',1,'N');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username`, `password`, `user_level_id`, `is_visitor`) VALUES
+(1, 1, 'Administrador', 'Intelix', 'jmartinezm@intelix.biz', 'admin', 'admin', 1, 'N');
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `user_level`
+-- Estructura de tabla para la tabla `user_level`
 --
 
-DROP TABLE IF EXISTS `user_level`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_level` (
   `id` int(5) NOT NULL,
   `name_level` varchar(50) DEFAULT NULL,
   `access_level` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user_level`
+-- Volcado de datos para la tabla `user_level`
 --
 
-LOCK TABLES `user_level` WRITE;
-/*!40000 ALTER TABLE `user_level` DISABLE KEYS */;
-INSERT INTO `user_level` VALUES (1,'Administrador',3),(2,'Participante',2);
-/*!40000 ALTER TABLE `user_level` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `user_level` (`id`, `name_level`, `access_level`) VALUES
+(1, 'Administrador', 3),
+(2, 'Participante', 2);
+
+-- --------------------------------------------------------
 
 --
--- Dumping routines for database 'abx_db'
+-- Estructura de tabla para la tabla `usuario`
 --
+
+CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL,
+  `nombre_usuario` varchar(50) NOT NULL,
+  `clave_usuario` varchar(50) DEFAULT NULL,
+  `id_nivel_usuario` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `clave_usuario`, `id_nivel_usuario`) VALUES
+(1, 'admin', 'admin', 1),
+(2, 'user', 'user', 2);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `affiliate`
+--
+ALTER TABLE `affiliate`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `group`
+--
+ALTER TABLE `group`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `group_user_role`
+--
+ALTER TABLE `group_user_role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`menu_id`);
+
+--
+-- Indices de la tabla `nivel_usuario`
+--
+ALTER TABLE `nivel_usuario`
+  ADD PRIMARY KEY (`id_nivel_usuario`);
+
+--
+-- Indices de la tabla `note`
+--
+ALTER TABLE `note`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `note_approver`
+--
+ALTER TABLE `note_approver`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `note_type`
+--
+ALTER TABLE `note_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `permiso`
+--
+ALTER TABLE `permiso`
+  ADD PRIMARY KEY (`id_permiso`);
+
+--
+-- Indices de la tabla `permission`
+--
+ALTER TABLE `permission`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `source`
+--
+ALTER TABLE `source`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `user_level`
+--
+ALTER TABLE `user_level`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `nombre_usuario` (`nombre_usuario`),
+  ADD KEY `id_nivel_usuario` (`id_nivel_usuario`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `affiliate`
+--
+ALTER TABLE `affiliate`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `group`
+--
+ALTER TABLE `group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `group_user_role`
+--
+ALTER TABLE `group_user_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `nivel_usuario`
+--
+ALTER TABLE `nivel_usuario`
+  MODIFY `id_nivel_usuario` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `note`
+--
+ALTER TABLE `note`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `note_approver`
+--
+ALTER TABLE `note_approver`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `note_type`
+--
+ALTER TABLE `note_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `permiso`
+--
+ALTER TABLE `permiso`
+  MODIFY `id_permiso` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `permission`
+--
+ALTER TABLE `permission`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `source`
+--
+ALTER TABLE `source`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `status`
+--
+ALTER TABLE `status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `user_level`
+--
+ALTER TABLE `user_level`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`id_nivel_usuario`) REFERENCES `nivel_usuario` (`id_nivel_usuario`);
