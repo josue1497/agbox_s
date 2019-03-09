@@ -23,8 +23,13 @@ class Affiliate extends Model
 
                 (new Column('user_id'))
                     ->set_label('User')
-                    ->set_fk_entity(new Usuario())
-                    )
+                    ->set_fk_entity(new User()),
+
+                (new Column('approved'))
+                    ->set_label('Approved')
+                    ->set_type(Column::$COLUMN_TYPE_SELECT)
+					->set_values(array('Yes','No')),
+            )
         );
 
         $this->init();
