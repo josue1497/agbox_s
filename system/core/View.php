@@ -45,11 +45,9 @@ class View
 	{
 		$form_content = '';
 		foreach ($this->model->table_fields as $form_field) {
-			if ($form_field->get_visible_form() && $form_field->get_column_in_db() && strcmp($data["form_action"], "Agregar") != 0)
+			if ($form_field->get_visible_form() && $form_field->get_column_in_db())
 				$form_content .= $this->build_element($form_field, $data);
-			else {
-				$form_content .= $this->build_element_without_data($form_field);
-			}
+			
 		}
 
 		return $form_content .
