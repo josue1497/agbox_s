@@ -2,14 +2,14 @@
 /**
  * controlador para el crud de menu
  */
-class sourceController extends Controller{
+class roleController extends Controller{
 	/**
 	 * metodo accion index que genera la grilla
 	 * 
 	 * @return void
 	 */
     function index(){
-		$this->action_index(new Source(),true);
+		$this->action_index(new Role(),true);
     }
     
     /**
@@ -18,7 +18,7 @@ class sourceController extends Controller{
 	 * @return void
 	 */
     function create(){
-		$this->action_create(new Source(),$_POST,true);
+		$this->action_create(new Role(),$_POST,true);
     }
     
     /**
@@ -27,7 +27,7 @@ class sourceController extends Controller{
 	 * @return void
 	 */
     function edit($id){
-		$this->action_edit($id,new Source(),$_POST,true);
+		$this->action_edit($id,new Role(),$_POST,true);
     }
 
     /**
@@ -35,7 +35,7 @@ class sourceController extends Controller{
 	 * @return type
 	 */
     public function delete($id){
-		$this->action_delete($id,new Source());
+		$this->action_delete($id,new Role());
 	}
 }
 ?>

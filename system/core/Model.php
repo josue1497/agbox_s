@@ -213,6 +213,7 @@
 			}
 			
 			$sqlInsert = "INSERT INTO ".$this->table_name." (";
+		
 			$sqlValues = "VALUES (";
 			$db_params = array();
 			$first = true;
@@ -226,11 +227,21 @@
 					$first = false;
 				}
 			}
-			
+		
 			$sqlInsert.= ") ";
 			$sqlValues.= ") ";
+			// var_dump($db_params);die;
+
+
 			$req = Database::getBdd()->prepare($sqlInsert.$sqlValues);
-			return $req->execute($db_params);
+
+		
+			$result= $req->execute($db_params);
+
+			//	 var_dump($req->errorInfo()) ; die;
+
+			return $result;
+
 		}
 		
 		/**

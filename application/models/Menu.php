@@ -36,7 +36,7 @@ class Menu extends Model{
 				->set_label('Icono del Menu')
 				->set_type(Column::$COLUMN_TYPE_ICONPICKER),
 				
-				(new Column('order'))
+				(new Column('menu_order'))
 				->set_label('Orden de Menu')
 				->set_type(Column::$COLUMN_TYPE_NUMBER)
 				->set_visible_grid(false),
