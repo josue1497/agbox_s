@@ -10,7 +10,7 @@ class Menu extends Model{
 		$this->add_columns(
 			array(
 				(new Column('menu_id'))
-				->set_label('Id del Menu')
+				->set_label('Id of Menu')
 				->set_primary_key()
 				->set_auto_increment()
 				->set_visible_grid(false)

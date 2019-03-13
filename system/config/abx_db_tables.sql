@@ -68,25 +68,6 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `order`, `url`, `
 
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `nivel_usuario`
---
-
-CREATE TABLE `nivel_usuario` (
-  `id_nivel_usuario` int(5) NOT NULL,
-  `nombre_nivel_usuario` varchar(50) DEFAULT NULL,
-  `acceso_nivel_usuario` int(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `nivel_usuario`
---
-
-INSERT INTO `nivel_usuario` (`id_nivel_usuario`, `nombre_nivel_usuario`, `acceso_nivel_usuario`) VALUES
-(1, 'Administrador', 3),
-(2, 'Participante', 2);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `note`

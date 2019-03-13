@@ -168,18 +168,20 @@
 $i++;
 $html_menu.='<hr class="sidebar-divider">
 <li class="nav-item  active">
-	<a class="nav-link collapsed" href="#" data-toggle="collapse" 
+	<a class="nav-link collapsed" href="';
+	$html_menu.=!array_key_exists ('childs',$parent)?'{{ base_url }}'.$parent['url'].'"':'#"
+	data-toggle="collapse" 
 		data-target="#collapse_'.$i.'" 
-		aria-expanded="true" aria-controls="collapse_'.$i.'">
-		<i class="'.$parent['icon_menu'].'"></i>
-		<span>'.$parent['title_menu'].'</span>
+		aria-expanded="true" aria-controls="collapse_'.$i.'';
+	$html_menu.=' ">
+		<i class="'.$parent['icon'].'"></i>
+		<span>'.$parent['title'].'</span>
 	</a>
-
 	<div id="collapse_'.$i.'" class="collapse" 
-		aria-labelledby="heading_'.$parent['title_menu'].'" data-parent="#accordionSidebar">
+		aria-labelledby="heading_'.$parent['title'].'" data-parent="#accordionSidebar">
 	  <div class="bg-white py-2 collapse-inner rounded">';
 
-$childs = $parent['childs'];
+$childs = array_key_exists ('childs',$parent)?$parent['childs']:[];
 if(is_array($childs))
 	foreach($childs as $child){
 		$child_permission = 
@@ -187,7 +189,7 @@ if(is_array($childs))
 		if(!isset($child_permission) || 
 			(isset($child_permission) && $child_permission['can_read'])){
 					$html_menu.='<a class="collapse-item" href="{{ base_url }}'.
-			$child['url_menu'].'">'.$child['title_menu'].'</a>';
+			$child['url'].'">'.$child['title'].'</a>';
 		}
 		/* end child permission check */
 	}
