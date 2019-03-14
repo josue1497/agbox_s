@@ -14,7 +14,7 @@ class Source extends Model{
 				->set_visible_grid(false)
 				->set_visible_form(false),
 				
-				(new Column('name'))
+				(new Column('title'))
 				->set_label('Source Name')
 				->set_name_key()
 				->set_unike_key(),
@@ -25,6 +25,7 @@ class Source extends Model{
 				->set_visible_grid(false)
 			)
 		);
+
 		$this->init();
 	}
 }

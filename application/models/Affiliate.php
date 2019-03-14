@@ -23,6 +23,7 @@ class Affiliate extends Model
 
                 (new Column('user_id'))
                     ->set_label('User')
+                    ->set_name_key()
                     ->set_fk_entity(new User()),
 
                 (new Column('approved'))

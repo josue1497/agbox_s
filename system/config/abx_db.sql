@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `affiliate` (
-  `id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `approved` varchar(10) NOT NULL
+  `id` int(11) ,
+  `group_id` int(11) ,
+  `user_id` int(11) ,
+  `approved` varchar(10) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -42,11 +42,11 @@ CREATE TABLE `affiliate` (
 --
 
 CREATE TABLE `group` (
-  `id` int(11) NOT NULL,
-  `domain_id` int(11) NOT NULL,
+  `id` int(11) ,
+  `domain_id` int(11) ,
   `parent_group_id` int(11) DEFAULT NULL,
-  `name` varchar(60) NOT NULL,
-  `description` varchar(256) NOT NULL
+  `name` varchar(60) ,
+  `description` varchar(256) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
 
 -- --------------------------------------------------------
@@ -56,10 +56,10 @@ CREATE TABLE `group` (
 --
 
 CREATE TABLE `group_user_role` (
-  `id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `role_id` int(11) NOT NULL
+  `id` int(11) ,
+  `group_id` int(11) ,
+  `user_id` int(11) ,
+  `role_id` int(11) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -69,7 +69,7 @@ CREATE TABLE `group_user_role` (
 --
 
 CREATE TABLE `menu` (
-  `menu_id` int(5) NOT NULL,
+  `menu_id` int(5) ,
   `title` varchar(256) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `icon` varchar(256) DEFAULT NULL,
@@ -94,15 +94,15 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 --
 
 CREATE TABLE `note` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `title` varchar(140) NOT NULL,
-  `source_id` int(11) NOT NULL,
-  `summary` varchar(256) NOT NULL,
-  `agreement_type_id` int(11) NOT NULL,
+  `id` int(11) ,
+  `user_id` int(11) ,
+  `title` varchar(140) ,
+  `source_id` int(11) ,
+  `summary` varchar(256) ,
+  `agreement_type_id` int(11) ,
   `init_date` date DEFAULT NULL,
   `finish_date` date DEFAULT NULL,
-  `status_id` int(11) NOT NULL,
+  `status_id` int(11) ,
   `date_approved` date DEFAULT NULL,
   `performer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -114,10 +114,10 @@ CREATE TABLE `note` (
 --
 
 CREATE TABLE `note_approver` (
-  `id` int(11) NOT NULL,
-  `note_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `choice` varchar(10) NOT NULL
+  `id` int(11) ,
+  `note_id` int(11) ,
+  `user_id` int(11) ,
+  `choice` varchar(10) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -127,9 +127,9 @@ CREATE TABLE `note_approver` (
 --
 
 CREATE TABLE `note_type` (
-  `id` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `description` varchar(140) NOT NULL
+  `id` int(11) ,
+  `name` varchar(60) ,
+  `description` varchar(140) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -139,13 +139,13 @@ CREATE TABLE `note_type` (
 --
 
 CREATE TABLE `permission` (
-  `id` int(5) NOT NULL,
-  `menu_id` int(5) NOT NULL,
-  `user_level_id` int(5) NOT NULL,
-  `can_read` varchar(3) NOT NULL,
-  `can_write` varchar(3) NOT NULL,
-  `can_edit` varchar(3) NOT NULL,
-  `can_delete` varchar(3) NOT NULL
+  `id` int(5) ,
+  `menu_id` int(5) ,
+  `user_level_id` int(5) ,
+  `can_read` varchar(3) ,
+  `can_write` varchar(3) ,
+  `can_edit` varchar(3) ,
+  `can_delete` varchar(3) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -162,9 +162,9 @@ INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_wri
 --
 
 CREATE TABLE `role` (
-  `id` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `description` varchar(256) NOT NULL
+  `id` int(11) ,
+  `name` varchar(60) ,
+  `description` varchar(256) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for Role''s Information';
 
 -- --------------------------------------------------------
@@ -174,9 +174,9 @@ CREATE TABLE `role` (
 --
 
 CREATE TABLE `source` (
-  `id` int(11) NOT NULL,
-  `title` varchar(60) NOT NULL,
-  `description` varchar(140) NOT NULL
+  `id` int(11) ,
+  `title` varchar(60) ,
+  `description` varchar(140) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -186,9 +186,9 @@ CREATE TABLE `source` (
 --
 
 CREATE TABLE `status` (
-  `id` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `description` varchar(140) NOT NULL
+  `id` int(11) ,
+  `name` varchar(60) ,
+  `description` varchar(140) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -198,15 +198,15 @@ CREATE TABLE `status` (
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `employee_id` int(11) NOT NULL,
-  `names` varchar(140) NOT NULL,
-  `lastnames` varchar(140) NOT NULL,
-  `mail` varchar(100) NOT NULL,
-  `username` varchar(60) NOT NULL,
-  `password` varchar(60) NOT NULL,
-  `user_level_id` int(11) NOT NULL,
-  `is_visitor` varchar(5) NOT NULL
+  `id` int(11) ,
+  `employee_id` int(11) ,
+  `names` varchar(140) ,
+  `lastnames` varchar(140) ,
+  `mail` varchar(100) ,
+  `username` varchar(60) ,
+  `password` varchar(60) ,
+  `user_level_id` int(11) ,
+  `is_visitor` varchar(5) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -224,7 +224,7 @@ INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username
 --
 
 CREATE TABLE `user_level` (
-  `id` int(5) NOT NULL,
+  `id` int(5) ,
   `name_level` varchar(50) DEFAULT NULL,
   `access_level` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

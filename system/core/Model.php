@@ -252,6 +252,7 @@ class Model
 
 		try {
 
+
 			$req = Database::getBdd()->prepare($sqlInsert . $sqlValues);		
 
 			$result = $req->execute($db_params);

@@ -19,6 +19,8 @@ class Group extends Model
 
                 (new Column('name'))
                     ->set_label('Group Name')
+                    ->set_name_key()
+                    ->set_unike_key()
                     ->set_type(Column::$COLUMN_TYPE_TEXT),
 
                 (new Column('description'))

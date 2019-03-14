@@ -16,6 +16,7 @@ define('DB_NAME','abx_db');
 define('DB_USER','root');
 define('DB_PASS','');
 
+
 require_once(ROOT.'system/core/Autoloader.php');
 Autoloader::register();
 ?>

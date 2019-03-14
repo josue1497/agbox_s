@@ -16,6 +16,7 @@ class Note extends Model {
 				//TODO note columns
 			)
 		);
+		$this->init();
 	}
 }
 ?>
