@@ -10,7 +10,7 @@ class Menu extends Model{
 		$this->add_columns(
 			array(
 				(new Column('menu_id'))
-				->set_label('Id del Menu')
+				->set_label('Id of Menu')
 				->set_primary_key()
 				->set_auto_increment()
 				->set_visible_grid(false)
@@ -36,7 +36,7 @@ class Menu extends Model{
 				->set_label('Icono del Menu')
 				->set_type(Column::$COLUMN_TYPE_ICONPICKER),
 				
-				(new Column('order'))
+				(new Column('menu_order'))
 				->set_label('Orden de Menu')
 				->set_type(Column::$COLUMN_TYPE_NUMBER)
 				->set_visible_grid(false),
