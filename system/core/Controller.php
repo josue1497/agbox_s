@@ -196,7 +196,7 @@
 		 * @param type $i 
 		 * @return type
 		 */
-		public function generate_parent_menu($parent,$i){
+		public function generate_parent_menu(array $parent,$i){
 			$html_menu='<a class="nav-link collapsed" href="'.
 	 		(!array_key_exists ('childs',$parent)?'{{ base_url }}'.$parent['url']:'#')	.'"';
 			if(array_key_exists('childs',$parent)){
@@ -260,8 +260,6 @@
 			if (isset($post[$this->model->name_fields[0]])){
 				if ($this->model->create($post)){
 					header("Location: " . WEBROOT .  $this->model->table_name."/index");
-				}else{
-					echo "<script>alert('Ha ocurrido un Error')</script>";
 				}
 			}
 			$this->set($d);
