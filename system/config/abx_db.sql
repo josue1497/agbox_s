@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2019 a las 04:07:01
+-- Tiempo de generación: 14-03-2019 a las 04:49:58
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -35,19 +35,36 @@ CREATE TABLE `affiliate` (
   `approved` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `affiliate`
+--
+
+INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
+(1, 2, 1, 'Yes');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `group`
+-- Estructura de tabla para la tabla `groups`
 --
 
-CREATE TABLE `group` (
+CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
   `domain_id` int(11) DEFAULT NULL,
   `parent_group_id` int(11) DEFAULT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
+
+--
+-- Volcado de datos para la tabla `groups`
+--
+
+INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`) VALUES
+(1, NULL, NULL, 'a', 'a'),
+(2, NULL, NULL, 'Grupo 1', 'W'),
+(3, NULL, NULL, 'Hola', 'd'),
+(4, NULL, 1, 'Hola2', 'A');
 
 -- --------------------------------------------------------
 
@@ -87,10 +104,11 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 (9, 'Role', 'Role', 'empty', NULL, 'role/index', 11),
 (11, 'Crud Test', 'Crud', 'fas fa-notes-medical', 1, '#', 0),
 (12, 'Affiliate', 'Affiliate', 'fab fa-500px', 3, 'affiliate', 11),
-(13, 'Group', 'Group', 'fas fa-superscript', 4, 'group', 11),
+(13, 'Group', 'Group', 'empty', 4, 'groups', 11),
 (14, 'Note', 'Note', 'fas fa-address-book', 4, 'note', 11),
 (15, 'Note Type', 'Type', 'fab fa-accessible-icon', 5, 'note_type', 11),
-(16, 'Test', 'Prueba', 'fab fa-accessible-icon', 5, '#', 0);
+(16, 'Test', 'Prueba', 'fab fa-accessible-icon', 5, '#', 0),
+(17, 'Note Approver', 'Note Approver', 'fas fa-address-book', 6, 'note_approver', 11);
 
 -- --------------------------------------------------------
 
@@ -136,6 +154,13 @@ CREATE TABLE `note_type` (
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(140) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `note_type`
+--
+
+INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
+(1, 'Acuerdo', 'Acuerdo');
 
 -- --------------------------------------------------------
 
@@ -268,9 +293,9 @@ ALTER TABLE `affiliate`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `group`
+-- Indices de la tabla `groups`
 --
-ALTER TABLE `group`
+ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -347,13 +372,13 @@ ALTER TABLE `user_level`
 -- AUTO_INCREMENT de la tabla `affiliate`
 --
 ALTER TABLE `affiliate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `group`
+-- AUTO_INCREMENT de la tabla `groups`
 --
-ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `group_user_role`
@@ -365,7 +390,7 @@ ALTER TABLE `group_user_role`
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `note`
@@ -383,7 +408,7 @@ ALTER TABLE `note_approver`
 -- AUTO_INCREMENT de la tabla `note_type`
 --
 ALTER TABLE `note_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `permission`

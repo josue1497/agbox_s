@@ -5,7 +5,7 @@ class Group extends Model
     public function __construct()
     {
 
-        parent::__construct('group');
+        parent::__construct('groups');
         $this->table_label = 'Groups';
 
         $this->add_columns(

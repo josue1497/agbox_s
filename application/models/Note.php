@@ -11,6 +11,7 @@ class Note extends Model {
 					->set_label('Note Id')
 					->set_primary_key()
 					->set_auto_increment()
+					->set_name_key()
 					->set_visible_grid(false)
 					->set_visible_form(false),
 				//TODO note columns

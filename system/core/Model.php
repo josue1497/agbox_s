@@ -248,16 +248,20 @@ class Model
 
 		$sqlInsert .= ") ";
 		$sqlValues .= ") ";
-		// var_dump($db_params);die;
-
-		try {
-
-
-			$req = Database::getBdd()->prepare($sqlInsert . $sqlValues);		
-
-			$result = $req->execute($db_params);
-		} catch (PDOException $err) {
-			echo $err->getMessage();
+		$req = Database::getBdd()->prepare($sqlInsert.$sqlValues);
+		$result= $req->execute($db_params);
+			
+		try{
+			$err = $req->errorInfo();
+			/* $err[0] = sqlstate; $err[1] = error code; $err[2] = error message */
+			if($err && isset($err[2])){
+			 	echo 'Database Error: '.$err[2].
+			 		'<br/>sql :'.$sqlInsert.$sqlValues.
+			 		'</br>params: ';
+			 	var_dump($db_params); die;
+			}
+		}catch(Exception $e){
+			echo 'Exception: '.$e->getMessage();
 		}
 
 		return $result;
