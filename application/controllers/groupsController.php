@@ -2,7 +2,7 @@
 /**
  * controlador para el crud de menu
  */
-class groupController extends Controller{
+class groupsController  extends Controller{
 	/**
 	 * metodo accion index que genera la grilla
 	 * 
