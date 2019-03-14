@@ -41,7 +41,7 @@ CREATE TABLE `affiliate` (
 -- Estructura de tabla para la tabla `group`
 --
 
-CREATE TABLE `group` (
+CREATE TABLE `groups` (
   `id` int(11) ,
   `domain_id` int(11) ,
   `parent_group_id` int(11) DEFAULT NULL,
@@ -250,7 +250,7 @@ ALTER TABLE `affiliate`
 --
 -- Indices de la tabla `group`
 --
-ALTER TABLE `group`
+ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -332,7 +332,7 @@ ALTER TABLE `affiliate`
 --
 -- AUTO_INCREMENT de la tabla `group`
 --
-ALTER TABLE `group`
+ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
