@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 13-03-2019 a las 20:41:44
--- Versión del servidor: 5.6.34
--- Versión de PHP: 5.6.32
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 14-03-2019 a las 04:49:58
+-- Versión del servidor: 10.1.37-MariaDB
+-- Versión de PHP: 7.3.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,25 +29,42 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `affiliate` (
-  `id` int(11) ,
-  `group_id` int(11) ,
-  `user_id` int(11) ,
-  `approved` varchar(10) 
+  `id` int(11) NOT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `approved` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `affiliate`
+--
+
+INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
+(1, 2, 1, 'Yes');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `group`
+-- Estructura de tabla para la tabla `groups`
 --
 
 CREATE TABLE `groups` (
   `id` int(11) ,
   `domain_id` int(11) ,
   `parent_group_id` int(11) DEFAULT NULL,
-  `name` varchar(60) ,
-  `description` varchar(256) 
+  `name` varchar(60) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
+
+--
+-- Volcado de datos para la tabla `groups`
+--
+
+INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`) VALUES
+(1, NULL, NULL, 'a', 'a'),
+(2, NULL, NULL, 'Grupo 1', 'W'),
+(3, NULL, NULL, 'Hola', 'd'),
+(4, NULL, 1, 'Hola2', 'A');
 
 -- --------------------------------------------------------
 
@@ -56,10 +73,10 @@ CREATE TABLE `groups` (
 --
 
 CREATE TABLE `group_user_role` (
-  `id` int(11) ,
-  `group_id` int(11) ,
-  `user_id` int(11) ,
-  `role_id` int(11) 
+  `id` int(11) NOT NULL,
+  `group_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -69,7 +86,7 @@ CREATE TABLE `group_user_role` (
 --
 
 CREATE TABLE `menu` (
-  `menu_id` int(5) ,
+  `menu_id` int(5) NOT NULL,
   `title` varchar(256) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `icon` varchar(256) DEFAULT NULL,
@@ -83,9 +100,15 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `url`, `parent_menu_id`) VALUES
-(7, 'Sources', 'Soruces', 'fab fa-500px', 0, 'source/index', 0),
-(9, 'Role', 'Role', 'fab fa-500px', NULL, 'role/index', 0),
-(10, 'Prueba', 'Hola soy un a prueba', 'fab fa-accessible-icon', 2, '#', 0);
+(7, 'Sources', 'Soruces', 'empty', 0, 'source/index', 11),
+(9, 'Role', 'Role', 'empty', NULL, 'role/index', 11),
+(11, 'Crud Test', 'Crud', 'fas fa-notes-medical', 1, '#', 0),
+(12, 'Affiliate', 'Affiliate', 'fab fa-500px', 3, 'affiliate', 11),
+(13, 'Group', 'Group', 'empty', 4, 'groups', 11),
+(14, 'Note', 'Note', 'fas fa-address-book', 4, 'note', 11),
+(15, 'Note Type', 'Type', 'fab fa-accessible-icon', 5, 'note_type', 11),
+(16, 'Test', 'Prueba', 'fab fa-accessible-icon', 5, '#', 0),
+(17, 'Note Approver', 'Note Approver', 'fas fa-address-book', 6, 'note_approver', 11);
 
 -- --------------------------------------------------------
 
@@ -94,15 +117,15 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 --
 
 CREATE TABLE `note` (
-  `id` int(11) ,
-  `user_id` int(11) ,
-  `title` varchar(140) ,
-  `source_id` int(11) ,
-  `summary` varchar(256) ,
-  `agreement_type_id` int(11) ,
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `title` varchar(140) DEFAULT NULL,
+  `source_id` int(11) DEFAULT NULL,
+  `summary` varchar(256) DEFAULT NULL,
+  `agreement_type_id` int(11) DEFAULT NULL,
   `init_date` date DEFAULT NULL,
   `finish_date` date DEFAULT NULL,
-  `status_id` int(11) ,
+  `status_id` int(11) DEFAULT NULL,
   `date_approved` date DEFAULT NULL,
   `performer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -114,10 +137,10 @@ CREATE TABLE `note` (
 --
 
 CREATE TABLE `note_approver` (
-  `id` int(11) ,
-  `note_id` int(11) ,
-  `user_id` int(11) ,
-  `choice` varchar(10) 
+  `id` int(11) NOT NULL,
+  `note_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `choice` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -127,10 +150,17 @@ CREATE TABLE `note_approver` (
 --
 
 CREATE TABLE `note_type` (
-  `id` int(11) ,
-  `name` varchar(60) ,
-  `description` varchar(140) 
+  `id` int(11) NOT NULL,
+  `name` varchar(60) DEFAULT NULL,
+  `description` varchar(140) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `note_type`
+--
+
+INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
+(1, 'Acuerdo', 'Acuerdo');
 
 -- --------------------------------------------------------
 
@@ -139,13 +169,13 @@ CREATE TABLE `note_type` (
 --
 
 CREATE TABLE `permission` (
-  `id` int(5) ,
-  `menu_id` int(5) ,
-  `user_level_id` int(5) ,
-  `can_read` varchar(3) ,
-  `can_write` varchar(3) ,
-  `can_edit` varchar(3) ,
-  `can_delete` varchar(3) 
+  `id` int(5) NOT NULL,
+  `menu_id` int(5) DEFAULT NULL,
+  `user_level_id` int(5) DEFAULT NULL,
+  `can_read` varchar(3) DEFAULT NULL,
+  `can_write` varchar(3) DEFAULT NULL,
+  `can_edit` varchar(3) DEFAULT NULL,
+  `can_delete` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -162,10 +192,18 @@ INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_wri
 --
 
 CREATE TABLE `role` (
-  `id` int(11) ,
-  `name` varchar(60) ,
-  `description` varchar(256) 
+  `id` int(11) NOT NULL,
+  `name` varchar(60) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for Role''s Information';
+
+--
+-- Volcado de datos para la tabla `role`
+--
+
+INSERT INTO `role` (`id`, `name`, `description`) VALUES
+(1, 'Lider de Grupo', 'Lider de un Grupo'),
+(2, 'Administrador de grupo', 'Administrador de grupo');
 
 -- --------------------------------------------------------
 
@@ -174,10 +212,17 @@ CREATE TABLE `role` (
 --
 
 CREATE TABLE `source` (
-  `id` int(11) ,
-  `title` varchar(60) ,
-  `description` varchar(140) 
+  `id` int(11) NOT NULL,
+  `title` varchar(60) DEFAULT NULL,
+  `description` varchar(140) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `source`
+--
+
+INSERT INTO `source` (`id`, `title`, `description`) VALUES
+(1, 'WhatsApp', 'WS');
 
 -- --------------------------------------------------------
 
@@ -186,9 +231,9 @@ CREATE TABLE `source` (
 --
 
 CREATE TABLE `status` (
-  `id` int(11) ,
-  `name` varchar(60) ,
-  `description` varchar(140) 
+  `id` int(11) NOT NULL,
+  `name` varchar(60) DEFAULT NULL,
+  `description` varchar(140) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -198,15 +243,15 @@ CREATE TABLE `status` (
 --
 
 CREATE TABLE `user` (
-  `id` int(11) ,
-  `employee_id` int(11) ,
-  `names` varchar(140) ,
-  `lastnames` varchar(140) ,
-  `mail` varchar(100) ,
-  `username` varchar(60) ,
-  `password` varchar(60) ,
-  `user_level_id` int(11) ,
-  `is_visitor` varchar(5) 
+  `id` int(11) NOT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  `names` varchar(140) DEFAULT NULL,
+  `lastnames` varchar(140) DEFAULT NULL,
+  `mail` varchar(100) DEFAULT NULL,
+  `username` varchar(60) DEFAULT NULL,
+  `password` varchar(60) DEFAULT NULL,
+  `user_level_id` int(11) DEFAULT NULL,
+  `is_visitor` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -224,7 +269,7 @@ INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username
 --
 
 CREATE TABLE `user_level` (
-  `id` int(5) ,
+  `id` int(5) NOT NULL,
   `name_level` varchar(50) DEFAULT NULL,
   `access_level` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -248,7 +293,7 @@ ALTER TABLE `affiliate`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `group`
+-- Indices de la tabla `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
@@ -327,10 +372,10 @@ ALTER TABLE `user_level`
 -- AUTO_INCREMENT de la tabla `affiliate`
 --
 ALTER TABLE `affiliate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `group`
+-- AUTO_INCREMENT de la tabla `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
@@ -345,7 +390,7 @@ ALTER TABLE `group_user_role`
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `note`
@@ -363,7 +408,7 @@ ALTER TABLE `note_approver`
 -- AUTO_INCREMENT de la tabla `note_type`
 --
 ALTER TABLE `note_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `permission`
@@ -375,13 +420,13 @@ ALTER TABLE `permission`
 -- AUTO_INCREMENT de la tabla `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `source`
 --
 ALTER TABLE `source`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `status`

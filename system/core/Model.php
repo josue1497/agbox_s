@@ -249,7 +249,7 @@ class Model
 		$sqlInsert .= ") ";
 		$sqlValues .= ") ";
 		$req = Database::getBdd()->prepare($sqlInsert.$sqlValues);
-		$results= $req->execute($db_params);
+		$result= $req->execute($db_params);
 			
 		try{
 			$err = $req->errorInfo();
@@ -264,7 +264,7 @@ class Model
 			echo 'Exception: '.$e->getMessage();
 		}
 
-		return $res ult;
+		return $result;
 	}
 
 	/**
