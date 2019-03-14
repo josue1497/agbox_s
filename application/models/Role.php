@@ -25,6 +25,7 @@ class Role extends Model{
 				->set_visible_grid(false)
 			)
 		);
+		$this->init();
 	}
 }
 ?>

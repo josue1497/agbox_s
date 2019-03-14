@@ -227,6 +227,8 @@ $html_menu.='</div>
 			if (isset($post[$this->model->name_fields[0]])){
 				if ($this->model->create($post)){
 					header("Location: " . WEBROOT .  $this->model->table_name."/index");
+				}else{
+					echo "<script>alert('Ha ocurrido un Error')</script>";
 				}
 			}
 			$this->set($d);
