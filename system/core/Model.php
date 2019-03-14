@@ -264,7 +264,7 @@ class Model
 			echo 'Exception: '.$e->getMessage();
 		}
 
-		return $res ult;
+		return $result;
 	}
 
 	/**
