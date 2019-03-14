@@ -25,6 +25,8 @@ class Note_Type extends Model{
 				->set_visible_grid(false)
 			)
 		);
+
+		$this->init();
 	}
 }
 ?>
