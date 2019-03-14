@@ -168,10 +168,9 @@
 $i++;
 $html_menu.='<hr class="sidebar-divider">
 <li class="nav-item  active">
-	<a class="nav-link collapsed" href="';
-	$html_menu.= (!array_key_exists ('childs',$parent)?'{{ base_url }}'.$parent['url'].'"':'#"')
-	.' data-toggle="collapse" 
-		data-target="#collapse_'.$i.'" 
+	<a class="nav-link collapsed" href="'.
+	 (!array_key_exists ('childs',$parent)?'{{ base_url }}'.$parent['url']:'#')
+	.'" data-toggle="collapse" data-target="#collapse_'.$i.'" 
 		aria-expanded="true" aria-controls="collapse_'.$i.'">
 		<i class="'.$parent['icon'].'"></i>
 		<span>'.$parent['title'].'</span>
@@ -180,8 +179,8 @@ $html_menu.='<hr class="sidebar-divider">
 		aria-labelledby="heading_'.$parent['title'].'" data-parent="#accordionSidebar">
 	  <div class="bg-white py-2 collapse-inner rounded">';
 
-$childs = array_key_exists ('childs',$parent)?$parent['childs']:[];
-if(is_array($childs))
+$childs = array_key_exists('childs',$parent)?$parent['childs']:array();
+if(is_array($childs) && count($childs)>0){
 	foreach($childs as $child){
 		$child_permission = 
 					CoreUtils::get_user_permissions_by_menu_id($child['menu_id']);
@@ -189,9 +188,11 @@ if(is_array($childs))
 			(isset($child_permission) && $child_permission['can_read'])){
 					$html_menu.='<a class="collapse-item" href="{{ base_url }}'.
 			$child['url'].'">'.$child['title'].'</a>';
+			/* end child permission check */
 		}
-		/* end child permission check */
 	}
+		
+}
 		
 $html_menu.='</div>
 	</div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * controlador para el crud de menu
+ * controlador para el crud de rol
  */
 class roleController extends Controller{
 	/**

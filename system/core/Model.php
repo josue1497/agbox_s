@@ -237,8 +237,19 @@
 
 		
 			$result= $req->execute($db_params);
-
-			//	 var_dump($req->errorInfo()) ; die;
+			
+		try{
+			$err = $req->errorInfo();
+			/* $err[0] = sqlstate; $err[1] = error code; $err[2] = error message */
+			if($err && isset($err[2])){
+			 	echo 'Database Error: '.$err[2].
+			 		'<br/>sql :'.$sqlInsert.$sqlValues.
+			 		'</br>params: ';
+			 	var_dump($db_params); die;
+			}
+		}catch(Exception $e){
+			echo 'Exception: '.$e->getMessage();
+		}
 
 			return $result;
 

@@ -36,6 +36,7 @@ class Group_User_Role extends Model{
 				
              )
         );
+        $this->init();
     }
 }
 ?>

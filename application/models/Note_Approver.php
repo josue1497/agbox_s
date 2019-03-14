@@ -27,6 +27,7 @@ class Note_Approver extends Model{
 				
              )
         );
+        $this->init();
     }
 }
 ?>
