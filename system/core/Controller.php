@@ -165,7 +165,7 @@
 		 * @return type
 		 */
 		public function generate_childs_menu($parent,$i){
-			$html_meu='<div id="collapse_'.$i.'" class="collapse" '.
+			$html_menu='<div id="collapse_'.$i.'" class="collapse" '.
 				'aria-labelledby="heading_'.$parent['title'].
 				'" data-parent="#accordionSidebar">'.
 	 			'<div class="bg-white py-2 collapse-inner rounded">';
