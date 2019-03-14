@@ -146,13 +146,13 @@
 		public static function get_user_permissions($url){
         	$row_menu = (new Menu())->get_by_property(
         			array(
-        				'url_menu'=>$url
+        				'url'=>$url
         			)
         		);
         	if(!isset($row_menu))
         		return null;
 
-        	return CoreUtils::get_user_permissions_by_menu_id($row_menu['id_menu']);
+        	return CoreUtils::get_user_permissions_by_menu_id($row_menu['menu_id']);
 		}
 		/**
 		 * obtiene los permisos de un usuario segun un controlador y una vista
