@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            />
+        <!-- Font Awesome CDN -->
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+            />
+        <!-- END CDN -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet"
+            />
+
+        <script
+            src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <style>
+        body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+        </style>
+        <div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-12">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card rounded ">
+                                <div class="card-header text-center">
+                                        Informacion de Grupo
+                                      </div>
+                                    <div class="profile-img p-2">
+                                            <img
+                                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+                                                alt="" />
+                                            <div class="file btn btn-lg btn-primary">
+                                                Change Photo
+                                                <input type="file" name="file" />
+                                            </div>
+                                        </div><hr>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Nombre</label>
+                                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                placeholder="Nombre de Grupo">
+                                        </div>
+
+                                        <div class="form-group">
+                                                <label for="exampleInputEmail1">Descripcion</label>
+                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                    placeholder="Desc de Grupo">
+                                            </div>
+
+                                    </div>
+                                    <div class="card-footer text-muted d-flex justify-content-end">
+                                          <button class="btn btn-primary"><span>Guardar&nbsp  <i class="fas fa-save"></i></span></button>
+                                    </div>
+                                  </div>
+                                </div>
+                    <div class="col-md-8">
+                            <div class="card" >
+                                    <div class="card-header">
+                                      <div class="row">
+                                          <div class="col-4">Usuarios Afiliados</div>
+                                          <div class="col-8">
+                                              <div class="d-flex justify-content-end">
+                                                    <button class="btn btn-success"> <i class="fas fa-plus"></i></button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                      <li class="list-group-item"><div class="row">
+                                            <div class="col-4">Usuarios 1</div>
+                                            <div class="col-8">
+                                                <div class="d-flex justify-content-end">
+                                                        <button class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                </div>
+                                            </div>
+                                        </div></li>
+                                      <li class="list-group-item"><div class="row">
+                                            <div class="col-4">Usuarios 2</div>
+                                            <div class="col-8">
+                                                <div class="d-flex justify-content-end">
+                                                      <button class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                </div>
+                                            </div>
+                                        </div></li>
+                                      <li class="list-group-item"><div class="row">
+                                            <div class="col-4">Usuarios 3</div>
+                                            <div class="col-8">
+                                                <div class="d-flex justify-content-end">
+                                                        <button class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                </div>
+                                            </div>
+                                        </div></li>
+                                    </ul>
+                                  </div>
+                    </div>
+                </div>
+            </div>
+            <script
+                type="text/javascript"
+                src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+        </body>
+    </html>
