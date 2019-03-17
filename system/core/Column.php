@@ -22,6 +22,8 @@
 		public static $COLUMN_TYPE_PASS='PASSWORD';
 		public static $COLUMN_TYPE_SELECT='SELECT';
 		public static $COLUMN_TYPE_HIDDEN='HIDDEN';
+		public static $COLUMN_TYPE_FILE='FILE';
+		public static $COLUMN_TYPE_PHOTO='PHOTO';
 		public static $COLUMN_TYPE_ICONPICKER='ICONPICKER';
 		
 		/* visibilidad de la columna en grid y form */
@@ -54,6 +56,9 @@
 		var $field_html;
 		var $field_help;
 		var $table_field_name;
+
+		/** atributos para campos de tipo File, donde se establezca que tipo de archivos podra subir */
+		var $file_type;
 		
 		/**
 		 * constructor por defecto de la clase
@@ -154,7 +159,8 @@
 				self::$COLUMN_TYPE_EMAIL,self::$COLUMN_TYPE_HIDDEN,
 				self::$COLUMN_TYPE_NUMBER,self::$COLUMN_TYPE_PASS,
 				self::$COLUMN_TYPE_SELECT,self::$COLUMN_TYPE_TEXTAREA,
-				self::$COLUMN_TYPE_DATE,self::$COLUMN_TYPE_ICONPICKER
+				self::$COLUMN_TYPE_DATE,self::$COLUMN_TYPE_ICONPICKER,
+				self::$COLUMN_TYPE_FILE,self::$COLUMN_TYPE_PHOTO
 			);
 			foreach($valid_types as $valid_type)
 				if($valid_type == $this->column_type)
@@ -467,6 +473,25 @@
 		 */
 		public function get_table_field_name(){
 			return $this->table_field_name;
+		}
+
+		/**
+		 * Establece el tipo de archivo "jpeg,png, pdf, etc"
+		 * 
+		 * @param type|string $value 
+		 * @return column
+		 */
+		public function set_file_type($value=''){
+			$this->file_type = $value;
+			return $this;
+		}
+		/**
+		 * Obtiene el tipo de archivo "jpeg,png, pdf, etc"
+		 * 
+		 * @return string
+		 */
+		public function get_file_type(){
+			return $this->file_type;
 		}
 	}
 ?>

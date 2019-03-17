@@ -19,6 +19,12 @@ class User extends Model
 					->set_visible_grid(false)
 					->set_visible_form(false),
 
+				(new Column('profile_photo'))
+					->set_label('Profile Photo')
+					->set_type(Column::$COLUMN_TYPE_PHOTO)
+					->set_file_type("image/png, .jpeg, .jpg, image/gif")
+					->set_visible_grid(false),
+
 				(new Column('names'))
 					->set_label('Nombres')
 					->set_unike_key()
@@ -57,10 +63,11 @@ class User extends Model
 					->set_type(Column::$COLUMN_TYPE_SELECT)
 					->set_fk_entity(new User_Level()),
 				
-					(new Column('is_visitor'))
+				(new Column('is_visitor'))
 					->set_label('Is Visitor?')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
-					->set_values(array('Yes','No'))
+					->set_values(array('Yes','No')),
+
 
 			)
 		);

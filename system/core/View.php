@@ -168,7 +168,6 @@ class View
 					$form_field->get_field_html()
 				);
 				break;
-
 			case Column::$COLUMN_TYPE_SELECT:
 				$res = Component::select_field(
 					$form_field->get_name(),
@@ -184,6 +183,24 @@ class View
 					$form_field->get_name(),
 					isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
 					$form_field->get_label()
+				);
+				break;
+			case Column::$COLUMN_TYPE_PHOTO:
+				$res = Component::image_upload(
+					$form_field->get_name(),
+					isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
+					$form_field->get_label(),
+					$form_field->get_file_type(),
+					$form_field->get_field_html()
+				);
+				break;
+				case Column::$COLUMN_TYPE_FILE:
+				$res = Component::file_upload(
+					$form_field->get_name(),
+					isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
+					$form_field->get_label(),
+					$form_field->get_file_type(),
+					$form_field->get_field_html()
 				);
 				break;
 			case Column::$COLUMN_TYPE_TEXT:
