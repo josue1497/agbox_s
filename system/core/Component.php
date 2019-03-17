@@ -142,22 +142,86 @@
 		}
 		
 		public static function save_button($text=null){
-			return '<button type="submit" class="btn btn-primary">'.(empty($text)?'Guardar':$text).'</button>';
+			return '<button type="submit" class="m-1 btn btn-primary"><i class="fas fa-save"></i><span> '.(empty($text)?'Guardar':$text).' </span></button>';
 		}
 		
 		public static function function_button($text,$function){
-			return '<a href="javascript:(0)" class="btn btn-info" onclick="'.$function.'">'.$text.'</a>';
+			return '<a href="javascript:(0)" class="btn btn-primary" onclick="'.$function.'">'.$text.'</a>';
 		}
 		
 		public static function action_button($module_name,$id=null,$action_name){
 			//action_name = {create, edit, delete,cancel} 
 			return "<a id='link_".$action_name."' href='/".APP_FOLDER.'/'.$module_name.'/'.
-				($action_name=='cancel'?'index':$action_name).'/'.$id."' class='btn ".
-					($action_name=='delete' || $action_name=='cancel'? 'btn-danger':($action_name=='edit'?'btn-info':'btn-primary pull-right')) ." btn-xs'>".
-						($action_name=='delete'?"<span class='glyphicon glyphicon-remove'></span> Eliminar":(
-							$action_name=='edit'?"<span class='glyphicon glyphicon-edit'></span> Editar":
-							($action_name=='cancel'?"Cancelar"
-							:"<b>+</b> Nuevo")))."</a>";
+				($action_name=='cancel'?'index':$action_name).'/'.$id."'".Component::set_classname_action($action_name)."'>".
+						Component::set_label_action($action_name)."</a>";
+		}
+
+
+		public static function set_icon_action($action=''){
+			$icon="<i class='fas ";
+			switch($action){
+				case "delete":
+					$icon.="fa-trash ";
+					break;
+				case "cancel":
+					$icon.="fa-times-circle ";
+					break;
+				case "edit":
+					$icon.="fa-pen ";
+					break;
+				case "create":
+					$icon.="fa-plus ";
+					break;
+				default:
+					$icon.="";
+					break; 
+			}
+			$icon.="'></i>";
+
+			return $icon;
+		}
+
+		public static function set_classname_action($action=''){
+			$class="class='m-1 btn ";
+
+			switch($action){
+				case "delete":
+				case "cancel":
+					$class.="btn-secondary ";
+					break;
+				case "edit":
+				case "create":
+					$class.="btn-primary ";
+				default:
+					$class.="";
+					break; 
+			}
+
+			return $class;
+		}
+
+		public static function set_label_action($action=''){
+			$label=Component::set_icon_action($action)."<span>";
+
+			switch($action){
+				case "delete":
+					$label.=" Eliminar ";
+					break;
+				case "cancel":
+					$label.=" Cancelar ";
+					break;
+				case "edit":
+					$label.=" Editar ";
+					break;
+				case "create":
+					$label.= " Nuevo ";
+					break;
+				default:
+					$label.="";
+					break; 
+			}
+			$label.="</span>";
+			return $label;
 		}
 		
 		public static function cancel_button($module_name){
