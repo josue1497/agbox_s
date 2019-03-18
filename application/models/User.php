@@ -38,13 +38,11 @@ class User extends Model
 				(new Column('mail'))
 					->set_label('E-Mail')
 					->set_type(Column::$COLUMN_TYPE_EMAIL)
-					->set_unike_key()
-					->set_name_key(),
+					->set_unike_key(),
 
 				(new Column('username'))
 					->set_label('Usuario')
-					->set_unike_key()
-					->set_name_key(),
+					->set_unike_key(),
 
 				(new Column('password'))
 					->set_label('Clave de Usuario')
