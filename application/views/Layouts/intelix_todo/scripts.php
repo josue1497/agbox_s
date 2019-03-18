@@ -16,3 +16,5 @@
 
 <!-- Bootstrap-Iconpicker Bundle -->
 <script type="text/javascript" src="{{ base_url }}application/views/Layouts/vendor/icon-picker/js/bootstrap-iconpicker.bundle.min.js"></script>
+
+<script src="{{ base_url }}application/views/Layouts/scripts/functions.js"></script>

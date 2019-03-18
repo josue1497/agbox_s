@@ -57,8 +57,8 @@
 			'<div class="form-group">'.
 			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
 			'<div class="d-flex flex-column profile-img p-2 my-2">
-             	<img class=" img-fluid" src="https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
-                     alt="" />'.
+				 <img id="'.$name.'_photo" class=" img-fluid" src="'.(!empty($value)?(''.Component::img_to_base64(IMG_DIR.$value).'"'):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"').
+                     'alt="" />'.
 			' <div class="file btn btn-lg btn-info">'.
 			' Change Photo <input type="file" '.
 			'id="'.$name.'" '.
@@ -66,7 +66,19 @@
 			'name="'.$name.'" '.
 			(!empty($value)?( 'value="'. (!is_array($value)?$value:(isset($value[$name])?$value[$name]:'')) .'"'):'').
 			(!empty($etc)?$etc:'').
-			'></div></div></div>';
+			''.Component::set_on_change_img($name).' ></div></div></div>';
+		}
+
+		public static function set_on_change_img($name){
+			$id=$name."_photo";
+			return "onchange=\"readURL(this,document.getElementById('".$id."'))\"";
+		}
+
+		public static function img_to_base64($path){
+			$type = pathinfo($path, PATHINFO_EXTENSION);
+			$data = file_get_contents($path);
+			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+			return $base64;
 		}
 		
 		public static function text_area($name,$value=null,$label=null,$placeholder=null,$etc=null){

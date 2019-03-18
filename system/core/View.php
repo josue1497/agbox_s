@@ -28,7 +28,7 @@ class View
 		 */
 	public function auto_build_form($form_content, $data)
 	{
-		return "<form method='post' action='#' " . (isset($data['onsubmit']) ? " onsubmit='" . $data['onsubmit'] . "' " : "") .
+		return "<form method='post' enctype='multipart/form-data' action='#' " . (isset($data['onsubmit']) ? " onsubmit='" . $data['onsubmit'] . "' " : "") .
 			" >" .
 			$form_content .
 			"</form>";
