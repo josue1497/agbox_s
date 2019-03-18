@@ -10,18 +10,18 @@ class Menu extends Model{
 		$this->add_columns(
 			array(
 				(new Column('menu_id'))
-				->set_label('Id del Menu')
+				->set_label('Id of Menu')
 				->set_primary_key()
 				->set_auto_increment()
 				->set_visible_grid(false)
 				->set_visible_form(false),
 				
-				(new Column('title_menu'))
+				(new Column('title'))
 				->set_label('Titulo del Menu')
 				->set_name_key()
 				->set_unike_key(),
 				
-				(new Column('description_menu'))
+				(new Column('description'))
 				->set_label('Descripcion del Menu')
 				->set_type(Column::$COLUMN_TYPE_TEXTAREA)
 				->set_visible_grid(false),
@@ -32,7 +32,7 @@ class Menu extends Model{
 				->set_fk_entity($this)
 				->set_visible_grid(false),
 				
-				(new Column('icon_menu'))
+				(new Column('icon'))
 				->set_label('Icono del Menu')
 				->set_type(Column::$COLUMN_TYPE_ICONPICKER),
 				
@@ -41,7 +41,7 @@ class Menu extends Model{
 				->set_type(Column::$COLUMN_TYPE_NUMBER)
 				->set_visible_grid(false),
 				
-				(new Column('url_menu'))
+				(new Column('url'))
 				->set_label('Url del Menu')
 				->set_field_help('modelo/vista')
 				

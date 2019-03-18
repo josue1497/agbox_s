@@ -16,7 +16,7 @@
 		public static function getBdd() {
 			if(is_null(self::$bdd)) {
 				self::$bdd = 
-					new PDO("mysql:host=".DB_HOST.":3307;dbname=".DB_NAME,DB_USER,DB_PASS, NULL);
+					new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER,DB_PASS, NULL);
 			}
 			return self::$bdd;
 		}

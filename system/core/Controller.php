@@ -155,7 +155,68 @@
 			/* render */
 			echo $html_view;
         }
+		 
 		
+		/**
+		 * metodo para generar automaticamente los menu hijos
+		 * @param type $html_menu 
+		 * @param type $parent 
+		 * @param type $i 
+		 * @return type
+		 */
+		public function generate_childs_menu($parent,$i){
+			$html_menu='<div id="collapse_'.$i.'" class="collapse" '.
+				'aria-labelledby="heading_'.$parent['title'].
+				'" data-parent="#accordionSidebar">'.
+	 			'<div class="bg-white py-2 collapse-inner rounded">';
+
+			$childs = $parent['childs'];
+
+			if(is_array($childs) && count($childs)>0){
+				foreach($childs as $child){
+					$child_permission = 
+						CoreUtils::get_user_permissions_by_menu_id($child['menu_id']);
+					if(!isset($child_permission) || 
+						(isset($child_permission) && 
+							$child_permission['can_read'])){
+						$html_menu.='<a class="collapse-item" href="{{ base_url }}'.
+							$child['url'].'">'.$child['title'].'</a>';
+					}
+				/* end child permission check */
+				}
+			}
+			$html_menu.='</div></div>';
+			return $html_menu;
+		}
+
+		/**
+		 * meodo para generar automaticamente el menu padre
+		 * @param type $html_menu 
+		 * @param type $parent 
+		 * @param type $i 
+		 * @return type
+		 */
+		public function generate_parent_menu(array $parent,$i){
+			$html_menu='<a class="nav-link collapsed" href="'.
+	 		(!array_key_exists ('childs',$parent)?'{{ base_url }}'.$parent['url']:'#')	.'"';
+			if(array_key_exists('childs',$parent)){
+	 			$html_menu.=' data-toggle="collapse" data-target="#collapse_'.$i.'" 
+					aria-expanded="true" aria-controls="collapse_'.$i.'"';
+			}
+			$html_menu.='><i class="'.$parent['icon'].'"></i><span>'.
+			$parent['title'].'</span></a>';
+
+			if(array_key_exists('childs',$parent)){
+				$html_menu.= $this->generate_childs_menu($parent,$i);
+			}
+			return $html_menu;
+		}
+
+		/**
+		 * metodo para generar automatcamente el menu de la aplicacion
+		 * segun los accesos del usuario loggeado
+		 * @return type
+		 */
 		public function get_app_menu(){
 			$html_menu = '';
 			$menu_data = (new Menu())->get_menu_data();
@@ -165,38 +226,12 @@
 					CoreUtils::get_user_permissions_by_menu_id($parent['menu_id']);
 				if(!isset($parent_permission) || 
 					(isset($parent_permission) && $parent_permission['can_read'])){
-$i++;
-$html_menu.='<hr class="sidebar-divider">
-<li class="nav-item  active">
-	<a class="nav-link collapsed" href="#" data-toggle="collapse" 
-		data-target="#collapse_'.$i.'" 
-		aria-expanded="true" aria-controls="collapse_'.$i.'">
-		<i class="'.$parent['icon_menu'].'"></i>
-		<span>'.$parent['title_menu'].'</span>
-	</a>
-
-	<div id="collapse_'.$i.'" class="collapse" 
-		aria-labelledby="heading_'.$parent['title_menu'].'" data-parent="#accordionSidebar">
-	  <div class="bg-white py-2 collapse-inner rounded">';
-
-$childs = $parent['childs'];
-if(is_array($childs))
-	foreach($childs as $child){
-		$child_permission = 
-					CoreUtils::get_user_permissions_by_menu_id($child['menu_id']);
-		if(!isset($child_permission) || 
-			(isset($child_permission) && $child_permission['can_read'])){
-					$html_menu.='<a class="collapse-item" href="{{ base_url }}'.
-			$child['url_menu'].'">'.$child['title_menu'].'</a>';
-		}
-		/* end child permission check */
-	}
-		
-$html_menu.='</div>
-	</div>
-</li>';
-}
-/*end parent permission check*/
+					$i++;
+					$html_menu.='<hr class="sidebar-divider">'.
+					'<li class="nav-item  active">'.
+					$this->generate_parent_menu($parent,$i).'</li>';
+				}
+				/*end parent permission check*/
 			}
 		return $html_menu;
 		}
