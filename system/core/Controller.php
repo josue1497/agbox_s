@@ -23,10 +23,18 @@
 			
 			/* establecer nombre de usuarioen topbar */
 			$user_name='';
-			if(Session::get('user_email')){
-				$user_name = Session::get('user_email');
+			if(Session::get('user_names')){
+				$user_name = Session::get('user_names');
+				$html_topbar = str_replace('{{ user_name }}',$user_name,$html_topbar);
 			}
-			$html_topbar = str_replace('{{ user_name }}',$user_name,$html_topbar);
+			
+
+			if(Session::get('user_id')){
+				$user_id = Session::get('user_id');
+				$html_topbar = str_replace('{{ user_id }}',$user_id,$html_topbar);
+			}
+
+			
 
 			$html_view =  str_replace(
 					'{{ '.$this->layout.'_topbar }}',
