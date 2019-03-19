@@ -2,9 +2,29 @@
 /**
  * clase base para gestionar la construccion de vistas
  */
-class View
-{
+class View{
 	public $model;
+
+	var $scripts = '';
+		
+	/**
+	 * metodo auxiliar para dicionar scripts
+	 * @param type $script_js 
+	 * @return type
+	 */
+	public function add_script_js($script_js){
+		$this->scripts .= $script_js;
+		return $this;
+	}
+
+	/**
+	 * metodo para obtener scrits agregados
+	 * @return type
+	 */
+	public function get_script_js(){
+		return $this->scripts;
+	}
+
 
 	/**
 		 * constructor usa modelo para construir vista,
@@ -13,8 +33,7 @@ class View
  		 * @param model $model
  		 * @return void
 		 */
-	public function __construct($model)
-	{
+	public function __construct($model){
 		$this->model = $model;
 	}
 
@@ -153,8 +172,20 @@ class View
 		 * @return type
 		 */
 	public function auto_build_list($list_content, $data){
-		return "<div class='row col-md-12 centered'>" .
-			"<table class='table table-striped custab'>" .
+		/* activa paginacion */
+		$this->add_script_js(
+		"$(document).ready(function () {".
+		"$('#table_".$this->model->table_name.
+		"').DataTable({ 'pagingType':'full' });".
+		"$('.dataTables_length').addClass('bs-select');".
+		"});");
+		/* paginacion */
+
+		return ($this->model->crud_config['can_create'] ?
+				Component::add_button($this->model->table_name) : '') .
+		"<div class='row col-md-12 centered'>" .
+			"<table id='table_".$this->model->table_name."' ".
+			"class='table table-striped custab table-sm'>" .
 			$list_content .
 			"</table>" .
 			"</div>";
@@ -179,14 +210,13 @@ class View
 		 * @return type
 		 */
 	public function auto_build_list_thead(){
-		$list_thead = "<thead>" . ($this->model->crud_config['can_create'] ?
-				Component::add_button($this->model->table_name) : '') .
+		$list_thead = "<thead>".
 			"<tr>" .
 			"<th>#</th>";
 
 		foreach ($this->model->table_fields as $list_field)
 			if ($list_field->get_visible_grid())
-				$list_thead .= "<th>" . ($list_field->get_label()) . "</th>";
+				$list_thead .= "<th class='th-sm' >" . ($list_field->get_label()) . "</th>";
 
 		return $list_thead . "<th class='text-center'>Accion</th>" .
 			"</tr>" .

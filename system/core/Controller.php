@@ -53,8 +53,12 @@
 			
 			$html_view =  str_replace(
 					'{{ '.$this->layout.'_scripts }}',
-					CoreUtils::get_layout_template_content('scripts',$this->layout),
+					CoreUtils::get_layout_template_content('scripts',$this->layout).
+					( !empty($this->view->get_script_js()) ? 
+						('<script>'.$this->view->get_script_js().'</script>'):'')
+					,
 					$html_view);
+
 			
 			$html_view =  str_replace(
 					'{{ '.$this->layout.'_footer }}',
