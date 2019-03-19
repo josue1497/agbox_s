@@ -38,6 +38,48 @@
 			(!empty($etc)?$etc:'').
 			'></div>';
 		}
+
+		public static function file_upload($name,$value=null,$label=null,$file_accept=null,$etc=null){
+			return 
+			'<div class="form-group">'.
+			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
+			'<input type="file"  class="form-control" '.
+			'id="'.$name.'" '.
+			(!empty($file_accept)?('accept="'.$file_accept.'"'):'').
+			'name="'.$name.'" '.
+			(!empty($value)?( 'value="'. (!is_array($value)?$value:(isset($value[$name])?$value[$name]:'')) .'"'):'').
+			(!empty($etc)?$etc:'').
+			'></div>';
+		}
+
+		public static function image_upload($name,$value=null,$label=null,$file_accept=null,$etc=null){
+			return 
+			'<div class="form-group">'.
+			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
+			'<div class="d-flex flex-column profile-img p-2 my-2">
+				 <img id="'.$name.'_photo" class=" img-fluid" src="'.(!empty($value)?(''.Component::img_to_base64(UPLOADS_DIR.$value).'"'):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"').
+                     'alt="" />'.
+			' <div class="file btn btn-lg btn-info">'.
+			' Change Photo <input type="file" '.
+			'id="'.$name.'" '.
+			(!empty($file_accept)?('accept="'.$file_accept.'"'):'').
+			'name="'.$name.'" '.
+			(!empty($value)?( 'value="'. (!is_array($value)?$value:(isset($value[$name])?$value[$name]:'')) .'"'):'').
+			(!empty($etc)?$etc:'').
+			''.Component::set_on_change_img($name).' ></div></div></div>';
+		}
+
+		public static function set_on_change_img($name){
+			$id=$name."_photo";
+			return "onchange=\"readURL(this,document.getElementById('".$id."'))\"";
+		}
+
+		public static function img_to_base64($path){
+			$type = pathinfo($path, PATHINFO_EXTENSION);
+			$data = file_get_contents($path);
+			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+			return $base64;
+		}
 		
 		public static function text_area($name,$value=null,$label=null,$placeholder=null,$etc=null){
 			return '<div class="form-group">'.
@@ -142,22 +184,86 @@
 		}
 		
 		public static function save_button($text=null){
-			return '<button type="submit" class="btn btn-primary">'.(empty($text)?'Guardar':$text).'</button>';
+			return '<button type="submit" class="m-1 btn btn-primary"><i class="fas fa-save"></i><span> '.(empty($text)?'Guardar':$text).' </span></button>';
 		}
 		
 		public static function function_button($text,$function){
-			return '<a href="javascript:(0)" class="btn btn-info" onclick="'.$function.'">'.$text.'</a>';
+			return '<a href="javascript:(0)" class="btn btn-primary" onclick="'.$function.'">'.$text.'</a>';
 		}
 		
 		public static function action_button($module_name,$id=null,$action_name){
 			//action_name = {create, edit, delete,cancel} 
 			return "<a id='link_".$action_name."' href='/".APP_FOLDER.'/'.$module_name.'/'.
-				($action_name=='cancel'?'index':$action_name).'/'.$id."' class='btn ".
-					($action_name=='delete' || $action_name=='cancel'? 'btn-danger':($action_name=='edit'?'btn-info':'btn-primary pull-right')) ." btn-xs'>".
-						($action_name=='delete'?"<span class='glyphicon glyphicon-remove'></span> Eliminar":(
-							$action_name=='edit'?"<span class='glyphicon glyphicon-edit'></span> Editar":
-							($action_name=='cancel'?"Cancelar"
-							:"<b>+</b> Nuevo")))."</a>";
+				($action_name=='cancel'?'index':$action_name).'/'.$id."'".Component::set_classname_action($action_name)."'>".
+						Component::set_label_action($action_name)."</a>";
+		}
+
+
+		public static function set_icon_action($action=''){
+			$icon="<i class='fas ";
+			switch($action){
+				case "delete":
+					$icon.="fa-trash ";
+					break;
+				case "cancel":
+					$icon.="fa-times-circle ";
+					break;
+				case "edit":
+					$icon.="fa-pen ";
+					break;
+				case "create":
+					$icon.="fa-plus ";
+					break;
+				default:
+					$icon.="";
+					break; 
+			}
+			$icon.="'></i>";
+
+			return $icon;
+		}
+
+		public static function set_classname_action($action=''){
+			$class="class='m-1 btn ";
+
+			switch($action){
+				case "delete":
+				case "cancel":
+					$class.="btn-secondary ";
+					break;
+				case "edit":
+				case "create":
+					$class.="btn-primary ";
+				default:
+					$class.="";
+					break; 
+			}
+
+			return $class;
+		}
+
+		public static function set_label_action($action=''){
+			$label=Component::set_icon_action($action)."<span>";
+
+			switch($action){
+				case "delete":
+					$label.=" Eliminar ";
+					break;
+				case "cancel":
+					$label.=" Cancelar ";
+					break;
+				case "edit":
+					$label.=" Editar ";
+					break;
+				case "create":
+					$label.= " Nuevo ";
+					break;
+				default:
+					$label.="";
+					break; 
+			}
+			$label.="</span>";
+			return $label;
 		}
 		
 		public static function cancel_button($module_name){

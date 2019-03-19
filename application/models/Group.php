@@ -16,6 +16,12 @@ class Group extends Model
                     ->set_auto_increment()
                     ->set_visible_grid(false)
                     ->set_visible_form(false),
+                     
+                (new Column('group_photo'))
+                    ->set_label('Group Photo')
+                    ->set_type(Column::$COLUMN_TYPE_PHOTO)
+                    ->set_file_type("image/png, .jpeg, .jpg, image/gif")
+                    ->set_visible_grid(false),
 
                 (new Column('name'))
                     ->set_label('Group Name')

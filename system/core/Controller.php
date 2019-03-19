@@ -23,10 +23,18 @@
 			
 			/* establecer nombre de usuarioen topbar */
 			$user_name='';
-			if(Session::get('user_email')){
-				$user_name = Session::get('user_email');
+			if(Session::get('user_names')){
+				$user_name = Session::get('user_names');
+				$html_topbar = str_replace('{{ user_name }}',$user_name,$html_topbar);
 			}
-			$html_topbar = str_replace('{{ user_name }}',$user_name,$html_topbar);
+			
+
+			if(Session::get('user_id')){
+				$user_id = Session::get('user_id');
+				$html_topbar = str_replace('{{ user_id }}',$user_id,$html_topbar);
+			}
+
+			
 
 			$html_view =  str_replace(
 					'{{ '.$this->layout.'_topbar }}',
@@ -45,8 +53,12 @@
 			
 			$html_view =  str_replace(
 					'{{ '.$this->layout.'_scripts }}',
-					CoreUtils::get_layout_template_content('scripts',$this->layout),
+					CoreUtils::get_layout_template_content('scripts',$this->layout).
+					( !empty($this->view->get_script_js()) ? 
+						('<script>'.$this->view->get_script_js().'</script>'):'')
+					,
 					$html_view);
+
 			
 			$html_view =  str_replace(
 					'{{ '.$this->layout.'_footer }}',
@@ -73,9 +85,27 @@
 				$html_side = CoreUtils::get_layout_template_content('side',$this->layout);	
 				if($auto_build){
 					if($filename == 'index'){
-						$html_content = $this->view->auto_build_list($this->view->auto_build_list_content($records),$records);
-					}else if($filename='form'){
+						$html_content = 
+							'<div id="index_'.$this->model->table_name.
+								'" style="display:block;">'.
+								$this->view->auto_build_list(
+									$this->view->auto_build_list_content($records),$records).
+								'</div><div id="items_'.$this->model->table_name.
+									'" style="display:none;">'.
+						 		$this->view->generate_item_list($records).
+						 	'</div>';
+					}else if($filename=='form'){
 						$html_content = $this->view->auto_build_form($this->view->auto_build_form_content($record),$record);
+					}else if($filename=='items'){
+						$html_content =
+						'<div id="index_'.$this->model->table_name.
+								'" style="display:none;">'.
+								$this->view->auto_build_list(
+									$this->view->auto_build_list_content($records),$records).
+								'</div><div id="items_'.$this->model->table_name.
+									'" style="display:block;">'.
+						 		$this->view->generate_item_list($records).
+						 	'</div>';
 					}
 				}else{
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
@@ -109,8 +139,42 @@
 
 			$html_view = str_replace(
 					'{{ title_module }}',
-					(isset($record['form_action'])?$record['form_action']:'').' '.
-					$this->model->table_label,
+					(isset($record['form_action'])?
+						$record['form_action']:'').' '.
+						$this->model->table_label.' &nbsp; '.
+						/* agregar boton collapsable */
+						(($filename == 'index' || $filename == 'items')? 
+							Component::function_button('Toogle View',
+								"if(!$('#index_".
+									$this->model->table_name.
+									"').parent().is(':visible')){".
+									"$('#index_".
+									$this->model->table_name.
+									"').parent().fadeIn();}else{".
+									"$('#index_".
+									$this->model->table_name.
+									"').parent().fadeOut();}")
+							:'').' &nbsp; '.
+						/* agregar boton cambio de vista (lista/cuadricula) */
+						($filename == 'index' ? 
+							Component::function_button('Change View',(
+									"if($('#index_".
+									$this->model->table_name.
+									"').is(':visible')){".
+									"$('#index_".
+									$this->model->table_name.
+									"').fadeOut();".
+									"$('#items_".
+									$this->model->table_name.
+									"').fadeIn();".
+									"}else{".
+									"$('#items_".
+									$this->model->table_name.
+									"').fadeOut();".
+									"$('#index_".
+									$this->model->table_name.
+									"').fadeIn();}"
+								)): '' ),
 					$html_view);
 
 
@@ -249,10 +313,16 @@
 		}
 		
 		function action_index($obj,$auto_build=false){
+			$this->action_list($obj,$auto_build,'index');
+		}
+		function action_items($obj,$auto_build=false){
+			$this->action_list($obj,$auto_build,'items');
+		}
+		function action_list($obj,$auto_build=false,$filename){
 			$this->init($obj);
 			$d['records'] = $this->model->showAllRecords();
 			$this->set($d);
-			$this->render("index",$auto_build);
+			$this->render($filename,$auto_build);
 		}
 		function action_create($obj,$post=null,$auto_build=false){
 			$this->init($obj);

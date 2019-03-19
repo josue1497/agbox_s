@@ -11,6 +11,14 @@ class groupsController  extends Controller{
     function index(){
 		$this->action_index(new Group(),true);
     }
+	
+	/**
+	 * metodo accion items que genera miniaturas
+	 * @return type
+	 */
+    function items(){
+		$this->action_items(new Group(),true);
+    }
     
     /**
 	 * metodo accion create que genera el form para agregar registros

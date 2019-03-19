@@ -23,7 +23,7 @@ class Autoloader {
 			'application/models/',
 			'application/controllers/',
 			'application/views/',
-			'application/views/Layouts/Lan/'
+			'application/views/Layouts/lan/'
 
 		);
 	}

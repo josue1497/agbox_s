@@ -7,6 +7,7 @@ define('LAYOUT_DIR', VIEWS_DIR . "Layouts/");
 define('JS_DIR', LAYOUT_DIR . "scripts/");
 define('CSS_DIR', LAYOUT_DIR . "styles/");
 define('IMG_DIR', LAYOUT_DIR . "imgs/");
+define('UPLOADS_DIR', LAYOUT_DIR . "imgs/uploads/");
 define('VENDOR_DIR', LAYOUT_DIR . "vendor/");
 define('MODELS_DIR', ROOT . "application/models/");
 
@@ -14,7 +15,7 @@ define('MODELS_DIR', ROOT . "application/models/");
 define('DB_HOST','localhost');
 define('DB_NAME','abx_db');
 define('DB_USER','root');
-define('DB_PASS','');
+define('DB_PASS','12345678');
 
 
 require_once(ROOT.'system/core/Autoloader.php');
