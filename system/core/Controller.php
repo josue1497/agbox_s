@@ -144,7 +144,16 @@
 						$this->model->table_label.' &nbsp; '.
 						/* agregar boton collapsable */
 						(($filename == 'index' || $filename == 'items')? 
-							Component::function_button('Toogle View','')
+							Component::function_button('Toogle View',
+								"if(!$('#index_".
+									$this->model->table_name.
+									"').parent().is(':visible')){".
+									"$('#index_".
+									$this->model->table_name.
+									"').parent().fadeIn();}else{".
+									"$('#index_".
+									$this->model->table_name.
+									"').parent().fadeOut();}")
 							:'').' &nbsp; '.
 						/* agregar boton cambio de vista (lista/cuadricula) */
 						($filename == 'index' ? 
