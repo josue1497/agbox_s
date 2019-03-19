@@ -97,7 +97,15 @@
 					}else if($filename=='form'){
 						$html_content = $this->view->auto_build_form($this->view->auto_build_form_content($record),$record);
 					}else if($filename=='items'){
-						$html_content = $this->view->generate_item_list($records);
+						$html_content =
+						'<div id="index_'.$this->model->table_name.
+								'" style="display:none;">'.
+								$this->view->auto_build_list(
+									$this->view->auto_build_list_content($records),$records).
+								'</div><div id="items_'.$this->model->table_name.
+									'" style="display:block;">'.
+						 		$this->view->generate_item_list($records).
+						 	'</div>';
 					}
 				}else{
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
@@ -133,7 +141,12 @@
 					'{{ title_module }}',
 					(isset($record['form_action'])?
 						$record['form_action']:'').' '.
-						$this->model->table_label.' '.
+						$this->model->table_label.' &nbsp; '.
+						/* agregar boton collapsable */
+						(($filename == 'index' || $filename == 'items')? 
+							Component::function_button('Toogle View','')
+							:'').' &nbsp; '.
+						/* agregar boton cambio de vista (lista/cuadricula) */
 						($filename == 'index' ? 
 							Component::function_button('Change View',(
 									"if($('#index_".
