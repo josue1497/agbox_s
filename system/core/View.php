@@ -26,8 +26,7 @@ class View
 		 * @param type $data 
 		 * @return type
 		 */
-	public function auto_build_form($form_content, $data)
-	{
+	public function auto_build_form($form_content, $data){
 		return "<form method='post' enctype='multipart/form-data' action='#' " . (isset($data['onsubmit']) ? " onsubmit='" . $data['onsubmit'] . "' " : "") .
 			" >" .
 			$form_content .
@@ -41,8 +40,7 @@ class View
 		 * @param type $data 
 		 * @return type
 		 */
-	public function auto_build_form_content($data)
-	{
+	public function auto_build_form_content($data){
 		$form_content = '';
 		foreach ($this->model->table_fields as $form_field) {
 			if ($form_field->get_visible_form() && $form_field->get_column_in_db())
@@ -78,12 +76,35 @@ class View
 		$i = 1;
 		foreach ($data as $row) {
 			 $item_list.=
-			 '<div class="col-md-3 p-3 m-2">'.
-		       	'<div class="card rounded" style="width: 18rem;">'.
-		         	'<img class="card-img-top img-fluid image" '.
-		         	'src="https://encrypted-tbn0.gstatic.com/'.
-		         	'images?q=tbn:ANd9GcRmkR1R9ywqPspiQFzZcV3v7XWuxre4FVpzuuHd_C9xDH9i9_luAw" '.
-		            'alt="Card image cap" id="group-icon"/>'.
+			 //'<div class="col-md-4 p-3 m-2">'.
+		       '<div class="col mr-2">'.
+		       	'<div class="card rounded" style="width:18rem;">'
+		         	;
+		    
+		     $url = 'https://encrypted-tbn0.gstatic.com/'.
+		         	'images?q=tbn:ANd9GcRmkR1R9ywqPspiQFzZcV3v7XWuxre4FVpzuuHd_C9xDH9i9_luAw';
+			$pic = '';
+
+				foreach ($this->model->table_fields as $list_field){
+
+		         	if( strpos(strtolower($list_field->get_name()), 'photo') !== false ){
+		         		$pic = '<img class="card-img-top img-fluid image" ';
+		         		
+		         		
+		         		if(isset($row[$list_field->get_name()]) && is_file($row[$list_field->get_name()])){
+		         			$url = $row[$list_field->get_name()];
+		         		}
+						
+						
+
+		         		$pic .= 'src="'.$url.'" '.
+		            'alt="Card image cap" id="group-icon"/>';
+		         	}
+				}
+
+				//var_dump($pic);
+
+		        $item_list.= $pic.
 		          	'<div class="card-body">'.
 			            '<h5 class="card-title text-center">';
 			

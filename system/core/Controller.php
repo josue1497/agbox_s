@@ -81,7 +81,15 @@
 				$html_side = CoreUtils::get_layout_template_content('side',$this->layout);	
 				if($auto_build){
 					if($filename == 'index'){
-						$html_content = $this->view->auto_build_list($this->view->auto_build_list_content($records),$records);
+						$html_content = 
+							'<div id="index_'.$this->model->table_name.
+								'" style="display:block;">'.
+								$this->view->auto_build_list(
+									$this->view->auto_build_list_content($records),$records).
+								'</div><div id="items_'.$this->model->table_name.
+									'" style="display:none;">'.
+						 		$this->view->generate_item_list($records).
+						 	'</div>';
 					}else if($filename=='form'){
 						$html_content = $this->view->auto_build_form($this->view->auto_build_form_content($record),$record);
 					}else if($filename=='items'){
@@ -119,8 +127,28 @@
 
 			$html_view = str_replace(
 					'{{ title_module }}',
-					(isset($record['form_action'])?$record['form_action']:'').' '.
-					$this->model->table_label,
+					(isset($record['form_action'])?
+						$record['form_action']:'').' '.
+						$this->model->table_label.' '.
+						($filename == 'index' ? 
+							Component::function_button('Change View',(
+									"if($('#index_".
+									$this->model->table_name.
+									"').is(':visible')){".
+									"$('#index_".
+									$this->model->table_name.
+									"').fadeOut();".
+									"$('#items_".
+									$this->model->table_name.
+									"').fadeIn();".
+									"}else{".
+									"$('#items_".
+									$this->model->table_name.
+									"').fadeOut();".
+									"$('#index_".
+									$this->model->table_name.
+									"').fadeIn();}"
+								)): '' ),
 					$html_view);
 
 
