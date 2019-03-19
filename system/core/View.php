@@ -55,7 +55,72 @@ class View
 			Component::save_button();
 	}
 
+	/**
+	 * metodo para generar una lista de items analoga a la lista grid
+	 * @param type $item_list 
+	 * @param type $data 
+	 * @return type
+	 */
+	public function auto_build_items($item_list,$data){
+		return
+			 ($this->model->crud_config['can_create'] ? 
+			 	Component::add_button($this->model->table_name) : '').
+			'<div class="row col-md-12 centered">'.$item_list.'</div>';
+	}
 
+	/**
+	 * metodo para construir la lista de items
+	 * @param type $data 
+	 * @return type
+	 */
+	public function auto_build_item_list($data){
+		$item_list='';
+		$i = 1;
+		foreach ($data as $row) {
+			 $item_list.=
+			 '<div class="col-md-3 p-3 m-2">'.
+		       	'<div class="card rounded" style="width: 18rem;">'.
+		         	'<img class="card-img-top img-fluid image" '.
+		         	'src="https://encrypted-tbn0.gstatic.com/'.
+		         	'images?q=tbn:ANd9GcRmkR1R9ywqPspiQFzZcV3v7XWuxre4FVpzuuHd_C9xDH9i9_luAw" '.
+		            'alt="Card image cap" id="group-icon"/>'.
+		          	'<div class="card-body">'.
+			            '<h5 class="card-title text-center">';
+			
+			foreach ($this->model->table_fields as $list_field) {
+				if($list_field->get_visible_grid() && $list_field->get_name_key() ){
+					$item_list.= $row[$list_field->get_name()].' ';
+				}
+			}
+			            
+			 $item_list.=
+			            '</h5><hr />'.
+			            '<div class="d-flex justify-content-center">';
+/*			              '<a href="#" class="btn btn-primary">Solicitar Afiliacion</a>'.*/
+			 $item_list.=
+			 	($this->model->crud_config['can_update'] ?
+					Component::edit_button($this->model->table_name, $row[$this->model->id_field]) : '') . 
+			 	($this->model->crud_config['can_delete'] ?
+					Component::delete_button($this->model->table_name, $row[$this->model->id_field]) : '');
+			 $item_list.=
+			            '</div>'.
+			          '</div>'.
+			       '</div>'.
+			     '</div>';
+			    $i++;
+		}
+		return $item_list;
+	}
+
+	/**
+	 * generar dinamicamente el contenido de lista como items
+	 * @param type|null $data 
+	 * @return type
+	 */
+	public function generate_item_list($data=null){
+		return $this->auto_build_items($this->auto_build_item_list($data),$data);
+	}
+	
 	/**
 		 * metodo para construir vista de listado automaticamente,
 		 * desde los datos del modelo
@@ -64,8 +129,7 @@ class View
 		 * @param type $data 
 		 * @return type
 		 */
-	public function auto_build_list($list_content, $data)
-	{
+	public function auto_build_list($list_content, $data){
 		return "<div class='row col-md-12 centered'>" .
 			"<table class='table table-striped custab'>" .
 			$list_content .
@@ -80,8 +144,7 @@ class View
 		 * @param type $data 
 		 * @return type
 		 */
-	public function auto_build_list_content($data)
-	{
+	public function auto_build_list_content($data){
 		return $this->auto_build_list_thead() .
 			$this->auto_build_list_tbody($data);
 	}
@@ -92,8 +155,7 @@ class View
 		 *
 		 * @return type
 		 */
-	public function auto_build_list_thead()
-	{
+	public function auto_build_list_thead(){
 		$list_thead = "<thead>" . ($this->model->crud_config['can_create'] ?
 				Component::add_button($this->model->table_name) : '') .
 			"<tr>" .
@@ -115,8 +177,7 @@ class View
 		 * @param type $data 
 		 * @return type
 		 */
-	public function auto_build_list_tbody($data)
-	{
+	public function auto_build_list_tbody($data){
 		$list_tbody = "<tbody>";
 		$i = 1;
 		foreach ($data as $row) {

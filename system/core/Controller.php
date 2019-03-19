@@ -82,8 +82,10 @@
 				if($auto_build){
 					if($filename == 'index'){
 						$html_content = $this->view->auto_build_list($this->view->auto_build_list_content($records),$records);
-					}else if($filename='form'){
+					}else if($filename=='form'){
 						$html_content = $this->view->auto_build_form($this->view->auto_build_form_content($record),$record);
+					}else if($filename=='items'){
+						$html_content = $this->view->generate_item_list($records);
 					}
 				}else{
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
@@ -257,10 +259,16 @@
 		}
 		
 		function action_index($obj,$auto_build=false){
+			$this->action_list($obj,$auto_build,'index');
+		}
+		function action_items($obj,$auto_build=false){
+			$this->action_list($obj,$auto_build,'items');
+		}
+		function action_list($obj,$auto_build=false,$filename){
 			$this->init($obj);
 			$d['records'] = $this->model->showAllRecords();
 			$this->set($d);
-			$this->render("index",$auto_build);
+			$this->render($filename,$auto_build);
 		}
 		function action_create($obj,$post=null,$auto_build=false){
 			$this->init($obj);
