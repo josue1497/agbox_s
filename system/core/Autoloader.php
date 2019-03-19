@@ -23,7 +23,7 @@ class Autoloader {
 			'application/models/',
 			'application/controllers/',
 			'application/views/',
-			'application/views/Layouts/Lan/'
+			'application/views/Layouts/lan/'
 
 		);
 	}
@@ -46,6 +46,7 @@ class Autoloader {
 			$find=false;
 			foreach(Autoloader::app_dirs()  as $dir){
 				$class_file = str_replace('\\', DIRECTORY_SEPARATOR, $dir.$class_name).'.php';
+				//var_dump($_SERVER["SCRIPT_FILENAME"]);
 				if(is_file($class_file)){
 					$find=true;
 					require_once ($class_file);
