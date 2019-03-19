@@ -10,6 +10,7 @@ class indexController extends Controller{
 	 */
     function index(){
 		$this->model=new User();
+		$this->view = new View($this->model);
 		$this->model->table_label='Dashboard';
 		$this->render("index");
     }
@@ -21,6 +22,7 @@ class indexController extends Controller{
 	 */
 	function login(){
 		$this->model=new User();
+		$this->view = new View($this->model);
 		if(isset($_POST['login_user'])){
 			$this->model=new User();
 			$this->record = array();
