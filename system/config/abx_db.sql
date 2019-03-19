@@ -49,8 +49,8 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 --
 
 CREATE TABLE `groups` (
-  `id` int(11) NOT NULL,
-  `domain_id` int(11) DEFAULT NULL,
+  `id` int(11) ,
+  `domain_id` int(11) ,
   `parent_group_id` int(11) DEFAULT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL
@@ -378,7 +378,7 @@ ALTER TABLE `affiliate`
 -- AUTO_INCREMENT de la tabla `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `group_user_role`
