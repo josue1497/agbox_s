@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2019 a las 04:49:58
+-- Tiempo de generación: 19-03-2019 a las 03:27:12
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -49,22 +49,23 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 --
 
 CREATE TABLE `groups` (
-  `id` int(11) ,
-  `domain_id` int(11) ,
+  `id` int(11) NOT NULL,
+  `domain_id` int(11) DEFAULT NULL,
   `parent_group_id` int(11) DEFAULT NULL,
   `name` varchar(60) DEFAULT NULL,
-  `description` varchar(256) DEFAULT NULL
+  `description` varchar(256) DEFAULT NULL,
+  `group_photo` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
 
 --
 -- Volcado de datos para la tabla `groups`
 --
 
-INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`) VALUES
-(1, NULL, NULL, 'a', 'a'),
-(2, NULL, NULL, 'Grupo 1', 'W'),
-(3, NULL, NULL, 'Hola', 'd'),
-(4, NULL, 1, 'Hola2', 'A');
+INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`, `group_photo`) VALUES
+(1, NULL, NULL, 'assssddsssd', 'as', '1552883474_IMG-20171224-00430.jpg'),
+(2, NULL, NULL, 'Grupo 1', 'Ws', '1552881460_IMG-20171224-00455.jpg'),
+(3, NULL, NULL, 'Hola', 'd', NULL),
+(4, NULL, 1, 'Hola2', 'A', '1a.PNG');
 
 -- --------------------------------------------------------
 
@@ -222,7 +223,8 @@ CREATE TABLE `source` (
 --
 
 INSERT INTO `source` (`id`, `title`, `description`) VALUES
-(1, 'WhatsApp', 'WS');
+(1, 'WhatsApp', 'WS'),
+(2, 'Holasssss', 'Hola2');
 
 -- --------------------------------------------------------
 
@@ -250,6 +252,7 @@ CREATE TABLE `user` (
   `mail` varchar(100) DEFAULT NULL,
   `username` varchar(60) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
+  `profile_photo` varchar(256) DEFAULT NULL,
   `user_level_id` int(11) DEFAULT NULL,
   `is_visitor` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -258,9 +261,9 @@ CREATE TABLE `user` (
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username`, `password`, `user_level_id`, `is_visitor`) VALUES
-(1, 1, 'Administrador', 'Intelix', 'jmartinezm@intelix.biz', 'admin', 'admin', 1, 'N'),
-(2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'josu12345', 1, 'No');
+INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username`, `password`, `profile_photo`, `user_level_id`, `is_visitor`) VALUES
+(1, 1, 'Administrador', 'Intelix', 'jmartinezm@intelix.biz', 'admin', 'admin', '1552883860_734647_10205465885197745_2147406997832188463_n.jpg', 1, 'No'),
+(2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'josu12345', NULL, 1, 'No');
 
 -- --------------------------------------------------------
 
@@ -378,7 +381,7 @@ ALTER TABLE `affiliate`
 -- AUTO_INCREMENT de la tabla `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `group_user_role`
@@ -426,7 +429,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT de la tabla `source`
 --
 ALTER TABLE `source`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `status`
