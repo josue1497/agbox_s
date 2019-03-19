@@ -280,7 +280,10 @@ class Model
 		}catch(Exception $e){
 			echo 'Exception: '.$e->getMessage();
 		}
-
+		if($result){
+			echo "<script>$('.alert').alert();</script>";
+			
+		}
 		return $result;
 	}
 

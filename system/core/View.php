@@ -49,7 +49,16 @@ class View{
 		return "<form method='post' enctype='multipart/form-data' action='#' " . (isset($data['onsubmit']) ? " onsubmit='" . $data['onsubmit'] . "' " : "") .
 			" >" .
 			$form_content .
-			"</form>";
+			"</form>".self::set_alert_bootstrap();
+	}
+
+	public static function set_alert_bootstrap(){
+		return '<div class=alert alert-warning alert-dismissible fade show" role="alert">
+		<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>';
 	}
 
 	/**

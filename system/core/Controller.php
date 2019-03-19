@@ -116,7 +116,7 @@
 						if(isset($this->view)){
 							$html_content = str_replace(
 								'{{ auto_build_form_content }}',
-								$this->view->auto_build_form_content($record),
+								$this->view->auto_build_form_content(isset($record)?$record:''),
 								$html_content);
 						}
 					}
