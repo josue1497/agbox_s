@@ -76,7 +76,12 @@ class Session {
 		Session::getNdelete('log_out');
 		Session::set('logged_in',true);
 		Session::set('user_id',$user_record['id']);
-		Session::set('user_email',$user_record['username']);
+        Session::set('user_email',$user_record['mail']);        
+        Session::set('username',$user_record['username']);
+        Session::set('user_names',$user_record['names']);
+        Session::set('user_lastnames',$user_record['lastnames']);
+        Session::set('username',$user_record['username']);
+        Session::set('user_profile_photo',$user_record['profile_photo']);
         Session::set('role_id',$user_record['user_level_id']);
         Session::set('lan',$user_record['lan']);
     }

@@ -1,8 +1,6 @@
 <!-- CSS -->
 <link href="{{ base_url }}application/views/Layouts/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
 
-<!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
 <!-- Font Awesome CDN -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
 <!-- END CDN -->
@@ -10,6 +8,7 @@
 
 <!-- Custom styles for this template-->
 <link href="{{ base_url }}application/views/Layouts/styles/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/bootstrap.css"/>
 <link href="{{ base_url }}application/views/Layouts/styles/style.css" rel="stylesheet">
 <!-- Font Awesome -->
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"> -->

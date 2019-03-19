@@ -279,9 +279,25 @@ class Model
 
 		foreach ($this->table_fields as $table_field) {
 			$name = $table_field->get_name();
+
+			if($table_field->get_type()==Column::$COLUMN_TYPE_FILE || $table_field->get_type()==Column::$COLUMN_TYPE_PHOTO){
+				// var_dump($_FILES[$name]);die;
+				if(!empty($_FILES[$name]["name"])){
+					if(!empty($_FILES[$name]["type"])){
+						$fileName = time().'_'.$_FILES[$name]['name'];
+						$sourcePath = $_FILES[$name]['tmp_name'];
+						$targetPath = IMG_DIR.$fileName;
+							if(move_uploaded_file($sourcePath,$targetPath)){
+								$params[$name] = $fileName;
+							}
+						
+					}
+			}
+		}
 			if (!empty($params[$name]) && strlen($params[$name]) > 0 && $table_field->get_column_in_db() == true) {
 				$sqlUpdate .= ($first == false ? " , " : "") . $name . " = :" . $name;
 				$db_params[$name] = $params[$name];
+				
 				$first = false;
 			}
 		}
