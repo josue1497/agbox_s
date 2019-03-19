@@ -246,7 +246,7 @@ class Model
 					if(!empty($_FILES[$name]["type"])){
 						$fileName = time().'_'.$_FILES[$name]['name'];
 						$sourcePath = $_FILES[$name]['tmp_name'];
-						$targetPath = IMG_DIR.$fileName;
+						$targetPath = UPLOADS_DIR.$fileName;
 							if(move_uploaded_file($sourcePath,$targetPath)){
 								$params[$name] = $fileName;
 							}
@@ -304,7 +304,7 @@ class Model
 					if(!empty($_FILES[$name]["type"])){
 						$fileName = time().'_'.$_FILES[$name]['name'];
 						$sourcePath = $_FILES[$name]['tmp_name'];
-						$targetPath = IMG_DIR.$fileName;
+						$targetPath = UPLOADS_DIR.$fileName;
 							if(move_uploaded_file($sourcePath,$targetPath)){
 								$params[$name] = $fileName;
 							}

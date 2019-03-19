@@ -81,8 +81,7 @@ class View
 		       	'<div class="card rounded" style="width:18rem;">'
 		         	;
 		    
-		     $url = 'https://encrypted-tbn0.gstatic.com/'.
-		         	'images?q=tbn:ANd9GcRmkR1R9ywqPspiQFzZcV3v7XWuxre4FVpzuuHd_C9xDH9i9_luAw';
+		     $url = 'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
 			$pic = '';
 
 				foreach ($this->model->table_fields as $list_field){
@@ -95,7 +94,10 @@ class View
 		         			$url = $row[$list_field->get_name()];
 		         		}
 						
-						
+								 if($list_field->get_type()==Column::$COLUMN_TYPE_PHOTO && 
+								 $row[$list_field->get_name()]!=null){
+									 $url=Component::img_to_base64(UPLOADS_DIR.$row[$list_field->get_name()]);
+								 }
 
 		         		$pic .= 'src="'.$url.'" '.
 		            'alt="Card image cap" id="group-icon"/>';

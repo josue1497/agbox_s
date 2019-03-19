@@ -57,7 +57,7 @@
 			'<div class="form-group">'.
 			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
 			'<div class="d-flex flex-column profile-img p-2 my-2">
-				 <img id="'.$name.'_photo" class=" img-fluid" src="'.(!empty($value)?(''.Component::img_to_base64(IMG_DIR.$value).'"'):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"').
+				 <img id="'.$name.'_photo" class=" img-fluid" src="'.(!empty($value)?(''.Component::img_to_base64(UPLOADS_DIR.$value).'"'):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"').
                      'alt="" />'.
 			' <div class="file btn btn-lg btn-info">'.
 			' Change Photo <input type="file" '.
