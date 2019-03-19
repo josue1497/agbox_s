@@ -19,3 +19,4 @@
 <!-- Bootstrap-Iconpicker -->
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/vendor/icon-picker/css/bootstrap-iconpicker.min.css"/>
 <!---->
+<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
