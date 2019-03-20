@@ -48,6 +48,7 @@
 			return CoreUtils::get_file_content(VIEWS_DIR . 
 					CoreUtils::get_controller_name($controller) . 
 					'/' . $file_url . '.php');
+
 		}
 		
 		/**

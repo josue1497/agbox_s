@@ -5,11 +5,11 @@
             function affiliateGroup(form_data) {
                 var url = "{{ api_url }}";
                 $.ajax({
-                    type: "POST",
+                    type:"POST",
                     url: url,
                     data: form_data,
-                    success: function(_data) {
-                        alert('exitoso');
+                    success: function(r) {
+                        console.log(r);
                     }
                 });
                 return false;
