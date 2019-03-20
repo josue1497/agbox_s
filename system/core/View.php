@@ -49,7 +49,7 @@ class View{
 		return "<form method='post' enctype='multipart/form-data' action='#' " . (isset($data['onsubmit']) ? " onsubmit='" . $data['onsubmit'] . "' " : "") .
 			" >" .
 			$form_content .
-			"</form>".self::set_alert_bootstrap();
+			"</form>";
 	}
 
 	public static function set_alert_bootstrap(){
@@ -346,61 +346,36 @@ class View{
 		return $res;
 	}
 
-	/**
-		 *  metodo para construir elementos de formulario en la vista,
-		 * sin un dato especifico en ella
-		 * desde las especificaciones del modelo 
-		 *
-		 * @param type $form_field 
-		 * @param type $data 
-		 * @return type
-		 */
-	public function build_element_without_data($form_field)
-	{
-		$res = '';
-		switch ($form_field->get_type()) {
-			case Column::$COLUMN_TYPE_TEXTAREA:
-				$res = Component::text_area(
-					$form_field->get_name(),
-					$form_field->get_label(),
-					$form_field->get_field_help(),
-					$form_field->get_field_html()
-				);
-				break;
+	public function buid_items_groups(){
+		$html='';
 
-			case Column::$COLUMN_TYPE_SELECT:
-				$res = Component::select_field(
-					$form_field->get_name(),
-					$form_field->get_name(),
-					$form_field->get_label(),
-					($form_field->get_foreing_key() ? $form_field->get_fk_entity()->get_select_data() : $form_field->get_values()),
-					$form_field->get_field_html()
-				);
-				break;
+		$data = Model::get_sql_data("select * from groups G where id not in (select group_id from affiliate where user_id=?)",array('user_id'=>Session::get('user_id')));
 
-			case Column::$COLUMN_TYPE_ICONPICKER:
-				$res = Component::icon_picker(
-					$form_field->get_name(),
-					$form_field->get_label()
-				);
-				break;
-			case Column::$COLUMN_TYPE_TEXT:
-			case Column::$COLUMN_TYPE_DATE:
-			case Column::$COLUMN_TYPE_EMAIL:
-			case Column::$COLUMN_TYPE_HIDDEN:
-			case Column::$COLUMN_TYPE_NUMBER:
-			case Column::$COLUMN_TYPE_PASS:
-			default:
-				$res = Component::base_field(
-					$form_field->get_type(),
-					$form_field->get_name(),
-					$form_field->get_label(),
-					$form_field->get_field_help(),
-					$form_field->get_field_html()
-				);
-				break;
-		}
-		return $res;
+				foreach($data as $row){
+							$click="affiliateGroup($('#form_".$row['id']."').serialize())";
+							$img=$row['group_photo']!=null?Component::img_to_base64(UPLOADS_DIR.$row['group_photo']):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
+							$html.='<div class="col m-2">
+							<form method="POST" action="#" id="form_'.$row['id'].'">
+							<input type="hidden" id="group_id" name="group_id" value="'.$row['id'].'"/>
+							<input type="hidden" id="user_id" name="user_id" value="'.Session::get('user_id').'"/>
+							<div class="card rounded" style="width: 18rem;">
+									<img class="card-img-top img-fluid image"
+											src="'.$img.'"
+											alt="Card image cap" id="group-icon" />
+									<div class="card-body">
+											<h5 class="card-title text-center">'.$row['name'].'</h5>
+											<hr />
+											<div class="d-flex justify-content-center">
+													<button class="btn btn-primary" onclick="'.$click.'">Solicitar Afiliacion</button>
+											</div>
+									</div>
+							</div>
+							</form>
+						</div>';
+
+						}
+
+				return $html;
 	}
 }
  

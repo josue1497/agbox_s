@@ -75,9 +75,13 @@
 		}
 
 		public static function img_to_base64($path){
-			$type = pathinfo($path, PATHINFO_EXTENSION);
-			$data = file_get_contents($path);
-			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+			if(is_file($path) && file_exists($path)){
+				$type = pathinfo($path, PATHINFO_EXTENSION);
+				$data = file_get_contents($path);
+				$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+			}else{
+				$base64=""	;
+			}	
 			return $base64;
 		}
 		

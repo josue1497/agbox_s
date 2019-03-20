@@ -341,5 +341,18 @@ class Model
 		}
 		return $model->create($data);
 	}
+
+	public static function get_sql_data($sql, array $params){
+		$req = Database::getBdd()->prepare($sql);
+
+		$i=1;
+		foreach($params as $param){
+			$req->bindParam($i,$param);
+		}
+
+		$req->execute();
+		return $req->fetchAll(PDO::FETCH_ASSOC);
+
+	}
 }
  

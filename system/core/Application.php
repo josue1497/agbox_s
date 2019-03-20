@@ -10,6 +10,7 @@ define('IMG_DIR', LAYOUT_DIR . "imgs/");
 define('UPLOADS_DIR', LAYOUT_DIR . "imgs/uploads/");
 define('VENDOR_DIR', LAYOUT_DIR . "vendor/");
 define('MODELS_DIR', ROOT . "application/models/");
+define('API_DIR', ROOT . "application/api/");
 
 /* constantes de la db */
 define('DB_HOST','localhost');
