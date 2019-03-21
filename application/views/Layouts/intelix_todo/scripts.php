@@ -20,3 +20,5 @@
 <script src="{{ base_url }}application/views/Layouts/scripts/functions.js"></script>
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
