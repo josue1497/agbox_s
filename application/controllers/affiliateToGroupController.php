@@ -21,5 +21,11 @@ class affiliateToGroupController extends Controller
         $this->render("affiliate_group");
 
     }
+
+    function get_data(){
+        $data = Model::get_sql_data("select * from groups G where id not in (select group_id from affiliate where user_id=?)",array('user_id'=>Session::get('user_id')));
+        header('Content-Type: application/json');
+        echo json_encode($data,JSON_PRETTY_PRINT);
+    }
 }
  
