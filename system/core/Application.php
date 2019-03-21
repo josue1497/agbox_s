@@ -14,7 +14,7 @@ define('MODELS_DIR', ROOT . "application/models/");
 /* constantes de la db */
 define('DB_HOST','localhost');
 define('DB_NAME','abx_db');
-define('DB_USER','root');
+define('DB_USER','abxuser');
 define('DB_PASS','12345678');
 
 
