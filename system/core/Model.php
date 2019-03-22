@@ -347,7 +347,7 @@ class Model
 
 		$i=1;
 		foreach($params as $param){
-			$req->bindParam($i,$param);
+			$req->bindParam($i++,$param);
 		}
 
 		$req->execute();

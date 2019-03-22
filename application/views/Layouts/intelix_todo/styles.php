@@ -21,6 +21,6 @@
 <!---->
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

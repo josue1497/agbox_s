@@ -109,8 +109,7 @@
 					}
 				}else if($filename=='affiliate_group'){
 					$html_content = CoreUtils::get_view_file_content('affiliate_group',$this);
-					$html_content = str_replace('{{ replace_groups }}',$this->view->buid_items_groups(),$html_content);
-					$html_content = str_replace('{{ api_url }}',API_DIR.'affiliateUserGroup.php',$html_content);
+					$html_content = str_replace('{{ URI_DATA }}',SERVER_DIR."affiliateToGroup".'/get_data',$html_content);
 					// var_dump(API_DIR);die;
 				}else{
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
