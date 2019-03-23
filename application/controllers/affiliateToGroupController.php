@@ -29,14 +29,14 @@ class affiliateToGroupController extends Controller
         echo json_encode($data,JSON_PRETTY_PRINT);
     }
 
-    function insert_data(){
-       
+    function insert_data(){  
+        $this->model = new Affiliate();
+       echo $this->model->create($_POST); 
     }
 
     function get_img(){
-        var_dump($_GET);
-        var_dump($_POST);
-       var_dump(Component::img_to_base64("hola"));
+      $photo= Component::img_to_base64(UPLOADS_DIR.$_POST['group_photo']);
+      echo $photo;
     }
 }
  
