@@ -20,7 +20,3 @@
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/vendor/icon-picker/css/bootstrap-iconpicker.min.css"/>
 <!---->
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
-
-<script src="https://unpkg.com/vue@2.6.10/dist/vue.js"></script>
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>

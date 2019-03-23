@@ -331,8 +331,7 @@ class Model
 	/**
 		* metodo generico deberia ser estatic y esta en model
 		*/
-	public static function save_record($model, $data)
-	{
+	public static function save_record($model, $data){
 		if (isset($data[$model->id_field])) {
 			$result = $model->get_by_id($data[$model->id_field]);
 			if ($result) {
@@ -341,7 +340,9 @@ class Model
 		}
 		return $model->create($data);
 	}
-
+	/**
+	*
+	*/
 	public static function get_sql_data($sql, array $params){
 		$req = Database::getBdd()->prepare($sql);
 

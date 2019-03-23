@@ -8,96 +8,32 @@
         var $layout = TEMPLATE_NAME;
 		var $model;
 		var $view;
+		var $view_processor;
 		
         function set($d){
             $this->vars = array_merge($this->vars, $d);
         }
-
-		function build_view($html_topbar,$html_side,$html_content){
-			$html_view = CoreUtils::get_layout_template_content('',$this->layout);
-
-			$html_view =  str_replace(
-					'{{ '.$this->layout.'_styles }}',
-					CoreUtils::get_layout_template_content('styles',$this->layout),
-					$html_view);
-			
-			/* establecer nombre de usuarioen topbar */
-			$user_name='';
-			if(Session::get('user_names')){
-				$user_name = Session::get('user_names');
-				$html_topbar = str_replace('{{ user_name }}',$user_name,$html_topbar);
-			}
-			
-
-			if(Session::get('user_id')){
-				$user_id = Session::get('user_id');
-				$html_topbar = str_replace('{{ user_id }}',$user_id,$html_topbar);
-			}
-
-			
-
-			$html_view =  str_replace(
-					'{{ '.$this->layout.'_topbar }}',
-					$html_topbar,
-					$html_view);
-
-			$html_view =  str_replace(
-					'{{ '.$this->layout.'_side }}',
-					$html_side,
-					$html_view);
-
-			$html_view =  str_replace(
-				'{{ '.$this->layout.'_content }}',
-				$html_content,
-				$html_view);
-			
-			$html_view =  str_replace(
-					'{{ '.$this->layout.'_scripts }}',
-					CoreUtils::get_layout_template_content('scripts',$this->layout).
-					( !empty($this->view->get_script_js()) ? 
-						('<script>'.$this->view->get_script_js().'</script>'):'')
-					,
-					$html_view);
-
-			
-			$html_view =  str_replace(
-					'{{ '.$this->layout.'_footer }}',
-					CoreUtils::get_layout_template_content('footer',$this->layout),
-					$html_view);
-
-			return $html_view;
-		}
 		
-        function render($filename,$auto_build=false){
-            extract($this->vars);
-			$html_topbar ='';
-			$html_side = '';
-			$html_content='';
-			if(Session::get('log_out')){
-				$html_content=CoreUtils::get_view_file_content('login',$this);
-			}else{
-				$tmp = CoreUtils::get_user_permissions_by_controller($this,$filename);
-				if(isset($tmp) && isset($tmp['id'])){
-					$this->model->crud_config = $tmp;
-				}
-
-				$html_topbar = CoreUtils::get_layout_template_content('topbar',$this->layout);
-				$html_side = CoreUtils::get_layout_template_content('side',$this->layout);	
-				if($auto_build){
-					if($filename == 'index'){
-						$html_content = 
-							'<div id="index_'.$this->model->table_name.
-								'" style="display:block;">'.
-								$this->view->auto_build_list(
-									$this->view->auto_build_list_content($records),$records).
-								'</div><div id="items_'.$this->model->table_name.
-									'" style="display:none;">'.
-						 		$this->view->generate_item_list($records).
-						 	'</div>';
-					}else if($filename=='form'){
-						$html_content = $this->view->auto_build_form($this->view->auto_build_form_content($record),$record);
-					}else if($filename=='items'){
-						$html_content =
+		function auto_build_view($filename,$records = null,$record = null){
+			/* si el archivo/accion a cargar es index(lista)*/
+				if($filename == '' || $filename == 'index'){
+					return 
+						'<div id="index_'.$this->model->table_name.
+							'" style="display:block;">'.
+							$this->view->auto_build_list(
+								$this->view->auto_build_list_content($records),$records).
+							'</div><div id="items_'.$this->model->table_name.
+								'" style="display:none;">'.
+							$this->view->generate_item_list($records).
+						'</div>';
+				}else 
+				/* si el archivo/accion a cargar es form(form create/edit)*/
+				if($filename=='form'){
+					return $this->view->auto_build_form($this->view->auto_build_form_content($record),$record);
+				}else 
+				/* si el archivo/accion a cargar es items(cuadricula) */
+				if($filename=='items'){
+					return
 						'<div id="index_'.$this->model->table_name.
 								'" style="display:none;">'.
 								$this->view->auto_build_list(
@@ -106,79 +42,85 @@
 									'" style="display:block;">'.
 						 		$this->view->generate_item_list($records).
 						 	'</div>';
-					}
-				}else if($filename=='affiliate_group'){
-					$html_content = CoreUtils::get_view_file_content('affiliate_group',$this);
-				}else{
+				}
+			/* si el archivo/accion es distinto a los definidos */
+			return '';
+		}
+		
+		function render($filename,$auto_build=false){
+			extract($this->vars);
+			
+			/* sanitize data */
+			$html_content = '';
+			
+			$record = array();
+			if(isset($this->vars['record']))
+				$record = $this->vars['record'];
+			
+			$records = array();
+			if(isset($this->vars['records']))
+				$records = $this->vars['records'];
+			
+			
+			if(Session::get('log_out')){
+				/* si no esta logueado o si cierra sesion se carga el contenido de login sin topbar ni sidebar */
+				$this->view_processor->add_content(CoreUtils::get_view_file_content('login',$this));
+			}else{
+				$tmp = CoreUtils::get_user_permissions_by_controller($this,$filename);
+				if(isset($tmp) && isset($tmp['id'])){
+					$this->model->crud_config = $tmp;
+				}
+
+				/*si esta logueado se carga el sidebar y el topbar */
+				$this->view_processor->set_topbar(CoreUtils::get_layout_template_content('topbar',$this->layout));
+				$this->view_processor->set_sidebar(CoreUtils::get_layout_template_content('side',$this->layout));
+				
+				/* si se establece que la vista se construira automaticamente */
+				if($auto_build){
+					$this->view_processor->add_content(
+						CoreUtils::generate_card(
+							$this->model,
+							$this->auto_build_view($filename,$records,$record),
+							$filename,
+							$record));
+				}
+				/* sino, la vista se construye a partir de un archiv de vista existente */
+				else{
+					/* intenta cargar el archivo de vista predefinido */
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
-					if($html_content==''){
-						$html_content = CoreUtils::get_view_file_content('index',new indexController());
+					if($html_content == ''){
+						/* si no lo consigue, carga el contenido del index por defecto*/
+						$this->view_processor->add_content(
+							CoreUtils::get_view_file_content('index',new indexController()));
 					}
+					/* si la consigie arma la vista */
 					else{
 						if(isset($this->view)){
-							$html_content = str_replace(
-								'{{ auto_build_form_content }}',
-								$this->view->auto_build_form_content(isset($record)?$record:''),
-								$html_content);
+								// var_dump(VIEWS_DIR. strtolower(CoreUtils::get_controller_name($this)).'/'.$filename.'.php');die;
+								// include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name($this)).'/'.$filename.'.php');
+								$this->view_processor->add_content(generate_content($this,$filename,$record));
 						}
+						
 					}
 				}
 			}
 			
-			/* las vistas del controlador index se genraran sin card */
-			if(get_class($this)!='indexController')
-				$html_content = CoreUtils::put_in_card($html_content,"{{ title_module }}");
+			/* styles, scripts, layout y footer son genericos para todas las vistas */
+			$this->view_processor->set_layout(CoreUtils::get_layout_template_content('',$this->layout));
+			$this->view_processor->set_styles(CoreUtils::get_layout_template_content('styles',$this->layout));
+			$this->view_processor->set_scripts(CoreUtils::get_layout_template_content('scripts',$this->layout).
+					( isset($this->view) ? ('<script>'.$this->view->get_script_js().'</script>'):''));
+			$this->view_processor->set_footer(CoreUtils::get_layout_template_content('footer',$this->layout));
 			
-			$html_view = $this->build_view(
-					$html_topbar,
-					$html_side,
-					$html_content);
-			
+			/* render */
+			echo $this->set_general_data($this->view_processor->build_view(),$filename);
+        }
+		
+		public function set_general_data($html_view,$filename){
 			$html_view = str_replace(
 					'{{ name_module }}',
 					$this->model->table_name.'_module',
 					$html_view);
-
-			$html_view = str_replace(
-					'{{ title_module }}',
-					(isset($record['form_action'])?
-						$record['form_action']:'').' '.
-						$this->model->table_label.' &nbsp; '.
-						/* agregar boton collapsable */
-						(($filename == 'index' || $filename == 'items')? 
-							Component::function_button('Toogle View',
-								"if(!$('#index_".
-									$this->model->table_name.
-									"').parent().is(':visible')){".
-									"$('#index_".
-									$this->model->table_name.
-									"').parent().fadeIn();}else{".
-									"$('#index_".
-									$this->model->table_name.
-									"').parent().fadeOut();}")
-							:'').' &nbsp; '.
-						/* agregar boton cambio de vista (lista/cuadricula) */
-						($filename == 'index' ? 
-							Component::function_button('Change View',(
-									"if($('#index_".
-									$this->model->table_name.
-									"').is(':visible')){".
-									"$('#index_".
-									$this->model->table_name.
-									"').fadeOut();".
-									"$('#items_".
-									$this->model->table_name.
-									"').fadeIn();".
-									"}else{".
-									"$('#items_".
-									$this->model->table_name.
-									"').fadeOut();".
-									"$('#index_".
-									$this->model->table_name.
-									"').fadeIn();}"
-								)): '' ),
-					$html_view);
-
 
 			$html_view = str_replace(
 					'{{ app_title }}',
@@ -211,17 +153,16 @@
 							$this->record['app_message'].
 						'</div>':''),
 					$html_view);
+					
 			 $html_view = 
 			 	CoreUtils::set_buttons_permissions($this,$filename,$html_view);
 			
 			$html_view = Translator::translate(
 				CoreUtils::get_controller_name($this) . '/' . $filename,
 				$html_view);
-
-			/* render */
-			echo $html_view;
-        }
-		 
+				
+				return $html_view;
+		}
 		
 		/**
 		 * metodo para generar automaticamente los menu hijos
@@ -308,12 +249,18 @@
 		/**
 		* acciones genericas de controlador
 		*/
+		/**
+		* acciones prepare
+		*/
 		public function init($obj){
 			CoreUtils::validate_user_session();
 			$this->model = $obj;
 			$this->view = new View($this->model);
+			$this->view_processor = new ViewProcessor($this->view);
 		}
-		
+		/**
+		* acciones doit crud
+		*/
 		function action_index($obj,$auto_build=false){
 			$this->action_list($obj,$auto_build,'index');
 		}
