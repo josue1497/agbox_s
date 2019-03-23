@@ -11,11 +11,14 @@ define('UPLOADS_DIR', LAYOUT_DIR . "imgs/uploads/");
 define('VENDOR_DIR', LAYOUT_DIR . "vendor/");
 define('MODELS_DIR', ROOT . "application/models/");
 
+define('SERVER_PORT',':8080');
+define('SERVER_DIR', "http://".$_SERVER['SERVER_NAME'].SERVER_PORT."/".APP_FOLDER."/");
+
 /* constantes de la db */
 define('DB_HOST','localhost');
 define('DB_NAME','abx_db');
 define('DB_USER','root');
-define('DB_PASS','12345678');
+define('DB_PASS','usbw');
 
 
 require_once(ROOT.'system/core/Autoloader.php');

@@ -37,6 +37,10 @@
 		public static function get_controller_name($controller_class){
 			return ucfirst(str_replace('Controller', '', get_class($controller_class)));
 		}
+		
+		public static function get_view_file_url($file_url,$controller){
+			return VIEWS_DIR . self::get_controller_name($controller) . '/' . $file_url . '.php';
+		}
 		/**
 		 * obtiene el contenido del archivo de una vista
 		 *
@@ -45,9 +49,7 @@
 		 * @return string contenido de la vista
 		 */
 		public static function get_view_file_content($file_url,$controller){
-			return CoreUtils::get_file_content(VIEWS_DIR . 
-					CoreUtils::get_controller_name($controller) . 
-					'/' . $file_url . '.php');
+			return self::get_file_content(self::get_view_file_url($file_url,$controller));
 		}
 		
 		/**
@@ -113,6 +115,51 @@
 						</div>
 					</div>';
         }
+		
+		/* metodo para generar card */
+		public static function generate_card($model,$content,$filename,$record = null){
+			$card = CoreUtils::put_in_card($content,"{{ title_module }}");
+			$card = str_replace(
+					'{{ title_module }}',
+					(isset($record['form_action'])?
+						$record['form_action']:'').' '.
+						$model->table_label.' &nbsp; '.
+						/* agregar boton collapsable */
+						(($filename == 'index' || $filename == 'items')? 
+							Component::function_button('Toogle View',
+								"if(!$('#index_".
+									$model->table_name.
+									"').parent().is(':visible')){".
+									"$('#index_".
+									$model->table_name.
+									"').parent().fadeIn();}else{".
+									"$('#index_".
+									$model->table_name.
+									"').parent().fadeOut();}")
+							:'').' &nbsp; '.
+						/* agregar boton cambio de vista (lista/cuadricula) */
+						(($filename == 'index' || $filename == 'items')? 
+							Component::function_button('Change View',(
+									"if($('#index_".
+									$model->table_name.
+									"').is(':visible')){".
+									"$('#index_".
+									$model->table_name.
+									"').fadeOut();".
+									"$('#items_".
+									$model->table_name.
+									"').fadeIn();".
+									"}else{".
+									"$('#items_".
+									$model->table_name.
+									"').fadeOut();".
+									"$('#index_".
+									$model->table_name.
+									"').fadeIn();}"
+								)): '' ),
+					$card);
+				return $card;
+		}
 
 		/**
 		 * obtiene los permisos del usuario logeado en el menu indicado
