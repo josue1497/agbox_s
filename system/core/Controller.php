@@ -108,10 +108,7 @@
 						 	'</div>';
 					}
 				}else if($filename=='affiliate_group'){
-					$html_content = CoreUtils::get_view_file_content('affiliate_group',$this);//http://localhost/abx_app/affiliateToGroup/insert_data
-					$html_content = str_replace('{{ URI_DATA }}',SERVER_DIR."affiliateToGroup".'/get_data',$html_content);
-					$html_content = str_replace('{{ URI_INSERT }}',SERVER_DIR."affiliateToGroup".'/insert_data',$html_content);
-					// var_dump(API_DIR);die;
+					$html_content = CoreUtils::get_view_file_content('affiliate_group',$this);
 				}else{
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
 					if($html_content==''){
