@@ -87,17 +87,18 @@
 				/* sino, la vista se construye a partir de un archiv de vista existente */
 				else{
 					/* intenta cargar el archivo de vista predefinido */
+					
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
-					if($html_content == ''){
+					if($html_content == '' || $filename == 'index'){
 						/* si no lo consigue, carga el contenido del index por defecto*/
 						$this->view_processor->add_content(
 							CoreUtils::get_view_file_content('index',new indexController()));
 					}
-					/* si la consigie arma la vista */
+					/* si la consigue arma la vista */
 					else{
 						if(isset($this->view)){
 								// var_dump(VIEWS_DIR. strtolower(CoreUtils::get_controller_name($this)).'/'.$filename.'.php');die;
-								// include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name($this)).'/'.$filename.'.php');
+								include_once(VIEWS_DIR.CoreUtils::get_controller_name($this).DIRECTORY_SEPARATOR.$filename.'.php');
 								$this->view_processor->add_content(generate_content($this,$filename,$record));
 						}
 						

@@ -49,6 +49,7 @@
 		 * @return string contenido de la vista
 		 */
 		public static function get_view_file_content($file_url,$controller){
+			// var_dump(self::get_view_file_url($file_url,$controller));die;
 			return self::get_file_content(self::get_view_file_url($file_url,$controller));
 		}
 		
