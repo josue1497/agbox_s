@@ -88,7 +88,7 @@
 				else{
 					/* intenta cargar el archivo de vista predefinido */
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
-					if($html_content == ''){
+					if( !is_file(CoreUtils::get_view_file_url($filename,$this)) || $html_content == ''){
 						/* si no lo consigue, carga el contenido del index por defecto*/
 						$this->view_processor->add_content(
 							CoreUtils::get_view_file_content('index',new indexController()));
