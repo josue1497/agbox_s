@@ -1,7 +1,7 @@
 <?php 
 	function generate_content($controller,$filename=null,$record=null){
-	return CoreUtils::put_in_card('
-<html>
+	return 
+'<html>
 	<head>
 		<title>login_form_title_trl</title>
 		<link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/styles/style.css">
@@ -85,5 +85,6 @@
   </div>
 
 	</body>
-</html>','');
+</html>';
+}
 ?>

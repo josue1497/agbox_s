@@ -64,7 +64,11 @@
 			
 			if(Session::get('log_out')){
 				/* si no esta logueado o si cierra sesion se carga el contenido de login sin topbar ni sidebar */
+				include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name($this)).'/login.php');
+				$this->view_processor->add_content(generate_content($this,'login',$record));
+/*
 				$this->view_processor->add_content(CoreUtils::get_view_file_content('login',$this));
+				*/
 			}else{
 				$tmp = CoreUtils::get_user_permissions_by_controller($this,$filename);
 				if(isset($tmp) && isset($tmp['id'])){
@@ -90,8 +94,13 @@
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
 					if( !is_file(CoreUtils::get_view_file_url($filename,$this)) || $html_content == ''){
 						/* si no lo consigue, carga el contenido del index por defecto*/
-						$this->view_processor->add_content(
+						
+				include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name(new indexController())).'/index.php');
+				$this->view_processor->add_content(generate_content(new indexController(),'index',$record));
+/*
+				$this->view_processor->add_content(
 							CoreUtils::get_view_file_content('index',new indexController()));
+							*/
 					}
 					/* si la consigie arma la vista */
 					else{
