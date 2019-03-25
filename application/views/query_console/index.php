@@ -1,7 +1,7 @@
 <?php
 function generate_content($controller, $filename = null, $record = null)
 {
-    return CoreUtils::put_in_card(
+    return CoreUtils::add_new_card(
         '<div class="container">
 			<div class="row">
                 <div class="col">
@@ -18,8 +18,8 @@ function generate_content($controller, $filename = null, $record = null)
                     </div>
                 </div>
                 <div class="col-2">
-                    <div class="p-4" id="alert_result">
-                        <button class="btn btn-primary" id="btn-execute">Execute</button>
+                    <div class="p-4">
+                        <button class="btn btn-primary" id="btn_execute">Execute</button>
                     </div>
                 </div>
             </div>

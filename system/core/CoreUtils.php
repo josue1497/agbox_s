@@ -147,9 +147,10 @@
 		 * @return type
 		 */
         public static function add_new_card($content,$title=null,$dimesion="12"){
+
 			return '<div class="container">
 						<div class="row">
-							<div class="col-md-'.$dimension.' col-md-offset-2">
+							<div class="col-md-'.$dimesion.' col-md-offset-2">
 								<div class="card shadow mb-4">
 									<div class="card-header py-3">
 									<h6 class="m-0 font-weight-bold text-primary">'.
