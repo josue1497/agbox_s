@@ -238,6 +238,23 @@ class Model
 
 		foreach ($this->table_fields as $table_field) {
 			$name = $table_field->get_name();
+
+			if($table_field->get_type()==Column::$COLUMN_TYPE_FILE || 
+				$table_field->get_type()==Column::$COLUMN_TYPE_PHOTO){
+				// var_dump($_FILES[$name]);die;
+				if(!empty($_FILES[$name]["name"])){
+					if(!empty($_FILES[$name]["type"])){
+						$fileName = time().'_'.$_FILES[$name]['name'];
+						$sourcePath = $_FILES[$name]['tmp_name'];
+						$targetPath = UPLOADS_DIR.$fileName;
+							if(move_uploaded_file($sourcePath,$targetPath)){
+								$params[$name] = $fileName;
+							}
+						
+					}
+			}
+		}
+
 			if (!empty($params[$name]) && strlen($params[$name]) > 0 && $table_field->get_column_in_db() == true) {
 				$sqlInsert .= ($first == false ? " , " : "") . $name;
 				$sqlValues .= ($first == false ? " , " : "") . ":" . $name;
@@ -280,13 +297,14 @@ class Model
 		foreach ($this->table_fields as $table_field) {
 			$name = $table_field->get_name();
 
-			if($table_field->get_type()==Column::$COLUMN_TYPE_FILE || $table_field->get_type()==Column::$COLUMN_TYPE_PHOTO){
+			if($table_field->get_type()==Column::$COLUMN_TYPE_FILE || 
+				$table_field->get_type()==Column::$COLUMN_TYPE_PHOTO){
 				// var_dump($_FILES[$name]);die;
 				if(!empty($_FILES[$name]["name"])){
 					if(!empty($_FILES[$name]["type"])){
 						$fileName = time().'_'.$_FILES[$name]['name'];
 						$sourcePath = $_FILES[$name]['tmp_name'];
-						$targetPath = IMG_DIR.$fileName;
+						$targetPath = UPLOADS_DIR.$fileName;
 							if(move_uploaded_file($sourcePath,$targetPath)){
 								$params[$name] = $fileName;
 							}
@@ -310,8 +328,7 @@ class Model
 	/**
 		* metodo generico deberia ser estatic y esta en model
 		*/
-	public static function save_record($model, $data)
-	{
+	public static function save_record($model, $data){
 		if (isset($data[$model->id_field])) {
 			$result = $model->get_by_id($data[$model->id_field]);
 			if ($result) {
@@ -320,5 +337,21 @@ class Model
 		}
 		return $model->create($data);
 	}
+	/**
+	*
+	*/
+	public static function get_sql_data($sql, array $params){
+		$req = Database::getBdd()->prepare($sql);
+
+		$i=1;
+		foreach($params as $param){
+			$req->bindParam($i++,$param);
+		}
+
+		$req->execute();
+		return $req->fetchAll(PDO::FETCH_ASSOC);
+
+	}
+
 }
  

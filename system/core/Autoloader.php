@@ -53,7 +53,7 @@ class Autoloader {
 				}
 			}
 			if($find==false){
-				throw new Exception('Class not Found: '.$class_name);
+				//if not found may be is not in this routs
 			}
 		});
 	}

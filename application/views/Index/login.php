@@ -1,8 +1,11 @@
-<html>
+<?php 
+	function generate_content($controller,$filename=null,$record=null){
+	return 
+'<html>
 	<head>
 		<title>login_form_title_trl</title>
 		<link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/styles/style.css">
-		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway' rel='stylesheet' type='text/css'>
+		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway" rel="stylesheet" type="text/css">
 	</head>
 	<body>
 
@@ -82,4 +85,6 @@
   </div>
 
 	</body>
-</html>
+</html>';
+}
+?>

@@ -1,4 +1,7 @@
-<!-- Begin Page Content -->
+<?php 
+	function generate_content($controller,$filename=null,$record=null){
+	return CoreUtils::put_in_card('
+	<!-- Begin Page Content -->
         <div class="container-fluid">
 
           <!-- Page Heading -- >
@@ -217,4 +220,7 @@
           </div>
 
         </div>
-        <!-- /.container-fluid -->
+        <!-- /.container-fluid -->',
+        'DashBoard');
+}
+?>
