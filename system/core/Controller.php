@@ -95,7 +95,6 @@
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
 					if( !is_file(CoreUtils::get_view_file_url($filename,$this)) || $html_content == ''){
 						/* si no lo consigue, carga el contenido del index por defecto*/
-						
 				include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name(new indexController())).'/index.php');
 				$this->view_processor->add_content(generate_content(new indexController(),'index',$record));
 /*
@@ -106,8 +105,7 @@
 					/* si la consigue arma la vista */
 					else{
 						if(isset($this->view)){
-								// var_dump(VIEWS_DIR. strtolower(CoreUtils::get_controller_name($this)).'/'.$filename.'.php');die;
-								include_once(VIEWS_DIR.CoreUtils::get_controller_name($this).DIRECTORY_SEPARATOR.$filename.'.php');
+								include_once(strtolower(VIEWS_DIR.CoreUtils::get_controller_name($this).DIRECTORY_SEPARATOR.$filename.'.php'));
 								$this->view_processor->add_content(generate_content($this,$filename,$record));
 						}
 						
