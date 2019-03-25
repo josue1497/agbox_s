@@ -355,5 +355,13 @@ class Model
 		return $req->fetchAll(PDO::FETCH_ASSOC);
 
 	}
+
+	/**
+	*
+	*/
+	public static function execute_query($sql){
+		$req = Database::getBdd()->prepare($sql);
+		return $req->execute();
+	}
 }
  

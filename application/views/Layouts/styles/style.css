@@ -84,14 +84,16 @@
     max-width: 70%;
 }
 .profile-img img{
-	max-width: 30%;
+	max-width: 35%;
 	height: 15rem;
+	padding: 2%;
+	border-radius:150px; 
 }
 .profile-img .file {
 	position: relative;
 	overflow: hidden;
 	color: #fff;
-    width: 30%;
+    width: 35%;
     border: none;
     border-radius: 0;
     font-size: 15px;
@@ -111,6 +113,14 @@
 }
 
 .img-group{
-	max-width: 100% !important;
-	height: 15rem !important;
+	border-radius:150px; 
+	padding: 2%;
+	width: 100% !important;
+	height: 100% !important;
 	}
+
+.img-profile-user{
+	width: 50px;
+    height: 50px;
+	border-radius: 150px;
+}
