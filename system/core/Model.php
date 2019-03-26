@@ -142,6 +142,8 @@ class Model
 		$sql = "SELECT * FROM " . $this->table_name . "";
 
 		if($properties != null ){
+			
+			$sql .=" Where ";
 			$keys = array_keys($properties);
 			$first = true;
 			foreach ($keys as $key) {
@@ -375,6 +377,16 @@ class Model
 	public static function execute_query($sql){
 		$req = Database::getBdd()->prepare($sql);
 		return $req->execute();
+	}
+
+	public function hide_column($column=null){
+		if($column!=null){
+			for( $i = 0; $i< count($this->table_fields) ; $i++){
+				if($this->table_fields[$i]->get_name() ==$column){
+					   $this->table_fields[$i]->set_visible_grid(false);
+				}
+		 }
+		}
 	}
 }
  

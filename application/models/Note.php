@@ -46,11 +46,15 @@ class Note extends Model {
 					->set_label('Date Approved')
 					->set_type(Column::$COLUMN_TYPE_DATE)
 					->set_visible_grid(false),
-					(new Column('performer_id'))
+				(new Column('performer_id'))
 					->set_label('Performer')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
 					->set_fk_entity(new Employee())
-					->set_visible_grid(false)
+					->set_visible_grid(false),
+					(new Column('note_type_id'))
+					->set_label('Note Type')
+					->set_type(Column::$COLUMN_TYPE_SELECT)
+					->set_fk_entity(new Note_Type())
 			)
 		);
 		$this->init();

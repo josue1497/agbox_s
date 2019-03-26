@@ -131,10 +131,11 @@
 							foreach($row as $card){
 							$html.=CoreUtils::add_new_card($card['content'],$card['title'],$card['dimension']);
 						}
-						'</div>
-					</div>';
-
-					return $html;
+						$html.='
+				</div></div>';
+				//col-md-12 col-md-offset-2
+				return $html;
+			// return CoreUtils::put_in_card($html,'Title');
         }
 		/**
 		 * coloca un contenido html en un card
@@ -148,8 +149,10 @@
 			return '<div class="col-md-'.$dimesion.' col-md-offset-2">
 						<div class="card shadow mb-4">
 							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">'.$title.'</h6></div>
-								<div class="card-body"><div id="dynamic_content">'.$content.'</div>
+								<h6 class="m-0 font-weight-bold text-primary">'.$title.'</h6>
+							</div>
+							<div class="card-body">
+								<div id="dynamic_content">'.$content.'</div>
 							</div>
 						</div>
 					</div>';

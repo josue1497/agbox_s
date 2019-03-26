@@ -48,10 +48,15 @@ class groupsController  extends Controller{
 
 	public function group_information($id){
 		$this->model=new Group();
-		$this->model->get_by_id('');
+		$this->model->get_by_id($id);
 		$this->view = new View($this->model);
 		$this->view_processor = new ViewProcessor($this->view);
-		$this->action_list($this->model, false,'group_information');
+
+		$this->init($this->model);
+		$d["record"] = $this->model->get_by_id($id);
+
+		$this->set($d);
+		$this->render('group_information');
 		// $this->render('group_information');
 	}
 }

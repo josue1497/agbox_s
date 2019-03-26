@@ -70,7 +70,9 @@ class View{
 		 */
 	public function auto_build_form_content($data){
 		$form_content = '';
+		// var_dump($this->model);die;
 		foreach ($this->model->table_fields as $form_field) {
+			// var_dump($form_field);die;
 			if ($form_field->get_visible_form() && $form_field->get_column_in_db())
 				$form_content .= $this->build_element($form_field, $data);
 			

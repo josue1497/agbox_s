@@ -29,6 +29,7 @@
 				}else 
 				/* si el archivo/accion a cargar es form(form create/edit)*/
 				if($filename=='form'){
+					// var_dump($this->view->auto_build_form($this->view->auto_build_form_content($record),$record));die;
 					return $this->view->auto_build_form($this->view->auto_build_form_content($record),$record);
 				}else 
 				/* si el archivo/accion a cargar es items(cuadricula) */
