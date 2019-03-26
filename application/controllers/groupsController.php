@@ -35,7 +35,7 @@ class groupsController  extends Controller{
 	 * @return void
 	 */
     function edit($id){
-		$this->action_edit($id,new Group(),$_POST,true);
+			$this->action_edit($id,new Group(),$_POST,true);
     }
 
     /**
@@ -44,6 +44,14 @@ class groupsController  extends Controller{
 	 */
     public function delete($id){
 		$this->action_delete($id,new Group());
+	}
+
+	public function group_information(){
+		$this->model=new Group();
+		$this->view = new View($this->model);
+		$this->view_processor = new ViewProcessor($this->view);
+		$this->action_list($this->model, false,'group_information');
+		// $this->render('group_information');
 	}
 }
 ?>
