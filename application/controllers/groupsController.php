@@ -46,8 +46,9 @@ class groupsController  extends Controller{
 		$this->action_delete($id,new Group());
 	}
 
-	public function group_information(){
+	public function group_information($id){
 		$this->model=new Group();
+		$this->model->get_by_id('');
 		$this->view = new View($this->model);
 		$this->view_processor = new ViewProcessor($this->view);
 		$this->action_list($this->model, false,'group_information');

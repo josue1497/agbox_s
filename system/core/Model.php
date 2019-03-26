@@ -79,7 +79,7 @@ class Model
 	/**
 		* metodo para buscar registros segun algun atributo(array (column_name => value, ...))
 		*/
-	public function findByPoperty($properties)
+	public function findByPoperty($properties, $all=false)
 	{
 		if (empty($properties)) {
 			return null;
@@ -92,15 +92,19 @@ class Model
 			$sql .= ($first == false ? " and " : "") . $key . " = '" . $properties[$key] . "' ";
 			$first = false;
 		}
-
 		$req = Database::getBdd()->prepare($sql);
 		$req->execute();
-		return $req->fetch();
+		if($all){
+			return $req->fetchAll(PDO::FETCH_ASSOC);
+		}
+		return $req->fetch(PDO::FETCH_ASSOC);
+		// $req->fetchAll(PDO::FETCH_ASSOC);
+		// 
 	}
 
-	public function get_by_property($properties)
+	public function get_by_property($properties, $all=false)
 	{
-		return $this->findByPoperty($properties);
+		return $this->findByPoperty($properties,$all);
 	}
 
 	/**
