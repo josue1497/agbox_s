@@ -137,9 +137,18 @@ class Model
 		* metodo para mostrar todos los registros
 		* retorna un array(filas) de arrays(columnas)
 		*/
-	public function showAllRecords()
+	public function showAllRecords($properties = null)
 	{
 		$sql = "SELECT * FROM " . $this->table_name . "";
+
+		if($properties != null ){
+			$keys = array_keys($properties);
+			$first = true;
+			foreach ($keys as $key) {
+				$sql .= ($first == false ? " and " : "") . $key . " = '" . $properties[$key] . "' ";
+				$first = false;
+			}
+		}
 		$req = Database::getBdd()->prepare($sql);
 		$req->execute();
 		return $req->fetchAll(PDO::FETCH_ASSOC);

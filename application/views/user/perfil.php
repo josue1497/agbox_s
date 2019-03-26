@@ -18,7 +18,7 @@
 		$affiliate_model = new Affiliate();
 		$group_model = new Group();
 
-		$affs = $affiliate_model->get_by_property(
+		$affs = $affiliate_model->showAllRecords(
 			array('user_id' => Session::get('user_id')));
 		
 
@@ -27,7 +27,7 @@
 		if($aff)
 			foreach($affs as $aff){
 				/* grupos a los que esta afiliado */
-				$groups[] = $group_model->get_by_id($aff['group_id']);
+				$groups[] = $group_model->showAllRecords(array('id' => $aff['group_id']));
 			}
 
 
@@ -52,16 +52,16 @@
 		
 		/* approved or rejected notes for this user */
 		$approvers = 
-			$approver_model->get_by_property(array('user_id' => Session::get('user_id')));
+			$approver_model->showAllRecords(array('user_id' => Session::get('user_id')));
 		/* if eists */
 		if($approvers)
 			foreach($approvers as $approver){
 				/* map it */
-				$notes[] = $note_model->get_by_id($approver['note_id']);
+				$notes[] = $note_model->showAllRecords( array( 'id' => $approver['note_id']));
 			}
 		
 		/* notes creatd by this user */
-		$user_notes = $note_model->get_by_property(array('user_id'=>Session::get('user_id')));
+		$user_notes = $note_model->showAllRecords(array('user_id'=>Session::get('user_id')));
 		/* if exists */
 		if($user_notes)
 			foreach($user_notes as $user_note){
@@ -102,16 +102,16 @@ $groups_card = str_replace('col-md-12 col-md-offset-2', 'col-lg-6 mb-4', $groups
 
 		/* return view with 3 cards */
 		return 
-			'<div class="container-fluid">'.
+			//'<div class="container-fluid">'.
 			'<div class="row">'.
 			$user_card. 
 			//'</div>'.
 			//'<div class="row">'.
 			$groups_card.
-			'</div>'.
-			'<div class="row">'.
+			//'</div>'.
+			//'<div class="row">'.
 			$notes_card.
-			'</div>'.
+			//'</div>'.
 			'</div>';
 
 /*
