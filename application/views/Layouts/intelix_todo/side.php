@@ -44,6 +44,7 @@
             <a class="collapse-item" href="{{ base_url }}user/index">Usuarios</a>
             <a class="collapse-item" href="{{ base_url }}user_level/index">Roles</a>
             <a class="collapse-item" href="{{ base_url }}query_console/index">SQL Console</a>
+            <a class="collapse-item" href="{{ base_url }}query_console/select_query">SQL Select Console</a>
 
           </div>
         </div>

@@ -1,7 +1,7 @@
 <?php
 function generate_content($controller, $filename = null, $record = null)
 {
-    return CoreUtils::add_new_card(
+    return CoreUtils::put_in_card(
         '<div class="container">
 			<div class="row">
                 <div class="col">

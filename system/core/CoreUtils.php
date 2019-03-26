@@ -126,13 +126,10 @@
 		 * @return type
 		 */
         public static function add_row_card(array $row){
-			$first=true;
-			$dimension=0;
 			$html = '<div class="container">
 						<div class="row">';
-						foreach($row as $card){
-						$dimension+=$card['dimension'];
-						$html+=CoreUtils::add_new_card($card['content'],$card['title'],$card['dimension']);
+							foreach($row as $card){
+							$html.=CoreUtils::add_new_card($card['content'],$card['title'],$card['dimension']);
 						}
 						'</div>
 					</div>';
@@ -148,21 +145,11 @@
 		 */
         public static function add_new_card($content,$title=null,$dimesion="12"){
 
-			return '<div class="container">
-						<div class="row">
-							<div class="col-md-'.$dimesion.' col-md-offset-2">
-								<div class="card shadow mb-4">
-									<div class="card-header py-3">
-									<h6 class="m-0 font-weight-bold text-primary">'.
-										$title.
-									'</h6>
-									</div>
-									<div class="card-body">
-										<div id="dynamic_content">'.
-											$content.'
-										</div>
-									</div>
-								</div>
+			return '<div class="col-md-'.$dimesion.' col-md-offset-2">
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">'.$title.'</h6></div>
+								<div class="card-body"><div id="dynamic_content">'.$content.'</div>
 							</div>
 						</div>
 					</div>';
