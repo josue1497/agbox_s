@@ -91,17 +91,19 @@
 				/* sino, la vista se construye a partir de un archiv de vista existente */
 				else{
 					/* intenta cargar el archivo de vista predefinido */
+					
 					$html_content = CoreUtils::get_view_file_content($filename,$this);
 					if( !is_file(CoreUtils::get_view_file_url($filename,$this)) || $html_content == ''){
 						/* si no lo consigue, carga el contenido del index por defecto*/
-						
 				include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name(new indexController())).'/index.php');
 				$this->view_processor->add_content(generate_content(new indexController(),'index',$record));
 					}
-					/* si la consigie arma la vista */
+					/* si la consigue arma la vista */
 					else{
 						if(isset($this->view)){
-								include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name($this)).'/'.$filename.'.php');
+
+								include_once(strtolower(VIEWS_DIR.CoreUtils::get_controller_name($this).DIRECTORY_SEPARATOR.$filename.'.php'));
+
 								$this->view_processor->add_content(generate_content($this,$filename,$record));
 						}
 						
@@ -147,6 +149,11 @@
 					'{{ base_url }}',
 					CoreUtils::base_url(),
 					$html_view);
+
+			$html_view = str_replace(
+						'{{ profile_icon }}',
+						Component::img_to_base64(UPLOADS_DIR.Session::get('user_profile_photo')),
+						$html_view);
 
 			$html_view = str_replace(
 					'{{ error_message }}',

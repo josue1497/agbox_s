@@ -11,11 +11,7 @@ class affiliate_to_groupController extends Controller{
     function items(){
 		
         $this->model = new Affiliate();
-
-        $props = array('user_id' =>  Session::get('user_id'));
-        
         $this->view = new View($this->model);
-		
 		$this->view_processor = new ViewProcessor($this->view);
 		
         $js=" Vue.component('affiliate-component',{
@@ -24,8 +20,8 @@ class affiliate_to_groupController extends Controller{
                     'user',
                     'id'],
             template : `<div class=\"col-md-3 p-3 m-2\">
-                            <div class=\"card rounded\" style=\"width: 18rem;\">
-                            <img class=\"card-img-top img-fluid image img-group\" v-bind:src=\"group_photo\" alt=\"Card image cap\"  v-bind:id=\"id\"/>
+                            <div class=\"card rounded \" style=\"width: 18rem;\">
+                            <img class=\"card-img-top img-fluid image img-group\"  alt=\"Card image cap\"  v-bind:id=\"id\"/>
                             <div class=\"card-body\">
                                    <h5 class=\"card-title text-center\">{{name}}</h5>
                                    <hr />
@@ -103,7 +99,7 @@ var app = new Vue({
 
     function insert_data(){  
         $this->model = new Affiliate();
-       echo $this->model->create($_POST); 
+        echo $this->model->create($_POST); 
     }
 
     function get_img(){

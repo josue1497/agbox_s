@@ -289,7 +289,10 @@ class Model
 		}catch(Exception $e){
 			echo 'Exception: '.$e->getMessage();
 		}
-
+		if($result){
+			echo "<script>$('.alert').alert();</script>";
+			
+		}
 		return $result;
 	}
 
@@ -362,5 +365,12 @@ class Model
 
 	}
 
+	/**
+	*
+	*/
+	public static function execute_query($sql){
+		$req = Database::getBdd()->prepare($sql);
+		return $req->execute();
+	}
 }
  

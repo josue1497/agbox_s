@@ -39,7 +39,8 @@
 		}
 		
 		public static function get_view_file_url($file_url,$controller){
-			return VIEWS_DIR . self::get_controller_name($controller) . '/' . $file_url . '.php';
+			// var_dump(strtolower(VIEWS_DIR . self::get_controller_name($controller) . '/' . $file_url . '.php'));die;
+			return strtolower(VIEWS_DIR . self::get_controller_name($controller) . '/' . $file_url . '.php');
 		}
 		/**
 		 * obtiene el contenido del archivo de una vista
@@ -49,7 +50,8 @@
 		 * @return string contenido de la vista
 		 */
 		public static function get_view_file_content($file_url,$controller){
-			return self::get_file_content(self::get_view_file_url($file_url,$controller));
+			// var_dump(self::get_view_file_url($file_url,$controller));die;
+			return strtolower(self::get_file_content(self::get_view_file_url($file_url,$controller)));
 		}
 		
 		/**
@@ -111,6 +113,43 @@
 										$content.'
 									</div>
 								</div>
+							</div>
+						</div>
+					</div>';
+		}
+		
+		/**
+		 * coloca un contenido html en un card
+		 * 
+		 * @param string $content contenido html
+		 * @param string|null $title titulo del card
+		 * @return type
+		 */
+        public static function add_row_card(array $row){
+			$html = '<div class="container">
+						<div class="row">';
+							foreach($row as $card){
+							$html.=CoreUtils::add_new_card($card['content'],$card['title'],$card['dimension']);
+						}
+						'</div>
+					</div>';
+
+					return $html;
+        }
+		/**
+		 * coloca un contenido html en un card
+		 * 
+		 * @param string $content contenido html
+		 * @param string|null $title titulo del card
+		 * @return type
+		 */
+        public static function add_new_card($content,$title=null,$dimesion="12"){
+
+			return '<div class="col-md-'.$dimesion.' col-md-offset-2">
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">'.$title.'</h6></div>
+								<div class="card-body"><div id="dynamic_content">'.$content.'</div>
 							</div>
 						</div>
 					</div>';
