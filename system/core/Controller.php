@@ -97,33 +97,12 @@
 						
 				include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name(new indexController())).'/index.php');
 				$this->view_processor->add_content(generate_content(new indexController(),'index',$record));
-/*
-				$this->view_processor->add_content(
-							CoreUtils::get_view_file_content('index',new indexController()));
-							*/
 					}
 					/* si la consigie arma la vista */
 					else{
 						if(isset($this->view)){
-							//$html_txt = eval($html_content);
-							//$this->view_processor->add_content($html_txt);	
-
-							//if(is_file(CoreUtils::base_url().CoreUtils::get_controller_name($this).'/'.$filename.'.php')){
 								include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name($this)).'/'.$filename.'.php');
 								$this->view_processor->add_content(generate_content($this,$filename,$record));
-							//}
-							
-							//$html_url = CoreUtils::get_view_file_url($filename,$this);
-							
-							//include_once($html_url);
-							
-							//$this->view_processor->add_content($html_content);
-							
-							//$this->view_processor->add_content(
-							//CoreUtils::get_view_file_content('index',new indexController()));
-							
-							//$this->view_processor->add_content($this->view->auto_build_form_content(isset($record)?$record:null));
-							
 						}
 						
 					}
@@ -141,6 +120,12 @@
 			echo $this->set_general_data($this->view_processor->build_view(),$filename);
         }
 		
+		/**
+		 * establece informacion general y standar en el html
+		 * @param type $html_view 
+		 * @param type $filename 
+		 * @return type
+		 */
 		public function set_general_data($html_view,$filename){
 			$html_view = str_replace(
 					'{{ name_module }}',
