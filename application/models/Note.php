@@ -21,14 +21,14 @@ class Note extends Model {
 					->set_label('Title')
 					->set_type(Column::$COLUMN_TYPE_TEXT)
 					->set_name_key(),
+				(new Column('summary'))
+					->set_label('Summary')
+					->set_type(Column::$COLUMN_TYPE_TEXTAREA)
+					->set_visible_grid(false),
 				(new Column('source_id'))
 					->set_label('Source')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
 					->set_fk_entity(new Source())
-					->set_visible_grid(false),
-				(new Column('summary'))
-					->set_label('Summary')
-					->set_type(Column::$COLUMN_TYPE_TEXTAREA)
 					->set_visible_grid(false),
 				(new Column('init_date'))
 					->set_label('Init Date')

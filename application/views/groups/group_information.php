@@ -11,9 +11,9 @@
               $affiliate_model = new Affiliate();
               $user_model = new User();
 
-              $user_model->hide_column('is_visitor');
-              $user_model->hide_column('user_level_id');
-              $user_model->hide_column('mail');
+              $user_model->hide_grid_column('is_visitor');
+              $user_model->hide_grid_column('user_level_id');
+              $user_model->hide_grid_column('mail');
 
 		$affs = $affiliate_model->showAllRecords(
                      array('group_id' => $this_group['id']));

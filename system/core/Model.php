@@ -377,11 +377,21 @@ class Model
 		return $req->execute();
 	}
 
-	public function hide_column($column=null){
+	public function hide_grid_column($column=null){
 		if($column!=null){
 			for( $i = 0; $i< count($this->table_fields) ; $i++){
 				if($this->table_fields[$i]->get_name() ==$column){
 					   $this->table_fields[$i]->set_visible_grid(false);
+				}
+		 }
+		}
+	}
+
+	public function hide_form_column($column=null){
+		if($column!=null){
+			for( $i = 0; $i< count($this->table_fields) ; $i++){
+				if($this->table_fields[$i]->get_name() ==$column){
+					   $this->table_fields[$i]->set_visible_form(false);
 				}
 		 }
 		}

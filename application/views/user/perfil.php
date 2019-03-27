@@ -71,7 +71,7 @@ function generate_content($controller, $filename = null, $record = null)
 	// $user_card = str_replace('col-md-12 col-md-offset-2', 'col-lg-6 mb-4', $user_card);
 	// $groups_card = str_replace('col-md-12 col-md-offset-2', 'col-lg-6 mb-4', $groups_card);
 	$html_result = str_replace('{{ USER_CARD }}', CoreUtils::add_new_card($user_card, 'User information '), $html_result);
-	$html_result = str_replace('profile-img', 'profile-img-info', $html_result);
+	$html_result = str_replace('profile-img', 'profile-img-info d-flex justify-content-center', $html_result);
 	$html_result = str_replace('{{ GROUPS_CARD }}', CoreUtils::add_new_card($groups_card, $tile_affiliate), $html_result);
 	$html_result = str_replace('{{ NOTES_USER }}', CoreUtils::add_new_card($notes_card, $title_note), $html_result);
 
