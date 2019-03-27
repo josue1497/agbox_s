@@ -353,13 +353,15 @@ class Model
 	/**
 	*
 	*/
-	public static function get_sql_data($sql, array $params){
+	public static function get_sql_data($sql, array $params=null){
 		$req = Database::getBdd()->prepare($sql);
 
 		$i=1;
+		if(count($params)>0){
 		foreach($params as $param){
 			$req->bindParam($i++,$param);
 		}
+	}
 
 		$req->execute();
 		return $req->fetchAll(PDO::FETCH_ASSOC);

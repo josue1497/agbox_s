@@ -36,7 +36,8 @@ class affiliate_to_groupController extends Controller{
                 sendAffiliationNotification: function(group_id, user_id){
                 var jqxhr = $.post( \"{{ URI_INSERT }}\",
                                 {user_id:user_id, group_id:group_id}, function(data, status) {
-                                    console.log('inserted');
+
+                                    console.log(data);
                                         })
                         .fail(function() {
                             alert( \"Ha ocurrido un Error.\" );
@@ -104,12 +105,12 @@ var app = new Vue({
         
         $entity_to=Model::get_sql_data("select id from affiliate order by id DESC limit 1 ");
         $user_to=Model::get_sql_data("select gur.user_id from groups g inner join group_user_role 
-            gur on g.id=gur.group_id where g.id= ",array('group_id'=>$_POST['group_id'])); 
-
+            gur on g.id=gur.group_id where g.id= ?",array('id'=>$_POST['group_id'])); 
+            
         $req=Model::execute_query("INSERT INTO notification
         ( message, user_to_id, entity_id, notification_type, shipping_date, `read`)
-        VALUES( 'Nueva solicitud de Afiliacion', ".$user_to.", '".$entity_to."', 'Affiliate_to_group', CURRENT_TIMESTAMP, 'N')");
-
+        VALUES( 'Nueva solicitud de Afiliacion', ".$user_to[0]['user_id'].", '".$entity_to['id']."', 'Affiliate_to_group', CURRENT_TIMESTAMP, 'N')");
+        echo json_encode($user_to);
         if($req){
             echo $this->model->create($_POST); 
         }        
