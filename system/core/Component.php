@@ -137,7 +137,7 @@
 		public static function select_field($name,$value=null,$label=null,$data=null,$etc=null){
 			return '<div class="form-group">'.
 			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
-			'<select class="form-control" id="'.$name.'" name="'.$name.'" '.$etc.' >'.
+			'<select class="form-control select2" id="'.$name.'" name="'.$name.'" '.$etc.' >'.
 			'<option value="0" '.(0==$value?'selected':'').'>Elija Opcion</option>'.
 			Component::create_options($data,(is_array($value)?(isset($value[$name])?$value[$name]:''):$value)).
 			'</select></div>';

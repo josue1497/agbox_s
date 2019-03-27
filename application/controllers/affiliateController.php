@@ -49,9 +49,7 @@ class affiliateController extends Controller{
 
 		$this->set($d);
 
-		$this->view->add_script_js("$('.select2').select2({
-			placeholder: 'Select an option'
-		});");
+		// $this->view->add_script_js("");
 
 		$this->render('approve_affiliate');
 	}
