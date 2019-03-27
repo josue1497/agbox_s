@@ -21,14 +21,14 @@ class Note extends Model {
 					->set_label('Title')
 					->set_type(Column::$COLUMN_TYPE_TEXT)
 					->set_name_key(),
+				(new Column('summary'))
+					->set_label('Summary')
+					->set_type(Column::$COLUMN_TYPE_TEXTAREA)
+					->set_visible_grid(false),
 				(new Column('source_id'))
 					->set_label('Source')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
 					->set_fk_entity(new Source())
-					->set_visible_grid(false),
-				(new Column('summary'))
-					->set_label('Summary')
-					->set_type(Column::$COLUMN_TYPE_TEXTAREA)
 					->set_visible_grid(false),
 				(new Column('init_date'))
 					->set_label('Init Date')
@@ -38,6 +38,10 @@ class Note extends Model {
 					->set_label('Finish Date')
 					->set_type(Column::$COLUMN_TYPE_DATE)
 					->set_visible_grid(false),
+				(new Column('note_type_id'))
+					->set_label('Note Type')
+					->set_type(Column::$COLUMN_TYPE_SELECT)
+					->set_fk_entity(new Note_Type()),
 				(new Column('status_id'))
 					->set_label('Status')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
@@ -46,7 +50,12 @@ class Note extends Model {
 					->set_label('Date Approved')
 					->set_type(Column::$COLUMN_TYPE_DATE)
 					->set_visible_grid(false),
-					(new Column('performer_id'))
+				(new Column('group_id'))
+					->set_label('Group')
+					->set_type(Column::$COLUMN_TYPE_SELECT)
+					->set_fk_entity(new Group())
+					->set_visible_grid(false),
+				(new Column('performer_id'))
 					->set_label('Performer')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
 					->set_fk_entity(new Employee())

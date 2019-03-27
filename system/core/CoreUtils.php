@@ -39,7 +39,6 @@
 		}
 		
 		public static function get_view_file_url($file_url,$controller){
-			// var_dump(strtolower(VIEWS_DIR . self::get_controller_name($controller) . '/' . $file_url . '.php'));die;
 			return strtolower(VIEWS_DIR . self::get_controller_name($controller) . '/' . $file_url . '.php');
 		}
 		/**
@@ -50,7 +49,6 @@
 		 * @return string contenido de la vista
 		 */
 		public static function get_view_file_content($file_url,$controller){
-			// var_dump(self::get_view_file_url($file_url,$controller));die;
 			return strtolower(self::get_file_content(self::get_view_file_url($file_url,$controller)));
 		}
 		
@@ -116,7 +114,7 @@
 							</div>
 						</div>
 					</div>';
-		}
+        }
 		
 		/**
 		 * coloca un contenido html en un card
@@ -131,11 +129,13 @@
 							foreach($row as $card){
 							$html.=CoreUtils::add_new_card($card['content'],$card['title'],$card['dimension']);
 						}
-						'</div>
-					</div>';
-
-					return $html;
+						$html.='
+				</div></div>';
+				//col-md-12 col-md-offset-2
+				return $html;
+			// return CoreUtils::put_in_card($html,'Title');
         }
+		
 		/**
 		 * coloca un contenido html en un card
 		 * 
@@ -148,8 +148,10 @@
 			return '<div class="col-md-'.$dimesion.' col-md-offset-2">
 						<div class="card shadow mb-4">
 							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">'.$title.'</h6></div>
-								<div class="card-body"><div id="dynamic_content">'.$content.'</div>
+								<h6 class="m-0 font-weight-bold text-primary">'.$title.'</h6>
+							</div>
+							<div class="card-body">
+								<div id="dynamic_content">'.$content.'</div>
 							</div>
 						</div>
 					</div>';

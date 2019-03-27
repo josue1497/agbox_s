@@ -9,10 +9,7 @@ class affiliate_to_groupController extends Controller{
      * @return void
      */
     function items(){
-		
-        $this->model = new Affiliate();
-        $this->view = new View($this->model);
-		$this->view_processor = new ViewProcessor($this->view);
+		$this->init(new Affiliate());
 		
         $js=" Vue.component('affiliate-component',{
             props : ['group_photo',

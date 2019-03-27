@@ -24,9 +24,17 @@
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
+<script src="{{ base_url }}application/views/Layouts/scripts/select2.full.js"></script>
+
 <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 
 <script src="{{ base_url }}application/views/Layouts/scripts/vue.js"></script>
 <script src="{{ base_url }}application/views/Layouts/scripts/axios.js"></script>
+
+<script>
+    $('.select2').select2({
+			placeholder: 'Select an option'
+		});
+</script>

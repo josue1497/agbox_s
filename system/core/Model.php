@@ -79,7 +79,7 @@ class Model
 	/**
 		* metodo para buscar registros segun algun atributo(array (column_name => value, ...))
 		*/
-	public function findByPoperty($properties)
+	public function findByPoperty($properties, $all=false)
 	{
 		if (empty($properties)) {
 			return null;
@@ -92,16 +92,19 @@ class Model
 			$sql .= ($first == false ? " and " : "") . $key . " = '" . $properties[$key] . "' ";
 			$first = false;
 		}
-
 		$req = Database::getBdd()->prepare($sql);
 		$req->execute();
-		return $req->fetch();
+		if($all){
+			return $req->fetchAll(PDO::FETCH_ASSOC);
+		}
+		return $req->fetch(PDO::FETCH_ASSOC);
 	}
 
-	public function get_by_property($properties)
+	public function get_by_property($properties, $all=false)
 	{
-		return $this->findByPoperty($properties);
+		return $this->findByPoperty($properties,$all);
 	}
+
 
 	/**
 		* metodo adaptados para obtener un registro de la entidad por id
@@ -138,6 +141,7 @@ class Model
 		$sql = "SELECT * FROM " . $this->table_name . "";
 
 		if($properties != null ){
+			$sql .=" Where ";
 			$keys = array_keys($properties);
 			$first = true;
 			foreach ($keys as $key) {
@@ -289,10 +293,7 @@ class Model
 		}catch(Exception $e){
 			echo 'Exception: '.$e->getMessage();
 		}
-		if($result){
-			echo "<script>$('.alert').alert();</script>";
-			
-		}
+
 		return $result;
 	}
 
@@ -372,5 +373,24 @@ class Model
 		$req = Database::getBdd()->prepare($sql);
 		return $req->execute();
 	}
+
+	public function hide_grid_column($column=null){
+		if($column!=null){
+			for( $i = 0; $i< count($this->table_fields) ; $i++){
+				if($this->table_fields[$i]->get_name() ==$column){
+					   $this->table_fields[$i]->set_visible_grid(false);
+				}
+		 }
+		}
+	}
+
+	public function hide_form_column($column=null){
+		if($column!=null){
+			for( $i = 0; $i< count($this->table_fields) ; $i++){
+				if($this->table_fields[$i]->get_name() ==$column){
+					   $this->table_fields[$i]->set_visible_form(false);
+				}
+		 }
+		}
+	}
 }
- 

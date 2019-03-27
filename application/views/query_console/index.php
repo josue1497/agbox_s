@@ -6,7 +6,7 @@ function generate_content($controller, $filename = null, $record = null)
 			<div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="query_area">Example textarea</label>
+                        <label for="query_area">SQL CODE</label>
                         <textarea class="form-control" id="query_area" name="query_area" rows="5"></textarea>
                     </div>
               </div>
