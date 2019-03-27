@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-03-2019 a las 03:27:12
+-- Tiempo de generación: 27-03-2019 a las 06:29:09
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -40,7 +40,12 @@ CREATE TABLE `affiliate` (
 --
 
 INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
-(1, 2, 1, 'Yes');
+(1, 13, 1, 'Yes'),
+(2, 14, 1, 'Yes'),
+(3, 15, 1, NULL),
+(4, 17, 1, NULL),
+(5, 18, 1, NULL),
+(6, 19, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -62,10 +67,13 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`, `group_photo`) VALUES
-(1, NULL, NULL, 'assssddsssd', 'as', '1552883474_IMG-20171224-00430.jpg'),
-(2, NULL, NULL, 'Grupo 1', 'Ws', '1552881460_IMG-20171224-00455.jpg'),
-(3, NULL, NULL, 'Hola', 'd', NULL),
-(4, NULL, 1, 'Hola2', 'A', '1a.PNG');
+(13, NULL, NULL, 'Prueba 1', 'Prueba 1', '1552967118_(iori03_)12345729_862092230578521_320436592_n.jpg'),
+(14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
+(15, NULL, NULL, 'Grupo 3', 'Grupo 3', '1553056938_(silla_e_mimbre)12224228_1654611478130905_689608145_n.jpg'),
+(16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
+(17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg'),
+(18, NULL, NULL, 'Grupo 6', 'Grupo 6', NULL),
+(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg');
 
 -- --------------------------------------------------------
 
@@ -79,6 +87,13 @@ CREATE TABLE `group_user_role` (
   `user_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `group_user_role`
+--
+
+INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
+(1, 13, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -109,7 +124,9 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 (14, 'Note', 'Note', 'fas fa-address-book', 4, 'note', 11),
 (15, 'Note Type', 'Type', 'fab fa-accessible-icon', 5, 'note_type', 11),
 (16, 'Test', 'Prueba', 'fab fa-accessible-icon', 5, '#', 0),
-(17, 'Note Approver', 'Note Approver', 'fas fa-address-book', 6, 'note_approver', 11);
+(17, 'Note Approver', 'Note Approver', 'fas fa-address-book', 6, 'note_approver', 11),
+(18, 'Affiliate To Group', 'Affiliate To Group', 'empty', 1, 'affiliate_to_group/items', 16),
+(19, 'Note Status', 'Note Status', 'fab fa-accessible-icon', 2, 'status', 11);
 
 -- --------------------------------------------------------
 
@@ -121,15 +138,24 @@ CREATE TABLE `note` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(140) DEFAULT NULL,
+  `note_type_id` int(11) DEFAULT NULL,
   `source_id` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
   `summary` varchar(256) DEFAULT NULL,
-  `agreement_type_id` int(11) DEFAULT NULL,
   `init_date` date DEFAULT NULL,
   `finish_date` date DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `date_approved` date DEFAULT NULL,
   `performer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `note`
+--
+
+INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `group_id`, `summary`, `init_date`, `finish_date`, `status_id`, `date_approved`, `performer_id`) VALUES
+(1, 1, 'Group', 1, 3, 13, '<asd', '2019-03-14', '2019-03-05', 1, NULL, NULL),
+(2, 2, 'Crud Test', 1, 1, NULL, 'A', '2019-03-22', '2019-03-29', 1, '2019-03-14', NULL);
 
 -- --------------------------------------------------------
 
@@ -224,7 +250,7 @@ CREATE TABLE `source` (
 
 INSERT INTO `source` (`id`, `title`, `description`) VALUES
 (1, 'WhatsApp', 'WS'),
-(2, 'Holasssss', 'Hola2');
+(3, 'nuevo', 'Nuevo');
 
 -- --------------------------------------------------------
 
@@ -237,6 +263,13 @@ CREATE TABLE `status` (
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(140) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `status`
+--
+
+INSERT INTO `status` (`id`, `name`, `description`) VALUES
+(1, 'Abierto', 'Abierto');
 
 -- --------------------------------------------------------
 
@@ -262,7 +295,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username`, `password`, `profile_photo`, `user_level_id`, `is_visitor`) VALUES
-(1, 1, 'Administrador', 'Intelix', 'jmartinezm@intelix.biz', 'admin', 'admin', '1552883860_734647_10205465885197745_2147406997832188463_n.jpg', 1, 'No'),
+(1, 1, 'Administrador', 'Intelix', 'jmartinezm@intelix.biz', 'admin', 'admin', '1553488242_Josue Martinez.jpg', 1, 'No'),
 (2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'josu12345', NULL, 1, 'No');
 
 -- --------------------------------------------------------
@@ -375,31 +408,31 @@ ALTER TABLE `user_level`
 -- AUTO_INCREMENT de la tabla `affiliate`
 --
 ALTER TABLE `affiliate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `group_user_role`
 --
 ALTER TABLE `group_user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `note`
 --
 ALTER TABLE `note`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `note_approver`
@@ -429,13 +462,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT de la tabla `source`
 --
 ALTER TABLE `source`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `status`
 --
 ALTER TABLE `status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
