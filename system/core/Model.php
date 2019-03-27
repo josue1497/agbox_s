@@ -98,8 +98,6 @@ class Model
 			return $req->fetchAll(PDO::FETCH_ASSOC);
 		}
 		return $req->fetch(PDO::FETCH_ASSOC);
-		// $req->fetchAll(PDO::FETCH_ASSOC);
-		// 
 	}
 
 	public function get_by_property($properties, $all=false)

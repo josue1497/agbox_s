@@ -84,7 +84,7 @@
     max-width: 100%;
 }
 .profile-img img{
-	width: 35%;
+	width: 25%;
 	height: 15rem;
 	padding: 2%;
 	border-radius:150px; 
@@ -93,7 +93,7 @@
 	position: relative;
 	overflow: hidden;
 	color: #fff;
-    width: 35%;
+    width: 25%;
     border: none;
     border-radius: 0;
     font-size: 15px;

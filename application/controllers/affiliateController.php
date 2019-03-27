@@ -37,5 +37,23 @@ class affiliateController extends Controller{
     public function delete($id){
 		$this->action_delete($id,new Affiliate());
 	}
+
+	public function approve_affiliate($id){
+		$this->model=new Affiliate();
+		$this->model->get_by_id($id);
+		$this->view = new View($this->model);
+		$this->view_processor = new ViewProcessor($this->view);
+
+		$this->init($this->model);
+		$d["record"] = $this->model->get_by_id($id);
+
+		$this->set($d);
+
+		$this->view->add_script_js("$('.select2').select2({
+			placeholder: 'Select an option'
+		});");
+
+		$this->render('approve_affiliate');
+	}
 }
 ?>

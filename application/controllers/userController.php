@@ -12,7 +12,7 @@ class userController extends Controller{
     public function delete($id){
 		$this->action_delete($id,new User());
 	}
-	public function perfil(){
+	public function profile(){
 		$this->init(new User());
 		$this->model->table_label='Perfil de Usuario';
 		$this->render("perfil");

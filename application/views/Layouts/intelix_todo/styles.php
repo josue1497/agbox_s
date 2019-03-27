@@ -24,3 +24,5 @@
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 <!-- Bootstrap-Iconpicker -->
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/jquery.dataTables.min.css" />
+
+<link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/select2.min.css" />

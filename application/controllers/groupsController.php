@@ -57,7 +57,6 @@ class groupsController  extends Controller{
 
 		$this->set($d);
 		$this->render('group_information');
-		// $this->render('group_information');
 	}
 }
 ?>
