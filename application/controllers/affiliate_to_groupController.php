@@ -21,7 +21,9 @@ class affiliate_to_groupController extends Controller{
                     'id'],
             template : `<div class=\"col-md-3 p-3 m-2\">
                             <div class=\"card rounded \" style=\"width: 18rem;\">
-                            <img class=\"card-img-top img-fluid image img-group\"  alt=\"Card image cap\"  v-bind:id=\"id\"/>
+                            <div class=\"d-flex justify-content-center\">
+                                <img class=\"card-img-top img-fluid image img-group\"  alt=\"Card image cap\"  v-bind:id=\"id\"/>
+                            </div>
                             <div class=\"card-body\">
                                    <h5 class=\"card-title text-center\">{{name}}</h5>
                                    <hr />
@@ -99,7 +101,18 @@ var app = new Vue({
 
     function insert_data(){  
         $this->model = new Affiliate();
-        echo $this->model->create($_POST); 
+        
+        $entity_to=Model::get_sql_data("select id from affiliate order by id DESC limit 1 ");
+        $user_to=Model::get_sql_data("select gur.user_id from groups g inner join group_user_role 
+            gur on g.id=gur.group_id where g.id= ",array('group_id'=>$_POST['group_id'])); 
+
+        $req=Model::execute_query("INSERT INTO notification
+        ( message, user_to_id, entity_id, notification_type, shipping_date, `read`)
+        VALUES( 'Nueva solicitud de Afiliacion', ".$user_to.", '".$entity_to."', 'Affiliate_to_group', CURRENT_TIMESTAMP, 'N')");
+
+        if($req){
+            echo $this->model->create($_POST); 
+        }        
     }
 
     function get_img(){

@@ -12,12 +12,12 @@ function generate_content($controller, $filename = null, $record = null)
               </div>
             </div> 
             <div class="row">
-                <div class="col-10">
+                <div class="col-md-10 col-sm-6">
                     <div class="p-4" id="alert_result">
                         <span id="query_result">Waiting ...</span>
                     </div>
                 </div>
-                <div class="col-2">
+                <div class="col-md-2 col-sm-6">
                     <div class="p-4">
                         <button class="btn btn-primary" id="btn_execute">Execute</button>
                     </div>

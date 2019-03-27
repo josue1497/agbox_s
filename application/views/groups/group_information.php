@@ -26,7 +26,6 @@
                             /* grupos a los que esta afiliado */
                             $users[] = $user_model->get_by_id($aff['user_id']);
 			}
-              // var_dump($users);die;
 
 		$c = new Controller();
 		$c->init($user_model);
@@ -72,7 +71,7 @@ function generate_affiliate_table($group_id){
        $table_rows='<tbody>';
        $i=1;
        foreach($affiliate_record as $row){                     
-         $table_rows.='<tr><input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
+         $table_rows.='<tr onclick="alert(\'mensaje\')"><input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
                      <input type="hidden" name="user_id" value="'.$row['user_id'].'">
                      <input type="hidden" name="group_id" value="'.$row['group_id'].'">
                      <td class="text-center">'.$i++.'</td>

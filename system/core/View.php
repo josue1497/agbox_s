@@ -46,7 +46,6 @@ class View{
 		 * @return type
 		 */
 	public function auto_build_form($form_content, $data){
-		var_dump($data);
 		return "<form method='post' enctype='multipart/form-data' action='#' " . (isset($data['onsubmit']) ? " onsubmit='" . $data['onsubmit'] . "' " : "") .
 			" >" .
 			$form_content .
@@ -71,9 +70,7 @@ class View{
 		 */
 	public function auto_build_form_content($data){
 		$form_content = '';
-		// var_dump($this->model);die;
 		foreach ($this->model->table_fields as $form_field) {
-			// var_dump($form_field);die;
 			if ($form_field->get_visible_form() && $form_field->get_column_in_db())
 				$form_content .= $this->build_element($form_field, $data);
 			
@@ -135,7 +132,6 @@ class View{
 		         	}
 				}
 
-				//var_dump($pic);
 
 		        $item_list.= $pic.
 		          	'<div class="card-body">'.
@@ -353,7 +349,6 @@ class View{
 		$html='';
 
 		$data = Model::get_sql_data("select * from groups G where id not in (select group_id from affiliate where user_id=?)",array('user_id'=>Session::get('user_id')));
-		// var_dump($data);die;
 				foreach($data as $row){
 							$click="affiliateGroup($('#form_".$row['id']."').serialize())";
 							$img=$row['group_photo']!=null?Component::img_to_base64(UPLOADS_DIR.$row['group_photo']):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
@@ -377,7 +372,6 @@ class View{
 						</div>';
 
 						}
-						// var_dump($html);die;
 				return $html;
 	}
 }

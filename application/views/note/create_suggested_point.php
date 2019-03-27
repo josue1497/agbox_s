@@ -13,7 +13,6 @@ function generate_content($controller, $filename = null, $record = null)
 
 
     $form_card=$controller->view->auto_build_form_content($record);
-    // var_dump($form_card); die;
     $form_card = str_replace('m-1 btn btn-secondary','d-none disable', $form_card);
    
     $select_user = generate_select_user();

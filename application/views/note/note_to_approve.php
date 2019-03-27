@@ -3,10 +3,6 @@ function generate_content($controller, $filename = null, $record = null)
 {
 
     $this_note=$controller->vars['record'];
-    // var_dump($this_note);
-
-
-
 
     $html_result = file_get_contents(__DIR__ . '/note_to_approve.html');
     $note_card=generate_note_card($this_note);

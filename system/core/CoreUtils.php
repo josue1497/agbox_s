@@ -39,7 +39,6 @@
 		}
 		
 		public static function get_view_file_url($file_url,$controller){
-			// var_dump(strtolower(VIEWS_DIR . self::get_controller_name($controller) . '/' . $file_url . '.php'));die;
 			return strtolower(VIEWS_DIR . self::get_controller_name($controller) . '/' . $file_url . '.php');
 		}
 		/**
@@ -50,7 +49,6 @@
 		 * @return string contenido de la vista
 		 */
 		public static function get_view_file_content($file_url,$controller){
-			// var_dump(self::get_view_file_url($file_url,$controller));die;
 			return strtolower(self::get_file_content(self::get_view_file_url($file_url,$controller)));
 		}
 		

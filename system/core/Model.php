@@ -254,7 +254,6 @@ class Model
 
 			if($table_field->get_type()==Column::$COLUMN_TYPE_FILE || 
 				$table_field->get_type()==Column::$COLUMN_TYPE_PHOTO){
-				// var_dump($_FILES[$name]);die;
 				if(!empty($_FILES[$name]["name"])){
 					if(!empty($_FILES[$name]["type"])){
 						$fileName = time().'_'.$_FILES[$name]['name'];
@@ -288,7 +287,6 @@ class Model
 			 	echo 'Database Error: '.$err[2].
 			 		'<br/>sql :'.$sqlInsert.$sqlValues.
 			 		'</br>params: ';
-			 	var_dump($db_params); die;
 			}
 		}catch(Exception $e){
 			echo 'Exception: '.$e->getMessage();
@@ -315,7 +313,6 @@ class Model
 
 			if($table_field->get_type()==Column::$COLUMN_TYPE_FILE || 
 				$table_field->get_type()==Column::$COLUMN_TYPE_PHOTO){
-				// var_dump($_FILES[$name]);die;
 				if(!empty($_FILES[$name]["name"])){
 					if(!empty($_FILES[$name]["type"])){
 						$fileName = time().'_'.$_FILES[$name]['name'];

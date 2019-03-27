@@ -16,7 +16,6 @@
 		$html_group=generate_group_div($group_record);
 
 
-		// var_dump($this_record);
 
 		$html_result=file_get_contents(__DIR__.'/approve_affiliate.html');
 
@@ -30,8 +29,6 @@
 
 function generate_user_div($user){
 	$emp_model = new Employee();
-	// $emp=$emp_model->findByPoperty(array('id' => $user['employee_id']));
-	// var_dump($emp);
 	$html='
 	<div class="profile-img"><img class="card-img-top" src="'.Component::img_to_base64(UPLOADS_DIR.$user['profile_photo']).'" alt="Card image cap" style="width:50% !important;" ></div>
 	<div class="card-body text-center">
@@ -44,9 +41,6 @@ function generate_user_div($user){
 } 
 
 function generate_group_div($group){
-	// $emp_model = new Employee();
-	// $emp=$emp_model->findByPoperty(array('id' => $user['employee_id']));
-	// var_dump($emp);
 	$html='
 	<div class="profile-img"><img class="card-img-top" src="'
 	.Component::img_to_base64(UPLOADS_DIR.$group['group_photo']).'" alt="Card image cap" style="width:50% !important;" ></div>
