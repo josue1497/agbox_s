@@ -1,32 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 4.8.4
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2019 a las 04:49:58
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.0
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `abx_db`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `affiliate`
---
+drop table if exists affiliate;
 
 CREATE TABLE `affiliate` (
   `id` int(11) NOT NULL,
@@ -38,9 +11,14 @@ CREATE TABLE `affiliate` (
 --
 -- Volcado de datos para la tabla `affiliate`
 --
-
 INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
-(1, 2, 1, 'Yes');
+(1, 13, 1, 'Yes'),
+(2, 14, 1, 'Yes'),
+(3, 15, 1, NULL),
+(4, 17, 1, NULL),
+(5, 18, 1, NULL),
+(6, 19, 1, NULL),
+(7, 16, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -48,29 +26,37 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 -- Estructura de tabla para la tabla `groups`
 --
 
+drop table if exists groups ;
+
 CREATE TABLE `groups` (
   `id` int(11) ,
   `domain_id` int(11) ,
   `parent_group_id` int(11) DEFAULT NULL,
   `name` varchar(60) DEFAULT NULL,
-  `description` varchar(256) DEFAULT NULL
+  `description` varchar(256) DEFAULT NULL,
+  `group_photo` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
 
 --
 -- Volcado de datos para la tabla `groups`
 --
 
-INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`) VALUES
-(1, NULL, NULL, 'a', 'a'),
-(2, NULL, NULL, 'Grupo 1', 'W'),
-(3, NULL, NULL, 'Hola', 'd'),
-(4, NULL, 1, 'Hola2', 'A');
 
+INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`, `group_photo`) VALUES
+(13, NULL, NULL, 'Prueba 1', 'Prueba 1', '1552967118_(iori03_)12345729_862092230578521_320436592_n.jpg'),
+(14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
+(15, NULL, NULL, 'Grupo 3', 'Grupo 3', '1553056938_(silla_e_mimbre)12224228_1654611478130905_689608145_n.jpg'),
+(16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
+(17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg'),
+(18, NULL, NULL, 'Grupo 6', 'Grupo 6', NULL),
+(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg');
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `group_user_role`
 --
+
+drop table if exists group_user_role;
 
 CREATE TABLE `group_user_role` (
   `id` int(11) NOT NULL,
@@ -79,11 +65,16 @@ CREATE TABLE `group_user_role` (
   `role_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
+(1, 13, 1, 1);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `menu`
 --
+drop table if exists menu;
 
 CREATE TABLE `menu` (
   `menu_id` int(5) NOT NULL,
@@ -108,21 +99,30 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 (14, 'Note', 'Note', 'fas fa-address-book', 4, 'note', 11),
 (15, 'Note Type', 'Type', 'fab fa-accessible-icon', 5, 'note_type', 11),
 (16, 'Test', 'Prueba', 'fab fa-accessible-icon', 5, '#', 0),
-(17, 'Note Approver', 'Note Approver', 'fas fa-address-book', 6, 'note_approver', 11);
+(17, 'Note Approver', 'Note Approver', 'fas fa-address-book', 6, 'note_approver', 11),
+(18, 'Affiliate To Group', 'Affiliate To Group', 'empty', 1, 'affiliate_to_group/items', 16),
+(19, 'Note Status', 'Note Status', 'fab fa-accessible-icon', 2, 'status', 11),
+(20, 'Create Assignment', 'Create Assignment', 'empty', 2, 'note/create_assignment', 21),
+(21, 'Notas', 'Notas', 'far fa-address-book', 3, NULL, 0),
+(22, 'Create Suggested Point', 'Create Suggested Point', 'empty', 2, 'note/create_suggested_point', 21),
+(23, 'Create commitment', 'Create commitment', 'empty', 3, 'note/create_commitment', 21),
+(24, 'Create agenda point', 'Create agenda point', 'empty', 4, 'note/create_agenda_point', 21);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `note`
 --
+drop table if exists note;
 
 CREATE TABLE `note` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(140) DEFAULT NULL,
+  `note_type_id` int(11) DEFAULT NULL,
   `source_id` int(11) DEFAULT NULL,
+  `group_id` int(11) DEFAULT NULL,
   `summary` varchar(256) DEFAULT NULL,
-  `agreement_type_id` int(11) DEFAULT NULL,
   `init_date` date DEFAULT NULL,
   `finish_date` date DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
@@ -130,11 +130,17 @@ CREATE TABLE `note` (
   `performer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `group_id`, `summary`, `init_date`, `finish_date`, `status_id`, `date_approved`, `performer_id`) VALUES
+(1, 1, 'Group', 1, 2, 13, 'Prueba de Sumario', '2019-03-14', '2019-03-05', 1, NULL, NULL),
+(2, 2, 'Crud Test', 1, 1, NULL, 'A', '2019-03-22', '2019-03-29', 1, '2019-03-14', NULL);
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `note_approver`
 --
+
+drop table if exists note_approver;
 
 CREATE TABLE `note_approver` (
   `id` int(11) NOT NULL,
@@ -145,9 +151,17 @@ CREATE TABLE `note_approver` (
 
 -- --------------------------------------------------------
 
+
+INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
+(1, 1, 1, NULL),
+(3, 1, 2, NULL);
+
+
 --
 -- Estructura de tabla para la tabla `note_type`
 --
+
+drop table if exists note_type;
 
 CREATE TABLE `note_type` (
   `id` int(11) NOT NULL,
@@ -159,15 +173,19 @@ CREATE TABLE `note_type` (
 -- Volcado de datos para la tabla `note_type`
 --
 
+
 INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
-(1, 'Acuerdo', 'Acuerdo');
+(1, 'Punto Sugerido', 'Punto Sugerido'),
+(2, 'Asignaciones', 'Asignaciones'),
+(3, 'Compromisos', 'Compromisos'),
+(4, 'Punto de Agenda', 'Punto de Agenda');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `permission`
 --
-
+drop table if exists permission;
 CREATE TABLE `permission` (
   `id` int(5) NOT NULL,
   `menu_id` int(5) DEFAULT NULL,
@@ -191,6 +209,8 @@ INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_wri
 -- Estructura de tabla para la tabla `role`
 --
 
+drop table if exists role;
+
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
@@ -202,14 +222,19 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`id`, `name`, `description`) VALUES
-(1, 'Lider de Grupo', 'Lider de un Grupo'),
-(2, 'Administrador de grupo', 'Administrador de grupo');
+(1, 'Lider', 'Lider'),
+(2, 'Administrador', 'Administrador'),
+(3, 'Miembro', 'Miembro de Grupo'),
+(5, 'Invitado', 'Invitado');
+
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `source`
 --
+
+drop table if exists source;
 
 CREATE TABLE `source` (
   `id` int(11) NOT NULL,
@@ -222,19 +247,32 @@ CREATE TABLE `source` (
 --
 
 INSERT INTO `source` (`id`, `title`, `description`) VALUES
-(1, 'WhatsApp', 'WS');
+(1, 'Chat de WhatsApp', 'Chat de WhatsApp'),
+(2, 'ReuniÃ³n', 'ReuniÃ³n'),
+(3, 'Reunion en el Almuerzo', 'A'),
+(4, 'ConversaciÃ³n', 'ConversaciÃ³n'),
+(5, 'HangOut', 'HangOut');
+
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `status`
 --
-
+drop table if exists status;
 CREATE TABLE `status` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(140) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `status`
+--
+
+INSERT INTO `status` (`id`, `name`, `description`) VALUES
+(1, 'Abierto', 'Abierto'),
+(2, 'Cerrado', NULL);
 
 -- --------------------------------------------------------
 
@@ -242,6 +280,7 @@ CREATE TABLE `status` (
 -- Estructura de tabla para la tabla `user`
 --
 
+drop table if exists user;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
@@ -250,6 +289,7 @@ CREATE TABLE `user` (
   `mail` varchar(100) DEFAULT NULL,
   `username` varchar(60) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
+  `profile_photo` varchar(256) DEFAULT NULL,
   `user_level_id` int(11) DEFAULT NULL,
   `is_visitor` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -258,15 +298,16 @@ CREATE TABLE `user` (
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username`, `password`, `user_level_id`, `is_visitor`) VALUES
-(1, 1, 'Administrador', 'Intelix', 'jmartinezm@intelix.biz', 'admin', 'admin', 1, 'N'),
-(2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'josu12345', 1, 'No');
+INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username`, `password`, `profile_photo`, `user_level_id`, `is_visitor`) VALUES
+(1, 1, 'Administrador', 'Intelix', 'jmartinezm@intelix.biz', 'admin', 'admin', '1553488242_Josue Martinez.jpg', 1, 'No'),
+(2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'josu12345', NULL, 1, 'No');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `user_level`
 --
+drop table if exists user_level;
 
 CREATE TABLE `user_level` (
   `id` int(5) NOT NULL,
@@ -446,7 +487,3 @@ ALTER TABLE `user`
 ALTER TABLE `user_level`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

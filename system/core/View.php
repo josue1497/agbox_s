@@ -52,6 +52,14 @@ class View{
 			"</form>";
 	}
 
+	public static function set_alert_bootstrap(){
+		return '<div class=alert alert-warning alert-dismissible fade show" role="alert">
+		<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		</div>';
+	}
 	/**
 		 * metodo para construir contenido de la vista de formulario automaticamente,
 	  	 * desde los datos del modelo
@@ -385,6 +393,7 @@ class View{
 				$res = Component::base_field(
 					$form_field->get_type(),
 					$form_field->get_name(),
+					isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
 					$form_field->get_label(),
 					$form_field->get_field_help(),
 					$form_field->get_field_html()
@@ -392,6 +401,38 @@ class View{
 				break;
 		}
 		return $res;
+	}
+	
+	public function buid_items_groups(){
+		$html='';
+
+		$data = Model::get_sql_data("select * from groups G where id not in (select group_id from affiliate where user_id=?)",array('user_id'=>Session::get('user_id')));
+		// var_dump($data);die;
+				foreach($data as $row){
+							$click="affiliateGroup($('#form_".$row['id']."').serialize())";
+							$img=$row['group_photo']!=null?Component::img_to_base64(UPLOADS_DIR.$row['group_photo']):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
+							$html.='<div class="col m-2">
+							<form method="POST" action="#" id="form_'.$row['id'].'">
+							<input type="hidden" id="group_id" name="group_id" value="'.$row['id'].'"/>
+							<input type="hidden" id="user_id" name="user_id" value="'.Session::get('user_id').'"/>
+							<div class="card rounded" style="width: 18rem;">
+									<img class="card-img-top img-fluid image"
+											src="'.$img.'"
+											alt="Card image cap" id="group-icon" />
+									<div class="card-body">
+											<h5 class="card-title text-center">'.$row['name'].'</h5>
+											<hr />
+											<div class="d-flex justify-content-center">
+													<button class="btn btn-primary" onclick="'.$click.'">Solicitar Afiliacion</button>
+											</div>
+									</div>
+							</div>
+							</form>
+						</div>';
+
+						}
+						// var_dump($html);die;
+				return $html;
 	}
 }
  

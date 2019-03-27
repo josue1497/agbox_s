@@ -45,5 +45,14 @@ class groupsController  extends Controller{
     public function delete($id){
 		$this->action_delete($id,new Group());
 	}
+	
+	public function group_information($id){
+		$this->init(new Group());
+		$this->model->get_by_id($id);
+		$d["record"] = $this->model->get_by_id($id);
+
+		$this->set($d);
+		$this->render('group_information');
+	}
 }
 ?>

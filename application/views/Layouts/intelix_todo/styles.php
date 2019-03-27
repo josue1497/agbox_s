@@ -1,7 +1,9 @@
+<!--<link href="{{ base_url }}application/views/Layouts/styles/fontawesome.all.css" rel="stylesheet" type="text/css">
+-->
 <!-- CSS -->
 <link href="{{ base_url }}application/views/Layouts/vendor/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
 
-<!-- Font Awesome CDN -->
+<!-- Font Awesome CDN - - >
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
 <!-- END CDN -->
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -18,5 +20,9 @@
 <!-- for icon picker -->
 <!-- Bootstrap-Iconpicker -->
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/vendor/icon-picker/css/bootstrap-iconpicker.min.css"/>
-<!---->
+<!--  - - >
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<!-- Bootstrap-Iconpicker -->
+<link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/jquery.dataTables.min.css" />
+
+<link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/select2.min.css" />

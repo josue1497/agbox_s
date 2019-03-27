@@ -9,5 +9,4 @@ session_start();
 
 $dispatch = new Dispatcher();
 $dispatch->dispatch();
-
 ?>

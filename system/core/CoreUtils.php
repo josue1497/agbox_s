@@ -37,6 +37,10 @@
 		public static function get_controller_name($controller_class){
 			return ucfirst(str_replace('Controller', '', get_class($controller_class)));
 		}
+		
+		public static function get_view_file_url($file_url,$controller){
+			return strtolower(VIEWS_DIR . self::get_controller_name($controller) . '/' . $file_url . '.php');
+		}
 		/**
 		 * obtiene el contenido del archivo de una vista
 		 *
@@ -45,9 +49,7 @@
 		 * @return string contenido de la vista
 		 */
 		public static function get_view_file_content($file_url,$controller){
-			return CoreUtils::get_file_content(VIEWS_DIR . 
-					CoreUtils::get_controller_name($controller) . 
-					'/' . $file_url . '.php');
+			return strtolower(self::get_file_content(self::get_view_file_url($file_url,$controller)));
 		}
 		
 		/**
@@ -113,6 +115,92 @@
 						</div>
 					</div>';
         }
+		
+		/**
+		 * coloca un contenido html en un card
+		 * 
+		 * @param string $content contenido html
+		 * @param string|null $title titulo del card
+		 * @return type
+		 */
+        public static function add_row_card(array $row){
+			$html = '<div class="container">
+						<div class="row">';
+							foreach($row as $card){
+							$html.=CoreUtils::add_new_card($card['content'],$card['title'],$card['dimension']);
+						}
+						$html.='
+				</div></div>';
+				//col-md-12 col-md-offset-2
+				return $html;
+			// return CoreUtils::put_in_card($html,'Title');
+        }
+		
+		/**
+		 * coloca un contenido html en un card
+		 * 
+		 * @param string $content contenido html
+		 * @param string|null $title titulo del card
+		 * @return type
+		 */
+        public static function add_new_card($content,$title=null,$dimesion="12"){
+
+			return '<div class="col-md-'.$dimesion.' col-md-offset-2">
+						<div class="card shadow mb-4">
+							<div class="card-header py-3">
+								<h6 class="m-0 font-weight-bold text-primary">'.$title.'</h6>
+							</div>
+							<div class="card-body">
+								<div id="dynamic_content">'.$content.'</div>
+							</div>
+						</div>
+					</div>';
+        }
+		
+		/* metodo para generar card */
+		public static function generate_card($model,$content,$filename,$record = null){
+			$card = CoreUtils::put_in_card($content,"{{ title_module }}");
+			$card = str_replace(
+					'{{ title_module }}',
+					(isset($record['form_action'])?
+						$record['form_action']:'').' '.
+						$model->table_label.' &nbsp; '.
+						/* agregar boton collapsable */
+						(($filename == 'index' || $filename == 'items')? 
+							Component::function_button('Toogle View',
+								"if(!$('#index_".
+									$model->table_name.
+									"').parent().is(':visible')){".
+									"$('#index_".
+									$model->table_name.
+									"').parent().fadeIn();}else{".
+									"$('#index_".
+									$model->table_name.
+									"').parent().fadeOut();}")
+							:'').' &nbsp; '.
+						/* agregar boton cambio de vista (lista/cuadricula) */
+						(($filename == 'index' || $filename == 'items')? 
+							Component::function_button('Change View',(
+									"if($('#index_".
+									$model->table_name.
+									"').is(':visible')){".
+									"$('#index_".
+									$model->table_name.
+									"').fadeOut();".
+									"$('#items_".
+									$model->table_name.
+									"').fadeIn();".
+									"}else{".
+									"$('#items_".
+									$model->table_name.
+									"').fadeOut();".
+									"$('#index_".
+									$model->table_name.
+									"').fadeIn();}"
+								)): '' ),
+					$card);
+				return $card;
+		}
 
 		/**
 		 * obtiene los permisos del usuario logeado en el menu indicado

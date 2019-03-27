@@ -9,8 +9,7 @@ class indexController extends Controller{
 	 * @return void
 	 */
     function index(){
-		$this->model=new User();
-		$this->view = new View($this->model);
+		$this->init(new User());
 		$this->model->table_label='Dashboard';
 		$this->render("index");
     }
@@ -21,10 +20,9 @@ class indexController extends Controller{
 	 * @return void
 	 */
 	function login(){
-		$this->model=new User();
-		$this->view = new View($this->model);
+		$this->init(new User());
+
 		if(isset($_POST['login_user'])){
-			$this->model=new User();
 			$this->record = array();
 
 			$row = $this->model->get_by_property(array('username'=>$_POST['email']));
@@ -42,8 +40,6 @@ class indexController extends Controller{
 		}else{
 			Session::unset_user_session_data();
 		}
-
-		$this->model=new User();
 		$this->render("login");	
 	}
 }
