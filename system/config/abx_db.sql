@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 27-03-2019 a las 06:29:09
--- Versión del servidor: 10.1.37-MariaDB
--- Versión de PHP: 7.3.0
+-- Servidor: localhost
+-- Tiempo de generación: 27-03-2019 a las 19:23:16
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.1.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,7 +45,8 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 (3, 15, 1, NULL),
 (4, 17, 1, NULL),
 (5, 18, 1, NULL),
-(6, 19, 1, NULL);
+(6, 19, 1, NULL),
+(7, 16, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -126,7 +127,12 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 (16, 'Test', 'Prueba', 'fab fa-accessible-icon', 5, '#', 0),
 (17, 'Note Approver', 'Note Approver', 'fas fa-address-book', 6, 'note_approver', 11),
 (18, 'Affiliate To Group', 'Affiliate To Group', 'empty', 1, 'affiliate_to_group/items', 16),
-(19, 'Note Status', 'Note Status', 'fab fa-accessible-icon', 2, 'status', 11);
+(19, 'Note Status', 'Note Status', 'fab fa-accessible-icon', 2, 'status', 11),
+(20, 'Create Assignment', 'Create Assignment', 'empty', 2, 'note/create_assignment', 21),
+(21, 'Notas', 'Notas', 'far fa-address-book', 3, NULL, 0),
+(22, 'Create Suggested Point', 'Create Suggested Point', 'empty', 2, 'note/create_suggested_point', 21),
+(23, 'Create commitment', 'Create commitment', 'empty', 3, 'note/create_commitment', 21),
+(24, 'Create agenda point', 'Create agenda point', 'empty', 4, 'note/create_agenda_point', 21);
 
 -- --------------------------------------------------------
 
@@ -154,7 +160,7 @@ CREATE TABLE `note` (
 --
 
 INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `group_id`, `summary`, `init_date`, `finish_date`, `status_id`, `date_approved`, `performer_id`) VALUES
-(1, 1, 'Group', 1, 3, 13, '<asd', '2019-03-14', '2019-03-05', 1, NULL, NULL),
+(1, 1, 'Group', 1, 2, 13, 'Prueba de Sumario', '2019-03-14', '2019-03-05', 1, NULL, NULL),
 (2, 2, 'Crud Test', 1, 1, NULL, 'A', '2019-03-22', '2019-03-29', 1, '2019-03-14', NULL);
 
 -- --------------------------------------------------------
@@ -169,6 +175,14 @@ CREATE TABLE `note_approver` (
   `user_id` int(11) DEFAULT NULL,
   `choice` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `note_approver`
+--
+
+INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
+(1, 1, 1, NULL),
+(3, 1, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,7 +201,10 @@ CREATE TABLE `note_type` (
 --
 
 INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
-(1, 'Acuerdo', 'Acuerdo');
+(1, 'Punto Sugerido', 'Punto Sugerido'),
+(2, 'Asignaciones', 'Asignaciones'),
+(3, 'Compromisos', 'Compromisos'),
+(4, 'Punto de Agenda', 'Punto de Agenda');
 
 -- --------------------------------------------------------
 
@@ -229,8 +246,10 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`id`, `name`, `description`) VALUES
-(1, 'Lider de Grupo', 'Lider de un Grupo'),
-(2, 'Administrador de grupo', 'Administrador de grupo');
+(1, 'Lider', 'Lider'),
+(2, 'Administrador', 'Administrador'),
+(3, 'Miembro', 'Miembro de Grupo'),
+(5, 'Invitado', 'Invitado');
 
 -- --------------------------------------------------------
 
@@ -249,8 +268,11 @@ CREATE TABLE `source` (
 --
 
 INSERT INTO `source` (`id`, `title`, `description`) VALUES
-(1, 'WhatsApp', 'WS'),
-(3, 'nuevo', 'Nuevo');
+(1, 'Chat de WhatsApp', 'Chat de WhatsApp'),
+(2, 'ReuniÃ³n', 'ReuniÃ³n'),
+(3, 'Reunion en el Almuerzo', 'A'),
+(4, 'ConversaciÃ³n', 'ConversaciÃ³n'),
+(5, 'HangOut', 'HangOut');
 
 -- --------------------------------------------------------
 
@@ -269,7 +291,8 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`id`, `name`, `description`) VALUES
-(1, 'Abierto', 'Abierto');
+(1, 'Abierto', 'Abierto'),
+(2, 'Cerrado', NULL);
 
 -- --------------------------------------------------------
 
@@ -408,7 +431,7 @@ ALTER TABLE `user_level`
 -- AUTO_INCREMENT de la tabla `affiliate`
 --
 ALTER TABLE `affiliate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `groups`
@@ -426,7 +449,7 @@ ALTER TABLE `group_user_role`
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `note`
@@ -438,13 +461,13 @@ ALTER TABLE `note`
 -- AUTO_INCREMENT de la tabla `note_approver`
 --
 ALTER TABLE `note_approver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `note_type`
 --
 ALTER TABLE `note_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `permission`
@@ -456,19 +479,19 @@ ALTER TABLE `permission`
 -- AUTO_INCREMENT de la tabla `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `source`
 --
 ALTER TABLE `source`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `status`
 --
 ALTER TABLE `status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
