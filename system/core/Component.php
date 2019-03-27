@@ -360,5 +360,7 @@
 			}
 			return $newStr.$replace;
 		}
+
+		
 	}
 ?>

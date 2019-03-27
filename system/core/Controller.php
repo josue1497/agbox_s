@@ -29,6 +29,7 @@
 				}else 
 				/* si el archivo/accion a cargar es form(form create/edit)*/
 				if($filename=='form'){
+					// var_dump($this->view->auto_build_form($this->view->auto_build_form_content($record),$record));die;
 					return $this->view->auto_build_form($this->view->auto_build_form_content($record),$record);
 				}else 
 				/* si el archivo/accion a cargar es items(cuadricula) */
@@ -97,10 +98,6 @@
 						/* si no lo consigue, carga el contenido del index por defecto*/
 				include_once(VIEWS_DIR. strtolower(CoreUtils::get_controller_name(new indexController())).'/index.php');
 				$this->view_processor->add_content(generate_content(new indexController(),'index',$record));
-/*
-				$this->view_processor->add_content(
-							CoreUtils::get_view_file_content('index',new indexController()));
-							*/
 					}
 					/* si la consigue arma la vista */
 					else{
@@ -124,6 +121,12 @@
 			echo $this->set_general_data($this->view_processor->build_view(),$filename);
         }
 		
+		/**
+		 * establece informacion general y standar en el html
+		 * @param type $html_view 
+		 * @param type $filename 
+		 * @return type
+		 */
 		public function set_general_data($html_view,$filename){
 			$html_view = str_replace(
 					'{{ name_module }}',

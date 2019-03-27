@@ -79,7 +79,7 @@ class Model
 	/**
 		* metodo para buscar registros segun algun atributo(array (column_name => value, ...))
 		*/
-	public function findByPoperty($properties)
+	public function findByPoperty($properties, $all=false)
 	{
 		if (empty($properties)) {
 			return null;
@@ -92,15 +92,19 @@ class Model
 			$sql .= ($first == false ? " and " : "") . $key . " = '" . $properties[$key] . "' ";
 			$first = false;
 		}
-
 		$req = Database::getBdd()->prepare($sql);
 		$req->execute();
-		return $req->fetch();
+		if($all){
+			return $req->fetchAll(PDO::FETCH_ASSOC);
+		}
+		return $req->fetch(PDO::FETCH_ASSOC);
+		// $req->fetchAll(PDO::FETCH_ASSOC);
+		// 
 	}
 
-	public function get_by_property($properties)
+	public function get_by_property($properties, $all=false)
 	{
-		return $this->findByPoperty($properties);
+		return $this->findByPoperty($properties,$all);
 	}
 
 	/**
@@ -133,9 +137,20 @@ class Model
 		* metodo para mostrar todos los registros
 		* retorna un array(filas) de arrays(columnas)
 		*/
-	public function showAllRecords()
+	public function showAllRecords($properties = null)
 	{
 		$sql = "SELECT * FROM " . $this->table_name . "";
+
+		if($properties != null ){
+			
+			$sql .=" Where ";
+			$keys = array_keys($properties);
+			$first = true;
+			foreach ($keys as $key) {
+				$sql .= ($first == false ? " and " : "") . $key . " = '" . $properties[$key] . "' ";
+				$first = false;
+			}
+		}
 		$req = Database::getBdd()->prepare($sql);
 		$req->execute();
 		return $req->fetchAll(PDO::FETCH_ASSOC);
@@ -362,6 +377,16 @@ class Model
 	public static function execute_query($sql){
 		$req = Database::getBdd()->prepare($sql);
 		return $req->execute();
+	}
+
+	public function hide_column($column=null){
+		if($column!=null){
+			for( $i = 0; $i< count($this->table_fields) ; $i++){
+				if($this->table_fields[$i]->get_name() ==$column){
+					   $this->table_fields[$i]->set_visible_grid(false);
+				}
+		 }
+		}
 	}
 }
  
