@@ -3,3 +3,4 @@ doxygen.exe
 doxyindexer.exe
 doxysearch.cgi.exe
 libclang.dll
+system/core/Application.php

@@ -114,7 +114,7 @@
 							</div>
 						</div>
 					</div>';
-		}
+        }
 		
 		/**
 		 * coloca un contenido html en un card
@@ -135,6 +135,7 @@
 				return $html;
 			// return CoreUtils::put_in_card($html,'Title');
         }
+		
 		/**
 		 * coloca un contenido html en un card
 		 * 
@@ -367,6 +368,70 @@
 			}
 			return $url;
 		}
+
+		public static function get_notification_count(){
+
+			$notification_record = Model::get_sql_data('SELECT count(*) as notif FROM notification WHERE user_to_id='.Session::get('user_id').' AND `read`='.'N'.'');
+			
+			$notification_html='';
+
+			foreach($notification_record as $notification){
+				$count=intval($notification['notif'])>0;
+				$notification_html.=$count? '<span class="badge badge-secondary badge-counter">'. $notification['notif'].'</span>':'';
+			}
+
+		  return $notification_html;
+				}
+
+		public static function get_user_notification(){
+
+			$notification_record = Model::get_sql_data('SELECT * FROM notification WHERE user_to_id='.Session::get('user_id').' ORDER BY shipping_date DESC');
+			
+			$notification_html='';
+			if(count($notification_record)>0){
+				foreach($notification_record as $notification){
+
+					$notification_html.='<a class="dropdown-item d-flex align-items-center" href="'.SERVER_DIR.DIRECTORY_SEPARATOR.$notification['controller_to'].DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.$notification['entity_id'].'">
+					<div class="mr-3">
+					<div class="icon-circle '.self::get_notification_color($notification['notification_type']).'">
+						 <p class='.$notification['read']==='N'?'"text-dark"':'"text-muted"'.'>'.self::get_notification_icon($notification['notification_type']).'</p>
+					</div>
+					</div>
+					<div>
+					<div class="small text-gray-500">'.date("F j, Y, g:i a", strtotime($notification['shipping_date'])).'</div>
+					<span class="font-weight-bold">'.$notification['message'].'</span>
+					</div>
+				</a>';
+				}
+		}else{
+			$notification_html.='<a class="dropdown-item d-flex align-items-center" href="#">
+				<div class="mr-3">
+				</div>
+				<div>
+				  <span class="font-weight-bold">there is not alerts!</span>
+				</div>
+			  </a>';
+		}
+
+			var_dump($notification_html);die;
+		  return $notification_html;
+				}
+
+		public static function get_notification_icon($type){
+			switch($type){
+				case 'affiliate':
+					return '<i class="fas fa-user-plus"></i>';
+			}
+			
+		}		
+
+		public static function get_notification_color($type){
+			switch($type){
+				case 'affiliate':
+					return ' bg-success ';
+			}
+			
+		}		
 		
 	}
 ?>

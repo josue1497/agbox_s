@@ -38,5 +38,19 @@ class Group_User_Role extends Model{
         );
         $this->init();
     }
+
+    public function get_user_by_role($role_name,$group_id){
+		$gur = new Group_User_Role();
+		$role_model = new Role();
+        $user_model = new User();
+        
+        $role_record=$role_model->findByPoperty(array('name'=>$role_name));
+        
+		$gur_record=$gur->findByPoperty(array('role_id'=>$role_record['id'], 'group_id'=>$group_id));
+                
+        $user_to=$user_model->findByPoperty(array('id'=>$gur_record['user_id']));
+
+        return $user_to;
+    }
 }
 ?>

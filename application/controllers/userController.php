@@ -17,5 +17,8 @@ class userController extends Controller{
 		$this->model->table_label='Perfil de Usuario';
 		$this->render("perfil");
 	}
+	public function perfil(){
+		$this->profile();
+	}
 }
 ?>

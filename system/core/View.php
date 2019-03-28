@@ -58,9 +58,8 @@ class View{
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
-	</div>';
+		</div>';
 	}
-
 	/**
 		 * metodo para construir contenido de la vista de formulario automaticamente,
 	  	 * desde los datos del modelo
@@ -345,6 +344,64 @@ class View{
 		return $res;
 	}
 
+	/**
+		 *  metodo para construir elementos de formulario en la vista,
+		 * sin un dato especifico en ella
+		 * desde las especificaciones del modelo 
+		 *
+		 * @param type $form_field 
+		 * @param type $data 
+		 * @return type
+		 */
+	public function build_element_without_data($form_field)
+	{
+		$res = '';
+		switch ($form_field->get_type()) {
+			case Column::$COLUMN_TYPE_TEXTAREA:
+				$res = Component::text_area(
+					$form_field->get_name(),
+					$form_field->get_label(),
+					$form_field->get_field_help(),
+					$form_field->get_field_html()
+				);
+				break;
+
+			case Column::$COLUMN_TYPE_SELECT:
+				$res = Component::select_field(
+					$form_field->get_name(),
+					$form_field->get_name(),
+					$form_field->get_label(),
+					($form_field->get_foreing_key() ? $form_field->get_fk_entity()->get_select_data() : $form_field->get_values()),
+					$form_field->get_field_html()
+				);
+				break;
+
+			case Column::$COLUMN_TYPE_ICONPICKER:
+				$res = Component::icon_picker(
+					$form_field->get_name(),
+					$form_field->get_label()
+				);
+				break;
+			case Column::$COLUMN_TYPE_TEXT:
+			case Column::$COLUMN_TYPE_DATE:
+			case Column::$COLUMN_TYPE_EMAIL:
+			case Column::$COLUMN_TYPE_HIDDEN:
+			case Column::$COLUMN_TYPE_NUMBER:
+			case Column::$COLUMN_TYPE_PASS:
+			default:
+				$res = Component::base_field(
+					$form_field->get_type(),
+					$form_field->get_name(),
+					isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
+					$form_field->get_label(),
+					$form_field->get_field_help(),
+					$form_field->get_field_html()
+				);
+				break;
+		}
+		return $res;
+	}
+	
 	public function buid_items_groups(){
 		$html='';
 

@@ -15,8 +15,6 @@
 		$group_record = $group_model->findByPoperty(array('id' => $this_record['group_id']));
 		$html_group=generate_group_div($group_record);
 
-
-
 		$html_result=file_get_contents(__DIR__.'/approve_affiliate.html');
 
 		$html_result=str_replace('{{ USER_INFO }}',CoreUtils::add_new_card($html_user,'User Information'),$html_result);

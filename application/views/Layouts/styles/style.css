@@ -86,8 +86,6 @@
 .profile-img img{
 	width: 250px;
 	height: 15rem;
-	padding: 2%;
-	border-radius:150px; 
 }
 .profile-img .file {
 	position: relative;

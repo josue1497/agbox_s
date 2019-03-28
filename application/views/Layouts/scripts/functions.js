@@ -13,4 +13,3 @@ function readURL(input, img) {
         img.src='/assets/no_preview.png';
       }
     }
-
