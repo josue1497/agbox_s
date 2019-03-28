@@ -391,17 +391,17 @@
 			if(count($notification_record)>0){
 				foreach($notification_record as $notification){
 
-					$notification_html.='<a class="dropdown-item d-flex align-items-center" href="'.SERVER_DIR.DIRECTORY_SEPARATOR.$notification['controller_to'].DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.$notification['entity_id'].'">
-					<div class="mr-3">
-					<div class="icon-circle '.self::get_notification_color($notification['notification_type']).'">
-						 <p class='.$notification['read']==='N'?'"text-dark"':'"text-muted"'.'>'.self::get_notification_icon($notification['notification_type']).'</p>
-					</div>
-					</div>
-					<div>
-					<div class="small text-gray-500">'.date("F j, Y, g:i a", strtotime($notification['shipping_date'])).'</div>
-					<span class="font-weight-bold">'.$notification['message'].'</span>
-					</div>
-				</a>';
+	$notification_html.='<a class="dropdown-item d-flex align-items-center" href="'.SERVER_DIR.DIRECTORY_SEPARATOR.$notification['controller_to'].DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.$notification['entity_id'].'">
+							<div class="mr-3">
+								<div class="icon-circle '.self::get_notification_color($notification['notification_type']).'">
+						 			<p class='.$notification['read']==='N'?'"text-dark"':'"text-muted"'.'>'.self::get_notification_icon($notification['notification_type']).'</p>
+								</div>
+							</div>
+							<div>
+								<div class="small text-gray-500">'.date("F j, Y, g:i a", strtotime($notification['shipping_date'])).'</div>
+									<span class="font-weight-bold">'.$notification['message'].'</span>
+							</div>
+						</a>';
 				}
 		}else{
 			$notification_html.='<a class="dropdown-item d-flex align-items-center" href="#">
