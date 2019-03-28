@@ -367,11 +367,24 @@ class Model
 	}
 
 	/**
-	*
-	*/
-	public static function execute_query($sql){
+	 * insert update delete 
+	 * @param type $sql 
+	 * @return type
+	 */
+	public static function execute_update($sql){
 		$req = Database::getBdd()->prepare($sql);
 		return $req->execute();
+	}
+	
+	/**
+	 * select 
+	 * @param type $sql 
+	 * @return type
+	 */
+	public static function execute_query($sql){
+		$req = Database::getBdd()->prepare($sql);
+		$req->execute();
+		return $req->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	public function hide_grid_column($column=null){

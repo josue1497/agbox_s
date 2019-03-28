@@ -29,7 +29,9 @@ function generate_content($controller, $filename = null, $record = null)
     <div class="row">
         <div class="col">
             <div class="form-group">
+            <div id="result_sql">
                 <h5>RESULT</h5>
+            </div>
                 <pre id="json"></pre>
             </div>
       </div>
