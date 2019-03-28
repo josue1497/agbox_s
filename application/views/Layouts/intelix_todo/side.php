@@ -37,13 +37,14 @@
         </a>
         <div id="collapseAjustes" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">Preferencias</a>
-            <a class="collapse-item" href="#">Ajustes</a>
+            <!--<a class="collapse-item" href="#">Preferencias</a>
+            <a class="collapse-item" href="#">Ajustes</a>-->
             <a class="collapse-item" href="{{ base_url }}menu/index">Menu</a>
             <a class="collapse-item" href="{{ base_url }}permission/index">Permisos</a>
             <a class="collapse-item" href="{{ base_url }}user/index">Usuarios</a>
-            <a class="collapse-item" href="{{ base_url }}user_level/index">Roles</a>
-
+            <a class="collapse-item" href="{{ base_url }}user_level/index">Niveles</a></a>
+            <a class="collapse-item" href="{{ base_url }}query_console/index">Consola sql update</a>
+            <a class="collapse-item" href="{{ base_url }}query_console/select_query">Consola sql select</a>
           </div>
         </div>
       </li>
