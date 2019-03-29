@@ -13,3 +13,12 @@ function readURL(input, img) {
         img.src='/assets/no_preview.png';
       }
     }
+
+function toReadNotification(uri_to, uri_read, notification_id){
+    $.post(uri_read,{notification_id:notification_id})
+        .done(function(data){
+            location.href =uri_to;
+        }).fail(function() {
+            alert( "error" );
+        }) ;   
+}

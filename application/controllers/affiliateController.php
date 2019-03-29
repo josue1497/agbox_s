@@ -48,8 +48,6 @@ class affiliateController extends Controller{
 
 		$this->set($d);
 
-		// $this->view->add_script_js("");
-
 		$this->render('approve_affiliate');
 	}
 
@@ -152,16 +150,16 @@ var app = new Vue({
 				$user_to=$gur->get_user_by_role('Lider',$_POST['group_id']);
 
 				$entity_to=Model::get_sql_data("select id from affiliate order by id DESC limit 1 ");
-				$affiliate_id=intval($entity_to[0]['id']);
-
+        $affiliate_id=intval($entity_to[0]['id']);
+        
 				$sql="INSERT INTO notification
-						( message, user_to_id, entity_id, notification_type, shipping_date, `read`)
-						VALUES( 'Nueva solicitud de Afiliacion', ".$user_to['id'].", '".++$affiliate_id."', 'affiliate/', CURRENT_TIMESTAMP, 'N')";
-            
-				// $req=Model::execute_query($sql);
-        // if($req){
-        //     echo $this->model->create($sql); 
-        // }        
+        (message, user_to_id, entity_id, notification_type,controller_to, shipping_date, `read`)
+        VALUES( 'Nueva Solicitud de Afilicacion', ".$user_to['id'].", '".++$affiliate_id."', 'affiliate','affiliate/approve_affiliate', 
+        CURRENT_TIMESTAMP, 'N')";
+
+        if($this->model->create($_POST)){
+          echo Model::execute_update($sql);;
+        }        
     }
 
     function get_img(){

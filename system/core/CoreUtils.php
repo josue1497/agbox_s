@@ -371,7 +371,7 @@
 
 		public static function get_notification_count(){
 
-			$notification_record = Model::get_sql_data('SELECT count(*) as notif FROM notification WHERE user_to_id='.Session::get('user_id').' AND `read`='.'N'.'');
+			$notification_record = Model::get_sql_data("SELECT count(id) notif FROM notification WHERE user_to_id=".Session::get('user_id')." AND `read`='N'");
 			
 			$notification_html='';
 
@@ -390,16 +390,15 @@
 			$notification_html='';
 			if(count($notification_record)>0){
 				foreach($notification_record as $notification){
-
-	$notification_html.='<a class="dropdown-item d-flex align-items-center" href="'.SERVER_DIR.DIRECTORY_SEPARATOR.$notification['controller_to'].DIRECTORY_SEPARATOR.DIRECTORY_SEPARATOR.$notification['entity_id'].'">
-							<div class="mr-3">
-								<div class="icon-circle '.self::get_notification_color($notification['notification_type']).'">
-						 			<p class='.$notification['read']==='N'?'"text-dark"':'"text-muted"'.'>'.self::get_notification_icon($notification['notification_type']).'</p>
-								</div>
-							</div>
+					$text=$notification['read']==="N"?"text-dark font-weight-bold ":"text-muted font-weight-normal";
+					$uri_to=SERVER_DIR.$notification['controller_to'].DIRECTORY_SEPARATOR.$notification['entity_id'];
+					$to_read = SERVER_DIR.'notification/read_notification';
+				$hola='href="'.SERVER_DIR.$notification['controller_to'].DIRECTORY_SEPARATOR.$notification['entity_id'].'';
+				$notification_html.='<a class="dropdown-item d-flex align-items-center" onclick="toReadNotification(\''.$uri_to.'\',\''.$to_read.'\',\''.$notification['id'].'\');">
+							'.self::get_notification_icon($notification['notification_type']).'
 							<div>
 								<div class="small text-gray-500">'.date("F j, Y, g:i a", strtotime($notification['shipping_date'])).'</div>
-									<span class="font-weight-bold">'.$notification['message'].'</span>
+									<span class="'.$text.'">'.$notification['message'].'</span>
 							</div>
 						</a>';
 				}
@@ -413,16 +412,23 @@
 			  </a>';
 		}
 
-			var_dump($notification_html);die;
 		  return $notification_html;
 				}
 
 		public static function get_notification_icon($type){
+			$html= '<div class="mr-3">
+						<div class="icon-circle '.self::get_notification_color($type).'">';
 			switch($type){
 				case 'affiliate':
-					return '<i class="fas fa-user-plus"></i>';
+					$html.='<i class="fas fa-file-alt text-white"></i>';
+				  break;
+
 			}
+
+			$html.='</div>
+			</div>';
 			
+		  return $html;
 		}		
 
 		public static function get_notification_color($type){

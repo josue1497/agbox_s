@@ -46,13 +46,18 @@
               </a>
               
 
-              <!-- Dropdown - Alerts -->
              
-               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header bg-primary border-primary">
-                  Notificaciones
-                </h6>
+               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+               <h6 class="dropdown-header bg-primary border-primary">
+                    Notificaciones
+                  </h6>
+                <!-- <div style="height:50vh;"> -->
+                <div>
+                  <div class="mh-100 overflow-auto">
                   {{ NOTIFICATION_DIV }}
+                  </div>
+                  <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                </div>
                 <!--
                 <a class="dropdown-item d-flex align-items-center" href="#">
                   <div class="mr-3">
@@ -87,7 +92,7 @@
                     Spending Alert: We've noticed unusually high spending for your account.
                   </div>
                 </a>-->
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                
               </div> 
             </li>
 
@@ -98,7 +103,6 @@
                  Counter - Messages 
                 <span class="badge badge-secondary badge-counter">7</span>
               </a>
-              <!-- Dropdown - Messages 
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
                   Message Center
