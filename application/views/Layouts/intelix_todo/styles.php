@@ -26,3 +26,7 @@
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/jquery.dataTables.min.css" />
 
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/select2.min.css" />
+
+
+<link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/styles/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/styles/slick/slick-theme.css"/>
