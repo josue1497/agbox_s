@@ -28,5 +28,8 @@
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/select2.min.css" />
 
 
-<link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/styles/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/styles/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/slick/slick-theme.css"/>
+
+<!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/> -->

@@ -36,16 +36,5 @@
 			width: '100%',
 		});
 </script>
-
-<script type="text/javascript" src="{{ base_url }}application/views/Layouts/scripts/slick.js"></script>
-
-<script>
-      $(document).ready(function(){
-        $('.slide-cont').slick({
-  			infinite: true,
-  			slidesToShow: 3,
-  			slidesToScroll: 3
-			});
-        });
-	
-  </script>
+<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+<script type="text/javascript" src="{{ base_url }}application/views/Layouts/slick/slick.min.js"></script>
