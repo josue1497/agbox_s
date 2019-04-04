@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-03-2019 a las 19:23:16
+-- Tiempo de generación: 04-04-2019 a las 22:44:25
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.1.26
 
@@ -13,7 +13,20 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-drop table if exists affiliate;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `abx_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `affiliate`
+--
 
 CREATE TABLE `affiliate` (
   `id` int(11) NOT NULL,
@@ -25,6 +38,7 @@ CREATE TABLE `affiliate` (
 --
 -- Volcado de datos para la tabla `affiliate`
 --
+
 INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 (1, 13, 1, 'Yes'),
 (2, 14, 1, 'Yes'),
@@ -32,7 +46,12 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 (4, 17, 1, NULL),
 (5, 18, 1, NULL),
 (6, 19, 1, NULL),
-(7, 16, 1, NULL);
+(7, 16, 1, NULL),
+(8, 13, 2, NULL),
+(9, NULL, NULL, NULL),
+(10, 20, 1, NULL),
+(11, 20, 2, NULL),
+(12, 19, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -40,11 +59,9 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 -- Estructura de tabla para la tabla `groups`
 --
 
-drop table if exists groups ;
-
 CREATE TABLE `groups` (
-  `id` int(11) ,
-  `domain_id` int(11) ,
+  `id` int(11) NOT NULL,
+  `domain_id` int(11) DEFAULT NULL,
   `parent_group_id` int(11) DEFAULT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
@@ -55,7 +72,6 @@ CREATE TABLE `groups` (
 -- Volcado de datos para la tabla `groups`
 --
 
-<<<<<<< HEAD
 INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`, `group_photo`) VALUES
 (13, NULL, NULL, 'Prueba 1', 'Prueba 1', '1552967118_(iori03_)12345729_862092230578521_320436592_n.jpg'),
 (14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
@@ -63,25 +79,14 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 (16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
 (17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg'),
 (18, NULL, NULL, 'Grupo 6', 'Grupo 6', NULL),
-(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg');
-=======
->>>>>>> master
+(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg'),
+(20, NULL, 14, 'New group', 'New group', '1553712932_IMG-20190306-WA0024.jpg');
 
-INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`, `group_photo`) VALUES
-(13, NULL, NULL, 'Prueba 1', 'Prueba 1', '1552967118_(iori03_)12345729_862092230578521_320436592_n.jpg'),
-(14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
-(15, NULL, NULL, 'Grupo 3', 'Grupo 3', '1553056938_(silla_e_mimbre)12224228_1654611478130905_689608145_n.jpg'),
-(16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
-(17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg'),
-(18, NULL, NULL, 'Grupo 6', 'Grupo 6', NULL),
-(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg');
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `group_user_role`
 --
-
-drop table if exists group_user_role;
 
 CREATE TABLE `group_user_role` (
   `id` int(11) NOT NULL,
@@ -90,22 +95,20 @@ CREATE TABLE `group_user_role` (
   `role_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `group_user_role`
 --
-=======
->>>>>>> master
 
 INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
-(1, 13, 1, 1);
+(1, 13, 1, 1),
+(2, 19, 1, 1),
+(3, 20, 1, 1);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `menu`
 --
-drop table if exists menu;
 
 CREATE TABLE `menu` (
   `menu_id` int(5) NOT NULL,
@@ -131,20 +134,20 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 (15, 'Note Type', 'Type', 'fab fa-accessible-icon', 5, 'note_type', 11),
 (16, 'Test', 'Prueba', 'fab fa-accessible-icon', 5, '#', 0),
 (17, 'Note Approver', 'Note Approver', 'fas fa-address-book', 6, 'note_approver', 11),
-(18, 'Affiliate To Group', 'Affiliate To Group', 'empty', 1, 'affiliate_to_group/items', 16),
+(18, 'Affiliate To Group', 'Affiliate To Group', 'empty', 1, 'affiliate/items', 16),
 (19, 'Note Status', 'Note Status', 'fab fa-accessible-icon', 2, 'status', 11),
 (20, 'Create Assignment', 'Create Assignment', 'empty', 2, 'note/create_assignment', 21),
 (21, 'Notas', 'Notas', 'far fa-address-book', 3, NULL, 0),
 (22, 'Create Suggested Point', 'Create Suggested Point', 'empty', 2, 'note/create_suggested_point', 21),
 (23, 'Create commitment', 'Create commitment', 'empty', 3, 'note/create_commitment', 21),
-(24, 'Create agenda point', 'Create agenda point', 'empty', 4, 'note/create_agenda_point', 21);
+(24, 'Create agenda point', 'Create agenda point', 'empty', 4, 'note/create_agenda_point', 21),
+(25, 'Role group', NULL, 'fab fa-adn', 23, 'group_user_role', 11);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `note`
 --
-drop table if exists note;
 
 CREATE TABLE `note` (
   `id` int(11) NOT NULL,
@@ -161,13 +164,10 @@ CREATE TABLE `note` (
   `performer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `note`
 --
 
-=======
->>>>>>> master
 INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `group_id`, `summary`, `init_date`, `finish_date`, `status_id`, `date_approved`, `performer_id`) VALUES
 (1, 1, 'Group', 1, 2, 13, 'Prueba de Sumario', '2019-03-14', '2019-03-05', 1, NULL, NULL),
 (2, 2, 'Crud Test', 1, 1, NULL, 'A', '2019-03-22', '2019-03-29', 1, '2019-03-14', NULL);
@@ -177,8 +177,6 @@ INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `grou
 --
 -- Estructura de tabla para la tabla `note_approver`
 --
-
-drop table if exists note_approver;
 
 CREATE TABLE `note_approver` (
   `id` int(11) NOT NULL,
@@ -197,17 +195,9 @@ INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
 
 -- --------------------------------------------------------
 
-
-INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
-(1, 1, 1, NULL),
-(3, 1, 2, NULL);
-
-
 --
 -- Estructura de tabla para la tabla `note_type`
 --
-
-drop table if exists note_type;
 
 CREATE TABLE `note_type` (
   `id` int(11) NOT NULL,
@@ -219,7 +209,6 @@ CREATE TABLE `note_type` (
 -- Volcado de datos para la tabla `note_type`
 --
 
-
 INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
 (1, 'Punto Sugerido', 'Punto Sugerido'),
 (2, 'Asignaciones', 'Asignaciones'),
@@ -229,9 +218,39 @@ INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `notification`
+--
+
+CREATE TABLE `notification` (
+  `id` int(11) NOT NULL,
+  `message` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `user_to_id` int(11) DEFAULT NULL,
+  `controller_to` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `entity_id` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `notification_type` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `shipping_date` timestamp NULL DEFAULT NULL,
+  `read` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `notification`
+--
+
+INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `entity_id`, `notification_type`, `shipping_date`, `read`) VALUES
+(2, 'test notification 2', 1, 'affiliate/approve_affiliate', '1', 'affiliate', '2019-03-29 13:24:09', 'Y'),
+(3, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 14:28:05', 'Y'),
+(4, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:16:42', 'Y'),
+(5, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:17:33', 'Y'),
+(6, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:18:40', 'Y'),
+(7, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '10', 'affiliate', '2019-03-29 22:22:11', 'Y'),
+(8, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '12', 'affiliate', '2019-03-29 22:38:37', 'Y');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `permission`
 --
-drop table if exists permission;
+
 CREATE TABLE `permission` (
   `id` int(5) NOT NULL,
   `menu_id` int(5) DEFAULT NULL,
@@ -255,8 +274,6 @@ INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_wri
 -- Estructura de tabla para la tabla `role`
 --
 
-drop table if exists role;
-
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
@@ -272,18 +289,12 @@ INSERT INTO `role` (`id`, `name`, `description`) VALUES
 (2, 'Administrador', 'Administrador'),
 (3, 'Miembro', 'Miembro de Grupo'),
 (5, 'Invitado', 'Invitado');
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `source`
 --
-
-drop table if exists source;
 
 CREATE TABLE `source` (
   `id` int(11) NOT NULL,
@@ -301,17 +312,13 @@ INSERT INTO `source` (`id`, `title`, `description`) VALUES
 (3, 'Reunion en el Almuerzo', 'A'),
 (4, 'ConversaciÃ³n', 'ConversaciÃ³n'),
 (5, 'HangOut', 'HangOut');
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `status`
 --
-drop table if exists status;
+
 CREATE TABLE `status` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
@@ -332,7 +339,6 @@ INSERT INTO `status` (`id`, `name`, `description`) VALUES
 -- Estructura de tabla para la tabla `user`
 --
 
-drop table if exists user;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
@@ -352,14 +358,13 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username`, `password`, `profile_photo`, `user_level_id`, `is_visitor`) VALUES
 (1, 1, 'Administrador', 'Intelix', 'jmartinezm@intelix.biz', 'admin', 'admin', '1553488242_Josue Martinez.jpg', 1, 'No'),
-(2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'josu12345', NULL, 1, 'No');
+(2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'jmartinezm', NULL, 1, 'No');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `user_level`
 --
-drop table if exists user_level;
 
 CREATE TABLE `user_level` (
   `id` int(5) NOT NULL,
@@ -422,6 +427,12 @@ ALTER TABLE `note_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `permission`
 --
 ALTER TABLE `permission`
@@ -465,29 +476,25 @@ ALTER TABLE `user_level`
 -- AUTO_INCREMENT de la tabla `affiliate`
 --
 ALTER TABLE `affiliate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `groups`
 --
 ALTER TABLE `groups`
-<<<<<<< HEAD
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
->>>>>>> master
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `group_user_role`
 --
 ALTER TABLE `group_user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `note`
@@ -508,6 +515,12 @@ ALTER TABLE `note_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `permission`
 --
 ALTER TABLE `permission`
@@ -523,11 +536,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT de la tabla `source`
 --
 ALTER TABLE `source`
-<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
->>>>>>> master
 
 --
 -- AUTO_INCREMENT de la tabla `status`
@@ -547,3 +556,7 @@ ALTER TABLE `user`
 ALTER TABLE `user_level`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
