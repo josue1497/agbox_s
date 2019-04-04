@@ -1,5 +1,9 @@
 <?php
 class Notification extends Model{
+
+    public static $AFFILIATE = 'affiliate';
+    public static $APPROVE_AFFILIATE = 'approve_affiliate';
+
     public function __construct()
     {
 
@@ -47,5 +51,12 @@ class Notification extends Model{
         );
 
         $this->init();
+    }
+
+    public static function create_notification(array $params){
+        $notification= new Notification();
+
+        return $notification->create($params);
+
     }
 }

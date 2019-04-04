@@ -212,7 +212,7 @@
 			$role_id = Session::get('role_id');
 
 			$row = (new Permission())->get_by_property(
-        		array('level_user_id'=>$role_id,'menu_id'=>$menu_id));
+						array('user_level_id'=>$role_id,'menu_id'=>$menu_id));
 
         	if(!isset($row) || !isset($row['id']))
 				return null;
@@ -402,7 +402,6 @@
 							</div>
 						</a>';
 				}
-		}else{
 			$notification_html.='<a class="dropdown-item d-flex align-items-center" href="#">
 				<div class="mr-3">
 				</div>

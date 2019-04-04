@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-04-2019 a las 22:44:25
+-- Tiempo de generación: 05-04-2019 a las 01:58:42
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.1.26
 
@@ -51,7 +51,11 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 (9, NULL, NULL, NULL),
 (10, 20, 1, NULL),
 (11, 20, 2, NULL),
-(12, 19, 2, NULL);
+(12, 19, 2, NULL),
+(13, 13, 3, 'Yes'),
+(14, 20, 3, 'Yes'),
+(16, 14, 2, NULL),
+(17, 18, 2, 'Yes');
 
 -- --------------------------------------------------------
 
@@ -102,7 +106,11 @@ CREATE TABLE `group_user_role` (
 INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 (1, 13, 1, 1),
 (2, 19, 1, 1),
-(3, 20, 1, 1);
+(3, 20, 1, 1),
+(4, 13, 3, 3),
+(6, 20, 3, NULL),
+(7, 18, 1, 1),
+(8, 18, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -127,7 +135,7 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `url`, `parent_menu_id`) VALUES
 (7, 'Sources', 'Soruces', 'empty', 0, 'source/index', 11),
 (9, 'Role', 'Role', 'empty', NULL, 'role/index', 11),
-(11, 'Crud Test', 'Crud', 'fas fa-notes-medical', 1, '#', 0),
+(11, 'Mantenimiento', 'Mantenimiento', 'fab fa-algolia', 1, '#', 0),
 (12, 'Affiliate', 'Affiliate', 'fab fa-500px', 3, 'affiliate', 11),
 (13, 'Group', 'Group', 'empty', 4, 'groups', 11),
 (14, 'Note', 'Note', 'fas fa-address-book', 4, 'note', 11),
@@ -141,7 +149,8 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 (22, 'Create Suggested Point', 'Create Suggested Point', 'empty', 2, 'note/create_suggested_point', 21),
 (23, 'Create commitment', 'Create commitment', 'empty', 3, 'note/create_commitment', 21),
 (24, 'Create agenda point', 'Create agenda point', 'empty', 4, 'note/create_agenda_point', 21),
-(25, 'Role group', NULL, 'fab fa-adn', 23, 'group_user_role', 11);
+(25, 'Role group', NULL, 'fab fa-adn', 23, 'group_user_role', 11),
+(26, 'Afiliacion a Grupos', 'Afiliacion a Grupos', 'empty', 2, 'affiliate/items', 11);
 
 -- --------------------------------------------------------
 
@@ -228,7 +237,7 @@ CREATE TABLE `notification` (
   `controller_to` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `entity_id` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `notification_type` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `shipping_date` timestamp NULL DEFAULT NULL,
+  `shipping_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `read` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -243,7 +252,11 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 (5, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:17:33', 'Y'),
 (6, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:18:40', 'Y'),
 (7, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '10', 'affiliate', '2019-03-29 22:22:11', 'Y'),
-(8, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '12', 'affiliate', '2019-03-29 22:38:37', 'Y');
+(8, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '12', 'affiliate', '2019-03-29 22:38:37', 'Y'),
+(9, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '13', 'affiliate', '2019-04-04 22:24:16', 'Y'),
+(10, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-04 23:18:46', 'Y'),
+(11, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-04 23:21:58', 'Y'),
+(12, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '17', 'affiliate', '2019-04-04 23:28:47', 'Y');
 
 -- --------------------------------------------------------
 
@@ -266,7 +279,15 @@ CREATE TABLE `permission` (
 --
 
 INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_write`, `can_edit`, `can_delete`) VALUES
-(1, 5, 1, 'Yes', 'No', 'Yes', 'No');
+(1, 5, 1, 'Yes', 'No', 'Yes', 'No'),
+(2, 21, 2, 'No', 'No', 'No', 'No'),
+(3, 20, 2, 'No', 'No', 'No', 'No'),
+(4, 16, 2, 'No', NULL, NULL, NULL),
+(5, 7, 2, 'No', NULL, NULL, NULL),
+(6, 9, 2, 'No', NULL, NULL, NULL),
+(7, 12, 2, 'No', NULL, NULL, NULL),
+(8, 15, 2, 'No', NULL, NULL, NULL),
+(9, 19, 2, 'No', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -358,7 +379,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username`, `password`, `profile_photo`, `user_level_id`, `is_visitor`) VALUES
 (1, 1, 'Administrador', 'Intelix', 'jmartinezm@intelix.biz', 'admin', 'admin', '1553488242_Josue Martinez.jpg', 1, 'No'),
-(2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'jmartinezm', NULL, 1, 'No');
+(2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'jmartinezm', NULL, 1, 'No'),
+(3, NULL, 'UsuarioX', 'ApellidoX', 'mailX@x.com', 'usuariox', 'usuariox', '1554415923_image.png', 2, 'No');
 
 -- --------------------------------------------------------
 
@@ -476,7 +498,7 @@ ALTER TABLE `user_level`
 -- AUTO_INCREMENT de la tabla `affiliate`
 --
 ALTER TABLE `affiliate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `groups`
@@ -488,13 +510,13 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT de la tabla `group_user_role`
 --
 ALTER TABLE `group_user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `note`
@@ -518,13 +540,13 @@ ALTER TABLE `note_type`
 -- AUTO_INCREMENT de la tabla `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `role`
@@ -548,7 +570,7 @@ ALTER TABLE `status`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `user_level`

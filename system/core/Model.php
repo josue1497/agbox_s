@@ -235,8 +235,6 @@ class Model
 	public function create($params)
 	{
 
-		echo '<script>console.log("modelo: agregar registro nuevo")</script>';
-
 		if ($this->exist_unike_keys($params)) {
 			echo '<script>console.log("modelo: ya existe la clave unica")</script>';
 
