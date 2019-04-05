@@ -55,18 +55,6 @@ CREATE TABLE `groups` (
 -- Volcado de datos para la tabla `groups`
 --
 
-<<<<<<< HEAD
-INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`, `group_photo`) VALUES
-(13, NULL, NULL, 'Prueba 1', 'Prueba 1', '1552967118_(iori03_)12345729_862092230578521_320436592_n.jpg'),
-(14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
-(15, NULL, NULL, 'Grupo 3', 'Grupo 3', '1553056938_(silla_e_mimbre)12224228_1654611478130905_689608145_n.jpg'),
-(16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
-(17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg'),
-(18, NULL, NULL, 'Grupo 6', 'Grupo 6', NULL),
-(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg');
-=======
->>>>>>> master
-
 INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`, `group_photo`) VALUES
 (13, NULL, NULL, 'Prueba 1', 'Prueba 1', '1552967118_(iori03_)12345729_862092230578521_320436592_n.jpg'),
 (14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
@@ -161,13 +149,10 @@ CREATE TABLE `note` (
   `performer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-<<<<<<< HEAD
 --
 -- Volcado de datos para la tabla `note`
 --
 
-=======
->>>>>>> master
 INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `group_id`, `summary`, `init_date`, `finish_date`, `status_id`, `date_approved`, `performer_id`) VALUES
 (1, 1, 'Group', 1, 2, 13, 'Prueba de Sumario', '2019-03-14', '2019-03-05', 1, NULL, NULL),
 (2, 2, 'Crud Test', 1, 1, NULL, 'A', '2019-03-22', '2019-03-29', 1, '2019-03-14', NULL);
@@ -196,11 +181,6 @@ INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
 (3, 1, 2, NULL);
 
 -- --------------------------------------------------------
-
-
-INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
-(1, 1, 1, NULL),
-(3, 1, 2, NULL);
 
 
 --
@@ -272,10 +252,6 @@ INSERT INTO `role` (`id`, `name`, `description`) VALUES
 (2, 'Administrador', 'Administrador'),
 (3, 'Miembro', 'Miembro de Grupo'),
 (5, 'Invitado', 'Invitado');
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 -- --------------------------------------------------------
 
@@ -301,10 +277,6 @@ INSERT INTO `source` (`id`, `title`, `description`) VALUES
 (3, 'Reunion en el Almuerzo', 'A'),
 (4, 'ConversaciÃ³n', 'ConversaciÃ³n'),
 (5, 'HangOut', 'HangOut');
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 -- --------------------------------------------------------
 
@@ -523,11 +495,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT de la tabla `source`
 --
 ALTER TABLE `source`
-<<<<<<< HEAD
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
->>>>>>> master
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `status`

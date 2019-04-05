@@ -354,7 +354,7 @@ class Model
 		$req = Database::getBdd()->prepare($sql);
 
 		$i=1;
-		if(count($params)>0){
+		if(is_array($params) && count($params)>0){
 		foreach($params as $param){
 			$req->bindParam($i++,$param);
 		}
