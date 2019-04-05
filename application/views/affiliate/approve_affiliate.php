@@ -22,6 +22,16 @@
         $html_result=str_replace('{{ GROUP_USER }}',CoreUtils::add_new_card($html_group,'Group Information'),$html_result);
         // $html_result=str_replace('{{ ROLE_SECTION }}',CoreUtils::add_new_card( generate_role_user(),'Roles'),$html_result);
 
+				$controller->view->add_script_js("function send_data(){
+					$.post( '".SERVER_DIR."affiliate/approve_user',".
+						"{record_id:".$this_record['id'].",approved:'Yes',role_id:$('#group_user_role').val()}".
+						", function( data ) {
+						console.log(data);
+						if('ok'===data){
+							location.href='".SERVER_DIR."';
+						}
+					});
+				}");
 		return $html_result;
 }
 
@@ -51,8 +61,9 @@ function generate_group_div($group){
 	return $html;
 } 
 function generate_button_approve($affiliate){
-	$disable =empty($affiliate['approved'])?'':'disabled';
-	return '<button class="btn btn-primary mx-3" '.$disable.'>Accept</button>
+	$disable =empty($affiliate['approved'])?'':'disabled ';
+		return '<span class="result"></span><button class="btn btn-primary mx-3" '.$disable.
+		' onclick="send_data()" >Accept</button>
 	<button class="btn btn-secondary" '.$disable.'>Decline</button>';
 } 
 

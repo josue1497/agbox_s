@@ -11,7 +11,10 @@ class indexController extends Controller{
     function index(){
 		$this->init(new User());
 		$this->model->table_label='Dashboard';
-		$this->view->add_script_js(' $(\'.slide-cont\').slick({
+		$this->view->add_script_js('
+		
+		$(document).ready(function(){
+		$(\'.slide-cont\').slick({
 			centerMode: true,
 			centerPadding: \'60px\',
 			slidesToShow: 3,
@@ -35,7 +38,9 @@ class indexController extends Controller{
 					}
 				}
 			]
-	});');
+			});
+		});
+	');
 		$this->render("index");
     }
 

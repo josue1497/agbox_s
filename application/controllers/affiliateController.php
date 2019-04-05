@@ -101,7 +101,8 @@ class affiliateController extends Controller{
 											console.log(e);
 											$('[m_id='+e+']').attr('id','m_'+e);
 											$('#m_'+e).attr('class', 'btn btn-success');
-											$('#m_'+e).text('Solicitado');
+                      $('#m_'+e).text('Solicitado');
+                      $('#m_'+e).attr('disabled','disabled');
                     }},
 created:function () { 
    this.getGroupPhoto(this.group_photo, this.id);
@@ -151,6 +152,8 @@ var app = new Vue({
 
 				$entity_to=Model::get_sql_data("select id from affiliate order by id DESC limit 1 ");
         $affiliate_id=intval($entity_to[0]['id']);
+
+       Notification::create_notification();
         
 				$sql="INSERT INTO notification
         (message, user_to_id, entity_id, notification_type,controller_to, shipping_date, `read`)
@@ -158,7 +161,8 @@ var app = new Vue({
         CURRENT_TIMESTAMP, 'N')";
 
         if($this->model->create($_POST)){
-          echo Model::execute_update($sql);;
+          echo Model::execute_update($sql);
+
         }        
     }
 
@@ -166,5 +170,38 @@ var app = new Vue({
       $photo= Component::img_to_base64(UPLOADS_DIR.$_POST['group_photo']);
       echo $photo;
     }
+
+    function approve_user(){
+     
+      $data =$_POST;
+
+      $affiliate_model = new Affiliate();
+
+      $affiliate_record = $affiliate_model->get_by_property(array('id'=>$data['record_id']));
+
+      $role_group = array('user_id'=>$affiliate_record['user_id'],
+                         'group_id'=>$affiliate_record['group_id'],
+                          'role_id'=>$data['role_id']);
+
+      $gur_model = new Group_User_Role();
+      $req1=$gur_model->create($role_group);
+      if($req1){
+        $affiliate_record['approved']=$data['approved'];
+        $req2=$affiliate_model->edit($data['record_id'], $affiliate_record);
+
+          if($req2){
+            $notification_model = new Notification();
+
+          }
+      }
+
+      if($req1 && $req2){
+        echo 'ok';
+      }else{
+        echo 'failed';
+      }
+      
+    }
 }
+
 ?>
