@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 05-04-2019 a las 01:58:42
+-- Tiempo de generación: 06-04-2019 a las 01:22:10
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.1.26
 
@@ -55,7 +55,12 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 (13, 13, 3, 'Yes'),
 (14, 20, 3, 'Yes'),
 (16, 14, 2, NULL),
-(17, 18, 2, 'Yes');
+(17, 18, 2, 'Yes'),
+(20, 17, 2, NULL),
+(21, 17, 3, 'Yes'),
+(22, 19, 3, 'Yes'),
+(23, 14, 3, NULL),
+(25, 18, 3, 'Yes');
 
 -- --------------------------------------------------------
 
@@ -69,22 +74,23 @@ CREATE TABLE `groups` (
   `parent_group_id` int(11) DEFAULT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
-  `group_photo` varchar(256) DEFAULT NULL
+  `group_photo` varchar(256) DEFAULT NULL,
+  `leader_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
 
 --
 -- Volcado de datos para la tabla `groups`
 --
 
-INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`, `group_photo`) VALUES
-(13, NULL, NULL, 'Prueba 1', 'Prueba 1', '1552967118_(iori03_)12345729_862092230578521_320436592_n.jpg'),
-(14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
-(15, NULL, NULL, 'Grupo 3', 'Grupo 3', '1553056938_(silla_e_mimbre)12224228_1654611478130905_689608145_n.jpg'),
-(16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg'),
-(17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg'),
-(18, NULL, NULL, 'Grupo 6', 'Grupo 6', NULL),
-(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg'),
-(20, NULL, 14, 'New group', 'New group', '1553712932_IMG-20190306-WA0024.jpg');
+INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description`, `group_photo`, `leader_id`) VALUES
+(13, NULL, NULL, 'Prueba 1', 'Prueba 1', '1552967118_(iori03_)12345729_862092230578521_320436592_n.jpg', NULL),
+(14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg', NULL),
+(15, NULL, NULL, 'Grupo 3', 'Grupo 3', '1553056938_(silla_e_mimbre)12224228_1654611478130905_689608145_n.jpg', NULL),
+(16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg', NULL),
+(17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg', NULL),
+(18, NULL, NULL, 'Grupo 6', 'Grupo 6', NULL, 2),
+(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg', NULL),
+(20, NULL, 14, 'New group', 'New group', '1553712932_IMG-20190306-WA0024.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -109,8 +115,12 @@ INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 (3, 20, 1, 1),
 (4, 13, 3, 3),
 (6, 20, 3, NULL),
-(7, 18, 1, 1),
-(8, 18, 2, 3);
+(7, 18, 3, 3),
+(9, 17, 1, 1),
+(10, 17, 3, 3),
+(11, 19, 3, 3),
+(12, 16, 1, 1),
+(13, 18, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -256,7 +266,17 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 (9, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '13', 'affiliate', '2019-04-04 22:24:16', 'Y'),
 (10, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-04 23:18:46', 'Y'),
 (11, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-04 23:21:58', 'Y'),
-(12, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '17', 'affiliate', '2019-04-04 23:28:47', 'Y');
+(12, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '17', 'affiliate', '2019-04-04 23:28:47', 'Y'),
+(13, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '18', 'affiliate', '2019-04-05 20:53:47', 'Y'),
+(14, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '21', 'affiliate', '2019-04-05 21:02:40', 'Y'),
+(15, 'Solicitud Aprobada', 3, 'groups/group_information', '17', 'approve_affiliate', '2019-04-05 21:10:58', 'Y'),
+(16, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '22', 'affiliate', '2019-04-05 22:46:22', 'Y'),
+(17, 'Solicitud Aprobada', 3, 'groups/group_information', '19', 'approve_affiliate', '2019-04-05 22:46:46', 'Y'),
+(18, 'Nueva Solicitud de Afilicacion', NULL, 'affiliate/approve_affiliate', '23', 'affiliate', '2019-04-05 23:00:15', 'N'),
+(19, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '24', 'affiliate', '2019-04-05 23:01:36', 'Y'),
+(20, 'Solicitud Declinada', 3, '#', '18', 'decline_affiliate', '2019-04-05 23:04:23', 'Y'),
+(21, 'Nueva Solicitud de Afilicacion', 2, 'affiliate/approve_affiliate', '24', 'affiliate', '2019-04-05 23:16:50', 'Y'),
+(22, 'Solicitud Aprobada', 3, 'groups/group_information', '18', 'approve_affiliate', '2019-04-05 23:18:43', 'Y');
 
 -- --------------------------------------------------------
 
@@ -498,7 +518,7 @@ ALTER TABLE `user_level`
 -- AUTO_INCREMENT de la tabla `affiliate`
 --
 ALTER TABLE `affiliate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `groups`
@@ -510,7 +530,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT de la tabla `group_user_role`
 --
 ALTER TABLE `group_user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -540,7 +560,7 @@ ALTER TABLE `note_type`
 -- AUTO_INCREMENT de la tabla `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `permission`

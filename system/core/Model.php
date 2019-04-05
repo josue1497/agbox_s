@@ -266,7 +266,7 @@ class Model
 		}
 
 			if (!empty($params[$name]) && strlen($params[$name]) > 0 && $table_field->get_column_in_db() == true) {
-				$sqlInsert .= ($first == false ? " , " : "") . $name;
+				$sqlInsert .= ($first == false ? " , `" : "`") . $name ."`";
 				$sqlValues .= ($first == false ? " , " : "") . ":" . $name;
 				$db_params[$name] = $params[$name];
 				$first = false;

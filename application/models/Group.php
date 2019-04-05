@@ -39,6 +39,12 @@ class Group extends Model
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
                     ->set_fk_entity($this)
                     ->set_visible_grid(false),
+                    
+                (new Column('leader_id'))
+                    ->set_label('Lider del grupo')
+                    ->set_visible_grid(false)
+                    ->set_type(Column::$COLUMN_TYPE_SELECT)
+                    ->set_values((new User())->get_select_data()) 
             )
         );
 

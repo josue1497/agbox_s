@@ -3,6 +3,11 @@ class Notification extends Model{
 
     public static $AFFILIATE = 'affiliate';
     public static $APPROVE_AFFILIATE = 'approve_affiliate';
+    public static $DECLINE_AFFILIATE = 'decline_affiliate';
+
+
+    public static $YES = 'Y';
+    public static $NO = 'N';
 
     public function __construct()
     {
@@ -20,8 +25,7 @@ class Notification extends Model{
                     ->set_visible_form(false),
                 (new Column('message'))
                     ->set_label('message')
-                    ->set_name_key()
-                    ->set_unike_key(),
+                    ->set_name_key(),
                 (new Column('user_to_id'))
                     ->set_label('user to')
                     ->set_type(Column::$COLUMN_TYPE_SELECT)

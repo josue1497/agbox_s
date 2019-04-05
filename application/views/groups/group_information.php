@@ -47,6 +47,25 @@
                      $html_result=str_replace('profile-img','profile-img-info',$html_result);
                      $html_result=str_replace('{{ AFFILIATES_USERS }}',CoreUtils::add_new_card($table_affilates,$tile_affiliate),$html_result);
                      $html_result=str_replace('{{ NOTES_GROUP }}',CoreUtils::add_new_card( $table_notes,$title_note),$html_result);
+                     $html_result=str_replace('{{ ROLE_USER }}',generate_role_user(),$html_result);
+                     
+
+                     $controller->view->add_script_js("$('#modal-user').on('show.bs.modal', function (event) {
+                            var button = $(event.relatedTarget) // Button that triggered the modal
+                            var name = button.data('user')
+                            var group = button.data('group') ;// Extract info from data-* attributes
+                            var id = button.data('id');
+                            var role = button.data('role');
+
+                            var modal = $(this)
+                            var text=modal.find('.modal-title').text();
+
+                            modal.find('.modal-title').text('Cambiar Rol a ' + name);
+                            modal.find('#user-name').val(name);
+                            modal.find('#user-id').val(id);
+                            modal.find('#group-id').val(group);
+                            modal.find('#group_user_role').val(role);
+                          })");
 
                      return $html_result;
 }
@@ -54,7 +73,7 @@
 function generate_affiliate_table($group_id){
        $affiliate_record=Model::get_sql_data("select a.id as 'affiliate_id', 
        u.id 'user_id', a.group_id, concat(u.names,' ',u.lastnames) as 'user_name',
-       r.name as 'role'  
+       r.name as 'role', r.id  as 'role_id'  
        from `affiliate` a inner join `user` u on(a.user_id=u.id) 
        inner join groups g on (g.id=a.group_id)
        inner join group_user_role gur on (gur.group_id=g.id and u.id=gur.user_id)
@@ -66,18 +85,20 @@ function generate_affiliate_table($group_id){
                                    <th>#</th>
                                    <th>Miembro</th>
                                    <th>Rol</th>
-                                   <th>Accion</th>
                             </thead>';
        $table_rows='<tbody>';
        $i=1;
        foreach($affiliate_record as $row){                     
-         $table_rows.='<tr onclick="alert(\'mensaje\')"><input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
+         $table_rows.='<tr data-toggle="modal" data-target="#modal-user" 
+                            data-user="'.$row['user_name'].'" data-group="'.$row['group_id'].'"
+                            data-role="'.$row['role_id'].'" data-id="'.$row['user_id'].'">
+                     <input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
                      <input type="hidden" name="user_id" value="'.$row['user_id'].'">
                      <input type="hidden" name="group_id" value="'.$row['group_id'].'">
                      <td class="text-center">'.$i++.'</td>
                      <td class="text-center">'.$row['user_name'].'</td>
                      <td class="text-center">'.$row['role'].'</td>
-                     <td class="text-center"><button class="btn btn-secondary">Desafiliar</button></td></tr>';
+                     </tr>';
        }
        $table_rows.='</tbody></table>';
        $table_affilates.=$table_rows;
@@ -119,4 +140,18 @@ function generate_note_table($group_id){
               
        return $table_notes;
 }
+
+function generate_role_user(){
+	$role = new Role();
+	$all_roles=$role->showAllRecords();
+	$html='<div class="form-group">
+				<label for="group_user_role" class="">Role in the Group</label>
+			<select name="group_user_role" id="group_user_role" class="form-control">
+				<option value="">Select a value</option>';
+			foreach($all_roles as $rol){
+				$html.='<option value="'.$rol['id'].'">'.$rol['name'].'</option>';
+			}
+	$html.='</select></div>';
+	return $html;
+} 
 ?>

@@ -150,18 +150,16 @@ var app = new Vue({
 				$gur = new Group_User_Role();
 				$user_to=$gur->get_user_by_role('Lider',$_POST['group_id']);
 
-				$entity_to=Model::get_sql_data("select id from affiliate order by id DESC limit 1 ");
+				$entity_to=Model::get_sql_data("select max(id)+1 as 'id' from affiliate");
         $affiliate_id=intval($entity_to[0]['id']);
-
-       Notification::create_notification();
-        
-				$sql="INSERT INTO notification
-        (message, user_to_id, entity_id, notification_type,controller_to, shipping_date, `read`)
-        VALUES( 'Nueva Solicitud de Afilicacion', ".$user_to['id'].", '".++$affiliate_id."', 'affiliate','affiliate/approve_affiliate', 
-        CURRENT_TIMESTAMP, 'N')";
-
+        echo $entity_to[0]['id'];
         if($this->model->create($_POST)){
-          echo Model::execute_update($sql);
+          echo  Notification::create_notification(array('user_to_id'=>$user_to['id'],
+                'message'=>'Nueva Solicitud de Afilicacion',
+                'entity_id'=>$affiliate_id,
+                'notification_type'=>Notification::$AFFILIATE,
+                'controller_to'=>'affiliate/approve_affiliate',
+                'read'=>Notification::$NO));
 
         }        
     }
@@ -174,24 +172,40 @@ var app = new Vue({
     function approve_user(){
      
       $data =$_POST;
-
       $affiliate_model = new Affiliate();
-
       $affiliate_record = $affiliate_model->get_by_property(array('id'=>$data['record_id']));
 
+      if('No'===$data['approved']){
+        $req1=$affiliate_model->delete($data['record_id']);
+       if($req1){
+        Notification::create_notification(array('user_to_id'=>$affiliate_record['user_id'],
+        'message'=>'Solicitud Declinada',
+        'entity_id'=>$affiliate_record['group_id'],
+        'notification_type'=>Notification::$DECLINE_AFFILIATE,
+        'controller_to'=>'#',
+        'read'=>Notification::$NO));
+
+        echo 'ok';
+       }
+      }else{
       $role_group = array('user_id'=>$affiliate_record['user_id'],
                          'group_id'=>$affiliate_record['group_id'],
                           'role_id'=>$data['role_id']);
 
-      $gur_model = new Group_User_Role();
-      $req1=$gur_model->create($role_group);
+      
+      $req1=Group_User_Role::set_user_role($affiliate_record['group_id']
+                ,$affiliate_record['user_id'],$data['role_id']);
       if($req1){
         $affiliate_record['approved']=$data['approved'];
         $req2=$affiliate_model->edit($data['record_id'], $affiliate_record);
 
           if($req2){
-            $notification_model = new Notification();
-
+            Notification::create_notification(array('user_to_id'=>$affiliate_record['user_id'],
+                'message'=>'Solicitud Aprobada',
+                'entity_id'=>$affiliate_record['group_id'],
+                'notification_type'=>Notification::$APPROVE_AFFILIATE,
+                'controller_to'=>'groups/group_information',
+                'read'=>Notification::$NO));
           }
       }
 
@@ -200,6 +214,11 @@ var app = new Vue({
       }else{
         echo 'failed';
       }
+     
+      }
+
+      
+      
       
     }
 }

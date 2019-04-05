@@ -31,7 +31,20 @@
 							location.href='".SERVER_DIR."';
 						}
 					});
-				}");
+				}
+				
+				function decline(){
+					$.post( '".SERVER_DIR."affiliate/approve_user',".
+						"{record_id:".$this_record['id'].",approved:'No',role_id:$('#group_user_role').val()}".
+						", function( data ) {
+						console.log(data);
+						if('ok'===data){
+							location.href='".SERVER_DIR."';
+						}
+					});
+				}
+				
+				");
 		return $html_result;
 }
 
@@ -64,7 +77,7 @@ function generate_button_approve($affiliate){
 	$disable =empty($affiliate['approved'])?'':'disabled ';
 		return '<span class="result"></span><button class="btn btn-primary mx-3" '.$disable.
 		' onclick="send_data()" >Accept</button>
-	<button class="btn btn-secondary" '.$disable.'>Decline</button>';
+	<button class="btn btn-secondary" '.$disable.' onclick="decline()">Decline</button>';
 } 
 
 function generate_role_user(){
