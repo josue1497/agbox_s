@@ -54,9 +54,34 @@ class noteController extends Controller{
 		$this->render('note_to_approve');
 
 	}
-
+	
+	/**
+	 * Description
+	 * @return type
+	 */
 	public function create_assignment(){
 		$this->init(new Note());
+		if(isset($_POST) && isset($_POST['title'])){
+			$data = $_POST;
+			$data['user_id']=Session::get('user_id');
+
+			/*TODO cambiar por un GlobalModuleConstants.Value*/
+			$note_type = (new Note_Type())->get_by_property(array('name'=>'Asignaciones'));
+			
+			if($note_type)
+				$data['note_type_id']=$note_type['id'];
+			else
+				$data['note_type_id']=1;
+
+			Model::save_record($this->model,$data);
+
+			$note = $this->model->get_by_property($data);
+			if($note)
+				header("location: ".CoreUtils::base_url().'note/note_information/'.$note['id']);
+			else 
+				header("location: ".CoreUtils::base_url().'note/index');
+		}
+		
 		$this->render('create_assignment');
 	}
 
