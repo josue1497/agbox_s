@@ -385,7 +385,7 @@
 
 		public static function get_user_notification(){
 
-			$notification_record = Model::get_sql_data('SELECT * FROM notification WHERE user_to_id='.Session::get('user_id').' ORDER BY shipping_date DESC');
+			$notification_record = Model::get_sql_data('SELECT * FROM notification WHERE user_to_id='.Session::get('user_id').' ORDER BY shipping_date DESC limit 10');
 			
 			$notification_html='';
 			if(count($notification_record)>0){
@@ -402,6 +402,8 @@
 							</div>
 						</a>';
 				}
+			
+		}else{
 			$notification_html.='<a class="dropdown-item d-flex align-items-center" href="#">
 				<div class="mr-3">
 				</div>
@@ -410,6 +412,7 @@
 				</div>
 			  </a>';
 		}
+		
 
 		  return $notification_html;
 				}
