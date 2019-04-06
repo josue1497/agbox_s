@@ -49,7 +49,7 @@ class userController extends Controller{
 
 		/* ocultar el registro de afiliacion (luego no aparecera)*/
 		echo '<script>
-				$("#aff_'.$affiliate_id.'").hide();
+				$("#aff_'.$affiliate_id.'").hide();;
 			</script>';
 	}
 }
