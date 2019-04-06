@@ -64,7 +64,8 @@ function generate_content($controller, $filename = null, $record = null)
 	$user_card = str_replace('container', '', $user_card);
 	$groups_card = str_replace('container', '', $groups_card);
 
-	$tile_affiliate='<div class="d-flex">Groups<button class="btn btn-primary ml-auto" id="add_affiliate"><i class="fas fa-plus"></i></button></div>';
+	$tile_affiliate='<div class="d-flex">Groups
+		<button class="btn btn-primary ml-auto" id="add_affiliate" onclick="location.href=\''.CoreUtils::base_url().'affiliate/items/'.Session::get('user_id').'\'"><i class="fas fa-plus"></i></button></div>';
 	$title_note='<div class="d-flex">User´s Notes<button class="btn btn-primary ml-auto" id="add_note"><i class="fas fa-plus"></i></button></div>';
                      
 
@@ -75,7 +76,14 @@ function generate_content($controller, $filename = null, $record = null)
 	$html_result = str_replace('{{ GROUPS_CARD }}', CoreUtils::add_new_card($groups_card, $tile_affiliate), $html_result);
 	$html_result = str_replace('{{ NOTES_USER }}', CoreUtils::add_new_card($notes_card, $title_note), $html_result);
 
-
+	
+	$controller->view->add_script_js('function desafiliar(user_id,group_id,role_id,affiliate_id){
+		$.post("'.SERVER_DIR.'user/unaffiliate",
+			{"user_id":user_id,"group_id":group_id,"role_id":role_id,"affiliate_id":affiliate_id},
+			function(data){
+				/* cargar response */
+				$(".group_result").html(data);
+		});}');
 
 	/* return view with 3 cards */
 	return $html_result;
@@ -119,15 +127,15 @@ function generate_note_table($user_id){
 	return $table_notes;
 }
 
-function generate_affiliate_table($group_id){
+function generate_affiliate_table($user_id){
 	$affiliate_record=Model::get_sql_data("select a.id as 'affiliate_id', 
 	u.id 'user_id', a.group_id, g.name as 'group_name',
-	r.name as 'role'  
+	r.name as 'role' , r.id as role_id 
 	from `affiliate` a inner join `user` u on(a.user_id=u.id) 
 	inner join groups g on (g.id=a.group_id)
 	inner join group_user_role gur on (gur.group_id=g.id and u.id=gur.user_id)
 	inner join `role` r on (r.id=gur.role_id) 
-	where a.user_id=? and a.approved='Yes'",array('group_id'=>$group_id));
+	where a.user_id=? and a.approved='Yes'",array('user_id'=>$user_id));
 	
 	$table_affilates='<table class="table table-striped table-hover">
 						 <thead class="text-center thead">
@@ -139,15 +147,18 @@ function generate_affiliate_table($group_id){
 	$table_rows='<tbody>';
 	$i=1;
 	foreach($affiliate_record as $row){                     
-	  $table_rows.='<tr><input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
+	  $table_rows.='<tr id="aff_'.$row['affiliate_id'].'" ><input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
 				  <input type="hidden" name="user_id" value="'.$row['user_id'].'">
 				  <input type="hidden" name="group_id" value="'.$row['group_id'].'">
 				  <td class="text-center">'.$i++.'</td>
 				  <td class="text-center">'.$row['group_name'].'</td>
 				  <td class="text-center">'.$row['role'].'</td>
-				  <td class="text-center"><button class="btn btn-secondary">Desafiliar</button></td></tr>';
+				  <td class="text-center"><button class="btn btn-secondary" 
+				  onclick="desafiliar(\''.$row['user_id'].'\',\''.$row['group_id'].'\','.
+				  	'\''.$row['role_id'].'\',\''.$row['affiliate_id'].'\')"
+				   >Desafiliar</button></td></tr>';
 	}
-	$table_rows.='</tbody></table>';
+	$table_rows.='</tbody></table><span class="group_result"></span>';
 	$table_affilates.=$table_rows;
 
 	return $table_affilates;

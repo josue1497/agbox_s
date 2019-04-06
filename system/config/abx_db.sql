@@ -1,23 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- Servidor: localhost
--- Tiempo de generación: 06-04-2019 a las 01:22:10
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.1.26
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Base de datos: `abx_db`
 --
@@ -27,6 +7,8 @@ SET time_zone = "+00:00";
 --
 -- Estructura de tabla para la tabla `affiliate`
 --
+
+drop table if exists affiliate;
 
 CREATE TABLE `affiliate` (
   `id` int(11) NOT NULL,
@@ -68,6 +50,8 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 -- Estructura de tabla para la tabla `groups`
 --
 
+drop table if exists groups;
+
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
   `domain_id` int(11) DEFAULT NULL,
@@ -98,6 +82,8 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 -- Estructura de tabla para la tabla `group_user_role`
 --
 
+drop table if exists group_user_role;
+
 CREATE TABLE `group_user_role` (
   `id` int(11) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
@@ -127,6 +113,7 @@ INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 --
 -- Estructura de tabla para la tabla `menu`
 --
+drop table if exists menu;
 
 CREATE TABLE `menu` (
   `menu_id` int(5) NOT NULL,
@@ -168,6 +155,8 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 -- Estructura de tabla para la tabla `note`
 --
 
+drop table if exists note;
+
 CREATE TABLE `note` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -197,6 +186,8 @@ INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `grou
 -- Estructura de tabla para la tabla `note_approver`
 --
 
+drop table if exists note_approver;
+
 CREATE TABLE `note_approver` (
   `id` int(11) NOT NULL,
   `note_id` int(11) DEFAULT NULL,
@@ -214,13 +205,11 @@ INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
 
 -- --------------------------------------------------------
 
-<<<<<<< HEAD
-
-=======
->>>>>>> b19e87cceb7eff3ff35d1b06b69f3c228a04abf8
 --
 -- Estructura de tabla para la tabla `note_type`
 --
+
+drop table if exists note_type;
 
 CREATE TABLE `note_type` (
   `id` int(11) NOT NULL,
@@ -243,6 +232,8 @@ INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
 --
 -- Estructura de tabla para la tabla `notification`
 --
+
+drop table if exists notification;
 
 CREATE TABLE `notification` (
   `id` int(11) NOT NULL,
@@ -288,6 +279,8 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 -- Estructura de tabla para la tabla `permission`
 --
 
+drop table if exists permission;
+
 CREATE TABLE `permission` (
   `id` int(5) NOT NULL,
   `menu_id` int(5) DEFAULT NULL,
@@ -319,6 +312,8 @@ INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_wri
 -- Estructura de tabla para la tabla `role`
 --
 
+drop table if exists role;
+
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
@@ -340,6 +335,8 @@ INSERT INTO `role` (`id`, `name`, `description`) VALUES
 --
 -- Estructura de tabla para la tabla `source`
 --
+
+drop table if exists source;
 
 CREATE TABLE `source` (
   `id` int(11) NOT NULL,
@@ -364,6 +361,8 @@ INSERT INTO `source` (`id`, `title`, `description`) VALUES
 -- Estructura de tabla para la tabla `status`
 --
 
+drop table if exists status;
+
 CREATE TABLE `status` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
@@ -383,6 +382,8 @@ INSERT INTO `status` (`id`, `name`, `description`) VALUES
 --
 -- Estructura de tabla para la tabla `user`
 --
+
+drop table if exists user;
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
@@ -411,6 +412,8 @@ INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username
 --
 -- Estructura de tabla para la tabla `user_level`
 --
+
+drop table if exists user_level;
 
 CREATE TABLE `user_level` (
   `id` int(5) NOT NULL,
@@ -601,8 +604,4 @@ ALTER TABLE `user`
 --
 ALTER TABLE `user_level`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  
