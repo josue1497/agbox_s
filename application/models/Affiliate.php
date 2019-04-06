@@ -39,5 +39,10 @@ class Affiliate extends Model
         $this->init();
     }
 
+    public static function delete_affiliation($id){
+        $affiliate = new Affiliate();
+        return $affiliate->delete($id);
+    }
+
 }
  

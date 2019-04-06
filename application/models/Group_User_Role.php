@@ -117,6 +117,15 @@ class Group_User_Role extends Model{
             $status = $m->create($params);
         }
     }
+
+    public static function delete_group_user_role($user_id, $group_id,$role_id){
+        $gur = new Group_User_Role();
+
+        $record=$gur->findByPoperty(array('user_id'=>$user_id,'group_id'=>$group_id,'role_id'=>$role_id));
+        
+        return $gur->delete($record['id']);
+
+    }
         
 }
 ?>

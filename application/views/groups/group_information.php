@@ -50,12 +50,14 @@
                      $html_result=str_replace('{{ ROLE_USER }}',generate_role_user(),$html_result);
                      
 
+
                      $controller->view->add_script_js("$('#modal-user').on('show.bs.modal', function (event) {
                             var button = $(event.relatedTarget) // Button that triggered the modal
                             var name = button.data('user')
                             var group = button.data('group') ;// Extract info from data-* attributes
                             var id = button.data('id');
                             var role = button.data('role');
+                            var affiliate = button.data('affiliate');
 
                             var modal = $(this)
                             var text=modal.find('.modal-title').text();
@@ -64,8 +66,43 @@
                             modal.find('#user-name').val(name);
                             modal.find('#user-id').val(id);
                             modal.find('#group-id').val(group);
+                            modal.find('#affiliate-id').val(affiliate);
                             modal.find('#group_user_role').val(role);
-                          })");
+                          });
+                          
+                          $('#save-button').click(function(){
+
+                            var role = $('#group_user_role option:selected').text();
+                            $.post( '".SERVER_DIR."group_user_role/update_group_user_role',$('#form-user').serialize(), function( data ) {
+                                   
+                                   console.log(data);
+                                   if(''!==data && 'fail'!==data){
+                                       $('#role'+data).text(role);
+                                       $('#modal-user').modal('hide');
+                                   }else{
+                                      alert('fail');   
+                                      $('#modal-user').modal('hide'); 
+                                   }
+                                 });
+                          });
+
+                          $('#desaffiliate-button').click(function(){
+                            if(confirm('¿Esta seguro que desea Desafiliar este usuario?')){
+                            $.post( '".SERVER_DIR."group_user_role/desaffiliate_group_user_role',$('#form-user').serialize(), function( data ) {
+                                   
+                                   console.log(data);
+                                   if(''!==data && 'fail'!==data){
+                                       $('#'+data).remove();
+                                       $('#modal-user').modal('hide');
+                                   }else{
+                                      alert('fail');  
+                                      $('#modal-user').modal('hide');  
+                                   }
+                                 });
+                            }
+                          });
+
+                          ");
 
                      return $html_result;
 }
@@ -91,13 +128,14 @@ function generate_affiliate_table($group_id){
        foreach($affiliate_record as $row){                     
          $table_rows.='<tr data-toggle="modal" data-target="#modal-user" 
                             data-user="'.$row['user_name'].'" data-group="'.$row['group_id'].'"
-                            data-role="'.$row['role_id'].'" data-id="'.$row['user_id'].'">
+                            data-role="'.$row['role_id'].'" data-id="'.$row['user_id'].'"
+                            data-affiliate="'.$row['affiliate_id'].'" id="'.$row['affiliate_id'].'">
                      <input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
                      <input type="hidden" name="user_id" value="'.$row['user_id'].'">
                      <input type="hidden" name="group_id" value="'.$row['group_id'].'">
                      <td class="text-center">'.$i++.'</td>
                      <td class="text-center">'.$row['user_name'].'</td>
-                     <td class="text-center">'.$row['role'].'</td>
+                     <td class="text-center" id="role'.$row['affiliate_id'].'">'.$row['role'].'</td>
                      </tr>';
        }
        $table_rows.='</tbody></table>';

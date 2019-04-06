@@ -4,6 +4,8 @@ class Notification extends Model{
     public static $AFFILIATE = 'affiliate';
     public static $APPROVE_AFFILIATE = 'approve_affiliate';
     public static $DECLINE_AFFILIATE = 'decline_affiliate';
+    public static $DESAFFILIATE_USER = 'desaffiliate_user';
+    public static $CHANGE_ROLE = 'change_role';
 
 
     public static $YES = 'Y';
@@ -57,6 +59,17 @@ class Notification extends Model{
         $this->init();
     }
 
+    /**
+     * Metodo para crear notificaciones cada vez que se necesite
+     * params $params array con caracteristicas de la notificaciones
+     *  ejemplo
+     * array('user_to_id'=>$affiliate_record['user_id'],
+                'message'=>'Solicitud Aprobada',
+                'entity_id'=>$affiliate_record['group_id'],
+                'notification_type'=>Notification::$APPROVE_AFFILIATE,
+                'controller_to'=>'groups/group_information',
+                'read'=>Notification::$NO)
+     */
     public static function create_notification(array $params){
         $notification= new Notification();
 
