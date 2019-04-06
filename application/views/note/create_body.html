@@ -1,5 +1,21 @@
 <div class="container">
-    <form action="" method="post">
+	<script>
+		function check_select_users(){
+				if($('#user_approved_id').length){
+					$('.select2-selection__choice').each(function(){
+						console.log('' + $(this).attr('title'));
+						if($('#users_id').val()=='')
+							$('#users_id').val( $(this).attr('title') );
+						else
+							$('#users_id').val( $('#users_id').val() + ';' + $(this).attr('title') );
+					});
+				}else{
+					console.log('user_approved_id not exists');
+				}
+			return true;
+		}
+	</script>
+    <form action="" onsubmit="return check_select_users()" method="post">
         <div class="row">
             <div class="col-md-6">
                 {{ FORM }}
@@ -8,6 +24,10 @@
                 <div>{{ APPROVE_USERS }}</div>
                 <!-- <div class="d-flex justify-content-center">{{ APPROVE_BUTTON }}</div> -->
             </div>
+            <input 
+            	type="hidden"
+            	name="users_id" 
+            	id="users_id" />
         </div>
     </form>
 </div>
