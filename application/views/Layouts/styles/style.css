@@ -155,3 +155,7 @@
 .slick-arrow::before{
 	color: #6e707e  !important;
 }
+
+.slick-track{
+	min-width: 1500px !important;
+}

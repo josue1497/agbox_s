@@ -45,7 +45,6 @@ class indexController extends Controller{
       }
     }
 	],
-	variableWidth: true
 			});
 		});
 	');
