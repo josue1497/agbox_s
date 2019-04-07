@@ -38,8 +38,20 @@
 
                      $form_group=$controller->auto_build_view('form',$this_group,$this_group);
 
+                     $button_add_note='<div class="btn-group dropleft ml-auto">
+                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-plus"></i>
+                     </button>
+                     <div class="dropdown-menu">
+                     <a class="dropdown-item" href="'.SERVER_DIR.'note/create_assignment">Asignacion</a>
+                     <a class="dropdown-item" href="'.SERVER_DIR.'note/create_suggested_point">Punto Sugerido</a>
+                     <a class="dropdown-item" href="'.SERVER_DIR.'note/create_commitment">Comentario</a>
+                     <a class="dropdown-item" href="'.SERVER_DIR.'note/create_agenda_point">Punto de Agenda</a>
+                     </div>
+                   </div>';
+
                      $tile_affiliate='<div class="d-flex">Affiliate<button class="btn btn-primary ml-auto" id="add_affiliate"><i class="fas fa-plus"></i></button></div>';
-                     $title_note='<div class="d-flex">Group´s Notes<button class="btn btn-primary ml-auto" id="add_note"><i class="fas fa-plus"></i></button></div>';
+                     $title_note='<div class="d-flex">Group´s Notes'.$button_add_note.'</div>';
                      
                      $html_result=file_get_contents(__DIR__.'/body.html');
                      

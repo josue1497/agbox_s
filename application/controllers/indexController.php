@@ -44,7 +44,8 @@ class indexController extends Controller{
         slidesToScroll: 1
       }
     }
-  ]
+	],
+	variableWidth: true
 			});
 		});
 	');
