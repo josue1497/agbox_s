@@ -13,7 +13,7 @@
 	foreach($list as $map){
 		$list_html.= '
 		<div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card border-left-info shadow h-100 py-2">
               <div class="card-body">
               <a href="'.CoreUtils::base_url().'groups/group_information/'.$map['group_id'].'">
                 <div class="row no-gutters align-items-center">
@@ -25,7 +25,7 @@
                   </div>
                   <div class="col-auto">
                   	<i class="fas fa-2x text-gray-300">
-                  		<img class="img-profile rounded-circle img-profile-user" src="'.$map['group_photo'].'">
+                  		<img class="img-profile rounded-circle img-profile-user" src="'.Component::img_to_base64(UPLOADS_DIR.$map['group_photo']).'">
                   	</i>
                   </div>
                 </div>

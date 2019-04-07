@@ -121,7 +121,6 @@ function generate_note_table($group_id){
               <th>Titulo</th>
               <th>Usuario Asignado</th>
               <th>Tipo</th>
-              <th>Accion</th>
        </thead>';
        $table_note_rows='<tbody>';
        $i=1;
@@ -133,7 +132,7 @@ function generate_note_table($group_id){
        <td class="text-center">'.$row['title'].'</td>
        <td class="text-center">'.$row['names'].'</td>
        <td class="text-center">'.$row['note_type'].'</td>
-       <td class="text-center"><button class="btn btn-secondary">Datalles</button></td></tr>';
+       </tr>';
        }
        $table_note_rows.='</tbody></table>';
        $table_notes.=$table_note_rows;

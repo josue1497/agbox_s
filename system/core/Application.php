@@ -19,7 +19,7 @@ define('SERVER_DIR', "http://".$_SERVER['SERVER_NAME'].SERVER_PORT."/".APP_FOLDE
 define('DB_HOST','localhost');
 define('DB_NAME','abx_db');
 define('DB_USER','root');
-define('DB_PASS','12345678');
+define('DB_PASS','');
 
 
 require_once(ROOT.'system/core/Autoloader.php');

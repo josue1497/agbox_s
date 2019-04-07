@@ -67,7 +67,7 @@ class View{
 		 * @param type $data 
 		 * @return type
 		 */
-	public function auto_build_form_content($data){
+	public function auto_build_form_content($data, $add_button=true){
 		$form_content = '';
 		foreach ($this->model->table_fields as $form_field) {
 			if ($form_field->get_visible_form() && $form_field->get_column_in_db())
@@ -75,9 +75,9 @@ class View{
 			
 		}
 
-		return $form_content .
+		return $form_content .($add_button?
 			Component::cancel_button($this->model->table_name) .
-			Component::save_button();
+			Component::save_button():'');
 	}
 
 	/**
