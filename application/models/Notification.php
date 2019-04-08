@@ -4,8 +4,9 @@ class Notification extends Model{
     public static $AFFILIATE = 'affiliate';
     public static $APPROVE_AFFILIATE = 'approve_affiliate';
     public static $DECLINE_AFFILIATE = 'decline_affiliate';
+    public static $CHANGE_ROLE = 'change_role';
 
-
+ 
     public static $YES = 'Y';
     public static $NO = 'N';
 

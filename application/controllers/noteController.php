@@ -144,12 +144,7 @@ class noteController extends Controller{
 				$data['note_type_id']=1;
 
 			Model::save_record($this->model,$data);
-//var_dump($data);
-
 			$note = $this->model->get_by_property(array('title'=>$data['title'],'summary'=>$data['summary']));
-			
-//var_dump($note);
-//die;
 			$note_approver_model = new Note_Approver();
 
 			foreach($users_id as $user_id){
@@ -168,11 +163,101 @@ class noteController extends Controller{
 
 	public function create_agenda_point(){
 		$this->init(new Note());
+
+		if(isset($_POST) && isset($_POST['title'])){
+
+			$users_name = $_POST['users_id'];
+			$users = explode(';',$users_name);
+
+			
+			$users_id = array();
+
+			foreach($users as $user_name){
+				$row = Model::get_sql_data("select id from user where concat(names,' ',lastnames) = ?",
+						array('user_name'=>$user_name));
+				if(isset($row[0]['id'])){
+					$users_id[] = $row[0]['id'];
+				}
+			}
+			
+
+			$data = $_POST;
+			$data['user_id']=Session::get('user_id');
+
+			/*TODO cambiar por un GlobalModuleConstants.Value*/
+			$note_type = (new Note_Type())->get_by_property(array('name'=>'Punto de Agenda'));
+			
+			if($note_type)
+				$data['note_type_id']=$note_type['id'];
+			else
+				$data['note_type_id']=1;
+
+			Model::save_record($this->model,$data);
+			$note = $this->model->get_by_property(array('title'=>$data['title'],'summary'=>$data['summary']));
+			$note_approver_model = new Note_Approver();
+
+			foreach($users_id as $user_id){
+				$approver_data=array('note_id'=>$note['id'],'user_id'=>$user_id);
+				Model::save_record($note_approver_model,$approver_data);
+			}
+
+			if($note)
+				header("location: ".CoreUtils::base_url().'note/note_information/'.$note['id']);
+			else 
+				header("location: ".CoreUtils::base_url().'note/index');
+		}
+
+
 		$this->render('create_agenda_point');
 	}
 
 	public function create_commitment(){
 		$this->init(new Note());
+
+		if(isset($_POST) && isset($_POST['title'])){
+
+			$users_name = $_POST['users_id'];
+			$users = explode(';',$users_name);
+
+			
+			$users_id = array();
+
+			foreach($users as $user_name){
+				$row = Model::get_sql_data("select id from user where concat(names,' ',lastnames) = ?",
+						array('user_name'=>$user_name));
+				if(isset($row[0]['id'])){
+					$users_id[] = $row[0]['id'];
+				}
+			}
+			
+
+			$data = $_POST;
+			$data['user_id']=Session::get('user_id');
+
+			/*TODO cambiar por un GlobalModuleConstants.Value*/
+			$note_type = (new Note_Type())->get_by_property(array('name'=>'Compromisos'));
+			
+			if($note_type)
+				$data['note_type_id']=$note_type['id'];
+			else
+				$data['note_type_id']=1;
+
+			Model::save_record($this->model,$data);
+			$note = $this->model->get_by_property(array('title'=>$data['title'],'summary'=>$data['summary']));
+			$note_approver_model = new Note_Approver();
+
+			foreach($users_id as $user_id){
+				$approver_data=array('note_id'=>$note['id'],'user_id'=>$user_id);
+				Model::save_record($note_approver_model,$approver_data);
+			}
+
+			if($note)
+				header("location: ".CoreUtils::base_url().'note/note_information/'.$note['id']);
+			else 
+				header("location: ".CoreUtils::base_url().'note/index');
+		}
+
+
 		$this->render('create_commitment');
 	}
 }

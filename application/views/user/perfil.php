@@ -66,8 +66,21 @@ function generate_content($controller, $filename = null, $record = null)
 
 	$tile_affiliate='<div class="d-flex">Groups
 		<button class="btn btn-primary ml-auto" id="add_affiliate" onclick="location.href=\''.CoreUtils::base_url().'affiliate/items/'.Session::get('user_id').'\'"><i class="fas fa-plus"></i></button></div>';
-	$title_note='<div class="d-flex">User´s Notes<button class="btn btn-primary ml-auto" id="add_note"><i class="fas fa-plus"></i></button></div>';
-                     
+
+		$button_add_note='<div class="btn-group dropleft ml-auto">
+		<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			   <i class="fas fa-plus"></i>
+		</button>
+		<div class="dropdown-menu">
+		<a class="dropdown-item" href="'.SERVER_DIR.'note/create_assignment">Asignacion</a>
+		<a class="dropdown-item" href="'.SERVER_DIR.'note/create_suggested_point">Punto Sugerido</a>
+		<a class="dropdown-item" href="'.SERVER_DIR.'note/create_commitment">Comentario</a>
+		<a class="dropdown-item" href="'.SERVER_DIR.'note/create_agenda_point">Punto de Agenda</a>
+		</div>
+	  </div>';
+	$title_note='<div class="d-flex">User´s Notes'.$button_add_note.'</div>';
+			 
+	
 
 	// $user_card = str_replace('col-md-12 col-md-offset-2', 'col-lg-6 mb-4', $user_card);
 	// $groups_card = str_replace('col-md-12 col-md-offset-2', 'col-lg-6 mb-4', $groups_card);

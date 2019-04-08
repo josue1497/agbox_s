@@ -37,7 +37,7 @@ function generate_select_user(){
     $users=$user_model->showAllRecords();
 
     $html='<div class="form-group">
-    <select multiple name="user_approved_id" id="user_approved_id" class="form-control select2">';
+    <select multiple required name="user_approved_id" id="user_approved_id" class="form-control select2">';
     foreach($users as $user){
         $html.=' <option value="'.$user['id'].'">'.$user['names'].' '.$user['lastnames'].'</option>';
     }
