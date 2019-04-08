@@ -109,6 +109,16 @@
 				}
 			}
 			
+			/* set or hide admin_menu TODO */
+			$user_level=new User_Level();
+			$level_row = $user_level->get_by_id(Session::get('user_level_id'));
+			if(!isset($level_row['access_level']) || 
+				$level_row['access_level'] != 3){
+				if($this->view){
+					$this->view->add_script_js('$(".admin_menu").each($(this).html("");');
+				}
+			}
+
 			/* styles, scripts, layout y footer son genericos para todas las vistas */
 			$this->view_processor->set_layout(CoreUtils::get_layout_template_content('',$this->layout));
 			$this->view_processor->set_styles(CoreUtils::get_layout_template_content('styles',$this->layout));

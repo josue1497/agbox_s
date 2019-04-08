@@ -1,3 +1,21 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost
+-- Tiempo de generación: 08-04-2019 a las 14:37:26
+-- Versión del servidor: 5.7.17-log
+-- Versión de PHP: 7.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de datos: `abx_db`
 --
@@ -8,8 +26,7 @@
 -- Estructura de tabla para la tabla `affiliate`
 --
 
-drop table if exists affiliate;
-
+DROP TABLE IF EXISTS `affiliate`;
 CREATE TABLE `affiliate` (
   `id` int(11) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
@@ -34,15 +51,12 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 (10, 20, 1, NULL),
 (11, 20, 2, NULL),
 (12, 19, 2, NULL),
-(13, 13, 3, 'Yes'),
 (14, 20, 3, 'Yes'),
 (16, 14, 2, NULL),
 (17, 18, 2, 'Yes'),
 (20, 17, 2, NULL),
-(21, 17, 3, 'Yes'),
 (22, 19, 3, 'Yes'),
-(23, 14, 3, NULL),
-(25, 18, 3, 'Yes');
+(23, 14, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -50,8 +64,7 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 -- Estructura de tabla para la tabla `groups`
 --
 
-drop table if exists groups;
-
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
   `domain_id` int(11) DEFAULT NULL,
@@ -82,8 +95,7 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 -- Estructura de tabla para la tabla `group_user_role`
 --
 
-drop table if exists group_user_role;
-
+DROP TABLE IF EXISTS `group_user_role`;
 CREATE TABLE `group_user_role` (
   `id` int(11) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
@@ -99,11 +111,8 @@ INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 (1, 13, 1, 1),
 (2, 19, 1, 1),
 (3, 20, 1, 1),
-(4, 13, 3, 3),
 (6, 20, 3, NULL),
-(7, 18, 3, 3),
 (9, 17, 1, 1),
-(10, 17, 3, 3),
 (11, 19, 3, 3),
 (12, 16, 1, 1),
 (13, 18, 2, 1);
@@ -113,8 +122,8 @@ INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 --
 -- Estructura de tabla para la tabla `menu`
 --
-drop table if exists menu;
 
+DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `menu_id` int(5) NOT NULL,
   `title` varchar(256) DEFAULT NULL,
@@ -155,8 +164,7 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 -- Estructura de tabla para la tabla `note`
 --
 
-drop table if exists note;
-
+DROP TABLE IF EXISTS `note`;
 CREATE TABLE `note` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -178,7 +186,13 @@ CREATE TABLE `note` (
 
 INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `group_id`, `summary`, `init_date`, `finish_date`, `status_id`, `date_approved`, `performer_id`) VALUES
 (1, 1, 'Group', 1, 2, 13, 'Prueba de Sumario', '2019-03-14', '2019-03-05', 1, NULL, NULL),
-(2, 2, 'Crud Test', 1, 1, NULL, 'A', '2019-03-22', '2019-03-29', 1, '2019-03-14', NULL);
+(2, 2, 'Crud Test', 1, 1, NULL, 'A', '2019-03-22', '2019-03-29', 1, '2019-03-14', NULL),
+(5, 3, 'Prueba de asignacion', 2, 1, 14, 'blablabla', NULL, NULL, 1, '2019-04-06', NULL),
+(6, 3, 'prueba 2 asignacion', 2, 1, 15, 'prueba', NULL, NULL, 1, '2019-04-06', NULL),
+(7, 3, 'isddj', 2, 5, 16, 'sdjcjdc', NULL, NULL, 1, '2019-04-06', NULL),
+(8, 3, 'ddg', 2, 1, 13, 'dfgdg', NULL, NULL, 1, '2019-04-06', NULL),
+(9, 3, 'ddg', 2, 1, 13, 'dfgdg', NULL, NULL, 1, '2019-04-06', NULL),
+(10, 3, 'ddg', 2, 1, 13, 'dfgdg', NULL, NULL, 1, '2019-04-06', NULL);
 
 -- --------------------------------------------------------
 
@@ -186,8 +200,7 @@ INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `grou
 -- Estructura de tabla para la tabla `note_approver`
 --
 
-drop table if exists note_approver;
-
+DROP TABLE IF EXISTS `note_approver`;
 CREATE TABLE `note_approver` (
   `id` int(11) NOT NULL,
   `note_id` int(11) DEFAULT NULL,
@@ -201,7 +214,11 @@ CREATE TABLE `note_approver` (
 
 INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
 (1, 1, 1, NULL),
-(3, 1, 2, NULL);
+(3, 1, 2, NULL),
+(4, NULL, 2, NULL),
+(5, NULL, 3, NULL),
+(6, 8, 2, NULL),
+(7, 8, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -209,8 +226,7 @@ INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
 -- Estructura de tabla para la tabla `note_type`
 --
 
-drop table if exists note_type;
-
+DROP TABLE IF EXISTS `note_type`;
 CREATE TABLE `note_type` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
@@ -233,8 +249,7 @@ INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
 -- Estructura de tabla para la tabla `notification`
 --
 
-drop table if exists notification;
-
+DROP TABLE IF EXISTS `notification`;
 CREATE TABLE `notification` (
   `id` int(11) NOT NULL,
   `message` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -251,27 +266,27 @@ CREATE TABLE `notification` (
 --
 
 INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `entity_id`, `notification_type`, `shipping_date`, `read`) VALUES
-(2, 'test notification 2', 1, 'affiliate/approve_affiliate', '1', 'affiliate', '2019-03-29 13:24:09', 'Y'),
-(3, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 14:28:05', 'Y'),
-(4, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:16:42', 'Y'),
-(5, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:17:33', 'Y'),
-(6, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:18:40', 'Y'),
-(7, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '10', 'affiliate', '2019-03-29 22:22:11', 'Y'),
-(8, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '12', 'affiliate', '2019-03-29 22:38:37', 'Y'),
-(9, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '13', 'affiliate', '2019-04-04 22:24:16', 'Y'),
-(10, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-04 23:18:46', 'Y'),
-(11, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-04 23:21:58', 'Y'),
-(12, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '17', 'affiliate', '2019-04-04 23:28:47', 'Y'),
-(13, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '18', 'affiliate', '2019-04-05 20:53:47', 'Y'),
-(14, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '21', 'affiliate', '2019-04-05 21:02:40', 'Y'),
-(15, 'Solicitud Aprobada', 3, 'groups/group_information', '17', 'approve_affiliate', '2019-04-05 21:10:58', 'Y'),
-(16, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '22', 'affiliate', '2019-04-05 22:46:22', 'Y'),
-(17, 'Solicitud Aprobada', 3, 'groups/group_information', '19', 'approve_affiliate', '2019-04-05 22:46:46', 'Y'),
-(18, 'Nueva Solicitud de Afilicacion', NULL, 'affiliate/approve_affiliate', '23', 'affiliate', '2019-04-05 23:00:15', 'N'),
-(19, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '24', 'affiliate', '2019-04-05 23:01:36', 'Y'),
-(20, 'Solicitud Declinada', 3, '#', '18', 'decline_affiliate', '2019-04-05 23:04:23', 'Y'),
-(21, 'Nueva Solicitud de Afilicacion', 2, 'affiliate/approve_affiliate', '24', 'affiliate', '2019-04-05 23:16:50', 'Y'),
-(22, 'Solicitud Aprobada', 3, 'groups/group_information', '18', 'approve_affiliate', '2019-04-05 23:18:43', 'Y');
+(2, 'test notification 2', 1, 'affiliate/approve_affiliate', '1', 'affiliate', '2019-03-29 18:24:09', 'Y'),
+(3, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 19:28:05', 'Y'),
+(4, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-30 03:16:42', 'Y'),
+(5, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-30 03:17:33', 'Y'),
+(6, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-30 03:18:40', 'Y'),
+(7, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '10', 'affiliate', '2019-03-30 03:22:11', 'Y'),
+(8, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '12', 'affiliate', '2019-03-30 03:38:37', 'Y'),
+(9, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '13', 'affiliate', '2019-04-05 03:24:16', 'Y'),
+(10, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-05 04:18:46', 'Y'),
+(11, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-05 04:21:58', 'Y'),
+(12, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '17', 'affiliate', '2019-04-05 04:28:47', 'Y'),
+(13, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '18', 'affiliate', '2019-04-06 01:53:47', 'Y'),
+(14, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '21', 'affiliate', '2019-04-06 02:02:40', 'Y'),
+(15, 'Solicitud Aprobada', 3, 'groups/group_information', '17', 'approve_affiliate', '2019-04-06 02:10:58', 'Y'),
+(16, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '22', 'affiliate', '2019-04-06 03:46:22', 'Y'),
+(17, 'Solicitud Aprobada', 3, 'groups/group_information', '19', 'approve_affiliate', '2019-04-06 03:46:46', 'Y'),
+(18, 'Nueva Solicitud de Afilicacion', NULL, 'affiliate/approve_affiliate', '23', 'affiliate', '2019-04-06 04:00:15', 'N'),
+(19, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '24', 'affiliate', '2019-04-06 04:01:36', 'Y'),
+(20, 'Solicitud Declinada', 3, '#', '18', 'decline_affiliate', '2019-04-06 04:04:23', 'Y'),
+(21, 'Nueva Solicitud de Afilicacion', 2, 'affiliate/approve_affiliate', '24', 'affiliate', '2019-04-06 04:16:50', 'Y'),
+(22, 'Solicitud Aprobada', 3, 'groups/group_information', '18', 'approve_affiliate', '2019-04-06 04:18:43', 'Y');
 
 -- --------------------------------------------------------
 
@@ -279,8 +294,7 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 -- Estructura de tabla para la tabla `permission`
 --
 
-drop table if exists permission;
-
+DROP TABLE IF EXISTS `permission`;
 CREATE TABLE `permission` (
   `id` int(5) NOT NULL,
   `menu_id` int(5) DEFAULT NULL,
@@ -297,14 +311,16 @@ CREATE TABLE `permission` (
 
 INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_write`, `can_edit`, `can_delete`) VALUES
 (1, 5, 1, 'Yes', 'No', 'Yes', 'No'),
-(2, 21, 2, 'No', 'No', 'No', 'No'),
-(3, 20, 2, 'No', 'No', 'No', 'No'),
 (4, 16, 2, 'No', NULL, NULL, NULL),
 (5, 7, 2, 'No', NULL, NULL, NULL),
 (6, 9, 2, 'No', NULL, NULL, NULL),
 (7, 12, 2, 'No', NULL, NULL, NULL),
 (8, 15, 2, 'No', NULL, NULL, NULL),
-(9, 19, 2, 'No', NULL, NULL, NULL);
+(10, 13, 2, 'No', NULL, NULL, NULL),
+(11, 14, 2, 'No', NULL, NULL, NULL),
+(12, 19, 2, 'No', NULL, NULL, NULL),
+(13, 17, 2, 'No', NULL, NULL, NULL),
+(14, 25, 2, 'No', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -312,8 +328,7 @@ INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_wri
 -- Estructura de tabla para la tabla `role`
 --
 
-drop table if exists role;
-
+DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
@@ -336,8 +351,7 @@ INSERT INTO `role` (`id`, `name`, `description`) VALUES
 -- Estructura de tabla para la tabla `source`
 --
 
-drop table if exists source;
-
+DROP TABLE IF EXISTS `source`;
 CREATE TABLE `source` (
   `id` int(11) NOT NULL,
   `title` varchar(60) DEFAULT NULL,
@@ -361,8 +375,7 @@ INSERT INTO `source` (`id`, `title`, `description`) VALUES
 -- Estructura de tabla para la tabla `status`
 --
 
-drop table if exists status;
-
+DROP TABLE IF EXISTS `status`;
 CREATE TABLE `status` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
@@ -383,8 +396,7 @@ INSERT INTO `status` (`id`, `name`, `description`) VALUES
 -- Estructura de tabla para la tabla `user`
 --
 
-drop table if exists user;
-
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `employee_id` int(11) DEFAULT NULL,
@@ -413,8 +425,7 @@ INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username
 -- Estructura de tabla para la tabla `user_level`
 --
 
-drop table if exists user_level;
-
+DROP TABLE IF EXISTS `user_level`;
 CREATE TABLE `user_level` (
   `id` int(5) NOT NULL,
   `name_level` varchar(50) DEFAULT NULL,
@@ -526,82 +537,71 @@ ALTER TABLE `user_level`
 --
 ALTER TABLE `affiliate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
 --
 -- AUTO_INCREMENT de la tabla `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
 --
 -- AUTO_INCREMENT de la tabla `group_user_role`
 --
 ALTER TABLE `group_user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
 --
 -- AUTO_INCREMENT de la tabla `menu`
 --
 ALTER TABLE `menu`
   MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
 --
 -- AUTO_INCREMENT de la tabla `note`
 --
 ALTER TABLE `note`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `note_approver`
 --
 ALTER TABLE `note_approver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `note_type`
 --
 ALTER TABLE `note_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `notification`
 --
 ALTER TABLE `notification`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
 --
 -- AUTO_INCREMENT de la tabla `permission`
 --
 ALTER TABLE `permission`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT de la tabla `source`
 --
 ALTER TABLE `source`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `status`
 --
 ALTER TABLE `status`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `user_level`
 --
 ALTER TABLE `user_level`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-  
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
