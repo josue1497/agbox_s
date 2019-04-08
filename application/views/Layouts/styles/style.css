@@ -81,17 +81,18 @@
 }
 .profile-img{
     text-align: center;
-    max-width: 70%;
+    max-width: 100%;
 }
 .profile-img img{
-	max-width: 30%;
+	width: 250px;
 	height: 15rem;
+	border-radius: 150px;
 }
 .profile-img .file {
 	position: relative;
 	overflow: hidden;
 	color: #fff;
-    width: 30%;
+    width: 250px;
     border: none;
     border-radius: 0;
     font-size: 15px;
@@ -101,4 +102,60 @@
     opacity: 0;
     right: 0;
     top: 0;
+}
+
+.dataTables_wrapper {
+    position: relative;
+    clear: both;
+	zoom: 1;
+	width: 100%;
+}
+
+.img-group{
+	border-radius:150px; 
+	padding: 2%;
+	width: 250px !important;
+    height: 250px !important;
+	}
+
+.img-profile-user{
+	width: 50px;
+    height: 50px;
+	border-radius: 150px;
+}
+
+.profile-img-info .file {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    width: 250px;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+	align-items: center;
+}
+
+.profile-img-info img{
+	width: 250px;
+	height: 15rem;
+	padding: 2%;
+	border-radius:150px; 
+}
+
+.profile-img-info .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.mh-50{
+	max-height:50% !important;
+}
+
+.slick-arrow::before{
+	color: #6e707e  !important;
+}
+
+.slick-track{
+	min-width: 1500px !important;
 }

@@ -26,15 +26,15 @@
 
 <script src="{{ base_url }}application/views/Layouts/scripts/select2.full.js"></script>
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
-
 <script src="{{ base_url }}application/views/Layouts/scripts/vue.js"></script>
+
 <script src="{{ base_url }}application/views/Layouts/scripts/axios.js"></script>
 
 <script>
     $('.select2').select2({
-			placeholder: 'Select an option'
+			placeholder: 'Select an option',
+			width: '100%',
 		});
 </script>
+<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+<script type="text/javascript" src="{{ base_url }}application/views/Layouts/slick/slick.min.js"></script>

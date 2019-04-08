@@ -212,7 +212,7 @@
 			$role_id = Session::get('role_id');
 
 			$row = (new Permission())->get_by_property(
-        		array('level_user_id'=>$role_id,'menu_id'=>$menu_id));
+						array('user_level_id'=>$role_id,'menu_id'=>$menu_id));
 
         	if(!isset($row) || !isset($row['id']))
 				return null;
@@ -368,6 +368,78 @@
 			}
 			return $url;
 		}
+
+		public static function get_notification_count(){
+
+			$notification_record = Model::get_sql_data("SELECT count(id) notif FROM notification WHERE user_to_id=".Session::get('user_id')." AND `read`='N'");
+			
+			$notification_html='';
+
+			foreach($notification_record as $notification){
+				$count=intval($notification['notif'])>0;
+				$notification_html.=$count? '<span class="badge badge-secondary badge-counter">'. $notification['notif'].'</span>':'';
+			}
+
+		  return $notification_html;
+				}
+
+		public static function get_user_notification(){
+
+			$notification_record = Model::get_sql_data('SELECT * FROM notification WHERE user_to_id='.Session::get('user_id').' ORDER BY shipping_date DESC limit 10');
+			
+			$notification_html='';
+			if(count($notification_record)>0){
+				foreach($notification_record as $notification){
+					$text=$notification['read']==="N"?"text-dark font-weight-bold ":"text-muted font-weight-normal";
+					$uri_to=SERVER_DIR.$notification['controller_to'].DIRECTORY_SEPARATOR.$notification['entity_id'];
+					$to_read = SERVER_DIR.'notification/read_notification';
+				$hola='href="'.SERVER_DIR.$notification['controller_to'].DIRECTORY_SEPARATOR.$notification['entity_id'].'';
+				$notification_html.='<a class="dropdown-item d-flex align-items-center" onclick="toReadNotification(\''.$uri_to.'\',\''.$to_read.'\',\''.$notification['id'].'\');">
+							'.self::get_notification_icon($notification['notification_type']).'
+							<div>
+								<div class="small text-gray-500">'.date("F j, Y, g:i a", strtotime($notification['shipping_date'])).'</div>
+									<span class="'.$text.'">'.$notification['message'].'</span>
+							</div>
+						</a>';
+				}
+			
+		}else{
+			$notification_html.='<a class="dropdown-item d-flex align-items-center" href="#">
+				<div class="mr-3">
+				</div>
+				<div>
+				  <span class="font-weight-bold">there is not alerts!</span>
+				</div>
+			  </a>';
+		}
+		
+
+		  return $notification_html;
+				}
+
+		public static function get_notification_icon($type){
+			$html= '<div class="mr-3">
+						<div class="icon-circle '.self::get_notification_color($type).'">';
+			switch($type){
+				case Notification::$AFFILIATE:
+					$html.='<i class="fas fa-file-alt text-white"></i>';
+				  break;
+
+			}
+
+			$html.='</div>
+			</div>';
+			
+		  return $html;
+		}		
+
+		public static function get_notification_color($type){
+			switch($type){
+				case 'affiliate':
+					return ' bg-success ';
+			}
+			
+		}		
 		
 	}
 ?>

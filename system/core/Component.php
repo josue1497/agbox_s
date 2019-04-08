@@ -76,8 +76,11 @@
 
 		public static function img_to_base64($path){
 			$type = pathinfo($path, PATHINFO_EXTENSION);
-			$data = file_get_contents($path);
-			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+			$base64='';
+			if(is_file($path) && file_exists($path)){
+				$data = file_get_contents($path);
+				$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+			}
 			return $base64;
 		}
 		
@@ -133,7 +136,7 @@
 		public static function select_field($name,$value=null,$label=null,$data=null,$etc=null){
 			return '<div class="form-group">'.
 			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
-			'<select class="form-control" id="'.$name.'" name="'.$name.'" '.$etc.' >'.
+			'<select class="form-control select2" id="'.$name.'" name="'.$name.'" '.$etc.' >'.
 			'<option value="0" '.(0==$value?'selected':'').'>Elija Opcion</option>'.
 			Component::create_options($data,(is_array($value)?(isset($value[$name])?$value[$name]:''):$value)).
 			'</select></div>';
@@ -356,5 +359,7 @@
 			}
 			return $newStr.$replace;
 		}
+
+		
 	}
 ?>

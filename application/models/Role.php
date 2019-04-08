@@ -27,5 +27,11 @@ class Role extends Model{
 		);
 		$this->init();
 	}
+
+	public static function get_role_name($id){
+		$role = new Role();
+		$record=$role->findByPoperty(array('id'=>$id));
+		return $record['name'];
+	}
 }
 ?>

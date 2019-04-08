@@ -15,9 +15,6 @@
 		$group_record = $group_model->findByPoperty(array('id' => $this_record['group_id']));
 		$html_group=generate_group_div($group_record);
 
-
-		// var_dump($this_record);
-
 		$html_result=file_get_contents(__DIR__.'/approve_affiliate.html');
 
 		$html_result=str_replace('{{ USER_INFO }}',CoreUtils::add_new_card($html_user,'User Information'),$html_result);
@@ -25,13 +22,34 @@
         $html_result=str_replace('{{ GROUP_USER }}',CoreUtils::add_new_card($html_group,'Group Information'),$html_result);
         // $html_result=str_replace('{{ ROLE_SECTION }}',CoreUtils::add_new_card( generate_role_user(),'Roles'),$html_result);
 
+				$controller->view->add_script_js("function send_data(){
+					$.post( '".SERVER_DIR."affiliate/approve_user',".
+						"{record_id:".$this_record['id'].",approved:'Yes',role_id:$('#group_user_role').val()}".
+						", function( data ) {
+						console.log(data);
+						if('ok'===data){
+							location.href='".SERVER_DIR."';
+						}
+					});
+				}
+				
+				function decline(){
+					$.post( '".SERVER_DIR."affiliate/approve_user',".
+						"{record_id:".$this_record['id'].",approved:'No',role_id:$('#group_user_role').val()}".
+						", function( data ) {
+						console.log(data);
+						if('ok'===data){
+							location.href='".SERVER_DIR."';
+						}
+					});
+				}
+				
+				");
 		return $html_result;
 }
 
 function generate_user_div($user){
 	$emp_model = new Employee();
-	// $emp=$emp_model->findByPoperty(array('id' => $user['employee_id']));
-	// var_dump($emp);
 	$html='
 	<div class="profile-img"><img class="card-img-top" src="'.Component::img_to_base64(UPLOADS_DIR.$user['profile_photo']).'" alt="Card image cap" style="width:50% !important;" ></div>
 	<div class="card-body text-center">
@@ -44,9 +62,6 @@ function generate_user_div($user){
 } 
 
 function generate_group_div($group){
-	// $emp_model = new Employee();
-	// $emp=$emp_model->findByPoperty(array('id' => $user['employee_id']));
-	// var_dump($emp);
 	$html='
 	<div class="profile-img"><img class="card-img-top" src="'
 	.Component::img_to_base64(UPLOADS_DIR.$group['group_photo']).'" alt="Card image cap" style="width:50% !important;" ></div>
@@ -59,9 +74,10 @@ function generate_group_div($group){
 	return $html;
 } 
 function generate_button_approve($affiliate){
-	$disable =empty($affiliate['approved'])?'':'disabled';
-	return '<button class="btn btn-primary mx-3" '.$disable.'>Accept</button>
-	<button class="btn btn-secondary" '.$disable.'>Decline</button>';
+	$disable =empty($affiliate['approved'])?'':'disabled ';
+		return '<span class="result"></span><button class="btn btn-primary mx-3" '.$disable.
+		' onclick="send_data()" >Accept</button>
+	<button class="btn btn-secondary" '.$disable.' onclick="decline()">Decline</button>';
 } 
 
 function generate_role_user(){

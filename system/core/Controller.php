@@ -149,6 +149,11 @@
 					$html_view);
 
 			$html_view = str_replace(
+					'{{ profile_icon }}',
+					Component::img_to_base64(UPLOADS_DIR.Session::get('user_profile_photo')),
+					$html_view);
+
+			$html_view = str_replace(
 					'{{ error_message }}',
 					(isset($this->record)&& isset($this->record['error_message'])?
 						'<div class="error_msg">'.
@@ -170,6 +175,18 @@
 			$html_view = Translator::translate(
 				CoreUtils::get_controller_name($this) . '/' . $filename,
 				$html_view);
+
+			$html_view = str_replace(
+					'{{ NOTIFICATION_COUNT }}',
+					CoreUtils::get_notification_count(),
+					$html_view);
+
+			$html_view = str_replace(
+					'{{ NOTIFICATION_DIV }}',
+					CoreUtils::get_user_notification(),
+					$html_view);
+			
+
 				
 				return $html_view;
 		}

@@ -67,7 +67,7 @@ class View{
 		 * @param type $data 
 		 * @return type
 		 */
-	public function auto_build_form_content($data){
+	public function auto_build_form_content($data, $add_button=true){
 		$form_content = '';
 		foreach ($this->model->table_fields as $form_field) {
 			if ($form_field->get_visible_form() && $form_field->get_column_in_db())
@@ -75,9 +75,9 @@ class View{
 			
 		}
 
-		return $form_content .
+		return $form_content .($add_button?
 			Component::cancel_button($this->model->table_name) .
-			Component::save_button();
+			Component::save_button():'');
 	}
 
 	/**
@@ -131,7 +131,6 @@ class View{
 		         	}
 				}
 
-				//var_dump($pic);
 
 		        $item_list.= $pic.
 		          	'<div class="card-body">'.
@@ -345,69 +344,10 @@ class View{
 		return $res;
 	}
 
-	/**
-		 *  metodo para construir elementos de formulario en la vista,
-		 * sin un dato especifico en ella
-		 * desde las especificaciones del modelo 
-		 *
-		 * @param type $form_field 
-		 * @param type $data 
-		 * @return type
-		 */
-	public function build_element_without_data($form_field)
-	{
-		$res = '';
-		switch ($form_field->get_type()) {
-			case Column::$COLUMN_TYPE_TEXTAREA:
-				$res = Component::text_area(
-					$form_field->get_name(),
-					$form_field->get_label(),
-					$form_field->get_field_help(),
-					$form_field->get_field_html()
-				);
-				break;
-
-			case Column::$COLUMN_TYPE_SELECT:
-				$res = Component::select_field(
-					$form_field->get_name(),
-					$form_field->get_name(),
-					$form_field->get_label(),
-					($form_field->get_foreing_key() ? $form_field->get_fk_entity()->get_select_data() : $form_field->get_values()),
-					$form_field->get_field_html()
-				);
-				break;
-
-			case Column::$COLUMN_TYPE_ICONPICKER:
-				$res = Component::icon_picker(
-					$form_field->get_name(),
-					$form_field->get_label()
-				);
-				break;
-			case Column::$COLUMN_TYPE_TEXT:
-			case Column::$COLUMN_TYPE_DATE:
-			case Column::$COLUMN_TYPE_EMAIL:
-			case Column::$COLUMN_TYPE_HIDDEN:
-			case Column::$COLUMN_TYPE_NUMBER:
-			case Column::$COLUMN_TYPE_PASS:
-			default:
-				$res = Component::base_field(
-					$form_field->get_type(),
-					$form_field->get_name(),
-					isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
-					$form_field->get_label(),
-					$form_field->get_field_help(),
-					$form_field->get_field_html()
-				);
-				break;
-		}
-		return $res;
-	}
-	
 	public function buid_items_groups(){
 		$html='';
 
 		$data = Model::get_sql_data("select * from groups G where id not in (select group_id from affiliate where user_id=?)",array('user_id'=>Session::get('user_id')));
-		// var_dump($data);die;
 				foreach($data as $row){
 							$click="affiliateGroup($('#form_".$row['id']."').serialize())";
 							$img=$row['group_photo']!=null?Component::img_to_base64(UPLOADS_DIR.$row['group_photo']):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg';
@@ -431,7 +371,6 @@ class View{
 						</div>';
 
 						}
-						// var_dump($html);die;
 				return $html;
 	}
 }

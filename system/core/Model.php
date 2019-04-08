@@ -235,8 +235,6 @@ class Model
 	public function create($params)
 	{
 
-		echo '<script>console.log("modelo: agregar registro nuevo")</script>';
-
 		if ($this->exist_unike_keys($params)) {
 			echo '<script>console.log("modelo: ya existe la clave unica")</script>';
 
@@ -254,7 +252,6 @@ class Model
 
 			if($table_field->get_type()==Column::$COLUMN_TYPE_FILE || 
 				$table_field->get_type()==Column::$COLUMN_TYPE_PHOTO){
-				// var_dump($_FILES[$name]);die;
 				if(!empty($_FILES[$name]["name"])){
 					if(!empty($_FILES[$name]["type"])){
 						$fileName = time().'_'.$_FILES[$name]['name'];
@@ -269,7 +266,7 @@ class Model
 		}
 
 			if (!empty($params[$name]) && strlen($params[$name]) > 0 && $table_field->get_column_in_db() == true) {
-				$sqlInsert .= ($first == false ? " , " : "") . $name;
+				$sqlInsert .= ($first == false ? " , `" : "`") . $name ."`";
 				$sqlValues .= ($first == false ? " , " : "") . ":" . $name;
 				$db_params[$name] = $params[$name];
 				$first = false;
@@ -288,7 +285,6 @@ class Model
 			 	echo 'Database Error: '.$err[2].
 			 		'<br/>sql :'.$sqlInsert.$sqlValues.
 			 		'</br>params: ';
-			 	var_dump($db_params); die;
 			}
 		}catch(Exception $e){
 			echo 'Exception: '.$e->getMessage();
@@ -312,7 +308,6 @@ class Model
 
 			if($table_field->get_type()==Column::$COLUMN_TYPE_FILE || 
 				$table_field->get_type()==Column::$COLUMN_TYPE_PHOTO){
-				// var_dump($_FILES[$name]);die;
 				if(!empty($_FILES[$name]["name"])){
 					if(!empty($_FILES[$name]["type"])){
 						$fileName = time().'_'.$_FILES[$name]['name'];
@@ -353,13 +348,15 @@ class Model
 	/**
 	*
 	*/
-	public static function get_sql_data($sql, array $params){
+	public static function get_sql_data($sql, array $params=null){
 		$req = Database::getBdd()->prepare($sql);
 
 		$i=1;
+		if(is_array($params) && count($params)>0){
 		foreach($params as $param){
 			$req->bindParam($i++,$param);
 		}
+	}
 
 		$req->execute();
 		return $req->fetchAll(PDO::FETCH_ASSOC);
