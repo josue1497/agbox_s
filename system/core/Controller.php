@@ -149,6 +149,11 @@
 					$html_view);
 
 			$html_view = str_replace(
+					'{{ profile_icon }}',
+					Component::img_to_base64(UPLOADS_DIR.Session::get('user_profile_photo')),
+					$html_view);
+
+			$html_view = str_replace(
 					'{{ error_message }}',
 					(isset($this->record)&& isset($this->record['error_message'])?
 						'<div class="error_msg">'.

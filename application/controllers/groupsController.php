@@ -21,23 +21,23 @@ class groupsController  extends Controller{
     }
     
     /**
-        * metodo accion create que genera el form para agregar registros
-        * 
-        * @return void
-        */
-				function create(){
-					$this->update_user_role_group();
-					$this->action_create(new Group(),$_POST,true);
-						 }
-   	 /**
-					* metdo accion edit que genra el form para editar registros
-					* 
-					* @return void
-					*/
-					function edit($id){
-						$this->update_user_role_group();
-						$this->action_edit($id,new Group(),$_POST,true);
-							 }
+    * metodo accion create que genera el form para agregar registros
+    * 
+    * @return void
+    */
+	function create(){
+		$this->update_user_role_group();
+		$this->action_create(new Group(),$_POST,true);
+	}
+	/**
+	* metdo accion edit que genra el form para editar registros
+	* 
+	* @return void
+	*/
+	function edit($id){
+		$this->update_user_role_group();
+		$this->action_edit($id,new Group(),$_POST,true);
+	 }
 
     /**
 	 * metodo accion delete que elimina un registro

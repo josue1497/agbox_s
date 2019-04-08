@@ -7,7 +7,7 @@ class Notification extends Model{
     public static $DESAFFILIATE_USER = 'desaffiliate_user';
     public static $CHANGE_ROLE = 'change_role';
 
-
+ 
     public static $YES = 'Y';
     public static $NO = 'N';
 

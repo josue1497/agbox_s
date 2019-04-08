@@ -153,5 +153,9 @@
 }
 
 .slick-arrow::before{
-	color: rgba(0, 0, 0, 0.15)  !important;
+	color: #6e707e  !important;
+}
+
+.slick-track{
+	min-width: 1500px !important;
 }

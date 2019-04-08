@@ -421,7 +421,7 @@
 			$html= '<div class="mr-3">
 						<div class="icon-circle '.self::get_notification_color($type).'">';
 			switch($type){
-				case 'affiliate':
+				case Notification::$AFFILIATE:
 					$html.='<i class="fas fa-file-alt text-white"></i>';
 				  break;
 
