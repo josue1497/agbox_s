@@ -29,7 +29,7 @@ function generate_note_card($note){
 
     $html='
     <div class="card-body">
-      <h5 class="card-title text-center display-2 text-info">'.$note['title'].'</h5>
+      <h5 class="card-title text-center display-4 text-info">'.$note['title'].'</h5>
       <h6 class="card-subtitle mb-2 text-muted">'.$note['summary'].'</h6>
         <hr>    
       <p class="card-text"><b>Origen: </b> '.$source['title'].'</p>

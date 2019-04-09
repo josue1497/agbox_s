@@ -391,9 +391,8 @@
 			if(count($notification_record)>0){
 				foreach($notification_record as $notification){
 					$text=$notification['read']==="N"?"text-dark font-weight-bold ":"text-muted font-weight-normal";
-					$uri_to=SERVER_DIR.$notification['controller_to'].DIRECTORY_SEPARATOR.$notification['entity_id'];
+					$uri_to=SERVER_DIR.$notification['controller_to'].'/'.$notification['entity_id'];
 					$to_read = SERVER_DIR.'notification/read_notification';
-				$hola='href="'.SERVER_DIR.$notification['controller_to'].DIRECTORY_SEPARATOR.$notification['entity_id'].'';
 				$notification_html.='<a class="dropdown-item d-flex align-items-center" onclick="toReadNotification(\''.$uri_to.'\',\''.$to_read.'\',\''.$notification['id'].'\');">
 							'.self::get_notification_icon($notification['notification_type']).'
 							<div>

@@ -141,7 +141,7 @@ function generate_affiliate_table($group_id){
          $table_rows.='<tr data-toggle="modal" data-target="#modal-user" 
                             data-user="'.$row['user_name'].'" data-group="'.$row['group_id'].'"
                             data-role="'.$row['role_id'].'" data-id="'.$row['user_id'].'"
-                            data-affiliate="'.$row['affiliate_id'].'" id="'.$row['affiliate_id'].'">
+                            data-affiliate="'.$row['affiliate_id'].'" id="'.$row['affiliate_id'].'"oncontextmenu="javascript:alert(\'success!\');return false;">
                      <input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
                      <input type="hidden" name="user_id" value="'.$row['user_id'].'">
                      <input type="hidden" name="group_id" value="'.$row['group_id'].'">
