@@ -33,5 +33,14 @@ class Role extends Model{
 		$record=$role->findByPoperty(array('id'=>$id));
 		return $record['name'];
 	}
+
+	public static function get_role_id_by_name($role_name){
+        $role = new Role();
+
+        $record=$role->findByPoperty(array('name'=>$role_name));
+        
+        return $record['id'];
+
+    }
 }
 ?>

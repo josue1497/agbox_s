@@ -6,6 +6,8 @@ class Notification extends Model{
     public static $DECLINE_AFFILIATE = 'decline_affiliate';
     public static $DESAFFILIATE_USER = 'desaffiliate_user';
     public static $CHANGE_ROLE = 'change_role';
+    public static $REQUEST_MEMBERSHIP = 'request_membership';
+    public static $NEW_MEMBER = 'new_member';
 
  
     public static $YES = 'Y';

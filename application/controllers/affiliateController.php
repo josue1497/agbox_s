@@ -216,11 +216,61 @@ var app = new Vue({
       }
      
       }
-
-      
-      
-      
     }
+
+    public function approve_request($id){
+      $this->model=new Affiliate();
+		  $this->model->get_by_id($id);
+		  $this->view = new View($this->model);
+		  $this->view_processor = new ViewProcessor($this->view);
+
+		  $this->init($this->model);
+		  $d["record"] = $this->model->get_by_id($id);
+
+		  $this->set($d);
+
+		  $this->render('approve_request');
+    }
+
+
+    public function response_to_request(){
+      $data=$_POST;
+
+      if($data['approved']==='Yes'){
+
+        $role_id = Role::get_role_id_by_name('Miembro');
+        $affiliate_model= new Affiliate();
+        $affiliate_record=$affiliate_model->findByPoperty(array('id'=>$data['record_id']));
+        $affiliate_record['approved']=$data['approved'];
+        $leader_record= Group_User_Role::get_user_by_role('Lider',$affiliate_record['group_id']);
+        $leader_id= $leader_record['id'];
+
+        if($affiliate_model->edit($affiliate_record['id'],$affiliate_record)){
+        
+          if(Group_User_Role::set_user_role($affiliate_record['group_id'],
+                                            $affiliate_record['user_id'],
+                                            $role_id)){
+              Notification::create_notification(array('user_to_id'=>$leader_id,
+                                      'message'=>'Tiene un Nuevo Miembro en su Grupo', 
+                                      'entity_id'=>$affiliate_record['group_id'], 
+                                      'notification_type'=>Notification::$NEW_MEMBER,
+                                      'controller_to'=>'groups/group_information', 
+                                      'read'=>Notification::$NO));
+                        echo 'ok';
+                                          }
+        }else{
+          echo 'fail';
+        }
+        
+
+      }else{
+
+      }
+
+      echo 'ok';
+    }
+
 }
+
 
 ?>

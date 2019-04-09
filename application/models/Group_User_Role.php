@@ -126,6 +126,8 @@ class Group_User_Role extends Model{
         return $gur->delete($record['id']);
 
     }
+
+    
         
 }
 ?>

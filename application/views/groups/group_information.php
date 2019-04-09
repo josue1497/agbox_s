@@ -50,7 +50,8 @@
                      </div>
                    </div>';
 
-                     $tile_affiliate='<div class="d-flex">Affiliate<button class="btn btn-primary ml-auto" id="add_affiliate"><i class="fas fa-plus"></i></button></div>';
+                     $tile_affiliate='<div class="d-flex">Affiliate<button class="btn btn-primary ml-auto" id="add_affiliate"
+                     data-toggle="modal" data-target="#modal-affiliate"><i class="fas fa-plus"></i></button></div>';
                      $title_note='<div class="d-flex">Group´s Notes'.$button_add_note.'</div>';
                      
                      $html_result=file_get_contents(__DIR__.'/body.html');
@@ -60,6 +61,7 @@
                      $html_result=str_replace('{{ AFFILIATES_USERS }}',CoreUtils::add_new_card($table_affilates,$tile_affiliate),$html_result);
                      $html_result=str_replace('{{ NOTES_GROUP }}',CoreUtils::add_new_card( $table_notes,$title_note),$html_result);
                      $html_result=str_replace('{{ ROLE_USER }}',generate_role_user(),$html_result);
+                     $html_result=str_replace('{{ USER_TO_AFFILIATE }}',generate_select_user($this_group['id']),$html_result);
                      
 
 
@@ -112,6 +114,22 @@
                                    }
                                  });
                             }
+                          });
+
+                          $('#affiliate-button').click(function(){
+                            $.post( '".SERVER_DIR."groups/request_membership',{'users_id':$('#user_to_affiliate_id').val(),'group_id':'".$this_group['id']."'}, function( data ) {
+                                   
+                                   console.log(data);
+                                   // if(''!==data && 'fail'!==data){
+                                   //     $('#'+data).remove();
+                                   //     $('#modal-user').modal('hide');
+                                   // }else{
+                                   //    alert('fail');  
+                                   //    $('#modal-user').modal('hide');  
+                                   // }
+                                 });
+
+                            // alert($('#user_to_affiliate_id').val());
                           });
 
                           ");
@@ -203,4 +221,19 @@ function generate_role_user(){
 	$html.='</select></div>';
 	return $html;
 } 
+
+function generate_select_user($group_id){
+
+       $users=Model::get_sql_data("select * from user where id not in (select user_id from affiliate where group_id=?)",array('group_id'=>$group_id));
+   
+       $html='<div class="form-group">
+       <label for="user_approved_id">Usuarios para Afiliar</label>
+       <select multiple required name="user_to_affiliate_id" id="user_to_affiliate_id" class="form-control select2">';
+       foreach($users as $user){
+           $html.=' <option value="'.$user['id'].'">'.$user['names'].' '.$user['lastnames'].'</option>';
+       }
+       $html.='</select>
+   </div>';
+   return $html;
+   }
 ?>
