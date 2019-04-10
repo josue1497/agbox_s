@@ -12,6 +12,7 @@ function generate_content($controller, $filename = null, $record = null)
     $model_note->hide_form_column('status_id');
     $model_note->hide_form_column('date_approved');
 
+    $record = $controller->vars['records'];
 
     $form_card=$controller->view->auto_build_form_content($record);
     $form_card = str_replace('m-1 btn btn-secondary','d-none disable', $form_card);

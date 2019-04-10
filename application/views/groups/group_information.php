@@ -38,6 +38,8 @@
 
                      $form_group=$controller->auto_build_view('form',$this_group,$this_group);
 
+                     Session::set('group_id',$this_group['id']);
+
                      $button_add_note='<div class="btn-group dropleft ml-auto">
                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-plus"></i>
@@ -120,16 +122,14 @@
                             $.post( '".SERVER_DIR."groups/request_membership',{'users_id':$('#user_to_affiliate_id').val(),'group_id':'".$this_group['id']."'}, function( data ) {
                                    
                                    console.log(data);
-                                   // if(''!==data && 'fail'!==data){
-                                   //     $('#'+data).remove();
-                                   //     $('#modal-user').modal('hide');
-                                   // }else{
-                                   //    alert('fail');  
-                                   //    $('#modal-user').modal('hide');  
-                                   // }
+                                   if(''!==data && 'fail'!==data){
+                                       $('#modal-affiliate').modal('hide');
+                                   }else{
+                                      alert('Ha ocurrido un Error!');  
+                                      $('#modal-affiliate').modal('hide');  
+                                   }
                                  });
 
-                            // alert($('#user_to_affiliate_id').val());
                           });
 
                           ");

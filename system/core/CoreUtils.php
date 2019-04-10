@@ -385,7 +385,7 @@
 
 		public static function get_user_notification(){
 
-			$notification_record = Model::get_sql_data('SELECT * FROM notification WHERE user_to_id='.Session::get('user_id').' ORDER BY shipping_date DESC limit 10');
+			$notification_record = Model::get_sql_data('SELECT * FROM notification WHERE user_to_id='.Session::get('user_id').' ORDER BY shipping_date DESC limit 7');
 			
 			$notification_html='';
 			if(count($notification_record)>0){
@@ -394,7 +394,7 @@
 					$uri_to=SERVER_DIR.$notification['controller_to'].'/'.$notification['entity_id'];
 					$to_read = SERVER_DIR.'notification/read_notification';
 				$notification_html.='<a class="dropdown-item d-flex align-items-center" onclick="toReadNotification(\''.$uri_to.'\',\''.$to_read.'\',\''.$notification['id'].'\');">
-							'.self::get_notification_icon($notification['notification_type']).'
+							'.self::get_notification_icon($notification['notification_type'],$notification['read']).'
 							<div>
 								<div class="small text-gray-500">'.date("F j, Y, g:i a", strtotime($notification['shipping_date'])).'</div>
 									<span class="'.$text.'">'.$notification['message'].'</span>
@@ -416,13 +416,29 @@
 		  return $notification_html;
 				}
 
-		public static function get_notification_icon($type){
+		public static function get_notification_icon($type,$read){
 			$html= '<div class="mr-3">
-						<div class="icon-circle '.self::get_notification_color($type).'">';
-			switch($type){
+						<div class="icon-circle '.self::get_notification_color($read).'">';
+			switch($type){			
 				case Notification::$AFFILIATE:
-					$html.='<i class="fas fa-file-alt text-white"></i>';
-				  break;
+				case Notification::$NEW_MEMBER:
+					$html.='<i class="fas fa-user-plus text-white"></i>';
+					break;
+				case Notification::$REQUEST_MEMBERSHIP:
+						$html.='<i class="fas fa-users text-white"></i>';
+						break;
+				case Notification::$APPROVE_AFFILIATE:
+						$html.='<i class="fas fa-check-square text-white"></i>';
+						break;
+				case Notification::$DECLINE_AFFILIATE:
+						$html.='<i class="fas fa-times-square text-white"></i>';
+						break;
+				case Notification::$CHANGE_ROLE:
+						$html.='<i class="fas fa-portrait text-white"></i>';
+						break;
+				case Notification::$DESAFFILIATE_USER:
+						$html.='<i class="fas fa-user-minus text-white"></i>';
+						break;
 
 			}
 
@@ -434,8 +450,10 @@
 
 		public static function get_notification_color($type){
 			switch($type){
-				case 'affiliate':
-					return ' bg-success ';
+				case 'Y':
+					return ' bg-info ';
+				case 'N':
+					return ' bg-secondary ';
 			}
 			
 		}		

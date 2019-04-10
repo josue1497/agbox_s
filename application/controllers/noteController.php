@@ -108,7 +108,9 @@ class noteController extends Controller{
 			else 
 				header("location: ".CoreUtils::base_url().'note/index');
 		}
-		
+		if(Session::get('group_id')){
+			$this->vars['records']['group_id']=Session::get('group_id');
+		}
 		$this->render('create_assignment');
 	}
 
@@ -158,6 +160,9 @@ class noteController extends Controller{
 				header("location: ".CoreUtils::base_url().'note/index');
 		}
 
+		if(Session::get('group_id')){
+			$this->vars['records']['group_id']=Session::get('group_id');
+		}
 		$this->render('create_suggested_point');
 	}
 
@@ -207,7 +212,9 @@ class noteController extends Controller{
 				header("location: ".CoreUtils::base_url().'note/index');
 		}
 
-
+		if(Session::get('group_id')){
+			$this->vars['records']['group_id']=Session::get('group_id');
+		}
 		$this->render('create_agenda_point');
 	}
 
@@ -257,7 +264,10 @@ class noteController extends Controller{
 				header("location: ".CoreUtils::base_url().'note/index');
 		}
 
-
+		if(Session::get('group_id')){
+			$this->vars['records']['group_id']=Session::get('group_id');
+			Session::delete('group_id');
+		}
 		$this->render('create_commitment');
 	}
 }

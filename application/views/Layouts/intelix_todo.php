@@ -21,7 +21,7 @@
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content" class="bg-info">
+      <div id="content" class="bg-light">
 		{{ intelix_todo_topbar }}
 		<!-- --- BEGIN CARD ---- -->
 		{{ intelix_todo_content }}

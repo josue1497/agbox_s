@@ -39,7 +39,7 @@ class Group_User_Role extends Model{
         $this->init();
     }
 
-    public function get_user_by_role($role_name,$group_id){
+    public static function get_user_by_role($role_name,$group_id){
 		$gur = new Group_User_Role();
 		$role_model = new Role();
         $user_model = new User();

@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/jquery.dataTables.min.css" />
 
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/select2.min.css" />
+<link href="https://pro-next.fontawesome.com/releases/v5.8.1/css/all.css" data-prerender="keep" rel="stylesheet">
 
 
 <link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/slick/slick.css"/>
