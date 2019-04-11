@@ -38,6 +38,8 @@
 
                      $form_group=$controller->auto_build_view('form',$this_group,$this_group);
 
+                     Session::set('group_id',$this_group['id']);
+
                      $button_add_note='<div class="btn-group dropleft ml-auto">
                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-plus"></i>
@@ -50,7 +52,8 @@
                      </div>
                    </div>';
 
-                     $tile_affiliate='<div class="d-flex">Affiliate<button class="btn btn-primary ml-auto" id="add_affiliate"><i class="fas fa-plus"></i></button></div>';
+                     $tile_affiliate='<div class="d-flex">Affiliate<button class="btn btn-primary ml-auto" id="add_affiliate"
+                     data-toggle="modal" data-target="#modal-affiliate"><i class="fas fa-plus"></i></button></div>';
                      $title_note='<div class="d-flex">Group´s Notes'.$button_add_note.'</div>';
                      
                      $html_result=file_get_contents(__DIR__.'/body.html');
@@ -60,6 +63,7 @@
                      $html_result=str_replace('{{ AFFILIATES_USERS }}',CoreUtils::add_new_card($table_affilates,$tile_affiliate),$html_result);
                      $html_result=str_replace('{{ NOTES_GROUP }}',CoreUtils::add_new_card( $table_notes,$title_note),$html_result);
                      $html_result=str_replace('{{ ROLE_USER }}',generate_role_user(),$html_result);
+                     $html_result=str_replace('{{ USER_TO_AFFILIATE }}',generate_select_user($this_group['id']),$html_result);
                      
 
 
@@ -114,6 +118,20 @@
                             }
                           });
 
+                          $('#affiliate-button').click(function(){
+                            $.post( '".SERVER_DIR."groups/request_membership',{'users_id':$('#user_to_affiliate_id').val(),'group_id':'".$this_group['id']."'}, function( data ) {
+                                   
+                                   console.log(data);
+                                   if(''!==data && 'fail'!==data){
+                                       $('#modal-affiliate').modal('hide');
+                                   }else{
+                                      alert('Ha ocurrido un Error!');  
+                                      $('#modal-affiliate').modal('hide');  
+                                   }
+                                 });
+
+                          });
+
                           ");
 
                      return $html_result;
@@ -141,7 +159,7 @@ function generate_affiliate_table($group_id){
          $table_rows.='<tr data-toggle="modal" data-target="#modal-user" 
                             data-user="'.$row['user_name'].'" data-group="'.$row['group_id'].'"
                             data-role="'.$row['role_id'].'" data-id="'.$row['user_id'].'"
-                            data-affiliate="'.$row['affiliate_id'].'" id="'.$row['affiliate_id'].'">
+                            data-affiliate="'.$row['affiliate_id'].'" id="'.$row['affiliate_id'].'"oncontextmenu="javascript:alert(\'success!\');return false;">
                      <input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
                      <input type="hidden" name="user_id" value="'.$row['user_id'].'">
                      <input type="hidden" name="group_id" value="'.$row['group_id'].'">
@@ -203,4 +221,19 @@ function generate_role_user(){
 	$html.='</select></div>';
 	return $html;
 } 
+
+function generate_select_user($group_id){
+
+       $users=Model::get_sql_data("select * from user where id not in (select user_id from affiliate where group_id=?)",array('group_id'=>$group_id));
+   
+       $html='<div class="form-group">
+       <label for="user_approved_id">Usuarios para Afiliar</label>
+       <select multiple required name="user_to_affiliate_id" id="user_to_affiliate_id" class="form-control select2">';
+       foreach($users as $user){
+           $html.=' <option value="'.$user['id'].'">'.$user['names'].' '.$user['lastnames'].'</option>';
+       }
+       $html.='</select>
+   </div>';
+   return $html;
+   }
 ?>

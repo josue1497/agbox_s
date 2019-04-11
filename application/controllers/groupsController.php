@@ -62,6 +62,35 @@ class groupsController  extends Controller{
 				$status = Group_User_Role::set_group_lider($record['id'],$_POST['leader_id']);
 			}
 		}
+
+		public function request_membership(){
+			$affiliate_model = new Affiliate();
+			$group_model = new Group();
+			
+			$data=$_POST;
+
+			$group_record=$group_model->findByPoperty(array('id'=>$data['group_id']));
+
+			if(isset($data)){
+				foreach($data['users_id'] as $user_id){
+					if($affiliate_model->create(array('user_id'=>$user_id,'group_id'=>$data['group_id']))){
+						$affiliate_record=$affiliate_model->findByPoperty(array('user_id'=>$user_id,'group_id'=>$data['group_id']));
+						if(Notification::create_notification(array('user_to_id'=>$user_id,
+						'message'=>'A sido invitado a participar en el grupo "'.$group_record['name'].'"',
+						'entity_id'=>$affiliate_record['id'],
+						'notification_type'=>Notification::$REQUEST_MEMBERSHIP,
+						'controller_to'=>'affiliate/approve_request',
+						'read'=>Notification::$NO))){
+							echo 'ok';
+						}
+					}else{
+						echo 'fail';
+					}
+				}
+				}
+			}
+
+
 }
 
  

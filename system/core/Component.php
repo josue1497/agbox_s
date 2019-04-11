@@ -187,7 +187,11 @@
 		}
 		
 		public static function save_button($text=null){
-			return '<button type="submit" class="m-1 btn btn-primary"><i class="fas fa-save"></i><span> '.(empty($text)?'Guardar':$text).' </span></button>';
+			return '<button type="submit" class="m-1 btn btn-primary"><i class="fas fa-save"></i><span> &nbsp;'.
+			/*(empty($text)?'Guardar':$text). 
+			comentado por solicitud funcional 
+			10-04-2018 */
+			' </span></button>';
 		}
 		
 		public static function function_button($text,$function){
@@ -197,8 +201,11 @@
 		public static function action_button($module_name,$id=null,$action_name){
 			//action_name = {create, edit, delete,cancel} 
 			return "<a id='link_".$action_name."' href='/".APP_FOLDER.'/'.$module_name.'/'.
-				($action_name=='cancel'?'index':$action_name).'/'.$id."'".Component::set_classname_action($action_name)."'>".
-						Component::set_label_action($action_name)."</a>";
+				($action_name=='cancel'?'index':$action_name).'/'.$id."'".Component::set_classname_action($action_name)."'>&nbsp;".
+						Component::set_icon_action($action_name).
+						/* Component::set_label_action($action_name). comentado por solicitud funcional 
+						10-04-2019*/
+						"</a>";
 		}
 
 
