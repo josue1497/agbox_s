@@ -15,6 +15,13 @@ class userController extends Controller{
 	public function profile(){
 		$this->init(new User());
 		$this->model->table_label='Perfil de Usuario';
+
+		if(isset($_POST)){
+			$data=$_POST;
+			$data['id']=Session::get('user_id');
+			$this->model->save_record($this->model,$data);
+		}
+
 		$this->render("perfil");
 	}
 	public function perfil(){

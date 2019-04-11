@@ -5,6 +5,10 @@ function generate_content($controller, $filename = null, $record = null)
 
 	/* cargar perfil del usuario actual */
 	$record = $controller->model->get_by_id(Session::get('user_id'));
+	$user_moel=$controller->model;
+	$user_moel->hide_form_column('user_level_id');
+	$user_moel->hide_form_column('is_visitor');
+	
 
 	$user_card = $controller->auto_build_view('form', null, $record);
 	
@@ -120,19 +124,18 @@ function generate_note_table($user_id){
 		   <th>Titulo</th>
 		   <th>Grupo</th>
 		   <th>Tipo</th>
-		   <th>Accion</th>
 	</thead>';
 	$table_note_rows='<tbody>';
 	$i=1;
 	foreach($note_group as $row){                     
-	$table_note_rows.='<tr><input type="hidden" name="note_id" value="'.$row['note_id'].'">
+	$table_note_rows.='<tr onclick="location.href=\''.SERVER_DIR.'note/note_information/'.$row['note_id'].'\'"><input type="hidden" name="note_id" value="'.$row['note_id'].'">
 	<input type="hidden" name="user_id" value="'.$row['user_id'].'">
 	<input type="hidden" name="group_id" value="'.$row['group_id'].'">
 	<td class="text-center">'.$i++.'</td>
 	<td class="text-center">'.$row['title'].'</td>
 	<td class="text-center">'.$row['group_name'].'</td>
 	<td class="text-center">'.$row['note_type'].'</td>
-	<td class="text-center"><button class="btn btn-secondary">Datalles</button></td></tr>';
+	</tr>';
 	}
 	$table_note_rows.='</tbody></table>';
 	$table_notes.=$table_note_rows;
@@ -160,7 +163,7 @@ function generate_affiliate_table($user_id){
 	$table_rows='<tbody>';
 	$i=1;
 	foreach($affiliate_record as $row){                     
-	  $table_rows.='<tr id="aff_'.$row['affiliate_id'].'" ><input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
+	  $table_rows.='<tr id="aff_'.$row['affiliate_id'].'""><input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
 				  <input type="hidden" name="user_id" value="'.$row['user_id'].'">
 				  <input type="hidden" name="group_id" value="'.$row['group_id'].'">
 				  <td class="text-center">'.$i++.'</td>

@@ -20,12 +20,14 @@ class Affiliate extends Model
                 (new Column('group_id'))
                     ->set_label('Group')
                     ->set_name_key()
+                    ->set_unike_key(true)
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
                     ->set_fk_entity(new Group()),
 
                 (new Column('user_id'))
                     ->set_label('User')
                     ->set_name_key()
+                    ->set_unike_key(true)
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
                     ->set_fk_entity(new User()),
 
