@@ -46,5 +46,13 @@ class Affiliate extends Model
         return $affiliate->delete($id);
     }
 
+    public static function count_affilate_groups($user_id){
+
+        $result=Model::get_sql_data("select count(*) as result from affiliate where user_id=?", array('user_id'=>$user_id));
+
+        return $result[0]['result'];
+
+    }
+
 }
  

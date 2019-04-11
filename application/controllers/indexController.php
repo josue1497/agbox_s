@@ -10,6 +10,7 @@ class indexController extends Controller{
 	 */
     function index(){
 		$this->init(new User());
+
 		$this->model->table_label='Dashboard';
 		$this->view->add_script_js('
 		
@@ -48,7 +49,12 @@ class indexController extends Controller{
 			});
 		});
 	');
-		$this->render("index");
+
+	if(Affiliate::count_affilate_groups(Session::get('user_id'))==='0'){
+		header("location: ".CoreUtils::base_url().'affiliate/items');
+	}
+	
+	$this->render("index");
     }
 
 	/**

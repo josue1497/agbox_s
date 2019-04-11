@@ -69,10 +69,18 @@ class View{
 		 */
 	public function auto_build_form_content($data, $add_button=true){
 		$form_content = '';
+		$is_group=$this->model->table_name==='groups';
+		$is_user=$this->model->table_name==='user';
 		foreach ($this->model->table_fields as $form_field) {
-			if ($form_field->get_visible_form() && $form_field->get_column_in_db())
+			if ($form_field->get_visible_form() && $form_field->get_column_in_db()){
+				if($is_group &&
+						$form_field->get_type()===Column::$COLUMN_TYPE_PHOTO
+				&& !isset($data[$form_field->get_table_field_name()])){
+					$data[$form_field->get_table_field_name()]='image_group.png';
+				}
 				$form_content .= $this->build_element($form_field, $data);
-			
+					
+			}
 		}
 
 		return $form_content .($add_button?

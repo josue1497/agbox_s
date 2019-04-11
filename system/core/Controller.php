@@ -115,7 +115,7 @@
 			if(!isset($level_row['access_level']) || 
 				$level_row['access_level'] != 3){
 				if($this->view){
-					$this->view->add_script_js('$(".admin_menu").each($(this).html("");');
+					$this->view->add_script_js('$(".admin_menu").each($(this).html(""));');
 				}
 			}
 
@@ -157,10 +157,10 @@
 					'{{ base_url }}',
 					CoreUtils::base_url(),
 					$html_view);
-
 			$html_view = str_replace(
 					'{{ profile_icon }}',
-					Component::img_to_base64(UPLOADS_DIR.Session::get('user_profile_photo')),
+					(Session::get('user_profile_photo')?Component::img_to_base64(UPLOADS_DIR.Session::get('user_profile_photo')) 
+					:'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg'),
 					$html_view);
 
 			$html_view = str_replace(

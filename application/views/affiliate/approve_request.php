@@ -50,7 +50,7 @@
 function generate_group_div($group){
 	$html='
 	<div class="profile-img"><img class="card-img-top" src="'
-	.Component::img_to_base64(UPLOADS_DIR.$group['group_photo']).'" alt="Card image cap" style="width:50% !important;" ></div>
+	.($group['group_photo']?Component::img_to_base64(UPLOADS_DIR.$group['group_photo']):'https://i.ibb.co/pKgD4mH/image-group.png').'" alt="Card image cap" style="width:50% !important;" ></div>
 	<div class="card-body text-center">
 	  <h1 class="card-title">'.$group['name'].'</h1>
 	  <hr>

@@ -9,7 +9,7 @@ function generate_content($controller, $filename = null, $record = null)
     $model_note->hide_form_column('finish_date');
     $model_note->hide_form_column('finish_date');
     $model_note->hide_form_column('date_approved');
-    $model_note->hide_form_column('performer_id');
+    // $model_note->hide_form_column('performer_id');
     $model_note->hide_form_column('note_type_id');
 
     if(isset($controller->vars['records']))
@@ -25,7 +25,7 @@ function generate_content($controller, $filename = null, $record = null)
     // $note_card=generate_note_card($this_note);
     // $approved_card=generate_note_approved_table($this_note['id']);
 
-    $html_result = str_replace('{{ FORM }}', CoreUtils::add_new_card($form_card, 'Comentario'), $html_result);
+    $html_result = str_replace('{{ FORM }}', CoreUtils::add_new_card($form_card, 'Compromiso'), $html_result);
     // $html_result = str_replace('<a id="link_cancel" href="/abx_app/note/index/" class="m-1 btn btn-secondary ">
     //                 <i class="fas fa-times-circle "></i><span> Cancelar </span></a>','', $html_result);
 	$html_result=str_replace('{{ APPROVE_USERS }}',CoreUtils::add_new_card($select_user, 'Aprovadores'),$html_result);

@@ -86,8 +86,9 @@ class affiliateController extends Controller{
                 getGroupPhoto: function(group_photo,id){
                     var jqxhr = $.post( \"".SERVER_DIR."affiliate/get_img\",
                                 {group_photo:group_photo}, function(data, status) {
-                        if(group_photo===\"\"){
-                            document.getElementById(id).src='https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg'
+                        if(group_photo===\"\" || group_photo==null){
+                            document.getElementById(id).src='https://i.ibb.co/pKgD4mH/image-group.png'
+                            
                         }else{
                        document.getElementById(id).src=data;
                         }
@@ -258,7 +259,7 @@ var app = new Vue({
                                             $affiliate_record['user_id'],
                                             $role_id)){
               Notification::create_notification(array('user_to_id'=>$leader_id,
-                                      'message'=>$user_rec['names'].' '.$user_rec['lastnames'].'es el Nuevo Miembro 
+                                      'message'=>$user_rec['names'].' es el Nuevo Miembro 
                                         del Grupo "'.$group_rec['name'].'"', 
                                       'entity_id'=>$affiliate_record['group_id'], 
                                       'notification_type'=>Notification::$NEW_MEMBER,
@@ -272,7 +273,7 @@ var app = new Vue({
       }else{
             if($affiliate_model->delete($affiliate_record['id'])){
               Notification::create_notification(array('user_to_id'=>$leader_id,
-              'message'=>$user_rec['name'].' '.$user_rec['lastnames'].' rechazo la solicitud de entrar al grupo "'.$group_rec['name'].'"', 
+              'message'=>$user_rec['names'].' rechazo la solicitud de entrar al grupo "'.$group_rec['name'].'"', 
               'entity_id'=>$affiliate_record['group_id'], 
               'notification_type'=>Notification::$NEW_MEMBER,
               'controller_to'=>'groups/group_information', 
