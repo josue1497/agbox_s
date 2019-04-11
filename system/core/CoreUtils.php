@@ -166,6 +166,8 @@
 						$record['form_action']:'').' '.
 						$model->table_label.' &nbsp; '.
 						/* agregar boton collapsable */
+						/* comentado por solicitud funcional 
+						10-04-2019 - 
 						(($filename == 'index' || $filename == 'items')? 
 							Component::function_button('Toogle View',
 								"if(!$('#index_".
@@ -177,8 +179,10 @@
 									"$('#index_".
 									$model->table_name.
 									"').parent().fadeOut();}")
-							:'').' &nbsp; '.
+							:'').' &nbsp; '.*/
 						/* agregar boton cambio de vista (lista/cuadricula) */
+						/* comentado por solicitud funcional 
+						10-04-2019  -
 						(($filename == 'index' || $filename == 'items')? 
 							Component::function_button('Change View',(
 									"if($('#index_".
@@ -197,7 +201,8 @@
 									"$('#index_".
 									$model->table_name.
 									"').fadeIn();}"
-								)): '' ),
+								)): '' ).
+								*/ '',
 					$card);
 				return $card;
 		}
