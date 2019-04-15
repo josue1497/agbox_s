@@ -11,7 +11,7 @@ define('IMG_DIR', LAYOUT_DIR . "imgs/");
 define('UPLOADS_DIR', LAYOUT_DIR . "imgs/uploads/");
 define('VENDOR_DIR', LAYOUT_DIR . "vendor/");
 define('MODELS_DIR', ROOT . "application/models/");
-define('SERVER_PORT','');
+define('SERVER_PORT','8090');
 define('SERVER_DIR', "http://".$_SERVER['SERVER_NAME'].SERVER_PORT."/".APP_FOLDER."/");
 
 /* constantes de la db */
