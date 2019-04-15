@@ -188,12 +188,12 @@ class View{
 		 */
 	public function auto_build_list($list_content, $data){
 		/* activa paginacion */
-		$this->add_script_js(
-		"$(document).ready(function () {".
-		"$('#table_".$this->model->table_name.
-		"').DataTable({ 'pagingType':'full' });".
-		"$('.dataTables_length').addClass('bs-select');".
-		"});");
+		// $this->add_script_js(
+		// "$(document).ready(function () {".
+		// "$('#table_".$this->model->table_name.
+		// "').DataTable({ 'pagingType':'full' });".
+		// "$('.dataTables_length').addClass('bs-select');".
+		// "});");
 		/* paginacion */
 
 		return ($this->model->crud_config['can_create'] ?

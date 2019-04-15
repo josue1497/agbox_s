@@ -90,6 +90,25 @@ class groupsController  extends Controller{
 				}
 			}
 
+			/**
+    * metodo accion create que genera el form para agregar registros
+    * 
+    * @return void
+    */
+	function create_group(){
+	
+		$this->init(new Group());
+		$this->render('create_group');
+
+		if(isset($_POST) && isset($_POST['name'])){
+			$data=$_POST;
+		
+			if($this->model->create($data)){
+				$this->update_user_role_group();
+			}
+		}
+	}
+
 
 }
 

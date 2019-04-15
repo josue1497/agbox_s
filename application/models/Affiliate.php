@@ -54,5 +54,36 @@ class Affiliate extends Model
 
     }
 
-}
- 
+    public static function create_new_affiliate(array $params,$auto_approve=false){
+        if(isset($params['user_id'])&& isset($params['group_id'])){
+            if($auto_approve){
+                $params['approved']='Yes';
+            }
+
+            $affiliate_model = new Affiliate();
+
+            $group_record= (new Group)->findByPoperty(array('id'=>$params['group_id']));
+            $user_record= (new User)->findByPoperty(array('id'=>$params['user_id']));
+
+            $req1 = $affiliate->create($params);
+
+            if($req1){
+                $affiliate_record= $affiliate_model->findByPoperty(array('user_id'=>$params['user_id'],
+                                                                    'group_id'=>$params['group_id']));
+                if(!$auto_approve){
+                Notification::create_notification(array('user_to_id'=>$params['user_id'],
+                'message'=>'A sido invitado a participar en el grupo "'.$group_record['name'].'"',
+                'entity_id'=>$affiliate_record['id'],
+                'notification_type'=>Notification::$REQUEST_MEMBERSHIP,
+                'controller_to'=>'affiliate/approve_request',
+                'read'=>Notification::$NO));
+
+                return true;
+                    }
+        }else{
+            return false;
+        }
+        }
+        return false;
+    }
+} 

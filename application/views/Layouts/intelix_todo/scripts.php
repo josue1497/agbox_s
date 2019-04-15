@@ -22,7 +22,7 @@
 
 <script src="{{ base_url }}application/views/Layouts/scripts/functions.js"></script>
 
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="{{ base_url }}application/views/Layouts/DataTables/datatables.min.js"></script>
 
 <script src="{{ base_url }}application/views/Layouts/scripts/select2.full.js"></script>
 
@@ -38,3 +38,7 @@
 </script>
 <!-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
 <script type="text/javascript" src="{{ base_url }}application/views/Layouts/slick/slick.min.js"></script>
+
+<script>
+	$('.table').DataTable();
+</script>

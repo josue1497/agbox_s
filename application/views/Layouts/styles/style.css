@@ -159,3 +159,9 @@
 .slick-track{
 	min-width: 1500px !important;
 }
+
+div.dataTables_wrapper div.dataTables_filter input {
+    margin-left: 0.5em;
+    display: inline-block;
+    width: 70% !important;
+}
