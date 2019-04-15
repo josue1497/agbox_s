@@ -104,6 +104,9 @@ class groupsController  extends Controller{
 			$data=$_POST;
 		
 			if($this->model->create($data)){
+				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id']),true)){
+
+				}
 				$this->update_user_role_group();
 			}
 		}
