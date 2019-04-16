@@ -12,6 +12,7 @@
 <link href="{{ base_url }}application/views/Layouts/styles/sb-admin-2.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/DataTables/datatables.min.css" />
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/bootstrap.css"/>
+<!-- <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> -->
 <link href="{{ base_url }}application/views/Layouts/styles/style.css" rel="stylesheet">
 <!-- Font Awesome -->
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"> -->

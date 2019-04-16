@@ -38,8 +38,8 @@ class Group extends Model
                     ->set_label('Parent Group')
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
                     ->set_fk_entity($this)
-                    ->set_visible_grid(false),
-
+                    ->set_visible_grid(false)
+                    ->set_visible_form(false),
                 (new Column('leader_id'))
                     ->set_label('Lider del grupo')
                     ->set_visible_grid(false)
