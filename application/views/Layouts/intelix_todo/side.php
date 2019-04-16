@@ -30,16 +30,14 @@
 
       <!-- Divider -->
 	<hr class="sidebar-divider admin_menu"> 
-	   <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item  active admin_menu" >
+      <!-- <li class="nav-item  active admin_menu" >
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAjustes" aria-expanded="true" aria-controls="collapseAjustes">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Ajustes</span>
         </a>
         <div id="collapseAjustes" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <!--<a class="collapse-item" href="#">Preferencias</a>
-            <a class="collapse-item" href="#">Ajustes</a>-->
+            <a class="collapse-item" href="#">Ajustes</a>
             <a class="collapse-item" href="{{ base_url }}menu/index">Menu</a>
             <a class="collapse-item" href="{{ base_url }}permission/index">Permisos</a>
             <a class="collapse-item" href="{{ base_url }}user/index">Usuarios</a>
@@ -50,16 +48,9 @@
         </div>
       </li>
 
-      <!-- Nav Item - Tables - - >
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
-	  <!-- -->
+      <hr class="sidebar-divider d-none d-md-block"> -->
 
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
+      {{ admin_menu }}
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">

@@ -10,6 +10,7 @@
 
 <!-- Custom styles for this template-->
 <link href="{{ base_url }}application/views/Layouts/styles/sb-admin-2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ base_url }}application/views/Layouts/DataTables/datatables.min.css" />
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/bootstrap.css"/>
 <link href="{{ base_url }}application/views/Layouts/styles/style.css" rel="stylesheet">
 <!-- Font Awesome -->
@@ -23,7 +24,7 @@
 <!--  - - >
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 <!-- Bootstrap-Iconpicker -->
-<link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/jquery.dataTables.min.css" />
+
 
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/select2.min.css" />
 <link href="https://pro-next.fontawesome.com/releases/v5.8.1/css/all.css" data-prerender="keep" rel="stylesheet">

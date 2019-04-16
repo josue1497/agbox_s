@@ -9,6 +9,11 @@
 <!-- Bootstrap CDN - - >
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 <!-- END CDN -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script> -->
+
+<script src="{{ base_url }}application/views/Layouts/scripts/popper.min.js"></script>
+
 <script src="{{ base_url }}application/views/Layouts/scripts/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
@@ -22,7 +27,7 @@
 
 <script src="{{ base_url }}application/views/Layouts/scripts/functions.js"></script>
 
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="{{ base_url }}application/views/Layouts/DataTables/datatables.min.js"></script>
 
 <script src="{{ base_url }}application/views/Layouts/scripts/select2.full.js"></script>
 
@@ -30,11 +35,16 @@
 
 <script src="{{ base_url }}application/views/Layouts/scripts/axios.js"></script>
 
+<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
+<script type="text/javascript" src="{{ base_url }}application/views/Layouts/slick/slick.min.js"></script>
+
 <script>
     $('.select2').select2({
 			placeholder: 'Select an option',
 			width: '100%',
 		});
 </script>
-<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
-<script type="text/javascript" src="{{ base_url }}application/views/Layouts/slick/slick.min.js"></script>
+
+<script>
+	$('.data-table').DataTable();
+</script>

@@ -1,5 +1,7 @@
 <?php
 	function generate_content($controller,$filename=null,$record=null){
+		$title='<div class="d-flex">Afiliate a un Grupo<a class="btn btn-primary ml-auto" 
+		href="'.SERVER_DIR.'groups/create_group"><i class="fas fa-plus"></i></a></div>';
 	return CoreUtils::put_in_card(
 		'<div id="app">
 			<div class="row">
@@ -10,6 +12,6 @@
 				</div>
 			</div> 
 		</div>',
-		'Afiliación a Grupos');
+		$title);
 }
 ?>

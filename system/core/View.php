@@ -89,6 +89,43 @@ class View{
 	}
 
 	/**
+		 * metodo para construir contenido de la vista de formulario automaticamente,
+	  	 * desde los datos del modelo
+		 *
+		 * @param type $data 
+		 * @return type
+		 */
+		public function auto_build_info_content($data){
+			$form_content = '';
+			$is_group=$this->model->table_name==='groups';
+			$is_user=$this->model->table_name==='user';
+			foreach ($this->model->table_fields as $form_field) {
+				if ($form_field->get_visible_form() && $form_field->get_column_in_db()){
+					if($is_group &&
+							$form_field->get_type()===Column::$COLUMN_TYPE_PHOTO
+					&& !isset($data[$form_field->get_table_field_name()])){
+						$data[$form_field->get_table_field_name()]='image_group.png';
+					}
+
+					if(	$form_field->get_type()===Column::$COLUMN_TYPE_SELECT
+								&& isset($data[$form_field->get_table_field_name()])){
+									$select_data=($form_field->get_foreing_key() ? $form_field->get_fk_entity()->get_select_data() : $form_field->get_values());
+									foreach($select_data as $item){
+										if($item['id']==$data[$form_field->get_table_field_name()]){
+											$data[$form_field->get_table_field_name()]=$item['name'];
+										}
+									}
+					}
+
+					$form_content .= $this->build_info_element($form_field, $data);
+						
+				}
+			}
+	
+			return $form_content ;
+		}
+
+	/**
 	 * metodo para generar una lista de items analoga a la lista grid
 	 * @param type $item_list 
 	 * @param type $data 
@@ -188,19 +225,19 @@ class View{
 		 */
 	public function auto_build_list($list_content, $data){
 		/* activa paginacion */
-		$this->add_script_js(
-		"$(document).ready(function () {".
-		"$('#table_".$this->model->table_name.
-		"').DataTable({ 'pagingType':'full' });".
-		"$('.dataTables_length').addClass('bs-select');".
-		"});");
+		// $this->add_script_js(
+		// "$(document).ready(function () {".
+		// "$('#table_".$this->model->table_name.
+		// "').DataTable({ 'pagingType':'full' });".
+		// "$('.dataTables_length').addClass('bs-select');".
+		// "});");
 		/* paginacion */
 
 		return ($this->model->crud_config['can_create'] ?
 				Component::add_button($this->model->table_name) : '') .
 		"<div class='row col-md-12 centered'>" .
 			"<table id='table_".$this->model->table_name."' ".
-			"class='table table-striped custab table-sm'>" .
+			"class='table table-striped custab table-sm data-table'>" .
 			$list_content .
 			"</table>" .
 			"</div>";
@@ -351,6 +388,72 @@ class View{
 		}
 		return $res;
 	}
+
+	/**
+		 *  metodo para construir elementos de la vista,
+		 * desde las especificaciones del modelo
+		 *
+		 * @param type $form_field 
+		 * @param null|type $data 
+		 * @return type
+		 */
+		public function build_info_element($form_field, $data=null)
+		{
+			$res = '';
+			switch ($form_field->get_type()) {
+				case Column::$COLUMN_TYPE_TEXTAREA:
+					$res = Component::base_info_column(
+						$form_field->get_name(),
+						isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
+						$form_field->get_label()
+					);
+					break;
+				case Column::$COLUMN_TYPE_SELECT:
+					$res = Component::base_info_column(
+						$form_field->get_name(),
+						isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
+						$form_field->get_label()
+					);
+					break;
+	
+				// case Column::$COLUMN_TYPE_ICONPICKER:
+				// 	$res = Component::icon_picker(
+				// 		$form_field->get_name(),
+				// 		isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
+				// 		$form_field->get_label()
+				// 	);
+				// 	break;
+				case Column::$COLUMN_TYPE_PHOTO:
+					$res = Component::show_image(
+						$form_field->get_name(),
+						isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:''
+					);
+					break;
+					// case Column::$COLUMN_TYPE_FILE:
+					// $res = Component::file_upload(
+					// 	$form_field->get_name(),
+					// 	isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
+					// 	$form_field->get_label(),
+					// 	$form_field->get_file_type(),
+					// 	$form_field->get_field_html()
+					// );
+					// break;
+				case Column::$COLUMN_TYPE_TEXT:
+				case Column::$COLUMN_TYPE_DATE:
+				case Column::$COLUMN_TYPE_EMAIL:
+				case Column::$COLUMN_TYPE_HIDDEN:
+				case Column::$COLUMN_TYPE_NUMBER:
+				case Column::$COLUMN_TYPE_PASS:
+				default:
+					$res = Component::base_info_column(
+						$form_field->get_name(),
+						isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
+						$form_field->get_label()
+					);
+					break;
+			}
+			return $res;
+		}
 
 	public function buid_items_groups(){
 		$html='';

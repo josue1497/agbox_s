@@ -58,7 +58,7 @@ class Note extends Model {
 				(new Column('performer_id'))
 					->set_label('Performer')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
-					->set_fk_entity(new Employee())
+					->set_fk_entity(new User())
 					->set_visible_grid(false)
 			)
 		);
