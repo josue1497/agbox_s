@@ -48,7 +48,7 @@ class Affiliate extends Model
 
     public static function count_affilate_groups($user_id){
 
-        $result=Model::get_sql_data("select count(*) as result from affiliate where user_id=?", array('user_id'=>$user_id));
+        $result=Model::get_sql_data("select count(*) as result from affiliate where user_id=? and approved='Yes'", array('user_id'=>$user_id));
 
         return $result[0]['result'];
 
@@ -63,9 +63,8 @@ class Affiliate extends Model
             $affiliate_model = new Affiliate();
 
             $group_record= (new Group)->findByPoperty(array('id'=>$params['group_id']));
-            $user_record= (new User)->findByPoperty(array('id'=>$params['user_id']));
 
-            $req1 = $affiliate->create($params);
+            $req1 = $affiliate_model->create($params);
 
             if($req1){
                 $affiliate_record= $affiliate_model->findByPoperty(array('user_id'=>$params['user_id'],
@@ -84,6 +83,6 @@ class Affiliate extends Model
             return false;
         }
         }
-        return false;
+        return true;
     }
 } 

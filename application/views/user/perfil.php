@@ -118,7 +118,7 @@ function generate_note_table($user_id){
 	inner join groups g on (n.group_id=g.id)
 	where u.id=?",array('user_id'=>$user_id));
 
-	$table_notes='<table class="table table-striped table-hover w-100 display responsive">
+	$table_notes='<table class="table table-striped table-hover w-100 display responsive data-table">
 	<thead class="text-center thead">
 		   <th>#</th>
 		   <th>Titulo</th>
@@ -153,7 +153,7 @@ function generate_affiliate_table($user_id){
 	inner join `role` r on (r.id=gur.role_id) 
 	where a.user_id=? and a.approved='Yes'",array('user_id'=>$user_id));
 	
-	$table_affilates='<table class="table table-striped table-hover w-100 display responsive">
+	$table_affilates='<table class="table table-striped table-hover w-100 display responsive data-table">
 						 <thead class="text-center thead">
 								<th>#</th>
 								<th>Grupo</th>

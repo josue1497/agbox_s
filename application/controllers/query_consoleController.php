@@ -109,7 +109,7 @@ class query_consoleController extends Controller{
 
 		function build_table($keys,$result){
 			
-			$html = '<table class="table table-striped custab table-sm dataTable no-footer"><thead>';
+			$html = '<table class="table table-striped custab table-sm dataTable no-footer w-100 display responsive data-table"><thead>';
 			
 			foreach($keys as $key){
 				$html.='<th>'.$key.'</th>';

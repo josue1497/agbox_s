@@ -22,19 +22,14 @@
 
                      $controller->view->add_script_js("
                           $('#save-group-button').click(function(){
-
-                            // alert($('#form-group').serialize());
                             $.post( '".SERVER_DIR."groups/create_group',
                             $('#form-group').serialize(), function( data ) {
-                                   
                                    console.log(data);
-                            //        if(''!==data && 'fail'!==data){
-                            //            $('#role'+data).text(role);
-                            //            $('#modal-user').modal('hide');
-                            //        }else{
-                            //           alert('fail');   
-                            //           $('#modal-user').modal('hide'); 
-                            //        }
+                                   if(''!==data && 'fail'!==data){
+                                       location.href='".SERVER_DIR."groups/group_information/'+data+'';
+                                   }else{
+                                      alert('fail');   
+                                   }
                                  });
                           });
                            ");

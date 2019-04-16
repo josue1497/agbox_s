@@ -98,17 +98,27 @@ class groupsController  extends Controller{
 	function create_group(){
 	
 		$this->init(new Group());
-		$this->render('create_group');
+		
+		$pass=true;
 
 		if(isset($_POST) && isset($_POST['name'])){
 			$data=$_POST;
-		
 			if($this->model->create($data)){
-				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id']),true)){
-
+				$group_record = (new Group)->findByPoperty(array('name'=>$data['name']));
+				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id'],'group_id'=>$group_record['id']),true)){
+						$this->update_user_role_group();
 				}
-				$this->update_user_role_group();
+				if(isset($data['user_affiliate'])){
+						foreach($data['user_affiliate'] as $user){
+							$pass=Affiliate::create_new_affiliate(array('user_id'=>$user,'group_id'=>$group_record['id']));
+						}
+				}
+				if($pass){
+					echo $group_record['id'];
+				}				
 			}
+		}else{
+			$this->render('create_group');
 		}
 	}
 

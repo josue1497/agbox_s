@@ -69,6 +69,27 @@
 			''.Component::set_on_change_img($name).' ></div></div></div>';
 		}
 
+		public static function show_image($name,$value=null){
+			return 
+			'<div class="d-inline">'.
+			'<div class="d-flex justify-content-center profile-img p-2 my-2">
+				 <img id="'.$name.'_photo" class=" img-fluid" src="'.(!empty($value)?(''.Component::img_to_base64(UPLOADS_DIR.$value).'"'):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"').
+					 'alt="" />
+			</div>
+			</div>';
+		}
+
+		public static function base_info_column($name,$value=null,$label=null){
+			return '<div class="d-flex">
+			<div class="d-inline">'.
+			(!empty($label)?('<p class="font-weight-bold">'.$label.':&nbsp</p></div>'):'').
+				'<div class="d-inline"><p class="font-weight-light">'.(!is_array($value)?$value:(isset($value[$name])?$value[$name]:'')).'
+				</p>
+			</div>'
+			.'</div>';
+		}
+
+
 		public static function set_on_change_img($name){
 			$id=$name."_photo";
 			return "onchange=\"readURL(this,document.getElementById('".$id."'))\"";

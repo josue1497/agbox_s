@@ -28,16 +28,23 @@
 			}
 
 		$c = new Controller();
-		$c->init($user_model);
+              $c->init($user_model);
+              $leader_user=Group_User_Role::get_user_by_role('Lider',$this_group['id']);
+              $is_leader=$leader_user['id']===Session::get('user_id');
 
              
-              $table_affilates=generate_affiliate_table($this_group['id']);
+              $table_affilates=generate_affiliate_table($this_group['id'],$is_leader);
 
               
               $table_notes=generate_note_table($this_group['id']);
 
-                     $form_group=$controller->auto_build_view('form',$this_group,$this_group);
+             
 
+              if($is_leader){
+                     $form_group=$controller->auto_build_view('form',$this_group,$this_group);
+              }else{
+                     $form_group=$controller->auto_build_view('info',$this_group,$this_group);
+              }
                      Session::set('group_id',$this_group['id']);
 
                      $button_add_note='<div class="btn-group dropleft ml-auto">
@@ -52,8 +59,8 @@
                      </div>
                    </div>';
 
-                     $tile_affiliate='<div class="d-flex">Affiliate<button class="btn btn-primary ml-auto" id="add_affiliate"
-                     data-toggle="modal" data-target="#modal-affiliate"><i class="fas fa-plus"></i></button></div>';
+                     $tile_affiliate='<div class="d-flex">Affiliate'.($is_leader?'<button class="btn btn-primary ml-auto" id="add_affiliate"
+                     data-toggle="modal" data-target="#modal-affiliate"><i class="fas fa-plus"></i></button>':'</div>');
                      $title_note='<div class="d-flex">Group´s Notes'.$button_add_note.'</div>';
                      
                      $html_result=file_get_contents(__DIR__.'/body.html');
@@ -66,78 +73,80 @@
                      $html_result=str_replace('{{ USER_TO_AFFILIATE }}',generate_select_user($this_group['id']),$html_result);
                      
 
+                     if( $is_leader){
+                            $controller->view->add_script_js("$('#modal-user').on('show.bs.modal', function (event) {
+                                   var button = $(event.relatedTarget) // Button that triggered the modal
+                                   var name = button.data('user')
+                                   var group = button.data('group') ;// Extract info from data-* attributes
+                                   var id = button.data('id');
+                                   var role = button.data('role');
+                                   var affiliate = button.data('affiliate');
 
-                     $controller->view->add_script_js("$('#modal-user').on('show.bs.modal', function (event) {
-                            var button = $(event.relatedTarget) // Button that triggered the modal
-                            var name = button.data('user')
-                            var group = button.data('group') ;// Extract info from data-* attributes
-                            var id = button.data('id');
-                            var role = button.data('role');
-                            var affiliate = button.data('affiliate');
+                                   var modal = $(this)
+                                   var text=modal.find('.modal-title').text();
 
-                            var modal = $(this)
-                            var text=modal.find('.modal-title').text();
+                                   modal.find('.modal-title').text('Cambiar Rol a ' + name);
+                                   modal.find('#user-name').val(name);
+                                   modal.find('#user-id').val(id);
+                                   modal.find('#group-id').val(group);
+                                   modal.find('#affiliate-id').val(affiliate);
+                                   modal.find('#group_user_role').val(role);
+                            });
+                            
+                            $('#save-button').click(function(){
 
-                            modal.find('.modal-title').text('Cambiar Rol a ' + name);
-                            modal.find('#user-name').val(name);
-                            modal.find('#user-id').val(id);
-                            modal.find('#group-id').val(group);
-                            modal.find('#affiliate-id').val(affiliate);
-                            modal.find('#group_user_role').val(role);
-                          });
-                          
-                          $('#save-button').click(function(){
+                                   var role = $('#group_user_role option:selected').text();
+                                   $.post( '".SERVER_DIR."group_user_role/update_group_user_role',$('#form-user').serialize(), function( data ) {
+                                          
+                                          console.log(data);
+                                          if(''!==data && 'fail'!==data){
+                                          $('#role'+data).text(role);
+                                          $('#modal-user').modal('hide');
+                                          }else{
+                                          alert('fail');   
+                                          $('#modal-user').modal('hide'); 
+                                          }
+                                   });
+                            });
 
-                            var role = $('#group_user_role option:selected').text();
-                            $.post( '".SERVER_DIR."group_user_role/update_group_user_role',$('#form-user').serialize(), function( data ) {
-                                   
-                                   console.log(data);
-                                   if(''!==data && 'fail'!==data){
-                                       $('#role'+data).text(role);
-                                       $('#modal-user').modal('hide');
-                                   }else{
-                                      alert('fail');   
-                                      $('#modal-user').modal('hide'); 
+                            $('#desaffiliate-button').click(function(){
+                                   if(confirm('¿Esta seguro que desea Desafiliar este usuario?')){
+                                   $.post( '".SERVER_DIR."group_user_role/desaffiliate_group_user_role',$('#form-user').serialize(), function( data ) {
+                                          
+                                          console.log(data);
+                                          if(''!==data && 'fail'!==data){
+                                          $('#'+data).remove();
+                                          $('#modal-user').modal('hide');
+                                          }else{
+                                          alert('fail');  
+                                          $('#modal-user').modal('hide');  
+                                          }
+                                   });
                                    }
-                                 });
-                          });
+                            });
 
-                          $('#desaffiliate-button').click(function(){
-                            if(confirm('¿Esta seguro que desea Desafiliar este usuario?')){
-                            $.post( '".SERVER_DIR."group_user_role/desaffiliate_group_user_role',$('#form-user').serialize(), function( data ) {
-                                   
-                                   console.log(data);
-                                   if(''!==data && 'fail'!==data){
-                                       $('#'+data).remove();
-                                       $('#modal-user').modal('hide');
-                                   }else{
-                                      alert('fail');  
-                                      $('#modal-user').modal('hide');  
-                                   }
-                                 });
-                            }
-                          });
+                            $('#affiliate-button').click(function(){
+                                   $.post( '".SERVER_DIR."groups/request_membership',{'users_id':$('#user_to_affiliate_id').val(),'group_id':'".$this_group['id']."'}, function( data ) {
+                                          
+                                          console.log(data);
+                                          if(''!==data && 'fail'!==data){
+                                          $('#modal-affiliate').modal('hide');
+                                          }else{
+                                          alert('Ha ocurrido un Error!');  
+                                          $('#modal-affiliate').modal('hide');  
+                                          }
+                                   });
 
-                          $('#affiliate-button').click(function(){
-                            $.post( '".SERVER_DIR."groups/request_membership',{'users_id':$('#user_to_affiliate_id').val(),'group_id':'".$this_group['id']."'}, function( data ) {
-                                   
-                                   console.log(data);
-                                   if(''!==data && 'fail'!==data){
-                                       $('#modal-affiliate').modal('hide');
-                                   }else{
-                                      alert('Ha ocurrido un Error!');  
-                                      $('#modal-affiliate').modal('hide');  
-                                   }
-                                 });
+                            });
 
-                          });
-
-                          ");
+                            ");
+                     }
+                    
 
                      return $html_result;
 }
 
-function generate_affiliate_table($group_id){
+function generate_affiliate_table($group_id, $is_leader){
        $affiliate_record=Model::get_sql_data("select a.id as 'affiliate_id', 
        u.id 'user_id', a.group_id, concat(u.names,' ',u.lastnames) as 'user_name',
        r.name as 'role', r.id  as 'role_id'  
@@ -147,7 +156,7 @@ function generate_affiliate_table($group_id){
        inner join `role` r on (r.id=gur.role_id) 
        where a.group_id=? and a.approved='Yes'",array('group_id'=>$group_id));
        
-       $table_affilates='<table class="table table-striped table-hover w-100 display responsive">
+       $table_affilates='<table class="table table-striped table-hover w-100 display responsive data-table">
                             <thead class="text-center thead">
                                    <th>#</th>
                                    <th>Miembro</th>
@@ -156,10 +165,10 @@ function generate_affiliate_table($group_id){
        $table_rows='<tbody>';
        $i=1;
        foreach($affiliate_record as $row){                     
-         $table_rows.='<tr data-toggle="modal" data-target="#modal-user" 
+         $table_rows.='<tr '.($is_leader?'data-toggle="modal" data-target="#modal-user" 
                             data-user="'.$row['user_name'].'" data-group="'.$row['group_id'].'"
                             data-role="'.$row['role_id'].'" data-id="'.$row['user_id'].'"
-                            data-affiliate="'.$row['affiliate_id'].'" id="'.$row['affiliate_id'].'"oncontextmenu="javascript:alert(\'success!\');return false;">
+                            data-affiliate="'.$row['affiliate_id'].'" id="'.$row['affiliate_id'].'':'').'"oncontextmenu="javascript:alert(\'success!\');return false;">
                      <input type="hidden" name="affiliate_id" value="'.$row['affiliate_id'].'">
                      <input type="hidden" name="user_id" value="'.$row['user_id'].'">
                      <input type="hidden" name="group_id" value="'.$row['group_id'].'">
@@ -183,7 +192,7 @@ function generate_note_table($group_id){
        inner join groups g on (n.group_id=g.id)
        where g.id=?",array('group_id'=>$group_id));
 
-       $table_notes='<table class="table table-striped table-hover  w-100 display responsive">
+       $table_notes='<table class="table table-striped table-hover  w-100 display responsive data-table">
        <thead class="text-center thead">
               <th>#</th>
               <th>Titulo</th>

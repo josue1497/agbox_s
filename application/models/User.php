@@ -59,12 +59,14 @@ class User extends Model
 				(new Column('user_level_id'))
 					->set_label('Nivel de Usuario')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
-					->set_fk_entity(new User_Level()),
+					->set_fk_entity(new User_Level())
+					->set_visible_grid(false),
 				
 				(new Column('is_visitor'))
 					->set_label('Is Visitor?')
 					->set_type(Column::$COLUMN_TYPE_SELECT)
-					->set_values(array('Yes','No')),
+					->set_values(array('Yes','No'))
+					->set_visible_grid(false),
 
 
 			)

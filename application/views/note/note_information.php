@@ -51,7 +51,7 @@ function generate_note_approved_table($note_id){
     where na.note_id=?",array('note_id'=>$note_id));
 
 
-	$table_notes='<table class="table table-striped table-hover">
+	$table_notes='<table class="table table-striped table-hover w-100 display responsive data-table">
 	<thead class="text-center thead">
 		   <th>#</th>
 		   <th>Miembro</th>
