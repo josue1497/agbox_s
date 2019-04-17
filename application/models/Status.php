@@ -22,10 +22,33 @@ class Status extends Model{
 				(new Column('description'))
 				->set_label('Description')
 				->set_type(Column::$COLUMN_TYPE_TEXTAREA)
+				->set_visible_grid(false),
+
+				(new Column('value'))
+				->set_label('Value')
+				->set_type(Column::$COLUMN_TYPE_TEXT)
 				->set_visible_grid(false)
+				
 			)
 		);
 		$this->init();
+	}
+
+	public static function get_status_id($status){
+		$status_record=(new Status)->findByPoperty(array('value'=>$status));
+		return $status_record['id'];
+	}
+
+	public static function get_complete_status(){
+		return get_status_id('CO');
+	}
+
+	public static function get_pending_status(){
+		return get_status_id('P');
+	}
+
+	public static function get_close_status(){
+		return get_status_id('C');
 	}
 }
 ?>

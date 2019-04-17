@@ -2,7 +2,7 @@
 	function generate_content($controller,$filename=null,$record=null){
 
 	$sql_groups = 
-		"select gur.group_id,g.name,g.group_photo
+		"select gur.group_id,g.name,g.group_photo,g.description
 		from groups g 
 		inner join group_user_role gur on g.id=gur.group_id 
 		where gur.user_id=?";
@@ -18,8 +18,9 @@
               <div class="d-flex flex-column">
               <div class="d-flex justify-content-center">
                 <div class="d-flex align-items-center">
-                  <i class="fas fa-2x text-gray-300"><img class="img-profile rounded-circle img-profile-user" src="'.$photo.'"></i>&nbsp;
-                  <a href="#"><i class="far fa-ellipsis-v text-secondary"></i></a>
+                  <i class="fas fa-2x text-gray-300"><img class="img-profile rounded-circle img-profile-user" src="'.$photo.'"></i>&nbsp;&nbsp;
+                  <a href="#" data-toggle="modal" data-target="#group_info_modal" data-group-name="'.$map['name'].'"
+                  data-group-id="'.$map['group_id'].'" data-group-desc="'.$map['description'].'"><i class="fas fa-ellipsis-v text-secondary"></i></a>
                 </div>
               </div>
               <a class="text-decoration-none" href="'.CoreUtils::base_url().'groups/group_information/'.$map['group_id'].'">

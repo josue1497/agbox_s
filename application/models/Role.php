@@ -22,6 +22,11 @@ class Role extends Model{
 				(new Column('description'))
 				->set_label('Description')
 				->set_type(Column::$COLUMN_TYPE_TEXTAREA)
+				->set_visible_grid(false),
+
+				(new Column('value'))
+				->set_label('Value')
+				->set_type(Column::$COLUMN_TYPE_TEXT)
 				->set_visible_grid(false)
 			)
 		);
@@ -41,6 +46,23 @@ class Role extends Model{
         
         return $record['id'];
 
-    }
+	}
+	
+	public static function get_role_id($status){
+		$record=(new Role)->findByPoperty(array('value'=>$status));
+		return $record['id'];
+	}
+
+	public static function get_leader_id(){
+		return get_role_id('L');
+	}
+
+	public static function get_admin_id(){
+		return get_role_id('A');
+	}
+
+	public static function get_member_id(){
+		return get_role_id('M');
+	}
 }
 ?>
