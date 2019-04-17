@@ -339,6 +339,22 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 (65, 'A sido invitado a participar en el grupo \"Grupo de Prueba JM\"', 5, 'affiliate/approve_request', '36', 'request_membership', '2019-04-11 19:24:23', 'Y'),
 (66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y');
 
+
+-- ---------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `param`
+-- 
+DROP TABLE IF EXISTS param;
+CREATE TABLE `param` (
+  `param_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`param_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla de parametros' AUTO_INCREMENT=1 ;
+
+
 -- --------------------------------------------------------
 
 --
@@ -392,8 +408,7 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`id`, `name`, `description`) VALUES
 (1, 'Lider', 'Lider'),
 (2, 'Administrador', 'Administrador'),
-(3, 'Miembro', 'Miembro de Grupo'),
-(5, 'Invitado', 'Invitado');
+(3, 'Participante', 'Participante del Grupo');
 
 -- --------------------------------------------------------
 
@@ -491,7 +506,9 @@ CREATE TABLE `user_level` (
 
 INSERT INTO `user_level` (`id`, `name_level`, `access_level`) VALUES
 (1, 'Administrador', 3),
-(2, 'Participante', 2);
+(2, 'Manager', 2),
+(3, 'Participante', 1);
+
 
 --
 -- Índices para tablas volcadas

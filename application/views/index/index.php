@@ -1,12 +1,12 @@
 <?php 
-	function generate_content($controller,$filename=null,$record=null){
-
+	
 	$sql_groups = 
 		"select gur.group_id,g.name,g.group_photo
 		from groups g 
 		inner join group_user_role gur on g.id=gur.group_id 
 		where gur.user_id=?";
-
+	
+	function generate_content($controller,$filename=null,$record=null){
 	$list = Model::get_sql_data($sql_groups,array('user_id'=>Session::get('user_id')));
 	$list_html="";
 
@@ -44,4 +44,17 @@
 	 
 	return $html_result;
 }
+
+public function get_pending_notes(){
+	$note_model = new Note();
+	$user_id = Session::get('user_id');
+	$group_list = Model::get_sql_data($sql_groups,array('user_id'=>$user_id));
+	foreach($group_list as $group){
+		$notes=$note_model->showAllRecords(array('user_id'));
+	}
+	
+	
+	
+}
+
 ?>
