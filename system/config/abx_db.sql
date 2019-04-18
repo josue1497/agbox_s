@@ -60,12 +60,8 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 (33, 19, 4, 'Yes'),
 (34, 19, 3, 'Yes'),
 (35, 21, 1, 'Yes'),
-<<<<<<< HEAD
-(36, 21, 5, 'Yes');
-=======
 (36, 21, 5, 'Yes'),
 (37, 22, 1, 'Yes');
->>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -93,13 +89,6 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 (14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg', NULL),
 (15, NULL, NULL, 'Grupo 3', 'Grupo 3', '1553056938_(silla_e_mimbre)12224228_1654611478130905_689608145_n.jpg', 2),
 (16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg', NULL),
-<<<<<<< HEAD
-(17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg', NULL),
-(18, NULL, NULL, 'Grupo 6', 'Grupo 6', '1554833587_IMG-20190306-WA0005.jpg', 2),
-(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg', NULL),
-(20, NULL, 14, 'New group', 'New group', '1553712932_IMG-20190306-WA0024.jpg', 1),
-(21, NULL, 13, 'Grupo de Prueba JM', 'Grupo de Prueba JM', NULL, 1);
-=======
 (17, NULL, NULL, 'Grupo 5', 'Descripcion de Grupo, un poco mas larga probando que se vea bien el modal de informacion de grupo', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg', NULL),
 (18, NULL, NULL, 'Grupo 6', 'Grupo 6', '1554833587_IMG-20190306-WA0005.jpg', 2),
 (19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg', NULL),
@@ -107,7 +96,6 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 (21, NULL, 13, 'Grupo de Prueba JM', 'Grupo de Prueba JM', NULL, 1),
 (22, NULL, NULL, 'Grupo Exposed', 'S', NULL, 1),
 (24, NULL, NULL, 'Test Group', 'Si', NULL, 1);
->>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -143,9 +131,6 @@ INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 (23, 19, 3, 3),
 (24, NULL, 1, 1),
 (25, 21, 1, 1),
-<<<<<<< HEAD
-(26, 21, 5, 3);
-=======
 (26, 21, 5, 3),
 (27, NULL, 1, 1),
 (28, NULL, 1, 1),
@@ -157,7 +142,6 @@ INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 (34, NULL, 1, 1),
 (35, 22, 1, 3),
 (36, 24, 1, 1);
->>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -372,29 +356,9 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 (63, 'Su rol dentro del grupo New group ha cambiado', 3, 'groups/group_information', '20', 'change_role', '2019-04-10 22:08:46', 'Y'),
 (64, 'Nueva Solicitud de Afilicacion', NULL, 'affiliate/approve_affiliate', '35', 'affiliate', '2019-04-11 19:15:37', 'N'),
 (65, 'A sido invitado a participar en el grupo \"Grupo de Prueba JM\"', 5, 'affiliate/approve_request', '36', 'request_membership', '2019-04-11 19:24:23', 'Y'),
-<<<<<<< HEAD
-(66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y');
-
-
--- ---------------------------------
-
--- 
--- Estructura de tabla para la tabla `param`
--- 
-DROP TABLE IF EXISTS param;
-CREATE TABLE `param` (
-  `param_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  PRIMARY KEY (`param_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla de parametros' AUTO_INCREMENT=1 ;
-
-=======
 (66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y'),
 (67, 'A sido invitado a participar en el grupo \"Grupo Exposed\"', 1, 'affiliate/approve_request', '37', 'request_membership', '2019-04-17 22:39:24', 'Y'),
 (68, 'Administrador es el Nuevo Miembro \n                                        del Grupo \"Grupo Exposed\"', 1, 'groups/group_information', '22', 'new_member', '2019-04-17 22:39:32', 'Y');
->>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -449,17 +413,10 @@ CREATE TABLE IF NOT EXISTS `role` (
 -- Volcado de datos para la tabla `role`
 --
 
-<<<<<<< HEAD
-INSERT INTO `role` (`id`, `name`, `description`) VALUES
-(1, 'Lider', 'Lider'),
-(2, 'Administrador', 'Administrador'),
-(3, 'Participante', 'Participante del Grupo');
-=======
 INSERT INTO `role` (`id`, `name`, `description`, `value`) VALUES
 (1, 'Lider', 'Lider', 'L'),
 (2, 'Administrador', 'Administrador', 'A'),
 (3, 'Miembro', 'Miembro de Grupo', 'M');
->>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -540,11 +497,7 @@ INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username
 (2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'jmartinezm', '1554726061_IMG-20190306-WA0053.jpg', 1, 'No'),
 (3, NULL, 'UsuarioX', 'ApellidoX', 'mailX@x.com', 'usuariox', 'usuariox', '1554415923_image.png', 2, 'No'),
 (4, NULL, 'Usuario Y', 'Y', 'usuarioy@y.com', 'usuarioy', 'usuarioy', '1554931527_IMG-20190306-WA0005.jpg', 2, 'No'),
-<<<<<<< HEAD
-(5, NULL, 'Ana', 'Maradey', 'amaradey@intelix.biz', 'amaradey', 'amaradey', NULL, 2, 'No'),
-=======
 (5, NULL, 'Ana', 'Maradey', 'amaradey@intelix.biz', 'amaradey', 'amaradey', '1555344069_image.png', 2, 'No'),
->>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 (6, NULL, 'Jose', 'Ramos', 'jramos@mail.com', 'jramos', 'jramos', NULL, 2, 'No');
 
 -- --------------------------------------------------------
@@ -567,192 +520,5 @@ CREATE TABLE IF NOT EXISTS `user_level` (
 
 INSERT INTO `user_level` (`id`, `name_level`, `access_level`) VALUES
 (1, 'Administrador', 3),
-<<<<<<< HEAD
-(2, 'Manager', 2),
-(3, 'Participante', 1);
-
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `affiliate`
---
-ALTER TABLE `affiliate`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `groups`
---
-ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `group_user_role`
---
-ALTER TABLE `group_user_role`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `menu`
---
-ALTER TABLE `menu`
-  ADD PRIMARY KEY (`menu_id`);
-
---
--- Indices de la tabla `note`
---
-ALTER TABLE `note`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `note_approver`
---
-ALTER TABLE `note_approver`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `note_type`
---
-ALTER TABLE `note_type`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `notification`
---
-ALTER TABLE `notification`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `permission`
---
-ALTER TABLE `permission`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `role`
---
-ALTER TABLE `role`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `source`
---
-ALTER TABLE `source`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `status`
---
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `user_level`
---
-ALTER TABLE `user_level`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `affiliate`
---
-ALTER TABLE `affiliate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
---
--- AUTO_INCREMENT de la tabla `groups`
---
-ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT de la tabla `group_user_role`
---
-ALTER TABLE `group_user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT de la tabla `menu`
---
-ALTER TABLE `menu`
-  MODIFY `menu_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT de la tabla `note`
---
-ALTER TABLE `note`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `note_approver`
---
-ALTER TABLE `note_approver`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `note_type`
---
-ALTER TABLE `note_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `notification`
---
-ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
-
---
--- AUTO_INCREMENT de la tabla `permission`
---
-ALTER TABLE `permission`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT de la tabla `role`
---
-ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `source`
---
-ALTER TABLE `source`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de la tabla `status`
---
-ALTER TABLE `status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de la tabla `user_level`
---
-ALTER TABLE `user_level`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-=======
 (2, 'Participante', 2);
 COMMIT;
->>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
