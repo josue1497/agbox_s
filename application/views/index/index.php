@@ -1,7 +1,7 @@
 <?php 
 	
 	$sql_groups = 
-		"select gur.group_id,g.name,g.group_photo
+		"select gur.group_id,g.name,g.group_photo,g.description
 		from groups g 
 		inner join group_user_role gur on g.id=gur.group_id 
 		where gur.user_id=?";
@@ -13,21 +13,20 @@
 	foreach($list as $map){
     $photo=$map['group_photo']?Component::img_to_base64(UPLOADS_DIR.$map['group_photo']):'https://i.ibb.co/pKgD4mH/image-group.png';
 		$list_html.= '
-		<div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-              <div class="card-body">
-              <a href="'.CoreUtils::base_url().'groups/group_information/'.$map['group_id'].'">
-                <div class="row no-gutters align-items-center">
-                  <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                    	<!--'.$map['name'].'-->
-                    </div>
-                    <div class="h6 mb-0 font-weight-bold text-gray-800">'.$map['name'].'</div>
-                  </div>
-                  <div class="col-auto">
-                  	<i class="fas fa-2x text-gray-300">
-                  		<img class="img-profile rounded-circle img-profile-user" src="'.$photo.'">
-                  	</i>
+		<div class="col-3">
+            <div class="card bg-transparent border-0">
+              <div class="d-flex flex-column">
+              <div class="d-flex justify-content-center">
+                <div class="d-flex align-items-center">
+                  <i class="fas fa-2x text-gray-300"><img class="img-profile rounded-circle img-profile-user" src="'.$photo.'"></i>&nbsp;&nbsp;
+                  <a href="#" data-toggle="modal" data-target="#group_info_modal" data-group-name="'.$map['name'].'"
+                  data-group-id="'.$map['group_id'].'" data-group-desc="'.$map['description'].'"><i class="fas fa-ellipsis-v text-secondary"></i></a>
+                </div>
+              </div>
+              <a class="text-decoration-none" href="'.CoreUtils::base_url().'groups/group_information/'.$map['group_id'].'">
+                <div class="d-flex justify-content-center">
+                  <div class="mt-1">
+                    <div class="h6 mb-0 font-weight-bold text-gray-800"><p class="h6 text-center">'.$map['name'].'</p></div>
                   </div>
                 </div>
                 </a>

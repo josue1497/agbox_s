@@ -1,17 +1,11 @@
 <?php 
 	function generate_content($controller,$filename=null,$record=null){
 	return 
-'<html>
-	<head>
-		<title>login_form_title_trl</title>
-		<link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/styles/style.css">
-		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway" rel="stylesheet" type="text/css">
-	</head>
-	<body>
+'
 
 		{{ app_message }}
-		
-  <div class="container">
+    <div class="d-flex align-items-center" style="height: 90vh;">
+    <div class="container">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
@@ -44,13 +38,6 @@
                       <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="enter_password_msg_trl"
 					  name="password">
                     </div>
-					<div class="form-group">
-						<select class="form-control form-control-select"  name="language">
-							<option value="lan_en" selected >select_lan_trl</option>
-							<option value="lan_en">select_en_trl</option>
-							<option value="lan_es">select_es_trl</option>
-						</select>
-                    </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
                         	<input type="checkbox" class="custom-control-input" id="customCheck">
@@ -60,14 +47,6 @@
 					
 					<input type="submit" class="btn btn-primary btn-user btn-block" value="login_button_msg_trl" name="login">
                     <hr>
-                    <a href="#" class="btn btn-google btn-user btn-block">
-                      <i class="fab fa-google fa-fw"></i> login_google_trl
-                    </a>
-                    <a href="#" class="btn btn-facebook btn-user btn-block">
-                      <i class="fab fa-facebook-f fa-fw"></i> login_facebook_trl
-                    </a>
-                  </form>
-                  <hr>
                   <div class="text-center">
                     <a class="small" href="#">forgot_password_trl</a>
                   </div>
@@ -83,8 +62,7 @@
     </div>
 
   </div>
-
-	</body>
-</html>';
+    </div>
+  ';
 }
 ?>

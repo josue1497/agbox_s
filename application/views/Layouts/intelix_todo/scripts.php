@@ -27,15 +27,17 @@
 
 <script src="{{ base_url }}application/views/Layouts/scripts/functions.js"></script>
 
-<script src="{{ base_url }}application/views/Layouts/DataTables/datatables.min.js"></script>
+<script src="{{ base_url }}application/views/Layouts/DataTables/datatables.js"></script>
 
 <script src="{{ base_url }}application/views/Layouts/scripts/select2.full.js"></script>
+
+<!-- <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
 
 <script src="{{ base_url }}application/views/Layouts/scripts/vue.js"></script>
 
 <script src="{{ base_url }}application/views/Layouts/scripts/axios.js"></script>
 
-<!-- <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
 <script type="text/javascript" src="{{ base_url }}application/views/Layouts/slick/slick.min.js"></script>
 
 <script>

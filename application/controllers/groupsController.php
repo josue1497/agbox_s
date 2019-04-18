@@ -122,6 +122,22 @@ class groupsController  extends Controller{
 		}
 	}
 
+	public function get_group_members(){
+
+		$data=$_POST;
+		$id=$_POST['group_id'];
+		
+		$group_record = Model::get_sql_data("select CONCAT(u.names,' ',u.lastnames) user_name, r.name role_name
+		from groups g inner join affiliate a on (a.group_id=g.id)
+		inner join group_user_role gur on (gur.group_id=g.id and a.user_id=gur.user_id)
+		inner join `user` u on (u.id=gur.user_id) 
+		inner join `role` r on (r.id=gur.role_id)
+		where g.id=?", array('group_id'=>$id));
+
+		header('Content-Type: application/json');
+  	echo json_encode($group_record,JSON_PRETTY_PRINT);
+	}
+
 
 }
 

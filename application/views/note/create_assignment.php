@@ -7,7 +7,6 @@ function generate_content($controller, $filename = null, $record = null)
 	$model_note->hide_form_column('user_id');
     $model_note->hide_form_column('init_date');
     $model_note->hide_form_column('finish_date');
-    $model_note->hide_form_column('performer_id');
     $model_note->hide_form_column('note_type_id');
     if(isset($controller->vars['records']))
         $record = $controller->vars['records'];

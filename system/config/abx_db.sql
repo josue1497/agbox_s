@@ -4,6 +4,7 @@
 --
 -- Servidor: localhost
 -- Tiempo de generación: 12-04-2019 a las 21:20:54
+-- Tiempo de generación: 18-04-2019 a las 01:28:16
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.1.26
 
@@ -12,15 +13,11 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Base de datos: `abx_db`
 --
+CREATE DATABASE IF NOT EXISTS `abx_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `abx_db`;
 
 -- --------------------------------------------------------
 
@@ -29,12 +26,13 @@ SET time_zone = "+00:00";
 --
 
 DROP TABLE IF EXISTS `affiliate`;
-CREATE TABLE `affiliate` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `affiliate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `approved` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `approved` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `affiliate`
@@ -62,7 +60,12 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 (33, 19, 4, 'Yes'),
 (34, 19, 3, 'Yes'),
 (35, 21, 1, 'Yes'),
+<<<<<<< HEAD
 (36, 21, 5, 'Yes');
+=======
+(36, 21, 5, 'Yes'),
+(37, 22, 1, 'Yes');
+>>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -70,15 +73,16 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 -- Estructura de tabla para la tabla `groups`
 --
 DROP TABLE IF EXISTS `groups`;
-CREATE TABLE `groups` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `domain_id` int(11) DEFAULT NULL,
   `parent_group_id` int(11) DEFAULT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `group_photo` varchar(256) DEFAULT NULL,
-  `leader_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
+  `leader_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
 
 --
 -- Volcado de datos para la tabla `groups`
@@ -89,11 +93,21 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 (14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg', NULL),
 (15, NULL, NULL, 'Grupo 3', 'Grupo 3', '1553056938_(silla_e_mimbre)12224228_1654611478130905_689608145_n.jpg', 2),
 (16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg', NULL),
+<<<<<<< HEAD
 (17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg', NULL),
 (18, NULL, NULL, 'Grupo 6', 'Grupo 6', '1554833587_IMG-20190306-WA0005.jpg', 2),
 (19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg', NULL),
 (20, NULL, 14, 'New group', 'New group', '1553712932_IMG-20190306-WA0024.jpg', 1),
 (21, NULL, 13, 'Grupo de Prueba JM', 'Grupo de Prueba JM', NULL, 1);
+=======
+(17, NULL, NULL, 'Grupo 5', 'Descripcion de Grupo, un poco mas larga probando que se vea bien el modal de informacion de grupo', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg', NULL),
+(18, NULL, NULL, 'Grupo 6', 'Grupo 6', '1554833587_IMG-20190306-WA0005.jpg', 2),
+(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg', NULL),
+(20, NULL, 14, 'New group', 'New group', '1553712932_IMG-20190306-WA0024.jpg', 1),
+(21, NULL, 13, 'Grupo de Prueba JM', 'Grupo de Prueba JM', NULL, 1),
+(22, NULL, NULL, 'Grupo Exposed', 'S', NULL, 1),
+(24, NULL, NULL, 'Test Group', 'Si', NULL, 1);
+>>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -102,12 +116,13 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 --
 
 DROP TABLE IF EXISTS `group_user_role`;
-CREATE TABLE `group_user_role` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `group_user_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `role_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `group_user_role`
@@ -128,7 +143,21 @@ INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 (23, 19, 3, 3),
 (24, NULL, 1, 1),
 (25, 21, 1, 1),
+<<<<<<< HEAD
 (26, 21, 5, 3);
+=======
+(26, 21, 5, 3),
+(27, NULL, 1, 1),
+(28, NULL, 1, 1),
+(29, NULL, 1, 1),
+(30, NULL, 1, 1),
+(31, NULL, 1, 1),
+(32, NULL, 1, 1),
+(33, NULL, 1, 1),
+(34, NULL, 1, 1),
+(35, 22, 1, 3),
+(36, 24, 1, 1);
+>>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -137,15 +166,16 @@ INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 --
 
 DROP TABLE IF EXISTS `menu`;
-CREATE TABLE `menu` (
-  `menu_id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `menu` (
+  `menu_id` int(5) NOT NULL AUTO_INCREMENT,
   `title` varchar(256) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `icon` varchar(256) DEFAULT NULL,
   `menu_order` int(5) DEFAULT NULL,
   `url` varchar(256) DEFAULT NULL,
-  `parent_menu_id` int(5) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `parent_menu_id` int(5) DEFAULT '0',
+  PRIMARY KEY (`menu_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `menu`
@@ -178,8 +208,8 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 --
 
 DROP TABLE IF EXISTS `note`;
-CREATE TABLE `note` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `note` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(140) DEFAULT NULL,
   `note_type_id` int(11) DEFAULT NULL,
@@ -190,8 +220,9 @@ CREATE TABLE `note` (
   `finish_date` date DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `date_approved` date DEFAULT NULL,
-  `performer_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `performer_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `note`
@@ -209,12 +240,13 @@ INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `grou
 --
 
 DROP TABLE IF EXISTS `note_approver`;
-CREATE TABLE `note_approver` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `note_approver` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `note_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `choice` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `choice` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `note_approver`
@@ -234,21 +266,23 @@ INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
 --
 
 DROP TABLE IF EXISTS `note_type`;
-CREATE TABLE `note_type` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `note_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) DEFAULT NULL,
-  `description` varchar(140) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `description` varchar(140) DEFAULT NULL,
+  `value` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `note_type`
 --
 
-INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
-(1, 'Punto Sugerido', 'Punto Sugerido'),
-(2, 'Asignaciones', 'Asignaciones'),
-(3, 'Compromisos', 'Compromisos'),
-(4, 'Punto de Agenda', 'Punto de Agenda');
+INSERT INTO `note_type` (`id`, `name`, `description`, `value`) VALUES
+(1, 'Punto Sugerido', 'Punto Sugerido', 'SP'),
+(2, 'Asignaciones', 'Asignaciones', 'AS'),
+(3, 'Compromisos', 'Compromisos', 'CO'),
+(4, 'Punto de Agenda', 'Punto de Agenda', 'AP');
 
 -- --------------------------------------------------------
 
@@ -257,16 +291,17 @@ INSERT INTO `note_type` (`id`, `name`, `description`) VALUES
 --
 
 DROP TABLE IF EXISTS `notification`;
-CREATE TABLE `notification` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `notification` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `message` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `user_to_id` int(11) DEFAULT NULL,
   `controller_to` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `entity_id` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `notification_type` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `shipping_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `read` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+  `read` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `notification`
@@ -337,6 +372,7 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 (63, 'Su rol dentro del grupo New group ha cambiado', 3, 'groups/group_information', '20', 'change_role', '2019-04-10 22:08:46', 'Y'),
 (64, 'Nueva Solicitud de Afilicacion', NULL, 'affiliate/approve_affiliate', '35', 'affiliate', '2019-04-11 19:15:37', 'N'),
 (65, 'A sido invitado a participar en el grupo \"Grupo de Prueba JM\"', 5, 'affiliate/approve_request', '36', 'request_membership', '2019-04-11 19:24:23', 'Y'),
+<<<<<<< HEAD
 (66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y');
 
 
@@ -354,6 +390,11 @@ CREATE TABLE `param` (
   PRIMARY KEY (`param_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla de parametros' AUTO_INCREMENT=1 ;
 
+=======
+(66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y'),
+(67, 'A sido invitado a participar en el grupo \"Grupo Exposed\"', 1, 'affiliate/approve_request', '37', 'request_membership', '2019-04-17 22:39:24', 'Y'),
+(68, 'Administrador es el Nuevo Miembro \n                                        del Grupo \"Grupo Exposed\"', 1, 'groups/group_information', '22', 'new_member', '2019-04-17 22:39:32', 'Y');
+>>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -362,15 +403,16 @@ CREATE TABLE `param` (
 --
 
 DROP TABLE IF EXISTS `permission`;
-CREATE TABLE `permission` (
-  `id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `permission` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `menu_id` int(5) DEFAULT NULL,
   `user_level_id` int(5) DEFAULT NULL,
   `can_read` varchar(3) DEFAULT NULL,
   `can_write` varchar(3) DEFAULT NULL,
   `can_edit` varchar(3) DEFAULT NULL,
-  `can_delete` varchar(3) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `can_delete` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `permission`
@@ -395,20 +437,29 @@ INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_wri
 --
 
 DROP TABLE IF EXISTS `role`;
-CREATE TABLE `role` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) DEFAULT NULL,
-  `description` varchar(256) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for Role''s Information';
+  `description` varchar(256) DEFAULT NULL,
+  `value` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Table for Role''s Information';
 
 --
 -- Volcado de datos para la tabla `role`
 --
 
+<<<<<<< HEAD
 INSERT INTO `role` (`id`, `name`, `description`) VALUES
 (1, 'Lider', 'Lider'),
 (2, 'Administrador', 'Administrador'),
 (3, 'Participante', 'Participante del Grupo');
+=======
+INSERT INTO `role` (`id`, `name`, `description`, `value`) VALUES
+(1, 'Lider', 'Lider', 'L'),
+(2, 'Administrador', 'Administrador', 'A'),
+(3, 'Miembro', 'Miembro de Grupo', 'M');
+>>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -417,11 +468,12 @@ INSERT INTO `role` (`id`, `name`, `description`) VALUES
 --
 
 DROP TABLE IF EXISTS `source`;
-CREATE TABLE `source` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `source` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(60) DEFAULT NULL,
-  `description` varchar(140) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `description` varchar(140) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `source`
@@ -441,19 +493,22 @@ INSERT INTO `source` (`id`, `title`, `description`) VALUES
 --
 
 DROP TABLE IF EXISTS `status`;
-CREATE TABLE `status` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(60) DEFAULT NULL,
-  `description` varchar(140) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `description` varchar(140) DEFAULT NULL,
+  `value` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `status`
 --
 
-INSERT INTO `status` (`id`, `name`, `description`) VALUES
-(1, 'Abierto', 'Abierto'),
-(2, 'Cerrado', NULL);
+INSERT INTO `status` (`id`, `name`, `description`, `value`) VALUES
+(1, 'Pendiente', 'Pendiente', 'P'),
+(2, 'Cerrado', 'Cerrado', 'C'),
+(3, 'Completado', 'Completado', 'CO');
 
 -- --------------------------------------------------------
 
@@ -462,8 +517,8 @@ INSERT INTO `status` (`id`, `name`, `description`) VALUES
 --
 
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_id` int(11) DEFAULT NULL,
   `names` varchar(140) DEFAULT NULL,
   `lastnames` varchar(140) DEFAULT NULL,
@@ -472,8 +527,9 @@ CREATE TABLE `user` (
   `password` varchar(60) DEFAULT NULL,
   `profile_photo` varchar(256) DEFAULT NULL,
   `user_level_id` int(11) DEFAULT NULL,
-  `is_visitor` varchar(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_visitor` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `user`
@@ -484,7 +540,11 @@ INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username
 (2, 0, 'Josue ', 'Martinez', 'josuermartinezm@gmail.com', 'jmartinezm', 'jmartinezm', '1554726061_IMG-20190306-WA0053.jpg', 1, 'No'),
 (3, NULL, 'UsuarioX', 'ApellidoX', 'mailX@x.com', 'usuariox', 'usuariox', '1554415923_image.png', 2, 'No'),
 (4, NULL, 'Usuario Y', 'Y', 'usuarioy@y.com', 'usuarioy', 'usuarioy', '1554931527_IMG-20190306-WA0005.jpg', 2, 'No'),
+<<<<<<< HEAD
 (5, NULL, 'Ana', 'Maradey', 'amaradey@intelix.biz', 'amaradey', 'amaradey', NULL, 2, 'No'),
+=======
+(5, NULL, 'Ana', 'Maradey', 'amaradey@intelix.biz', 'amaradey', 'amaradey', '1555344069_image.png', 2, 'No'),
+>>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 (6, NULL, 'Jose', 'Ramos', 'jramos@mail.com', 'jramos', 'jramos', NULL, 2, 'No');
 
 -- --------------------------------------------------------
@@ -494,11 +554,12 @@ INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username
 --
 
 DROP TABLE IF EXISTS `user_level`;
-CREATE TABLE `user_level` (
-  `id` int(5) NOT NULL,
+CREATE TABLE IF NOT EXISTS `user_level` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `name_level` varchar(50) DEFAULT NULL,
-  `access_level` int(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `access_level` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `user_level`
@@ -506,6 +567,7 @@ CREATE TABLE `user_level` (
 
 INSERT INTO `user_level` (`id`, `name_level`, `access_level`) VALUES
 (1, 'Administrador', 3),
+<<<<<<< HEAD
 (2, 'Manager', 2),
 (3, 'Participante', 1);
 
@@ -690,3 +752,7 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+=======
+(2, 'Participante', 2);
+COMMIT;
+>>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32

@@ -12,43 +12,12 @@ class indexController extends Controller{
 		$this->init(new User());
 
 		$this->model->table_label='Dashboard';
-		$this->view->add_script_js('
-		
-		$(document).ready(function(){
-		$(\'.slide-cont\').slick({
-			dots: true,
-  infinite: false,
-  speed: 300,
-  slidesToShow: 4,
-  slidesToScroll: 4,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 3,
-        infinite: true,
-        dots: true
-      }
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1
-      }
-    }
-	],
-			});
-		});
-	');
+
+		$js=$html_result = file_get_contents(JS_DIR . 'index.js');
+
+		$js = str_replace('{{ URI_DATA }}',SERVER_DIR."groups/get_group_members",$js);
+
+		$this->view->add_script_js($js);
 
 	if(Affiliate::count_affilate_groups(Session::get('user_id'))==='0'){
 		header("location: ".CoreUtils::base_url().'affiliate/items');
