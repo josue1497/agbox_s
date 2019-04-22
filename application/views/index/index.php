@@ -44,7 +44,7 @@
 	return $html_result;
 }
 
-public function get_pending_notes(){
+function get_pending_notes(){
 	$note_model = new Note();
 	$user_id = Session::get('user_id');
 	$group_list = Model::get_sql_data($sql_groups,array('user_id'=>$user_id));

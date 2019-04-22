@@ -3,11 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 12-04-2019 a las 21:20:54
--- Tiempo de generación: 18-04-2019 a las 01:28:16
+-- Tiempo de generación: 22-04-2019 a las 19:33:44
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.1.26
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -68,6 +68,7 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 --
 -- Estructura de tabla para la tabla `groups`
 --
+
 DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -159,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   `url` varchar(256) DEFAULT NULL,
   `parent_menu_id` int(5) DEFAULT '0',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `menu`
@@ -183,7 +184,8 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 (23, 'Create commitment', 'Create commitment', 'empty', 3, 'note/create_commitment', 21),
 (24, 'Create agenda point', 'Create agenda point', 'empty', 4, 'note/create_agenda_point', 21),
 (25, 'Role group', NULL, 'fab fa-adn', 23, 'group_user_role', 11),
-(26, 'Afiliacion a Grupos', 'Afiliacion a Grupos', 'empty', 2, 'affiliate/items', 11);
+(26, 'Afiliacion a Grupos', 'Afiliacion a Grupos', 'empty', 2, 'affiliate/items', 11),
+(27, 'Comentario', 'Comentario', 'fab fa-500px', 1, 'note_comment', 11);
 
 -- --------------------------------------------------------
 
@@ -206,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `note` (
   `date_approved` date DEFAULT NULL,
   `performer_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `note`
@@ -215,7 +217,16 @@ CREATE TABLE IF NOT EXISTS `note` (
 INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `group_id`, `summary`, `init_date`, `finish_date`, `status_id`, `date_approved`, `performer_id`) VALUES
 (1, 1, 'Group', 1, 2, 13, 'Prueba de Sumario', '2019-03-14', '2019-03-05', 1, NULL, NULL),
 (2, 2, 'Crud Test', 1, 1, NULL, 'A', '2019-03-22', '2019-03-29', 1, '2019-03-14', NULL),
-(3, 1, 'Comentario de Prueba', 3, 1, 18, 'Esto es una prueba de guardado de un comentario', NULL, NULL, 1, NULL, NULL);
+(3, 1, 'Comentario de Prueba', 3, 1, 18, 'Esto es una prueba de guardado de un comentario', NULL, NULL, 1, NULL, NULL),
+(4, 1, 'Prueba de Compromiso', 3, 1, 14, 'Prueba de Compromiso', NULL, '2019-04-04', 1, NULL, 2),
+(5, 1, 'otra Prueba', 3, 1, 13, 'otra Prueb aotra Prueba', NULL, '2019-04-19', 1, NULL, 3),
+(6, 1, 'Crear Pendientes', 2, NULL, 13, 'Crear metodo de insercion para pendientes', '2019-04-01', '2019-04-10', 1, NULL, 1),
+(7, 1, 'Acuerdo', 3, 2, 13, 'Prueba de Insercion de Acuerdos', NULL, '2019-04-17', NULL, NULL, NULL),
+(8, 1, 'punto de Agenda', 4, NULL, 13, 'Prueba de punto de Agenda okey!', NULL, NULL, NULL, '2019-04-24', NULL),
+(9, 1, 'punto de Agenda', 4, NULL, 15, 'punto de Agenda punto de Agenda punto de Agenda', NULL, NULL, NULL, '2019-04-18', NULL),
+(10, 1, 'punto de Agenda', 4, NULL, 14, 'punto de Agendapunto de Agendapunto de Agenda', NULL, NULL, NULL, '2019-04-18', NULL),
+(11, 1, 'Prueba de Asignacion', 2, NULL, 13, 'Prueba de Asignacion con notificacion', '2019-04-02', '2019-04-17', 1, NULL, 4),
+(12, 1, 'Prueba con Otra', 2, NULL, 13, 'Prueba con Otra notificacion', '2019-04-09', '2019-04-17', 1, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -230,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `note_approver` (
   `user_id` int(11) DEFAULT NULL,
   `choice` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `note_approver`
@@ -241,7 +252,36 @@ INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
 (3, 1, 2, NULL),
 (4, 3, 2, NULL),
 (5, 3, 4, NULL),
-(6, 3, 5, NULL);
+(6, 3, 5, NULL),
+(7, 5, 5, NULL),
+(8, 5, 6, NULL),
+(9, 7, 4, NULL),
+(10, 7, 6, NULL),
+(11, 10, 5, NULL),
+(12, 10, 6, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `note_comment`
+--
+
+DROP TABLE IF EXISTS `note_comment`;
+CREATE TABLE IF NOT EXISTS `note_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `date_comment` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `note_id` int(11) DEFAULT NULL,
+  `author_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `note_comment`
+--
+
+INSERT INTO `note_comment` (`id`, `comment`, `date_comment`, `note_id`, `author_id`) VALUES
+(1, 'Comentario de Prueba', '2019-04-22 17:23:54', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -285,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `shipping_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `read` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `notification`
@@ -358,7 +398,24 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 (65, 'A sido invitado a participar en el grupo \"Grupo de Prueba JM\"', 5, 'affiliate/approve_request', '36', 'request_membership', '2019-04-11 19:24:23', 'Y'),
 (66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y'),
 (67, 'A sido invitado a participar en el grupo \"Grupo Exposed\"', 1, 'affiliate/approve_request', '37', 'request_membership', '2019-04-17 22:39:24', 'Y'),
-(68, 'Administrador es el Nuevo Miembro \n                                        del Grupo \"Grupo Exposed\"', 1, 'groups/group_information', '22', 'new_member', '2019-04-17 22:39:32', 'Y');
+(68, 'Administrador es el Nuevo Miembro \n                                        del Grupo \"Grupo Exposed\"', 1, 'groups/group_information', '22', 'new_member', '2019-04-17 22:39:32', 'Y'),
+(69, 'Tiene una nueva tarea Asignada', 4, 'note/note_information', '11', 'new_assignment', '2019-04-22 17:13:22', 'N'),
+(70, 'Tiene una nueva tarea Asignada', 2, 'note/note_information', '12', 'new_assignment', '2019-04-22 17:15:10', 'Y');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `param`
+--
+
+DROP TABLE IF EXISTS `param`;
+CREATE TABLE IF NOT EXISTS `param` (
+  `param_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`param_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla de parametros';
 
 -- --------------------------------------------------------
 
@@ -521,4 +578,5 @@ CREATE TABLE IF NOT EXISTS `user_level` (
 INSERT INTO `user_level` (`id`, `name_level`, `access_level`) VALUES
 (1, 'Administrador', 3),
 (2, 'Participante', 2);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
