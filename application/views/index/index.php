@@ -118,9 +118,6 @@ function build_line($list_lines)
                                   <i class="fas fa-comment-alt-edit fa-lg text-secondary"></i>
                               </a>
                             </div>
-                            <div class="mx-2">
-                              <a data-toggle="modal" data-target="#reassing-note" data-whatever="@mdo" '.Component::set_tooltip_info("Reasignar.").'><i class="fas fa-share-square fa-lg text-secondary"></i></a>
-                            </div>
                         </div>
                     </div>
               </div>

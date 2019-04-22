@@ -9,6 +9,10 @@ function generate_content($controller, $filename = null, $record = null)
     $model_note->hide_form_column('finish_date');
     $model_note->hide_form_column('performer_id');
     $model_note->hide_form_column('note_type_id');
+    $model_note->hide_form_column('source_id');
+    $model_note->hide_form_column('status_id');
+
+
 
     if(isset($controller->vars['records']))
         $record = $controller->vars['records'];
@@ -37,7 +41,7 @@ function generate_select_user(){
     $users=$user_model->showAllRecords();
 
     $html='<div class="form-group">
-    <select multiple required name="user_approved_id" id="user_approved_id" class="form-control select2">';
+    <select multiple required name="user_approved_id[]" id="user_approved_id" class="form-control select2">';
     foreach($users as $user){
         $html.=' <option value="'.$user['id'].'">'.$user['names'].' '.$user['lastnames'].'</option>';
     }
