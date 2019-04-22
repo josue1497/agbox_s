@@ -82,10 +82,17 @@ class noteController extends Controller{
 			$data['user_id']=Session::get('user_id');
 
 			/*TODO cambiar por un GlobalModuleConstants.Value*/
-			$note_type = (new Note_Type())->get_by_property(array('name'=>'Asignaciones'));
+			$note_type =Note_Type::get_assignment_status();
+
+			$status_id =Status::get_pending_status();
+
+			if($status_id)
+				$data['status_id']=$status_id;
+			else
+				$data['status_id']=1;
 			
 			if($note_type)
-				$data['note_type_id']=$note_type['id'];
+				$data['note_type_id']=$note_type;
 			else
 				$data['note_type_id']=1;
 
@@ -138,10 +145,10 @@ class noteController extends Controller{
 			$data['user_id']=Session::get('user_id');
 
 			/*TODO cambiar por un GlobalModuleConstants.Value*/
-			$note_type = (new Note_Type())->get_by_property(array('name'=>'Punto Sugerido'));
+			$note_type = Note_Type::get_suggested_point_status();
 			
 			if($note_type)
-				$data['note_type_id']=$note_type['id'];
+				$data['note_type_id']=$note_type;
 			else
 				$data['note_type_id']=1;
 
@@ -190,10 +197,10 @@ class noteController extends Controller{
 			$data['user_id']=Session::get('user_id');
 
 			/*TODO cambiar por un GlobalModuleConstants.Value*/
-			$note_type = (new Note_Type())->get_by_property(array('name'=>'Punto de Agenda'));
+			$note_type = Note_Type::get_agenda_point_status();
 			
 			if($note_type)
-				$data['note_type_id']=$note_type['id'];
+				$data['note_type_id']=$note_type;
 			else
 				$data['note_type_id']=1;
 
@@ -242,10 +249,10 @@ class noteController extends Controller{
 			$data['user_id']=Session::get('user_id');
 
 			/*TODO cambiar por un GlobalModuleConstants.Value*/
-			$note_type = (new Note_Type())->get_by_property(array('name'=>'Compromisos'));
+			$note_type = Note_Type::get_commitment_status();
 			
 			if($note_type)
-				$data['note_type_id']=$note_type['id'];
+				$data['note_type_id']=$note_type;
 			else
 				$data['note_type_id']=1;
 
@@ -271,4 +278,3 @@ class noteController extends Controller{
 		$this->render('create_commitment');
 	}
 }
-?>

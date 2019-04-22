@@ -3,6 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
+-- Tiempo de generación: 12-04-2019 a las 21:20:54
 -- Tiempo de generación: 18-04-2019 a las 01:28:16
 -- Versión del servidor: 10.1.38-MariaDB
 -- Versión de PHP: 7.1.26
@@ -67,7 +68,6 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 --
 -- Estructura de tabla para la tabla `groups`
 --
-
 DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

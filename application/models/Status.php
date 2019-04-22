@@ -40,15 +40,15 @@ class Status extends Model{
 	}
 
 	public static function get_complete_status(){
-		return get_status_id('CO');
+		return Status::get_status_id('CO');
 	}
 
 	public static function get_pending_status(){
-		return get_status_id('P');
+		return Status::get_status_id('P');
 	}
 
 	public static function get_close_status(){
-		return get_status_id('C');
+		return Status::get_status_id('C');
 	}
 }
 ?>
