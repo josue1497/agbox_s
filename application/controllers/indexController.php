@@ -13,9 +13,13 @@ class indexController extends Controller{
 
 		$this->model->table_label='Dashboard';
 
-		$js=$html_result = file_get_contents(JS_DIR . 'index.js');
+		$js= file_get_contents(JS_DIR . 'index.js');
 
 		$js = str_replace('{{ URI_DATA }}',SERVER_DIR."groups/get_group_members",$js);
+		$js = str_replace('{{ SEND_COMMENT }}',SERVER_DIR."note_comment/create",$js);
+		$js = str_replace('{{ COMMMENT_DATA }}',SERVER_DIR."note_comment/get_comments",$js);
+
+		
 
 		$this->view->add_script_js($js);
 
@@ -40,7 +44,7 @@ class indexController extends Controller{
 			$row = $this->model->get_by_property(array('username'=>$_POST['email']));
 			if(isset($row) && isset($row['id'])){
 				if($row['password'] == $_POST['password']){
-					$row['lan']=$_POST['language'];
+					$row['lan']=isset($_POST['language'])?$_POST['language']:'';
 					Session::set_user_session_data($row);
 					header('location: '.CoreUtils::base_url().'index/index');
 				}else{

@@ -41,12 +41,18 @@
 <script type="text/javascript" src="{{ base_url }}application/views/Layouts/slick/slick.min.js"></script>
 
 <script>
-    $('.select2').select2({
-			placeholder: 'Select an option',
-			width: '100%',
-		});
+	$('.select2').select2({
+		placeholder: 'Select an option',
+		width: '100%',
+	});
 </script>
 
 <script>
 	$('.data-table').DataTable();
+</script>
+
+<script>
+	$(function() {
+		$('[data-toggle="tooltip"]').tooltip();
+	});
 </script>
