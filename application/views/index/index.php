@@ -104,7 +104,7 @@ function build_line($list_lines)
   
   setlocale(LC_ALL,"es_ES");
   foreach ($list_lines as $line) {
-    $result .= '<li class="list-group-item list-group-item-action border-0">
+    $result .= '<li class="list-group-item list-group-item-action border-0" id="'.$line['id'].'">
                 <div class="d-flex ">
                     <div class="p-2" data-toggle="modal" data-target="#note-info-modal" data-note="'. $line['id'].'" 
                     data-title="'. $line['title'].'"  data-summary="'. $line['summary'].'" >' . $line['title'] . '</div>

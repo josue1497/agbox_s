@@ -234,4 +234,13 @@ class noteController extends Controller{
 		}
 		$this->render('create_commitment');
 	}
+
+	public function complete_assigment(){
+		if(isset($_POST) && isset($_POST['note_id'])){
+			$id=$_POST['note_id'];
+			$note_record= (new Note)->findByPoperty(array('id'=>$id));
+			echo json_encode($note_record);
+
+		}
+	}
 }

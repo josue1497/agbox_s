@@ -18,6 +18,7 @@ class indexController extends Controller{
 		$js = str_replace('{{ URI_DATA }}',SERVER_DIR."groups/get_group_members",$js);
 		$js = str_replace('{{ SEND_COMMENT }}',SERVER_DIR."note_comment/create",$js);
 		$js = str_replace('{{ COMMMENT_DATA }}',SERVER_DIR."note_comment/get_comments",$js);
+		$js = str_replace('{{ COMPLETE_ASSINGMENT }}',SERVER_DIR."note/complete_assigment",$js);
 
 		
 
