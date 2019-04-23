@@ -149,7 +149,7 @@ var app = new Vue({
 				$this->model = new Affiliate();
 
 				$gur = new Group_User_Role();
-				$user_to=$gur->get_user_by_role('Lider',$_POST['group_id']);
+				$user_to=$gur->get_user_by_role('L',$_POST['group_id']);
 
 				$entity_to=Model::get_sql_data("select max(id)+1 as 'id' from affiliate");
         $affiliate_id=intval($entity_to[0]['id']);
@@ -243,7 +243,7 @@ var app = new Vue({
       $affiliate_record['approved']=$data['approved'];
 
 
-      $leader_record= Group_User_Role::get_user_by_role('Lider',$affiliate_record['group_id']);
+      $leader_record= Group_User_Role::get_user_by_role('L',$affiliate_record['group_id']);
       $leader_id= $leader_record['id'];
 
       $user_model=new User();

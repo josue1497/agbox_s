@@ -22,3 +22,12 @@ function toReadNotification(uri_to, uri_read, notification_id){
             alert( "error" );
         }) ;   
 }
+
+function toReadMessage(uri_to, uri_read, message_id){
+    $.post(uri_read,{message_id:message_id})
+        .done(function(data){
+            location.href =uri_to;
+        }).fail(function() {
+            alert( "error" );
+        }) ;   
+}

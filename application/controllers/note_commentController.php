@@ -51,7 +51,7 @@ class note_commentController extends Controller{
     public function get_comments(){
         $data=$_POST;
 
-        $query = "select nc.comment, concat(u.names,' ',u.lastnames) as 'user_name', date_comment 
+        $query = "select nc.id,nc.comment, concat(u.names,' ',u.lastnames) as 'user_name', date_comment 
         from note_comment nc inner join note n on (n.id=nc.note_id) 
         inner join `user` u on (nc.author_id=u.id)
         where n.id=? order by date_comment desc ";

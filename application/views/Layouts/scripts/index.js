@@ -73,6 +73,7 @@ $('#note-info-modal').on('show.bs.modal', function (event) {
     var note_id = button.data('note');
     var title = button.data('title');
     var summary = button.data('summary');
+    var group = button.data('group');
     $('#comment_content').html("");
 
     $.post("{{ COMMMENT_DATA }}", { 'note_id': note_id }, function (data, status) {
@@ -86,14 +87,51 @@ $('#note-info-modal').on('show.bs.modal', function (event) {
         });
 
     $('#complete-button').on('click', function () {
-        $.post("{{ COMPLETE_ASSINGMENT }}", {'note_id':$('#assingment_id').val()}, function (data, status) {
-            console.log(data);
-            // $('#add-comment-modal').modal('hide');
-            // $('#comment').val('');
-        })
+
+        if (message=prompt("¿Esta seguro de haber completado esta asignación?",'Escriba un comentario para completar.')) {
+            $.post("{{ COMPLETE_ASSINGMENT }}", { 'note_id': $('#assingment_id').val(),'message':message }, function (data) {
+                console.log(data);
+                console.log(message);
+                if(''!==data && 'fail'!==data){
+                    $('#'+data).remove();
+                    $('#note-info-modal').modal('hide');
+                    if(!($("#"+group).children().length>0)){
+                        $("#"+group).append('<li class="list-group-item list-group-item-action border-0""><div class="d-flex ">'+
+                            '<div class="p-2 h4 text-info" >ya no posee asignaciones Pendientes</div></div></li>');
+                    }
+                }
+                // $('#add-comment-modal').modal('hide');
+                // $('#comment').val('');
+                $("#complete-button").unbind( "click" );
+            })
             .fail(function () {
-                alert("Ha ocurrido un Error.");
+                    alert("Ha ocurrido un Error.");
             });
+        }
+        
+    });
+
+    $('#reasing-button').on('click', function () {
+
+        if (message=prompt("¿Esta seguro de reasignar esta tarea?",'Escriba un comentario.')) {
+            $.post("{{ REASING_ASSINGMENT }}", { 'note_id': $('#assingment_id').val(),'message':message }, function (data) {
+                console.log(data);
+                console.log(message);
+                if(''!==data && 'fail'!==data){
+                    $('#'+data).remove();
+                    $('#note-info-modal').modal('hide');
+                    if(!($("#"+group).children().length>0)){
+                        $("#"+group).append('<li class="list-group-item list-group-item-action border-0""><div class="d-flex ">'+
+                            '<div class="p-2 h4 text-info" >ya no posee asignaciones Pendientes</div></div></li>');
+                    }
+                }
+                $("#reasing-button").unbind( "click" );
+            })
+            .fail(function () {
+                    alert("Ha ocurrido un Error.");
+            });
+        }
+        
     });
 
 

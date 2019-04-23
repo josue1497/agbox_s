@@ -236,11 +236,79 @@ class noteController extends Controller{
 	}
 
 	public function complete_assigment(){
+		$this->init(new Note());
 		if(isset($_POST) && isset($_POST['note_id'])){
 			$id=$_POST['note_id'];
+			$message_complete=$_POST['message'];
 			$note_record= (new Note)->findByPoperty(array('id'=>$id));
-			echo json_encode($note_record);
+			$user_id = $note_record['performer_id'];
+			$group_id = $note_record['group_id'];
+			$note_record['status_id']=Status::get_complete_status();
+			$leader_id=Group_User_Role::get_user_by_role('L',$group_id);
 
+			if(Model::save_record($this->model,$note_record)){
+					Note_Comment::create_comment($id,$user_id, $message_complete);
+					Notification::create_notification(array('user_to_id'=>$leader_id['id'],
+																									'message'=>'Asignacion completada',
+																									'entity_id'=>$id,
+																									'notification_type'=>Notification::$ASSINGMENT_COMPLETE,
+																									'controller_to'=>'note/assigment_complete',
+																									'read'=>Notification::$NO));
+					echo $id;
+			}else{
+				echo 'fail';
+			}
 		}
+	}
+
+	public function reasing_assigment(){
+		$this->init(new Note());
+		if(isset($_POST) && isset($_POST['note_id'])){
+			$id=$_POST['note_id'];
+			$message_complete=$_POST['message'];
+			$note_record= (new Note)->findByPoperty(array('id'=>$id));
+			$user_id = $note_record['performer_id'];
+			$group_id = $note_record['group_id'];
+			$note_record['status_id']=Status::get_paused_status();
+			$leader_id=Group_User_Role::get_user_by_role('L',$group_id);
+			$note_record['performer_id']=$leader_id;
+
+			if(Model::save_record($this->model,$note_record)){
+					Note_Comment::create_comment($id,$user_id, $message_complete);
+					Notification::create_notification(array('user_to_id'=>$leader_id['id'],
+																									'message'=>'Solicitud de reasignacion de tarea',
+																									'entity_id'=>$id,
+																									'notification_type'=>Notification::$ASSINGMENT_REASING,
+																									'controller_to'=>'note/assigment_reasing',
+																									'read'=>Notification::$NO));
+					echo $id;
+			}else{
+				echo 'fail';
+			}
+		}
+	}
+
+	public function assigment_complete($id){
+		$this->init(new Note());
+		$d["record"] = $this->model->get_by_id($id);
+
+		// if(isset($_POST)){
+		// 	header("location: ".CoreUtils::base_url().'index/index');
+		// }
+
+		$this->set($d);
+		$this->render('assigment_complete');
+	}
+
+	public function assigment_reasing($id){
+		$this->init(new Note());
+		$d["record"] = $this->model->get_by_id($id);
+
+		// if(isset($_POST)){
+		// 	header("location: ".CoreUtils::base_url().'index/index');
+		// }
+
+		$this->set($d);
+		$this->render('assigment_reasing');
 	}
 }

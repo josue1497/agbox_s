@@ -50,5 +50,9 @@ class Status extends Model{
 	public static function get_close_status(){
 		return Status::get_status_id('C');
 	}
+
+	public static function get_paused_status(){
+		return Status::get_status_id('PS');
+	}
 }
 ?>

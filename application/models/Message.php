@@ -1,18 +1,5 @@
 <?php
-class Notification extends Model{
-
-    public static $AFFILIATE = 'affiliate';
-    public static $APPROVE_AFFILIATE = 'approve_affiliate';
-    public static $DECLINE_AFFILIATE = 'decline_affiliate';
-    public static $DESAFFILIATE_USER = 'desaffiliate_user';
-    public static $CHANGE_ROLE = 'change_role';
-    public static $REQUEST_MEMBERSHIP = 'request_membership';
-    public static $NEW_MEMBER = 'new_member';
-    public static $NEW_ASSIGNMENT = 'new_assignment';
-    public static $ASSINGMENT_COMPLETE = 'assingment_complete';
-    public static $ASSINGMENT_REASING = 'assingment_reasing';
-    
-
+class Message extends Model{
  
     public static $YES = 'Y';
     public static $NO = 'N';
@@ -20,41 +7,54 @@ class Notification extends Model{
     public function __construct()
     {
 
-        parent::__construct('notification');
-        $this->table_label = 'notification';
+        parent::__construct('message');
+        $this->table_label = 'message';
 
         $this->add_columns(
             array(
                 (new Column('id'))
-                    ->set_label('Notification ID')
+                    ->set_label('Message ID')
                     ->set_primary_key()
                     ->set_auto_increment()
                     ->set_visible_grid(false)
                     ->set_visible_form(false),
+
                 (new Column('message'))
                     ->set_label('message')
                     ->set_name_key(),
-                (new Column('user_to_id'))
+
+                (new Column('user_to'))
                     ->set_label('user to')
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
                     ->set_fk_entity(new User())
                     ->set_visible_grid(false),
+
+                (new Column('user_from'))
+                    ->set_label('user to')
+                    ->set_type(Column::$COLUMN_TYPE_SELECT)
+                    ->set_fk_entity(new User())
+                    ->set_visible_grid(false),
+
                 (new Column('controller_to'))
                     ->set_label('controller_to')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
                     ->set_visible_grid(false),
+
                 (new Column('entity_id'))
                     ->set_label('entity_id')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
                     ->set_visible_grid(false),
-                (new Column('notification_type'))
-                    ->set_label('notification_type')
+
+                (new Column('message_type'))
+                    ->set_label('message type')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
                     ->set_visible_grid(false),
+
                 (new Column('shipping_date'))
                     ->set_label('shipping_date')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
                     ->set_visible_grid(false),
+
                 (new Column('read'))
                     ->set_label('read')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)

@@ -44,9 +44,9 @@ class Group_User_Role extends Model{
 		$role_model = new Role();
         $user_model = new User();
         
-        $role_record=$role_model->findByPoperty(array('name'=>$role_name));
+        $role_record=Role::get_role_id($role_name);
         
-		$gur_record=$gur->findByPoperty(array('role_id'=>$role_record['id'], 'group_id'=>$group_id));
+		$gur_record=$gur->findByPoperty(array('role_id'=>$role_record, 'group_id'=>$group_id));
                 
         $user_to=$user_model->findByPoperty(array('id'=>$gur_record['user_id']));
 
@@ -126,6 +126,16 @@ class Group_User_Role extends Model{
         return $gur->delete($record['id']);
 
     }
+
+    public static function is_leader($group_id,$user_id){
+         $gur =(new Group)->findByPoperty(array('id'=>$group_id));
+
+         return $gur['leader_id']=== $user_id;
+    }
+
+   
+
+
 
     
         
