@@ -1,7 +1,6 @@
 <?php
 
-function generate_content($controller, $filename = null, $record = null)
-{
+function generate_content($controller, $filename = null, $record = null){
 
   $sql_groups =
     "select gur.group_id,g.name,g.group_photo,g.description
@@ -43,18 +42,45 @@ function generate_content($controller, $filename = null, $record = null)
     $pendientes='<div class="p-3 h3 text-center text-info">No posee asignaciones Pendientes</div>';
   }
 
+  $completadas = get_completed_notes($list);
+  if(empty($completadas)){
+    $completadas='<div class="p-3 h3 text-center text-info">No posee asignaciones Completadas</div>';
+  }
+
+
   $html_result = file_get_contents(__DIR__ . '/index.html');
 
   $html_result = str_replace('{{ groups_horizontal_list }}', $list_html, $html_result);
 
   $html_result = str_replace('{{ PENDINGS_NOTES }}', CoreUtils::add_new_card($pendientes, 'Pendientes'), $html_result);
 
+    $html_result = str_replace('{{ completed_notes }}', CoreUtils::add_new_card($completadas, 'Completadas'), $html_result);
+
   return $html_result;
 }
 
-function get_pending_notes($list_group)
-{
+/**
+ * metodo para obtener las notas pendientes del usuario actual 
+ * en sus gruos afiliados
+ * @param type $list_group 
+ * @return type
+ */
+function get_pending_notes($list_group){
+	return get_notes($list_group,true);
+}
 
+function get_completed_notes($list_group){
+	return get_notes($list_group);
+}
+
+/**
+ * metodo para obtener las notas del usuario actual segun los grupos en 
+ * los que este afiliado
+ * @param type $list_group 
+ * @param type $note_status 
+ * @return type
+ */
+function get_notes($list_group,$pending=false){
   $function_result = '';
   $note_model = new Note();
   $user_id = Session::get('user_id');
@@ -62,13 +88,14 @@ function get_pending_notes($list_group)
 
     $note_list = Model::get_sql_data(
       "select n.id ,n.title, n.finish_date, n.group_id , n.summary,
-                                      g.name from note n 
-                                      inner join note_type nt on (nt.id=n.note_type_id)
-                                      inner join status s on (s.id=n.status_id)
-                                      inner join `user` u on (n.performer_id=u.id)
-                                      inner join groups g on (g.id=n.group_id)
-                                      where n.performer_id=" . $user_id . " and g.id=" . $group['group_id'] . " and s.value='P' and nt.value='AS'
-                                      order by n.finish_date"
+      g.name from note n 
+      inner join note_type nt on (nt.id=n.note_type_id)
+      inner join status s on (s.id=n.status_id)
+      inner join `user` u on (n.performer_id=u.id)
+      inner join groups g on (g.id=n.group_id)
+      where n.performer_id=" . $user_id . " and g.id=" . $group['group_id'] .
+      ($pending ? " and s.value='P'":" and s.value<>'P'")." and nt.value='AS'
+      order by n.finish_date"
     );
     if (!empty($note_list)) {
       $function_result .= build_groups($group, $note_list);

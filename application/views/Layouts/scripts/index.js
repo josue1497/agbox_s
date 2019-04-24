@@ -32,6 +32,13 @@ $(document).ready(function () {
             }
         ],
     });
+
+    $('.slide-panels-one').slick({
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    });
 });
 
 $('#group_info_modal').on('show.bs.modal', function (event) {
