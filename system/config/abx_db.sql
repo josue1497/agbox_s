@@ -93,13 +93,6 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 (14, NULL, 13, 'Grupo 2', 'Grupo 2', '1553045469_(claudiaalende)12327939_1523138514680505_341742002_n.jpg', NULL),
 (15, NULL, NULL, 'Grupo 3', 'Grupo 3', '1553056938_(silla_e_mimbre)12224228_1654611478130905_689608145_n.jpg', 2),
 (16, NULL, NULL, 'Grupo 4', 'Grupo 4', '1553310933_(claudiaalende)12327939_1523138514680505_341742002_n.jpg', NULL),
-<<<<<<< HEAD
-(17, NULL, NULL, 'Grupo 5', 'Grupo 5', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg', NULL),
-(18, NULL, NULL, 'Grupo 6', 'Grupo 6', '1554833587_IMG-20190306-WA0005.jpg', 2),
-(19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg', NULL),
-(20, NULL, 14, 'New group', 'New group', '1553712932_IMG-20190306-WA0024.jpg', 1),
-(21, NULL, 13, 'Grupo de Prueba JM', 'Grupo de Prueba JM', NULL, 1);
-=======
 (17, NULL, NULL, 'Grupo 5', 'Descripcion de Grupo, un poco mas larga probando que se vea bien el modal de informacion de grupo', '1553054128_(lexypanterra)12362050_1096808836998015_2103085051_n.jpg', NULL),
 (18, NULL, NULL, 'Grupo 6', 'Grupo 6', '1554833587_IMG-20190306-WA0005.jpg', 2),
 (19, NULL, NULL, 'Grupo 24', 'Grupo 4d', '1553487426_(iori03_)12345729_862092230578521_320436592_n.jpg', NULL),
@@ -107,7 +100,6 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 (21, NULL, 13, 'Grupo de Prueba JM', 'Grupo de Prueba JM', NULL, 1),
 (22, NULL, NULL, 'Grupo Exposed', 'S', NULL, 1),
 (24, NULL, NULL, 'Test Group', 'Si', NULL, 1);
->>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
@@ -372,7 +364,6 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 (63, 'Su rol dentro del grupo New group ha cambiado', 3, 'groups/group_information', '20', 'change_role', '2019-04-10 22:08:46', 'Y'),
 (64, 'Nueva Solicitud de Afilicacion', NULL, 'affiliate/approve_affiliate', '35', 'affiliate', '2019-04-11 19:15:37', 'N'),
 (65, 'A sido invitado a participar en el grupo \"Grupo de Prueba JM\"', 5, 'affiliate/approve_request', '36', 'request_membership', '2019-04-11 19:24:23', 'Y'),
-<<<<<<< HEAD
 (66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y');
 
 
@@ -390,11 +381,6 @@ CREATE TABLE `param` (
   PRIMARY KEY (`param_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla de parametros' AUTO_INCREMENT=1 ;
 
-=======
-(66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y'),
-(67, 'A sido invitado a participar en el grupo \"Grupo Exposed\"', 1, 'affiliate/approve_request', '37', 'request_membership', '2019-04-17 22:39:24', 'Y'),
-(68, 'Administrador es el Nuevo Miembro \n                                        del Grupo \"Grupo Exposed\"', 1, 'groups/group_information', '22', 'new_member', '2019-04-17 22:39:32', 'Y');
->>>>>>> b68e3bffa532f3c334c61717db6939a7a1af8f32
 
 -- --------------------------------------------------------
 
