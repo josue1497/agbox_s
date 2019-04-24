@@ -29,7 +29,7 @@
 
 		$c = new Controller();
               $c->init($user_model);
-              $leader_user=Group_User_Role::get_user_by_role('Lider',$this_group['id']);
+              $leader_user=Group_User_Role::get_user_by_role('L',$this_group['id']);
               $is_leader=$leader_user['id']===Session::get('user_id');
 
              

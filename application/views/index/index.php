@@ -39,6 +39,9 @@ function generate_content($controller, $filename = null, $record = null)
 
 
   $pendientes = get_pending_notes($list);
+  if(empty($pendientes)){
+    $pendientes='<div class="p-3 h3 text-center text-info">No posee asignaciones Pendientes</div>';
+  }
 
   $html_result = file_get_contents(__DIR__ . '/index.html');
 
@@ -69,6 +72,8 @@ function get_pending_notes($list_group)
     );
     if (!empty($note_list)) {
       $function_result .= build_groups($group, $note_list);
+    }else{
+
     }
   }
 
@@ -82,14 +87,14 @@ function build_groups($group, $list)
     <div class="row">
       <div class="col-6 d-flex justify-content-center">
         <a href="' . SERVER_DIR . 'groups/group_information/' . $group['group_id'] . '" class="text-decoration-none">
-          <h3 class="text-mutted ml-2" id="' . $group['group_id'] . '">' . $group['name'] . '</h3>
+          <h3 class="text-mutted ml-2">' . $group['name'] . '</h3>
         </a>
       </div>
     </div>
     <div class="row">
       <div class="col-12 d-flex flex-column">
-        <ul class="list-group">
-         ' . build_line($list) . '
+        <ul class="list-group"  id="' . $group['group_id'] . '">
+         ' . build_line($list,$group['group_id']) . '
         </ul>
       </div>
     </div>
@@ -98,16 +103,17 @@ function build_groups($group, $list)
   return $result;
 }
 
-function build_line($list_lines)
+function build_line($list_lines, $group_id)
 {
   $result = '';
   
   setlocale(LC_ALL,"es_ES");
   foreach ($list_lines as $line) {
-    $result .= '<li class="list-group-item list-group-item-action border-0">
+    $result .= '<li class="list-group-item list-group-item-action border-0" id="'.$line['id'].'">
                 <div class="d-flex ">
                     <div class="p-2" data-toggle="modal" data-target="#note-info-modal" data-note="'. $line['id'].'" 
-                    data-title="'. $line['title'].'"  data-summary="'. $line['summary'].'" >' . $line['title'] . '</div>
+                    data-title="'. $line['title'].'"  data-summary="'. $line['summary'].'"
+                    data-group="'. $group_id.'" >' . $line['title'] . '</div>
                     <div class="p-2"><small><b>' . strftime ( "%d %b %g" , strtotime($line['finish_date'])) . '</b></small></div>
                     <div class="ml-auto p-2">
                         <div class="d-flex flex-row">
