@@ -75,6 +75,30 @@ $('#group_info_modal').on('show.bs.modal', function (event) {
     modal.find('#group-description').text(group_desc)
 });
 
+$('#completed-note-info-modal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var note_id = button.data('note');
+    var title = button.data('title');
+    var summary = button.data('summary');
+    var group = button.data('group');
+    $('#comment_content').html("");
+
+    $.post("{{ COMMMENT_DATA }}", { 'note_id': note_id }, function (data, status) {
+        var members = data;
+
+        $('#comment_content').html(members);
+
+    })
+        .fail(function () {
+            alert("Ha ocurrido un Error.");
+        });
+   
+    var modal = $(this);
+    modal.find('.modal-title').text(title);
+    modal.find('#summary').text(summary);
+    modal.find('#assingment_id').val(note_id);
+});
+
 $('#note-info-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var note_id = button.data('note');

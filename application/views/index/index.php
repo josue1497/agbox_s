@@ -136,7 +136,9 @@ function build_line($list_lines, $group_id,$pending=false){
   foreach ($list_lines as $line) {
     $result .= '<li class="list-group-item list-group-item-action border-0" id="'.$line['id'].'">
                 <div class="d-flex ">
-                    <div class="p-2" data-toggle="modal" data-target="#note-info-modal" data-note="'. $line['id'].'" 
+                    <div class="p-2" data-toggle="modal" data-target="#'.
+                    ($pending?'':'completed-').
+                    'note-info-modal" data-note="'. $line['id'].'" 
                     data-title="'. $line['title'].'"  data-summary="'. $line['summary'].'"
                     data-group="'. $group_id.'" >' . $line['title'] . '</div>
                     <div class="p-2"><small><b>' . strftime ( "%d %b %g" , strtotime($line['finish_date'])) . '</b></small></div>
