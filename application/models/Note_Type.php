@@ -40,19 +40,19 @@ class Note_Type extends Model{
 	}
 
 	public static function get_assignment_status(){
-		return get_type_id('AS');
+		return Note_type::get_type_id('AS');
 	}
 
 	public static function get_commitment_status(){
-		return get_type_id('CO');
+		return Note_type::get_type_id('CO');
 	}
 
 	public static function get_suggested_point_status(){
-		return get_type_id('SP');
+		return Note_type::get_type_id('SP');
 	}
 
 	public static function get_agenda_point_status(){
-		return get_type_id('AP');
+		return Note_type::get_type_id('AP');
 	}
 }
 ?>

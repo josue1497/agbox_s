@@ -13,9 +13,13 @@ class indexController extends Controller{
 
 		$this->model->table_label='Dashboard';
 
-		$js=$html_result = file_get_contents(JS_DIR . 'index.js');
+		$js= file_get_contents(JS_DIR . 'index.js');
 
 		$js = str_replace('{{ URI_DATA }}',SERVER_DIR."groups/get_group_members",$js);
+		$js = str_replace('{{ SEND_COMMENT }}',SERVER_DIR."note_comment/create",$js);
+		$js = str_replace('{{ COMMMENT_DATA }}',SERVER_DIR."note_comment/get_comments",$js);
+
+		
 
 		$this->view->add_script_js($js);
 

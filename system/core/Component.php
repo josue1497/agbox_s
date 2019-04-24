@@ -388,6 +388,10 @@
 			return $newStr.$replace;
 		}
 
+		public static function set_tooltip_info($title){
+			return ' data-toggle="tooltip" data-placement="top" title="'.$title.'" data-delay=\'{"show":"500", "hide":"1000"}\'';
+		}
+
 		
 	}
 ?>
