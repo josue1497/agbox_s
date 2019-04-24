@@ -98,7 +98,7 @@ function get_notes($list_group,$pending=false){
       order by n.finish_date"
     );
     if (!empty($note_list)) {
-      $function_result .= build_groups($group, $note_list);
+      $function_result .= build_groups($group, $note_list,$pending);
     }else{
 
     }
@@ -107,8 +107,7 @@ function get_notes($list_group,$pending=false){
   return $function_result;
 }
 
-function build_groups($group, $list)
-{
+function build_groups($group, $list, $pending=false){
   $result = '<div class="row my-2">
   <div class="col-12">
     <div class="row">
@@ -121,7 +120,7 @@ function build_groups($group, $list)
     <div class="row">
       <div class="col-12 d-flex flex-column">
         <ul class="list-group"  id="' . $group['group_id'] . '">
-         ' . build_line($list,$group['group_id']) . '
+         ' . build_line($list,$group['group_id'],$pending) . '
         </ul>
       </div>
     </div>
@@ -130,8 +129,7 @@ function build_groups($group, $list)
   return $result;
 }
 
-function build_line($list_lines, $group_id)
-{
+function build_line($list_lines, $group_id,$pending=false){
   $result = '';
   
   setlocale(LC_ALL,"es_ES");
@@ -145,11 +143,11 @@ function build_line($list_lines, $group_id)
                     <div class="ml-auto p-2">
                         <div class="d-flex flex-row">
                             <div class="mx-2" >
-                              <a  data-toggle="modal" data-target="#add-comment-modal" data-note="'. $line['id'].'" 
+                              '.($pending?'<a  data-toggle="modal" data-target="#add-comment-modal" data-note="'. $line['id'].'" 
                                    data-title="'. $line['title'].'" data-author="'.Session::get('user_id').'" 
                                   '.Component::set_tooltip_info("Añadir comentario de Avance").'>
                                   <i class="fas fa-comment-alt-edit fa-lg text-secondary"></i>
-                              </a>
+                              </a>':'').'
                             </div>
                         </div>
                     </div>
