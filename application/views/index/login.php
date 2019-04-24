@@ -23,7 +23,7 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">welcome_msg_trl</h1>
+                    <h1 class="h4 text-gray-900 mb-4">¡Bienvenido!</h1>
                   </div>
                   <form class="user" action="#" method="post" id="form_log_in">
 
@@ -32,23 +32,23 @@
 				  <input type="hidden" name="login_user" value="1"/>
                     <div class="form-group">
 					<!--type email-->
-                      <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="enter_email_msg_trl"  name="email">
+                      <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Correo Electronico"  name="email">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="enter_password_msg_trl"
+                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña"
 					  name="password">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
                         	<input type="checkbox" class="custom-control-input" id="customCheck">
-                        <label class="custom-control-label" for="customCheck"> enter_rememberme_msg_trl</label>
+                        <label class="custom-control-label" for="customCheck"> Recuerdame</label>
                       </div>
                     </div>
 					
-					<input type="submit" class="btn btn-primary btn-user btn-block" value="login_button_msg_trl" name="login">
+					<input type="submit" class="btn btn-primary btn-user btn-block" value="Iniciar Sesion" name="login">
                     <hr>
                   <div class="text-center">
-                    <a class="small" href="#">forgot_password_trl</a>
+                    <a class="small" href="#">¿Olvido su Contraseña?</a>
                   </div>
 
                 </div>

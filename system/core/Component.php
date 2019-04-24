@@ -28,8 +28,8 @@
 		}
 		
 		public static function base_field($type=null,$name,$value=null,$label=null,$placeholder=null,$etc=null){
-			return '<div class="form-group">'.
-			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
+			return '<div class="form-group my-1">'.
+			(!empty($label)?('<label for="'.$name.'"><small>'.$label.'</small></label>'):'').
 			'<input type="'.(!empty($type)?$type:'text').'" class="form-control" '.
 			'id="'.$name.'" '.
 			(!empty($placeholder)?('placeholder="'.$placeholder.'"'):'').
@@ -41,8 +41,8 @@
 
 		public static function file_upload($name,$value=null,$label=null,$file_accept=null,$etc=null){
 			return 
-			'<div class="form-group">'.
-			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
+			'<div class="form-group my-1">'.
+			(!empty($label)?('<label for="'.$name.'"><small>'.$label.'</small></label>'):'').
 			'<input type="file"  class="form-control" '.
 			'id="'.$name.'" '.
 			(!empty($file_accept)?('accept="'.$file_accept.'"'):'').
@@ -54,8 +54,8 @@
 
 		public static function image_upload($name,$value=null,$label=null,$file_accept=null,$etc=null){
 			return 
-			'<div class="form-group">'.
-			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
+			'<div class="form-group my-1">'.
+			(!empty($label)?('<label for="'.$name.'"><small>'.$label.'</small></label>'):'').
 			'<div class="d-flex flex-column profile-img p-2 my-2">
 				 <img id="'.$name.'_photo" class=" img-fluid" src="'.(!empty($value)?(''.Component::img_to_base64(UPLOADS_DIR.$value).'"'):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"').
                      'alt="" />'.
@@ -106,8 +106,8 @@
 		}
 		
 		public static function text_area($name,$value=null,$label=null,$placeholder=null,$etc=null){
-			return '<div class="form-group">'.
-			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
+			return '<div class="form-group my-1">'.
+			(!empty($label)?('<label for="'.$name.'"><small>'.$label.'</small></label>'):'').
 			'<textarea class="form-control" '.
 			'id="'.$name.'" '.
 			(!empty($placeholder)?('placeholder="'.$placeholder.'"'):'').
@@ -144,8 +144,8 @@
 		}
 		
 		public static function icon_picker($name,$value=null,$label=null){
-			return '<div class="form-group">'.
-				(!empty($label)?('<label for="'.$name.'">'.$label.'</label><br/>'):'').
+			return '<div class="form-group my-1">'.
+				(!empty($label)?('<label for="'.$name.'"><small>'.$label.'</small></label><br/>'):'').
 				'<button name="'.$name.'" class="btn btn-secondary iconpicker dropdown-toggle" role="iconpicker" data-original-title="" title="" aria-describedby="popover989682">'.
 				'<i class="'.(is_array($value)?(isset($value[$name])?$value[$name]:'empty'):$value).'"></i>'.
 				'<input name="'.$name.'" type="hidden" value="'.(is_array($value)?(isset($value[$name])?$value[$name]:'empty'):$value).'">'.
@@ -155,8 +155,8 @@
 		}
 		
 		public static function select_field($name,$value=null,$label=null,$data=null,$etc=null){
-			return '<div class="form-group">'.
-			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
+			return '<div class="form-group  my-1">'.
+			(!empty($label)?('<label for="'.$name.'"><small>'.$label.'</small></label>'):'').
 			'<select class="form-control select2" id="'.$name.'" name="'.$name.'" '.$etc.' >'.
 			'<option value="0" '.(0==$value?'selected':'').'>Elija Opcion</option>'.
 			Component::create_options($data,(is_array($value)?(isset($value[$name])?$value[$name]:''):$value)).

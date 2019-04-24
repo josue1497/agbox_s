@@ -225,6 +225,13 @@
 					'{{ NOTIFICATION_DIV }}',
 					CoreUtils::get_user_notification(),
 					$html_view);
+
+			$html_view = str_replace(
+						'{{ URL_NOTIFICATION }}',
+						SERVER_DIR.'notification/show_all',
+						$html_view);
+
+
 			
 
 				
@@ -342,7 +349,16 @@
 		}
 		function action_create($obj,$post=null,$auto_build=false){
 			$this->init($obj);
+
 			$d["record"]['form_action'] = 'Agregar';
+
+			if(isset($post)){
+				/*foreach($post as $key=>$value){
+					$d["record"][$key]=$value;
+				}*/
+				$d["record"]=array_merge($d["record"], $post);
+			}
+
 			if (isset($post[$this->model->name_fields[0]])){
 				if ($this->model->create($post)){
 					header("Location: " . WEBROOT .  $this->model->table_name."/index");

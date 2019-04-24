@@ -100,6 +100,30 @@ class Model
 		return $req->fetch(PDO::FETCH_ASSOC);
 	}
 
+	/**
+		* metodo para buscar registros segun algun atributo(array (column_name => value, ...))
+		*/
+		public function find_by_subquery($properties, $all=false)
+		{
+			if (empty($properties)) {
+				return null;
+			}
+	
+			$sql = "Select * From " . $this->table_name . " Where ";
+			$keys = array_keys($properties);
+			$first = true;
+			foreach ($keys as $key) {
+				$sql .= ($first == false ? " and " : "") . $key . " " . $properties[$key] . " ";
+				$first = false;
+			}
+			$req = Database::getBdd()->prepare($sql);
+			$req->execute();
+			if($all){
+				return $req->fetchAll(PDO::FETCH_ASSOC);
+			}
+			return $req->fetch(PDO::FETCH_ASSOC);
+		}
+
 	public function get_by_property($properties, $all=false)
 	{
 		return $this->findByPoperty($properties,$all);
@@ -193,6 +217,21 @@ class Model
 			);
 		return $result;
 	}
+
+	/**
+	* metodo para obtener registros y mapearlos para combo generico
+	*/
+		public function get_select_data_with_params(array $params = null)
+		{
+			$data = $this->find_by_subquery($params, true);
+			$result = array();
+			foreach ($data as $row)
+				$result[] = array(
+					"id" => $row[$this->id_field],
+					"name" => $this->map_name_value($row)
+				);
+			return $result;
+		}
 
 	/* metodo par obtener los valores del registro a mostrar en los select */
 	public function map_name_value($row)
@@ -399,6 +438,26 @@ class Model
 			for( $i = 0; $i< count($this->table_fields) ; $i++){
 				if($this->table_fields[$i]->get_name() ==$column){
 					   $this->table_fields[$i]->set_visible_form(false);
+				}
+		 }
+		}
+	}
+
+	public function add_options_html($column=null, $options=""){
+		if($column!=null){
+			for( $i = 0; $i< count($this->table_fields) ; $i++){
+				if($this->table_fields[$i]->get_name() ==$column){
+					   $this->table_fields[$i]->set_field_html($options);
+				}
+		 }
+		}
+	}
+
+	public function set_fields_values($column=null, $select_data){
+		if($column!=null){
+			for( $i = 0; $i< count($this->table_fields) ; $i++){
+				if($this->table_fields[$i]->get_name() ==$column){
+					   $this->table_fields[$i]->set_values($select_data);
 				}
 		 }
 		}

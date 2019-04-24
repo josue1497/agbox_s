@@ -27,6 +27,7 @@ class groupsController  extends Controller{
     */
 	function create(){
 		$this->update_user_role_group();
+		// $_POST['onsubmit']='return validateFields()';
 		$this->action_create(new Group(),$_POST,true);
 	}
 	/**

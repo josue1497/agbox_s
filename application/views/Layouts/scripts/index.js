@@ -32,7 +32,7 @@ $(document).ready(function () {
             }
         ],
     });
-});
+
 
 $('#group_info_modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
@@ -42,20 +42,13 @@ $('#group_info_modal').on('show.bs.modal', function (event) {
 
     $.post("{{ URI_DATA }}", { 'group_id': group_id }, function (data, status) {
         var members = '';
-        var leader = '';
         $.each(data, function (point, item) {
-            if ('Lider' !== item.role_name) {
                 members += "<li class=\"list-group-item\"><span>" + item.user_name + "</span>&nbsp;-&nbsp;<span>" + item.role_name + "</span></li>"
-            } else {
-                leader += "<li class=\"list-group-item\">" + item.user_name + "<\/li>"
-            }
 
-
-            console.log(item);
         });
 
         $('#member-list').html(members);
-        $('#leader-list').html(leader);
+        // $('#leader-list').html(leader);
 
         leader = '';
         members = '';
@@ -162,4 +155,6 @@ $('#add-comment-modal').on('show.bs.modal', function (event) {
     modal.find('#show-note-title').text(title);
     modal.find('#note_id').val(note_id);
     modal.find('#author_id').val(user_id);
+});
+
 });

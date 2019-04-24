@@ -68,7 +68,7 @@ class affiliateController extends Controller{
                                    <h5 class=\"card-title text-center\">{{name}}</h5>
                                    <hr />
                                    <div class=\"d-flex justify-content-center\">
-                                           <button v-bind:m_id=\"id\" class=\"btn btn-primary\" v-on:click=\"sendAffiliationNotification(id,user);affiliated(id);\">Solicitar Afiliacion</button>
+                                           <button v-bind:m_id=\"id\" class=\"btn btn-primary\" v-on:click=\"sendAffiliationNotification(id,user);affiliated(id);\">Solicitar Afiliación</button>
                                    </div>
                                 </div>
                             </div>`,
@@ -133,7 +133,7 @@ var app = new Vue({
 
         $this->view->add_script_js($js);
 
-        $this->model->table_label = 'Afiliacion a Grupos';
+        $this->model->table_label = 'Afiliación a Grupos';
         $this->render("items");
 
     }
@@ -285,6 +285,15 @@ var app = new Vue({
             }
       }
 
+    }
+
+    public function get_user_affiliate(){
+
+      $user_record = Model::get_sql_data("select u.id, CONCAT(u.names,' ',u.lastnames) text from `user` u where id in (select a.user_id from 
+                                    affiliate a inner join groups g on (a.group_id=g.id) 
+                                    where a.group_id=? and a.approved='Yes')", array('group_id'=>$_POST['group_id']));
+
+      echo json_encode($user_record);
     }
 
 }

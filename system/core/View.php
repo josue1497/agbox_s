@@ -46,7 +46,7 @@ class View{
 		 * @return type
 		 */
 	public function auto_build_form($form_content, $data){
-		return "<form method='post' enctype='multipart/form-data' action='#' " . (isset($data['onsubmit']) ? " onsubmit='" . $data['onsubmit'] . "' " : "") .
+		return "<form method='post' enctype='multipart/form-data' action='#' " . (isset($data['onsubmit']) ? " onsubmit='" . $data['onsubmit'] . "' " : "onsubmit=\"return validateFields()\"") .
 			" >" .
 			$form_content .
 			"</form>";
