@@ -356,9 +356,23 @@ INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `ent
 (63, 'Su rol dentro del grupo New group ha cambiado', 3, 'groups/group_information', '20', 'change_role', '2019-04-10 22:08:46', 'Y'),
 (64, 'Nueva Solicitud de Afilicacion', NULL, 'affiliate/approve_affiliate', '35', 'affiliate', '2019-04-11 19:15:37', 'N'),
 (65, 'A sido invitado a participar en el grupo \"Grupo de Prueba JM\"', 5, 'affiliate/approve_request', '36', 'request_membership', '2019-04-11 19:24:23', 'Y'),
-(66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y'),
-(67, 'A sido invitado a participar en el grupo \"Grupo Exposed\"', 1, 'affiliate/approve_request', '37', 'request_membership', '2019-04-17 22:39:24', 'Y'),
-(68, 'Administrador es el Nuevo Miembro \n                                        del Grupo \"Grupo Exposed\"', 1, 'groups/group_information', '22', 'new_member', '2019-04-17 22:39:32', 'Y');
+(66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y');
+
+
+-- ---------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `param`
+-- 
+DROP TABLE IF EXISTS param;
+CREATE TABLE `param` (
+  `param_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`param_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla de parametros' AUTO_INCREMENT=1 ;
+
 
 -- --------------------------------------------------------
 
