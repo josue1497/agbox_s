@@ -8,6 +8,10 @@ class Notification extends Model{
     public static $CHANGE_ROLE = 'change_role';
     public static $REQUEST_MEMBERSHIP = 'request_membership';
     public static $NEW_MEMBER = 'new_member';
+    public static $NEW_ASSIGNMENT = 'new_assignment';
+    public static $ASSINGMENT_COMPLETE = 'assingment_complete';
+    public static $ASSINGMENT_REASING = 'assingment_reasing';
+    
 
  
     public static $YES = 'Y';

@@ -28,7 +28,7 @@ function generate_content($controller, $filename = null, $record = null)
     $html_result = str_replace('{{ FORM }}', CoreUtils::add_new_card($form_card, 'Punto Sugerido'), $html_result);
     // $html_result = str_replace('<a id="link_cancel" href="/abx_app/note/index/" class="m-1 btn btn-secondary ">
     //                 <i class="fas fa-times-circle "></i><span> Cancelar </span></a>','', $html_result);
-	$html_result=str_replace('{{ APPROVE_USERS }}',CoreUtils::add_new_card($select_user, 'Aprovadores'),$html_result);
+	$html_result=str_replace('{{ APPROVE_USERS }}',CoreUtils::add_new_card($select_user, 'Aprobadores'),$html_result);
 
     return $html_result;
 }
@@ -39,7 +39,7 @@ function generate_select_user(){
     $users=$user_model->showAllRecords();
 
     $html='<div class="form-group">
-    <select multiple required name="user_approved_id" id="user_approved_id" class="form-control select2">';
+    <select multiple required name="user_approved_id[]" id="user_approved_id" class="form-control select2">';
     foreach($users as $user){
         $html.=' <option value="'.$user['id'].'">'.$user['names'].' '.$user['lastnames'].'</option>';
     }

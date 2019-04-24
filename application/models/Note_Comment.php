@@ -17,13 +17,13 @@ class Note_Comment extends Model{
 				(new Column('comment'))
                 ->set_label('Comentario')
                 ->set_type(Column::$COLUMN_TYPE_TEXT)
-                ->set_name_key()
-                ->set_unike_key(),
+                ->set_name_key(),
 				
 				(new Column('date_comment'))
 				->set_label('Fecha del Comentario')
 				->set_type(Column::$COLUMN_TYPE_DATE)
-				->set_visible_grid(false),
+				->set_visible_grid(false)
+				->set_unike_key(),
 
 				(new Column('note_id'))
 				->set_label('Nota')
@@ -41,6 +41,11 @@ class Note_Comment extends Model{
 		);
 
 		$this->init();
+	}
+
+	public static function create_comment($note_id, $user_id, $message){
+		$model = new Note_Comment();
+		return $model->create(array('note_id'=>$note_id, 'author_id'=>$user_id, 'comment'=>$message));
 	}
 
 }

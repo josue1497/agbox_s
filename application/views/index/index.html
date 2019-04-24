@@ -67,6 +67,7 @@
 		<div class="modal-content">
 			<div class="modal-header bg-primary">
 				<h5 class="modal-title text-white" id="note-title">New message</h5>
+				<input type="hidden" name="assingment_id" id="assingment_id" value="">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span class="text-white" aria-hidden="true">&times;</span>
 				</button>
@@ -87,9 +88,9 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-success" id="reasing">Completar</button>
-				<button type="button" class="btn btn-danger" id="reasing">Reasignar</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-success" id="complete-button">Completar</button>
+				<button type="button" class="btn btn-danger" id="reasing-button">Reasignar</button>
 			</div>
 		</div>
 	</div>
@@ -126,33 +127,3 @@
 	</div>
 </div>
 
-
-<div class="modal fade" id="reassing-note" tabindex="-1" role="dialog"
-	aria-labelledby="reassing-note" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header bg-primary">
-				<h5 class="modal-title text-white" id="note-title">Añadir Comentario</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span class="text-white" aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form action="POST" onsubmit="return false;">
-					<div class="form-group">
-						<label for="recipient-name" class="col-form-label">Recipient:</label>
-						<input type="text" class="form-control" id="recipient-name">
-					</div>
-					<div class="form-group">
-						<label for="message-text" class="col-form-label">Message:</label>
-						<textarea class="form-control" id="message-text"></textarea>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Send message</button>
-			</div>
-		</div>
-	</div>
-</div>

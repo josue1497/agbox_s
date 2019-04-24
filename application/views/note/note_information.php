@@ -8,9 +8,9 @@ function generate_content($controller, $filename = null, $record = null)
     $note_card=generate_note_card($this_note);
     $approved_card=generate_note_approved_table($this_note['id']);
 
-    $html_result = str_replace('{{ NOTE_INFO }}', CoreUtils::add_new_card($note_card, 'Note information '), $html_result);
+    $html_result = str_replace('{{ NOTE_INFO }}', CoreUtils::add_new_card($note_card, 'Información'), $html_result);
 	// $html_result = str_replace('profile-img', 'profile-img-info d-flex justify-content-center', $html_result);
-	$html_result = str_replace('{{ APPROVE_USERS }}', CoreUtils::add_new_card($approved_card, 'Miembros Aprobadores'), $html_result);
+	$html_result = str_replace('{{ APPROVE_USERS }}', CoreUtils::add_new_card($approved_card, 'Aprobadores'), $html_result);
 	// $html_result=str_replace('{{ APPROVE_BUTTON }}',generate_button_approve($this_note['id'], Session::get('user_id')),$html_result);
 
     return $html_result;
