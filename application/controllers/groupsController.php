@@ -139,6 +139,16 @@ class groupsController  extends Controller{
   	echo json_encode($group_record,JSON_PRETTY_PRINT);
 	}
 
+	public function list_groups(){
+		$this->init(new Group());
+
+		$this->init($this->model);
+		$d["record"] = $this->model->get_select_data_with_params(array('id'=>'in (select a.group_id from affiliate a inner join `user` u on (u.id=a.user_id) where a.user_id='.Session::get('user_id').' and approved=\'Yes\')')); 
+		$this->set($d);
+
+		$this->render('list_groups');
+	}
+
 
 }
 

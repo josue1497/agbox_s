@@ -59,7 +59,7 @@ class affiliateController extends Controller{
                     'name',
                     'user',
                     'id'],
-            template : `<div class=\"col-md-3 p-3 m-2\">
+            template : `<div class=\"col-md-2 p-2 m-2\">
                             <div class=\"card rounded \" style=\"width: 18rem;\">
                             <div class=\"d-flex justify-content-center\">
                                 <img class=\"card-img-top img-fluid image img-group\"  alt=\"Card image cap\"  v-bind:id=\"id\"/>

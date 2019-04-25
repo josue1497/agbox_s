@@ -412,7 +412,7 @@
 				<div class="mr-3">
 				</div>
 				<div>
-				  <span class="font-weight-bold">there is not alerts!</span>
+				  <span class="font-weight-bold">No tiene notificaciones</span>
 				</div>
 			  </a>';
 		}
@@ -444,7 +444,18 @@
 				case Notification::$DESAFFILIATE_USER:
 						$html.='<i class="fas fa-user-minus text-white"></i>';
 						break;
+				case Notification::$NEW_ASSIGNMENT:
+						$html.='<i class="fas fa-tasks text-white"></i>';
+						break;
+				case Notification::$ASSINGMENT_COMPLETE:
+						$html.='<i class="fas fa-badge-check text-white"></i>';
+						break;
+				case Notification::$ASSINGMENT_REASING:
+						$html.='<i class="fas fa-hand-holding-box text-white"></i>';
+						break;
 
+
+						
 			}
 
 			$html.='</div>
