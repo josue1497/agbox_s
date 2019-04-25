@@ -20,7 +20,8 @@ function generate_content($controller, $filename = null, $record = null)
               <div class="d-flex flex-column">
               <div class="d-flex justify-content-center">
                 <div class="d-flex align-items-center">
-                  <i class="fas fa-2x text-gray-300"><img class="img-profile rounded-circle img-profile-user" src="' . $photo . '"></i>&nbsp;&nbsp;
+                  <a class="text-decoration-none" href="#' . $map['group_id'] . '">
+                     <i class="fas fa-2x text-gray-300"><img class="img-profile rounded-circle img-profile-user" src="' . $photo . '"></i>&nbsp;&nbsp;</a>
                   <a href="#" data-toggle="modal" data-target="#group_info_modal" data-group-name="' . $map['name'] . '"
                   data-group-id="' . $map['group_id'] . '" data-group-desc="' . $map['description'] . '"><i class="fas fa-ellipsis-v text-secondary"></i></a>
                 </div>
@@ -47,7 +48,7 @@ function generate_content($controller, $filename = null, $record = null)
 
   $html_result = str_replace('{{ groups_horizontal_list }}', $list_html, $html_result);
 
-  $html_result = str_replace('{{ PENDINGS_NOTES }}', CoreUtils::add_new_card($pendientes, 'Pendientes'), $html_result);
+  $html_result = str_replace('{{ PENDINGS_NOTES }}', CoreUtils::add_new_card($pendientes, 'Pendientes', "8"), $html_result);
 
   return $html_result;
 }

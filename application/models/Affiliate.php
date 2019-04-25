@@ -18,21 +18,21 @@ class Affiliate extends Model
                     ->set_visible_form(false),
 
                 (new Column('group_id'))
-                    ->set_label('Group')
+                    ->set_label('Grupo')
                     ->set_name_key()
                     ->set_unike_key(true)
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
                     ->set_fk_entity(new Group()),
 
                 (new Column('user_id'))
-                    ->set_label('User')
+                    ->set_label('Usuario')
                     ->set_name_key()
                     ->set_unike_key(true)
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
                     ->set_fk_entity(new User()),
 
                 (new Column('approved'))
-                    ->set_label('Approved')
+                    ->set_label('Aprobado')
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
 					->set_values(array('Yes','No')),
             )

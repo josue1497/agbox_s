@@ -29,5 +29,20 @@ function toReadMessage(uri_to, uri_read, message_id){
             location.href =uri_to;
         }).fail(function() {
             alert( "error" );
-        }) ;   
+        }) ;  
+         
+}
+
+function validateFields(){
+    result = true;
+    $('.form-control').each(function (index,item) {
+        if($(this).attr('is_required')!==undefined &&$(this).attr('is_required').length>0){
+            if($(this).val()==="0" || $(this).val()===""){
+                $(this).parent().append("<div class=\"alert alert-danger mt-2\" role=\"alert\">"+
+                "Este campo es requerido</div>")
+                result=false;
+            }
+        }
+    });
+    return result;
 }

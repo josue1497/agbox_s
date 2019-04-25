@@ -18,21 +18,22 @@ class Group extends Model
                     ->set_visible_form(false),
                      
                 (new Column('group_photo'))
-                    ->set_label('Group Photo')
+                    ->set_label('Imagen de grupo')
                     ->set_type(Column::$COLUMN_TYPE_PHOTO)
                     ->set_file_type("image/png, .jpeg, .jpg, image/gif")
                     ->set_visible_grid(false),
 
                 (new Column('name'))
-                    ->set_label('Group Name')
+                    ->set_label('Nombre de grupo')
                     ->set_name_key()
                     ->set_unike_key()
                     ->set_type(Column::$COLUMN_TYPE_TEXT),
 
                 (new Column('description'))
-                    ->set_label('Group Description')
+                    ->set_label('Propósito del grupo')
                     ->set_type(Column::$COLUMN_TYPE_TEXTAREA)
-                    ->set_visible_grid(false),
+                    ->set_visible_grid(false)
+                    ->set_field_html('is_required="true" ') ,
       
                 (new Column('parent_group_id'))
                     ->set_label('Parent Group')
@@ -44,7 +45,9 @@ class Group extends Model
                     ->set_label('Lider del grupo')
                     ->set_visible_grid(false)
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
-                    ->set_values((new User())->get_select_data()) 
+                    ->set_values((new User())->get_select_data())
+                    ->set_field_html('is_required="true" ') 
+                    
             )
         );
 
