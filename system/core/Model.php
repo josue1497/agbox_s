@@ -255,9 +255,12 @@ class Model
 		}
 
 		$db_params = array();
-		foreach ($this->unike_keys as $key) {
-			$db_params[$key] = $params[$key];
+		if(isset($this->unike_keys)){
+			foreach ($this->unike_keys as $key) {
+				$db_params[$key] = $params[$key];
+			}
 		}
+		
 
 		$result = $this->findByPoperty($db_params);
 

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 -- phpMyAdmin SQL Dump
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
@@ -50,23 +48,12 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `affiliate`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `affiliate`;
-CREATE TABLE IF NOT EXISTS `affiliate` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `approved` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
-=======
 CREATE TABLE `affiliate` (
   `id` int(11) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `approved` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `affiliate`
@@ -102,28 +89,16 @@ INSERT INTO `affiliate` (`id`, `group_id`, `user_id`, `approved`) VALUES
 --
 -- Estructura de tabla para la tabla `groups`
 --
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `groups`;
-CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-=======
 
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
   `domain_id` int(11) DEFAULT NULL,
   `parent_group_id` int(11) DEFAULT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `group_photo` varchar(256) DEFAULT NULL,
-<<<<<<< HEAD
-  `leader_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
-=======
   `leader_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for group''s information';
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `groups`
@@ -148,23 +123,12 @@ INSERT INTO `groups` (`id`, `domain_id`, `parent_group_id`, `name`, `description
 -- Estructura de tabla para la tabla `group_user_role`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `group_user_role`;
-CREATE TABLE IF NOT EXISTS `group_user_role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `role_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
-=======
 CREATE TABLE `group_user_role` (
   `id` int(11) NOT NULL,
   `group_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `group_user_role`
@@ -203,27 +167,15 @@ INSERT INTO `group_user_role` (`id`, `group_id`, `user_id`, `role_id`) VALUES
 -- Estructura de tabla para la tabla `menu`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `menu`;
-CREATE TABLE IF NOT EXISTS `menu` (
-  `menu_id` int(5) NOT NULL AUTO_INCREMENT,
-=======
 CREATE TABLE `menu` (
   `menu_id` int(5) NOT NULL,
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
   `title` varchar(256) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `icon` varchar(256) DEFAULT NULL,
   `menu_order` int(5) DEFAULT NULL,
   `url` varchar(256) DEFAULT NULL,
-<<<<<<< HEAD
-  `parent_menu_id` int(5) DEFAULT '0',
-  PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-=======
   `parent_menu_id` int(5) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `menu`
@@ -252,14 +204,6 @@ INSERT INTO `menu` (`menu_id`, `title`, `description`, `icon`, `menu_order`, `ur
 -- --------------------------------------------------------
 
 --
-<<<<<<< HEAD
--- Estructura de tabla para la tabla `note`
---
-
-DROP TABLE IF EXISTS `note`;
-CREATE TABLE IF NOT EXISTS `note` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-=======
 -- Estructura de tabla para la tabla `message`
 --
 
@@ -283,7 +227,6 @@ CREATE TABLE `message` (
 
 CREATE TABLE `note` (
   `id` int(11) NOT NULL,
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(140) DEFAULT NULL,
   `note_type_id` int(11) DEFAULT NULL,
@@ -294,14 +237,8 @@ CREATE TABLE `note` (
   `finish_date` date DEFAULT NULL,
   `status_id` int(11) DEFAULT NULL,
   `date_approved` date DEFAULT NULL,
-<<<<<<< HEAD
-  `performer_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-=======
   `performer_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `note`
@@ -310,12 +247,8 @@ CREATE TABLE `note` (
 INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `group_id`, `summary`, `init_date`, `finish_date`, `status_id`, `date_approved`, `performer_id`) VALUES
 (1, 1, 'Group', 1, 2, 13, 'Prueba de Sumario', '2019-03-14', '2019-03-05', 1, NULL, NULL),
 (2, 2, 'Crud Test', 1, 1, NULL, 'A', '2019-03-22', '2019-03-29', 1, '2019-03-14', NULL),
-<<<<<<< HEAD
-(3, 1, 'Comentario de Prueba', 3, 1, 18, 'Esto es una prueba de guardado de un comentario', NULL, NULL, 1, NULL, NULL);
-=======
 (3, 1, 'Comentario de Prueba', 3, 1, 18, 'Esto es una prueba de guardado de un comentario', NULL, NULL, 1, NULL, NULL),
 (4, 1, 'prueba asignacion', 2, NULL, 19, 'prueba pryeba', '2019-04-24', '2019-05-15', 3, NULL, 1);
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 -- --------------------------------------------------------
 
@@ -323,23 +256,12 @@ INSERT INTO `note` (`id`, `user_id`, `title`, `note_type_id`, `source_id`, `grou
 -- Estructura de tabla para la tabla `note_approver`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `note_approver`;
-CREATE TABLE IF NOT EXISTS `note_approver` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `note_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `choice` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-=======
 CREATE TABLE `note_approver` (
   `id` int(11) NOT NULL,
   `note_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `choice` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `note_approver`
@@ -355,19 +277,6 @@ INSERT INTO `note_approver` (`id`, `note_id`, `user_id`, `choice`) VALUES
 -- --------------------------------------------------------
 
 --
-<<<<<<< HEAD
--- Estructura de tabla para la tabla `note_type`
---
-
-DROP TABLE IF EXISTS `note_type`;
-CREATE TABLE IF NOT EXISTS `note_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) DEFAULT NULL,
-  `description` varchar(140) DEFAULT NULL,
-  `value` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-=======
 -- Estructura de tabla para la tabla `note_comment`
 --
 
@@ -406,7 +315,6 @@ CREATE TABLE `note_type` (
   `description` varchar(140) DEFAULT NULL,
   `value` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `note_type`
@@ -424,117 +332,22 @@ INSERT INTO `note_type` (`id`, `name`, `description`, `value`) VALUES
 -- Estructura de tabla para la tabla `notification`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `notification`;
-CREATE TABLE IF NOT EXISTS `notification` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-=======
 CREATE TABLE `notification` (
   `id` int(11) NOT NULL,
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
   `message` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `user_to_id` int(11) DEFAULT NULL,
   `controller_to` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `entity_id` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `notification_type` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `shipping_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-<<<<<<< HEAD
-  `read` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-=======
   `read` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `notification`
 --
 
 INSERT INTO `notification` (`id`, `message`, `user_to_id`, `controller_to`, `entity_id`, `notification_type`, `shipping_date`, `read`) VALUES
-<<<<<<< HEAD
-(2, 'test notification 2', 1, 'affiliate/approve_affiliate', '1', 'affiliate', '2019-03-29 13:24:09', 'Y'),
-(3, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 14:28:05', 'Y'),
-(4, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:16:42', 'Y'),
-(5, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:17:33', 'Y'),
-(6, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 22:18:40', 'Y'),
-(7, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '10', 'affiliate', '2019-03-29 22:22:11', 'Y'),
-(8, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '12', 'affiliate', '2019-03-29 22:38:37', 'Y'),
-(9, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '13', 'affiliate', '2019-04-04 22:24:16', 'Y'),
-(10, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-04 23:18:46', 'Y'),
-(11, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '14', 'affiliate', '2019-04-04 23:21:58', 'Y'),
-(12, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '17', 'affiliate', '2019-04-04 23:28:47', 'Y'),
-(13, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '18', 'affiliate', '2019-04-05 20:53:47', 'Y'),
-(14, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '21', 'affiliate', '2019-04-05 21:02:40', 'Y'),
-(15, 'Solicitud Aprobada', 3, 'groups/group_information', '17', 'approve_affiliate', '2019-04-05 21:10:58', 'Y'),
-(16, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '22', 'affiliate', '2019-04-05 22:46:22', 'Y'),
-(17, 'Solicitud Aprobada', 3, 'groups/group_information', '19', 'approve_affiliate', '2019-04-05 22:46:46', 'Y'),
-(18, 'Nueva Solicitud de Afilicacion', NULL, 'affiliate/approve_affiliate', '23', 'affiliate', '2019-04-05 23:00:15', 'N'),
-(19, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '24', 'affiliate', '2019-04-05 23:01:36', 'Y'),
-(20, 'Solicitud Declinada', 3, '#', '18', 'decline_affiliate', '2019-04-05 23:04:23', 'Y'),
-(21, 'Nueva Solicitud de Afilicacion', 2, 'affiliate/approve_affiliate', '24', 'affiliate', '2019-04-05 23:16:50', 'Y'),
-(22, 'Solicitud Aprobada', 3, 'groups/group_information', '18', 'approve_affiliate', '2019-04-05 23:18:43', 'Y'),
-(23, 'Su rol dentro del grupo Grupo 6 ha cambiado', 3, 'groups/group_information', '18', 'change_role', '2019-04-06 14:52:10', 'Y'),
-(24, 'Su rol dentro del grupo Grupo 6 ha cambiado', 3, 'groups/group_information', '18', 'change_role', '2019-04-06 14:54:29', 'Y'),
-(25, 'Usted fue Desafiliado del grupo Grupo 6', 3, '#', NULL, 'desaffiliate_user', '2019-04-06 14:56:58', 'Y'),
-(26, 'Nueva Solicitud de Afilicacion', 2, 'affiliate/approve_affiliate', '24', 'affiliate', '2019-04-06 15:07:09', 'Y'),
-(27, 'Solicitud Aprobada', 3, 'groups/group_information', '18', 'approve_affiliate', '2019-04-06 15:07:49', 'Y'),
-(28, 'Usted fue Desafiliado del grupo Grupo 6', 3, '#', NULL, 'desaffiliate_user', '2019-04-06 15:12:03', 'Y'),
-(29, 'Su rol dentro del grupo Prueba 1 ha cambiado', 3, 'groups/group_information', '13', 'change_role', '2019-04-08 12:21:31', 'Y'),
-(30, 'Su rol dentro del grupo Prueba 1 ha cambiado', 3, 'groups/group_information', '13', 'change_role', '2019-04-08 12:21:36', 'Y'),
-(31, 'A sido invitado a participar en el grupo \"Grupo 6\"', 3, 'affiliate/approve_request', '24', 'request_membership', '2019-04-09 17:42:34', 'Y'),
-(32, 'Solicitud Aprobada', 2, 'groups/group_information', '18', 'new_member', '2019-04-09 19:51:55', 'Y'),
-(33, 'Nueva Solicitud de Afilicacion', 2, 'affiliate/approve_affiliate', '25', 'affiliate', '2019-04-10 18:35:04', 'Y'),
-(34, 'Solicitud Aprobada', 3, 'groups/group_information', '15', 'approve_affiliate', '2019-04-10 18:35:26', 'Y'),
-(35, 'Su rol dentro del grupo Prueba 1 ha cambiado', 3, 'groups/group_information', '13', 'change_role', '2019-04-10 18:48:03', 'Y'),
-(36, 'Usted fue Desafiliado del grupo Grupo 24', 3, '#', NULL, 'desaffiliate_user', '2019-04-10 19:05:16', 'Y'),
-(37, 'Usted fue Desafiliado del grupo Grupo 3', 3, '#', NULL, 'desaffiliate_user', '2019-04-10 19:06:03', 'Y'),
-(38, 'A sido invitado a participar en el grupo \"New group\"', 1, 'affiliate/approve_request', '26', 'request_membership', '2019-04-10 19:19:35', 'Y'),
-(39, 'Tiene un Nuevo Miembro en su Grupo \"\"', 1, 'groups/group_information', '20', 'new_member', '2019-04-10 19:20:03', 'Y'),
-(40, 'Su rol dentro del grupo New group ha cambiado', 1, 'groups/group_information', '20', 'change_role', '2019-04-10 19:20:13', 'Y'),
-(41, 'A sido invitado a participar en el grupo \"New group\"', 3, 'affiliate/approve_request', '27', 'request_membership', '2019-04-10 19:25:33', 'Y'),
-(42, 'Tiene un Nuevo Miembro en su Grupo \"\"', 1, 'groups/group_information', '20', 'new_member', '2019-04-10 19:25:48', 'Y'),
-(43, 'Usted fue Desafiliado del grupo New group', 3, '#', NULL, 'desaffiliate_user', '2019-04-10 19:27:17', 'Y'),
-(44, 'A sido invitado a participar en el grupo \"New group\"', 3, 'affiliate/approve_request', '28', 'request_membership', '2019-04-10 19:30:04', 'Y'),
-(45, ' ApellidoXes el Nuevo Miembro \n                                        del Grupo \"\"', 1, 'groups/group_information', '20', 'new_member', '2019-04-10 19:30:23', 'Y'),
-(46, ' ApellidoXes el Nuevo Miembro \n                                        del Grupo \"\"', 1, 'groups/group_information', '20', 'new_member', '2019-04-10 19:30:25', 'Y'),
-(47, 'Usted fue Desafiliado del grupo New group', 3, '#', NULL, 'desaffiliate_user', '2019-04-10 19:33:55', 'Y'),
-(48, 'A sido invitado a participar en el grupo \"New group\"', 3, 'affiliate/approve_request', '29', 'request_membership', '2019-04-10 19:34:39', 'Y'),
-(49, 'UsuarioX ApellidoXes el Nuevo Miembro \n                                        del Grupo \"\"', 1, 'groups/group_information', '20', 'new_member', '2019-04-10 19:37:17', 'Y'),
-(50, 'Usted fue Desafiliado del grupo New group', 3, '#', NULL, 'desaffiliate_user', '2019-04-10 19:38:08', 'Y'),
-(51, 'A sido invitado a participar en el grupo \"New group\"', 3, 'affiliate/approve_request', '30', 'request_membership', '2019-04-10 19:38:39', 'Y'),
-(52, 'UsuarioX ApellidoXes el Nuevo Miembro \n                                        del Grupo \"\"', 1, 'groups/group_information', '20', 'new_member', '2019-04-10 19:39:52', 'Y'),
-(53, 'Usted fue Desafiliado del grupo New group', 3, '#', NULL, 'desaffiliate_user', '2019-04-10 19:40:51', 'Y'),
-(54, 'A sido invitado a participar en el grupo \"New group\"', 3, 'affiliate/approve_request', '31', 'request_membership', '2019-04-10 19:41:18', 'Y'),
-(55, 'UsuarioX ApellidoXes el Nuevo Miembro \n                                        del Grupo \"\"', 1, 'groups/group_information', '20', 'new_member', '2019-04-10 19:42:02', 'Y'),
-(56, 'Usted fue Desafiliado del grupo New group', 3, '#', NULL, 'desaffiliate_user', '2019-04-10 19:42:22', 'Y'),
-(57, 'A sido invitado a participar en el grupo \"New group\"', 3, 'affiliate/approve_request', '32', 'request_membership', '2019-04-10 19:42:43', 'Y'),
-(58, 'UsuarioX ApellidoXes el Nuevo Miembro \n                                        del Grupo \"New group\"', 1, 'groups/group_information', '20', 'new_member', '2019-04-10 19:43:07', 'Y'),
-(59, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '33', 'affiliate', '2019-04-10 21:29:05', 'Y'),
-(60, 'Solicitud Aprobada', 4, 'groups/group_information', '19', 'approve_affiliate', '2019-04-10 21:29:35', 'Y'),
-(61, 'A sido invitado a participar en el grupo \"Grupo 24\"', 3, 'affiliate/approve_request', '34', 'request_membership', '2019-04-10 21:31:04', 'Y'),
-(62, 'UsuarioX ApellidoXes el Nuevo Miembro \n                                        del Grupo \"Grupo 24\"', 1, 'groups/group_information', '19', 'new_member', '2019-04-10 21:33:33', 'Y'),
-(63, 'Su rol dentro del grupo New group ha cambiado', 3, 'groups/group_information', '20', 'change_role', '2019-04-10 22:08:46', 'Y'),
-(64, 'Nueva Solicitud de Afilicacion', NULL, 'affiliate/approve_affiliate', '35', 'affiliate', '2019-04-11 19:15:37', 'N'),
-(65, 'A sido invitado a participar en el grupo \"Grupo de Prueba JM\"', 5, 'affiliate/approve_request', '36', 'request_membership', '2019-04-11 19:24:23', 'Y'),
-(66, 'Ana Maradeyes el Nuevo Miembro \n                                        del Grupo \"Grupo de Prueba J', 1, 'groups/group_information', '21', 'new_member', '2019-04-11 19:27:13', 'Y');
-
-
--- ---------------------------------
-
--- 
--- Estructura de tabla para la tabla `param`
--- 
-DROP TABLE IF EXISTS param;
-CREATE TABLE `param` (
-  `param_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  PRIMARY KEY (`param_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla de parametros' AUTO_INCREMENT=1 ;
-
-=======
 (2, 'test notification 2', 1, 'affiliate/approve_affiliate', '1', 'affiliate', '2019-03-29 18:24:09', 'Y'),
 (3, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-29 19:28:05', 'Y'),
 (4, 'Nueva Solicitud de Afilicacion', 1, 'affiliate/approve_affiliate', '9', 'affiliate', '2019-03-30 03:16:42', 'Y'),
@@ -617,7 +430,6 @@ CREATE TABLE `param` (
   `description` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabla de parametros';
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 -- --------------------------------------------------------
 
@@ -625,27 +437,15 @@ CREATE TABLE `param` (
 -- Estructura de tabla para la tabla `permission`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `permission`;
-CREATE TABLE IF NOT EXISTS `permission` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-=======
 CREATE TABLE `permission` (
   `id` int(5) NOT NULL,
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
   `menu_id` int(5) DEFAULT NULL,
   `user_level_id` int(5) DEFAULT NULL,
   `can_read` varchar(3) DEFAULT NULL,
   `can_write` varchar(3) DEFAULT NULL,
   `can_edit` varchar(3) DEFAULT NULL,
-<<<<<<< HEAD
-  `can_delete` varchar(3) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-=======
   `can_delete` varchar(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `permission`
@@ -669,23 +469,12 @@ INSERT INTO `permission` (`id`, `menu_id`, `user_level_id`, `can_read`, `can_wri
 -- Estructura de tabla para la tabla `role`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `role`;
-CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) DEFAULT NULL,
-  `description` varchar(256) DEFAULT NULL,
-  `value` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Table for Role''s Information';
-=======
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
   `value` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Table for Role''s Information';
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `role`
@@ -694,11 +483,7 @@ CREATE TABLE `role` (
 INSERT INTO `role` (`id`, `name`, `description`, `value`) VALUES
 (1, 'Lider', 'Lider', 'L'),
 (2, 'Administrador', 'Administrador', 'A'),
-<<<<<<< HEAD
-(3, 'Miembro', 'Miembro de Grupo', 'M');
-=======
 (3, 'Participante', 'Particiante de Grupo', 'M');
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 -- --------------------------------------------------------
 
@@ -706,21 +491,11 @@ INSERT INTO `role` (`id`, `name`, `description`, `value`) VALUES
 -- Estructura de tabla para la tabla `source`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `source`;
-CREATE TABLE IF NOT EXISTS `source` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(60) DEFAULT NULL,
-  `description` varchar(140) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-=======
 CREATE TABLE `source` (
   `id` int(11) NOT NULL,
   `title` varchar(60) DEFAULT NULL,
   `description` varchar(140) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `source`
@@ -739,23 +514,12 @@ INSERT INTO `source` (`id`, `title`, `description`) VALUES
 -- Estructura de tabla para la tabla `status`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `status`;
-CREATE TABLE IF NOT EXISTS `status` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) DEFAULT NULL,
-  `description` varchar(140) DEFAULT NULL,
-  `value` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-=======
 CREATE TABLE `status` (
   `id` int(11) NOT NULL,
   `name` varchar(60) DEFAULT NULL,
   `description` varchar(140) DEFAULT NULL,
   `value` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `status`
@@ -772,14 +536,8 @@ INSERT INTO `status` (`id`, `name`, `description`, `value`) VALUES
 -- Estructura de tabla para la tabla `user`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-=======
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
   `employee_id` int(11) DEFAULT NULL,
   `names` varchar(140) DEFAULT NULL,
   `lastnames` varchar(140) DEFAULT NULL,
@@ -788,14 +546,8 @@ CREATE TABLE `user` (
   `password` varchar(60) DEFAULT NULL,
   `profile_photo` varchar(256) DEFAULT NULL,
   `user_level_id` int(11) DEFAULT NULL,
-<<<<<<< HEAD
-  `is_visitor` varchar(5) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-=======
   `is_visitor` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `user`
@@ -815,21 +567,11 @@ INSERT INTO `user` (`id`, `employee_id`, `names`, `lastnames`, `mail`, `username
 -- Estructura de tabla para la tabla `user_level`
 --
 
-<<<<<<< HEAD
-DROP TABLE IF EXISTS `user_level`;
-CREATE TABLE IF NOT EXISTS `user_level` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
-  `name_level` varchar(50) DEFAULT NULL,
-  `access_level` int(5) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-=======
 CREATE TABLE `user_level` (
   `id` int(5) NOT NULL,
   `name_level` varchar(50) DEFAULT NULL,
   `access_level` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
 
 --
 -- Volcado de datos para la tabla `user_level`
@@ -837,10 +579,6 @@ CREATE TABLE `user_level` (
 
 INSERT INTO `user_level` (`id`, `name_level`, `access_level`) VALUES
 (1, 'Administrador', 3),
-<<<<<<< HEAD
-(2, 'Participante', 2);
-COMMIT;
-=======
 -- phpMyAdmin SQL Dump
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
@@ -1379,7 +1117,6 @@ INSERT INTO `user_level` (`id`, `name_level`, `access_level`) VALUES
 (1, 'Administrador', 3),
 (2, 'Participante', 2);
 COMMIT;
->>>>>>> 5444383462e53d0cbde31c616eceabd650f1bd71
 =======
 (2, 'Participante', 1),
 (3, 'Manager', 2);
