@@ -230,6 +230,12 @@
 					'{{ URL_NOTIFICATION }}',
 					SERVER_DIR.'notification/show_all',
 					$html_view);
+					
+			$html_view = str_replace(
+					'{{ FOOTER_INFO }}',
+					PHP_VERSION,
+					$html_view);
+
 
 				
 				return $html_view;
