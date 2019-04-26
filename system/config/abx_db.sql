@@ -1,32 +1,9 @@
 -- phpMyAdmin SQL Dump
-<<<<<<< HEAD
--- version 4.8.5
--- https://www.phpmyadmin.net/
---
--- Servidor: localhost
--- Tiempo de generación: 12-04-2019 a las 21:20:54
--- Tiempo de generación: 18-04-2019 a las 01:28:16
--- Versión del servidor: 10.1.38-MariaDB
--- Versión de PHP: 7.1.26
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
---
--- Base de datos: `abx_db`
---
-CREATE DATABASE IF NOT EXISTS `abx_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-USE `abx_db`;
-=======
 -- phpMyAdmin SQL Dump
 -- version 4.6.6
 -- https://www.phpmyadmin.net/
-=======
 -- version 4.0.4.2
 -- http://www.phpmyadmin.net
->>>>>>> lisandro-dev
 --
 -- Servidor: localhost
 -- Tiempo de generación: 25-04-2019 a las 23:02:17
@@ -45,12 +22,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `abx_db`
 --
-<<<<<<< HEAD
->>>>>>> 444d6e92d202509a41ad9400f9ea86f663449351
-=======
 CREATE DATABASE IF NOT EXISTS `abx_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `abx_db`;
->>>>>>> lisandro-dev
 
 -- --------------------------------------------------------
 
