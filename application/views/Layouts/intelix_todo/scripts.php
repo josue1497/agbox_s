@@ -45,6 +45,12 @@
 		placeholder: 'Select an option',
 		width: '100%',
 	});
+	$('.select2_multiple').select2({
+		placeholder: 'Select an option',
+		width: '100%',
+		tags:true
+	});
+	
 </script>
 
 <script>

@@ -8,9 +8,9 @@ function generate_content($controller, $filename = null, $record = null)
     $controller->view->add_script_js(' $(\'#notif\').DataTable( {
         "scrollY":        "50vh",
         "scrollCollapse": true,
-        "paging":         false,
         "ordering": false,
-        "searching": false
+        "searching": false,
+        "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]]
     } );');
 
     return $html_result;

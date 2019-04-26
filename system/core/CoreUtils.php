@@ -401,7 +401,7 @@
 				$notification_html.='<a class="dropdown-item d-flex align-items-center" onclick="toReadNotification(\''.$uri_to.'\',\''.$to_read.'\',\''.$notification['id'].'\');">
 							'.self::get_notification_icon($notification['notification_type'],$notification['read']).'
 							<div>
-								<div class="small text-gray-500">'.date("F j, Y, g:i a", strtotime($notification['shipping_date'])).'</div>
+								<div class="small text-gray-500">'. @date("F j, Y, g:i a", @strtotime($notification['shipping_date'])).'</div>
 									<span class="'.$text.'">'.$notification['message'].'</span>
 							</div>
 						</a>';
@@ -412,7 +412,7 @@
 				<div class="mr-3">
 				</div>
 				<div>
-				  <span class="font-weight-bold">there is not alerts!</span>
+				  <span class="font-weight-bold">No tiene notificaciones</span>
 				</div>
 			  </a>';
 		}
@@ -444,7 +444,18 @@
 				case Notification::$DESAFFILIATE_USER:
 						$html.='<i class="fas fa-user-minus text-white"></i>';
 						break;
+				case Notification::$NEW_ASSIGNMENT:
+						$html.='<i class="fas fa-tasks text-white"></i>';
+						break;
+				case Notification::$ASSINGMENT_COMPLETE:
+						$html.='<i class="fas fa-badge-check text-white"></i>';
+						break;
+				case Notification::$ASSINGMENT_REASING:
+						$html.='<i class="fas fa-hand-holding-box text-white"></i>';
+						break;
 
+
+						
 			}
 
 			$html.='</div>

@@ -72,7 +72,9 @@ class View{
 		$is_group=$this->model->table_name==='groups';
 		$is_user=$this->model->table_name==='user';
 		foreach ($this->model->table_fields as $form_field) {
-			if ($form_field->get_visible_form() && $form_field->get_column_in_db()){
+			if ($form_field->get_visible_form() 
+				//&& $form_field->get_column_in_db()
+				){
 				if($is_group &&
 						$form_field->get_type()===Column::$COLUMN_TYPE_PHOTO
 				&& !isset($data[$form_field->get_table_field_name()])){
@@ -335,12 +337,17 @@ class View{
 				);
 				break;
 			case Column::$COLUMN_TYPE_SELECT:
-				$res = Component::select_field(
-					$form_field->get_name(),
+			case Column::$COLUMN_TYPE_SELECT_MULTIPLE:
+			
+			$multiple = ($form_field->get_type() == Column::$COLUMN_TYPE_SELECT_MULTIPLE);
+			
+			$res = Component::select_field(
+					$form_field->get_name() .($multiple?'[]':''),
 					isset(	$data[$form_field->get_table_field_name()] ) ? $data[$form_field->get_table_field_name()]:'',
 					$form_field->get_label(),
 					($form_field->get_foreing_key() ? $form_field->get_fk_entity()->get_select_data() : $form_field->get_values()),
-					$form_field->get_field_html()
+					$form_field->get_field_html(),
+					$multiple
 				);
 				break;
 

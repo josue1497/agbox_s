@@ -17,25 +17,24 @@ class Note_Comment extends Model{
 				(new Column('comment'))
                 ->set_label('Comentario')
                 ->set_type(Column::$COLUMN_TYPE_TEXT)
-                ->set_name_key(),
+				->set_name_key(),
 				
 				(new Column('date_comment'))
 				->set_label('Fecha del Comentario')
 				->set_type(Column::$COLUMN_TYPE_DATE)
-				->set_visible_grid(false)
-				->set_unike_key(),
+				->set_visible_grid(false),
 
 				(new Column('note_id'))
 				->set_label('Nota')
                 ->set_type(Column::$COLUMN_TYPE_SELECT)
                 ->set_fk_entity(new Note())
-                ->set_visible_grid(false),
+				->set_visible_grid(false),
                 
                 (new Column('author_id'))
 				->set_label('Autor')
                 ->set_type(Column::$COLUMN_TYPE_SELECT)
                 ->set_fk_entity(new User())
-                ->set_visible_grid(false),
+				->set_visible_grid(false),
 
 			)
 		);
