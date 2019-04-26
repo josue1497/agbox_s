@@ -20,7 +20,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ base_url }}index/index">
           <i class="fas fa-fw fa-home"></i>
-          <span>Incio</span></a>
+          <span>Inicio</span></a>
       </li>
 
      

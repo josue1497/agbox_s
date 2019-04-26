@@ -53,6 +53,20 @@ class groupsController  extends Controller{
 		$this->model->get_by_id($id);
 		$d["record"] = $this->model->get_by_id($id);
 
+		if(!empty($_POST) && isset($_POST['name'])){
+			$this->model->after_save($_POST,$d["record"]['id']);
+			$group=array_merge($d["record"],$_POST);
+			$this->update_user_role_group();
+			if($this->model::save_record($this->model,$group)){
+			header("location: ".CoreUtils::base_url().'index/index');
+		}
+		}
+
+		
+		$tmp = $this->model->before_render_form($d["record"],$d["record"]['id']);
+				if(isset($tmp))
+					$d["record"] = $tmp;
+
 		$this->set($d);
 		$this->render('group_information');
 	}
@@ -137,6 +151,16 @@ class groupsController  extends Controller{
 
 		header('Content-Type: application/json');
   	echo json_encode($group_record,JSON_PRETTY_PRINT);
+	}
+
+	public function list_groups(){
+		$this->init(new Group());
+
+		$this->init($this->model);
+		$d["record"] = $this->model->get_select_data_with_params(array('id'=>'in (select a.group_id from affiliate a inner join `user` u on (u.id=a.user_id) where a.user_id='.Session::get('user_id').' and approved=\'Yes\')')); 
+		$this->set($d);
+
+		$this->render('list_groups');
 	}
 
 

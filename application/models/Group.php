@@ -46,8 +46,9 @@ class Group extends Model
                     ->set_label('Lider del grupo')
                     ->set_visible_grid(false)
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
-                    ->set_values((new User())->get_select_data())
-                    ->set_field_html('is_required="true" ') ,
+                    ->set_field_html('is_required="true" ') 
+                    ->set_values((new User())->get_select_data()),
+
 					
                 (new Column('tags'))
                     ->set_label('Etiquetas')

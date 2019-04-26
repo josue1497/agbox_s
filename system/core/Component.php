@@ -168,8 +168,8 @@
 		 * 
 		 */
 		public static function select_field($name,$value=null,$label=null,$data=null,$etc=null,$multiple=false){
-			return '<div class="form-group">'.
-			(!empty($label)?('<label for="'.$name.'">'.$label.'</label>'):'').
+			return '<div class="form-group my-1">'.
+			(!empty($label)?('<label for="'.$name.'"><small>'.$label.'</small></label>'):'').
 			'<select '.($multiple?'multiple':'').' class="form-control select2'.($multiple?'_multiple':'').'" id="'.$name.'" name="'.$name.'" '.$etc.' >'.
 			($multiple?'':
 				'<option value="0" '.(0==$value?'selected':'').'>Elija Opcion</option>').

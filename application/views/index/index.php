@@ -22,7 +22,7 @@ function generate_content($controller, $filename = null, $record = null){
                   <a class="text-decoration-none" href="#' . $map['group_id'] . '">
                      <i class="fas fa-2x text-gray-300"><img class="img-profile rounded-circle img-profile-user" src="' . $photo . '"></i>&nbsp;&nbsp;</a>
                   <a href="#" data-toggle="modal" data-target="#group_info_modal" data-group-name="' . $map['name'] . '"
-                  data-group-id="' . $map['group_id'] . '" data-group-desc="' . $map['description'] . '"><i class="fas fa-ellipsis-v text-secondary"></i></a>
+                  data-group-id="' . $map['group_id'] . '" data-group-desc="' . $map['description'] . '" ><i class="fas fa-ellipsis-v text-secondary" '.Component::set_tooltip_info("información rápida").'></i></a>
                 </div>
               </div>
               <a class="text-decoration-none" href="#' . $map['group_id'] . '">
@@ -147,9 +147,8 @@ function build_line($list_lines, $group_id,$pending=false){
                         <div class="d-flex flex-row">
                             <div class="mx-2" >
                               '.($pending?'<a  data-toggle="modal" data-target="#add-comment-modal" data-note="'. $line['id'].'" 
-                                   data-title="'. $line['title'].'" data-author="'.Session::get('user_id').'" 
-                                  '.Component::set_tooltip_info("Añadir comentario de Avance").'>
-                                  <i class="fas fa-comment-alt-edit fa-lg text-secondary"></i>
+                                   data-title="'. $line['title'].'" data-author="'.Session::get('user_id').'" >
+                                  <i class="fas fa-comment-alt-edit fa-lg text-secondary" '.Component::set_tooltip_info("Añadir comentario de Avance").'></i>
                               </a>':'').'
                             </div>
                         </div>

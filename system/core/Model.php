@@ -255,9 +255,12 @@ class Model
 		}
 
 		$db_params = array();
-		foreach ($this->unike_keys as $key) {
-			$db_params[$key] = $params[$key];
+		if(isset($this->unike_keys)){
+			foreach ($this->unike_keys as $key) {
+				$db_params[$key] = $params[$key];
+			}
 		}
+		
 
 		$result = $this->findByPoperty($db_params);
 
@@ -304,7 +307,7 @@ class Model
 			}
 		}
 
-			if (!empty($params[$name]) && strlen($params[$name]) > 0 && $table_field->get_column_in_db() == true) {
+			if (!empty($params[$name]) && $table_field->get_column_in_db() == true && strlen($params[$name]) > 0 ) {
 				$sqlInsert .= ($first == false ? " , `" : "`") . $name ."`";
 				$sqlValues .= ($first == false ? " , " : "") . ":" . $name;
 				$db_params[$name] = $params[$name];
@@ -359,7 +362,7 @@ class Model
 					}
 			}
 		}
-			if (!empty($params[$name]) && strlen($params[$name]) > 0 && $table_field->get_column_in_db() == true) {
+			if (!empty($params[$name]) && strlen(!is_array($params[$name])?$params[$name]:'') > 0 && $table_field->get_column_in_db() == true) {
 				$sqlUpdate .= ($first == false ? " , " : "") . $name . " = :" . $name;
 				$db_params[$name] = $params[$name];
 				

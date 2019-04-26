@@ -57,7 +57,7 @@
                   <div class="mh-100 overflow-auto">
                   {{ NOTIFICATION_DIV }}
                   </div>
-                  <a class="dropdown-item text-center small text-gray-500" href="{{ URL_NOTIFICATION }}">Show All Alerts</a>
+                  <a class="dropdown-item text-center small text-gray-500" href="{{ URL_NOTIFICATION }}">Mostrar Todas</a>
                 </div>
                 <!--
                 <a class="dropdown-item d-flex align-items-center" href="#">

@@ -184,6 +184,11 @@ $('#note-info-modal').on('show.bs.modal', function (event) {
     modal.find('#assingment_id').val(note_id);
 });
 
+$('#note-info-modal').on('hide.bs.modal', function (event) {
+    $("#reasing-button").unbind("click");
+    $("#complete-button").unbind("click");
+});
+
 $('#add-comment-modal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var note_id = button.data('note');
@@ -199,11 +204,17 @@ $('#add-comment-modal').on('show.bs.modal', function (event) {
             .fail(function () {
                 alert("Ha ocurrido un Error.");
             });
+
+            $("#send-comment").unbind("click");
     });
 
     var modal = $(this)
     modal.find('#show-note-title').text(title);
     modal.find('#note_id').val(note_id);
     modal.find('#author_id').val(user_id);
+});
+
+$('#add-comment-modal').on('hide.bs.modal', function (event) {
+    $("#send-comment").unbind("click");
 });
 
