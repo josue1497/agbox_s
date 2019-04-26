@@ -5,7 +5,7 @@ function generate_content($controller, $filename = null, $record = null){
   $sql_groups =
     "select gur.group_id,g.name,g.group_photo,g.description
 		from groups g 
-		inner join group_user_role gur on g.id=gur.group_id 
+		inner join affiliate gur on g.id=gur.group_id 
     where gur.user_id=?";
 
   $list = Model::get_sql_data($sql_groups, array('user_id' => Session::get('user_id')));

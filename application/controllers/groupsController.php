@@ -60,7 +60,7 @@ class groupsController  extends Controller{
 	public function update_user_role_group(){
 		if(isset($_POST) && isset($_POST['name'])){
 				$record = (new Group())->get_by_property(array('name'=>$_POST['name']));
-				$status = Group_User_Role::set_group_lider($record['id'],$_POST['leader_id']);
+				$status = Affiliate::set_group_lider($record['id'],$_POST['leader_id']);
 			}
 		}
 
@@ -129,10 +129,10 @@ class groupsController  extends Controller{
 		$id=$_POST['group_id'];
 		
 		$group_record = Model::get_sql_data("select CONCAT(u.names,' ',u.lastnames) user_name, r.name role_name
-		from groups g inner join affiliate a on (a.group_id=g.id)
-		inner join group_user_role gur on (gur.group_id=g.id and a.user_id=gur.user_id)
-		inner join `user` u on (u.id=gur.user_id) 
-		inner join `role` r on (r.id=gur.role_id)
+		from groups g 
+		inner join affiliate a on (a.group_id=g.id)
+		inner join `user` u on (u.id=a.user_id) 
+		left join `role` r on (r.id=a.role_id)
 		where g.id=?", array('group_id'=>$id));
 
 		header('Content-Type: application/json');

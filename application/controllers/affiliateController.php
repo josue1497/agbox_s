@@ -148,8 +148,7 @@ var app = new Vue({
     function insert_data(){  
 				$this->model = new Affiliate();
 
-				$gur = new Group_User_Role();
-				$user_to=$gur->get_user_by_role('L',$_POST['group_id']);
+				$user_to=$this->model->get_user_by_role('L',$_POST['group_id']);
 
 				$entity_to=Model::get_sql_data("select max(id)+1 as 'id' from affiliate");
         $affiliate_id=intval($entity_to[0]['id']);
@@ -194,7 +193,7 @@ var app = new Vue({
                           'role_id'=>$data['role_id']);
 
       
-      $req1=Group_User_Role::set_user_role($affiliate_record['group_id']
+      $req1=Affiliate::set_user_role($affiliate_record['group_id']
                 ,$affiliate_record['user_id'],$data['role_id']);
       if($req1){
         $affiliate_record['approved']=$data['approved'];
@@ -243,7 +242,7 @@ var app = new Vue({
       $affiliate_record['approved']=$data['approved'];
 
 
-      $leader_record= Group_User_Role::get_user_by_role('L',$affiliate_record['group_id']);
+      $leader_record= Affiliate::get_user_by_role('L',$affiliate_record['group_id']);
       $leader_id= $leader_record['id'];
 
       $user_model=new User();
@@ -255,7 +254,7 @@ var app = new Vue({
       if($data['approved']==='Yes'){
         if($affiliate_model->edit($affiliate_record['id'],$affiliate_record)){
         
-          if(Group_User_Role::set_user_role($affiliate_record['group_id'],
+          if(Affiliate::set_user_role($affiliate_record['group_id'],
                                             $affiliate_record['user_id'],
                                             $role_id)){
               Notification::create_notification(array('user_to_id'=>$leader_id,
@@ -295,6 +294,49 @@ var app = new Vue({
 
       echo json_encode($user_record);
     }
+
+    /* metodos agregads de group_user_roleController */
+
+    public function update_group_user_role(){
+		$data = $_POST;
+
+		$group_name=Group::get_group_name($data['group-id']);
+		$role_name=Role::get_role_name($data['group_user_role']);
+
+		if(Affiliate::set_user_role($data['group-id'],$data['user-id'],$data['group_user_role'])){
+			if(Notification::create_notification(array('user_to_id'=>$data['user-id'], 
+				'message'=>'Su rol dentro del grupo '.$group_name.' ha cambiado',			
+				'entity_id'=>$data['group-id'],
+				'notification_type'=>Notification::$CHANGE_ROLE,
+				'controller_to'=>'groups/group_information',
+				'read'=>Notification::$NO))){
+				echo $data['affiliate-id'];
+			}else{
+				echo 'fail';
+			}
+		}else{
+			echo 'fail';
+		}
+	}
+
+	public function desaffiliate_group_user_role(){
+		$data = $_POST;
+		$group_name=Group::get_group_name($data['group-id']);
+		if(Affiliate::delete_group_user_role($data['user-id'],$data['group-id'],$data['group_user_role'])
+					&& Affiliate::delete_affiliation($data['affiliate-id'])){
+			if(Notification::create_notification(array('user_to_id'=>$data['user-id'], 
+			'message'=>'Usted fue Desafiliado del grupo '.$group_name.'',
+			'entity_id'=>'','notification_type'=>Notification::$DESAFFILIATE_USER,
+			'controller_to'=>'#',
+			'read'=>Notification::$NO))){
+						echo $data['affiliate-id'];
+			}else{
+				echo 'fail';
+			}
+		}else{
+			echo 'fail';
+		}
+	}
 
 }
 
