@@ -9,7 +9,9 @@ function generate_content($controller, $filename = null, $record = null)
     $table=generate_table($controller,$this_record);
     $table=str_replace('edit','group_information',$table);
 
-    $title='<div class="d-flex">grupos
+    $table=str_replace('btn btn-secondary','group_information',$table);
+
+    $title='<div class="d-flex align-items-center">Tus Grupos
             <div class=" ml-auto">
             <a class="btn btn-primary" href="'.SERVER_DIR.'groups/create_group" '.Component::set_tooltip_info("Crea un Grupo").'><i class="fas fa-plus"></i></a>
             <a class="btn btn-primary" href="'.SERVER_DIR.'affiliate/items" '.Component::set_tooltip_info("Afiliate a un Grupo").'><i class="fas fa-user-plus"></i></a>
@@ -28,13 +30,13 @@ function generate_content($controller, $filename = null, $record = null)
 }
 
 function generate_table($controller,$record){
-
+var_dump($record);
     // auto_build_list_content
     // $record= Model::get_sql_data('SELECT * FROM notification WHERE user_to_id='.Session::get('user_id').' ORDER BY shipping_date DESC');
     $notifi_table=' <div class="row container">
     <div class="col-12">
             <table id="notif" class="table table-striped table-hover w-100 display responsive">'
-            .$controller->view->auto_build_list_content($record).'
+            .$controller->view->auto_build_list_content($record, true, true).'
                   </table>
     </div>
     </div>';

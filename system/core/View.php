@@ -252,9 +252,9 @@ class View{
 		 * @param type $data 
 		 * @return type
 		 */
-	public function auto_build_list_content($data){
+	public function auto_build_list_content($data, $btn_edit=true,$btn_delete=true){
 		return $this->auto_build_list_thead() .
-			$this->auto_build_list_tbody($data);
+			$this->auto_build_list_tbody($data, $btn_edit, $btn_delete);
 	}
 
 	/**
@@ -284,7 +284,7 @@ class View{
 		 * @param type $data 
 		 * @return type
 		 */
-	public function auto_build_list_tbody($data){
+	public function auto_build_list_tbody($data,$btn_edit=true,$btn_delete=true){
 		$list_tbody = "<tbody>";
 		$i = 1;
 		foreach ($data as $row) {
@@ -306,8 +306,9 @@ class View{
 					}
 				}
 			}
-			$list_tbody .= "<td class='text-center'>" . ($this->model->crud_config['can_update'] ?
-					Component::edit_button($this->model->table_name, $row[$this->model->id_field]) : '') . ($this->model->crud_config['can_delete'] ?
+			$list_tbody .= "<td class='text-center'>" . ($this->model->crud_config['can_update'] && $btn_edit ?
+					Component::edit_button($this->model->table_name, $row[$this->model->id_field]) : '') .
+					($this->model->crud_config['can_delete'] && $btn_delete ?
 					Component::delete_button($this->model->table_name, $row[$this->model->id_field]) : '') .
 				"</td>" .
 				"</tr>";

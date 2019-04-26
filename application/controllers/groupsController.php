@@ -157,7 +157,7 @@ class groupsController  extends Controller{
 		$this->init(new Group());
 
 		$this->init($this->model);
-		$d["record"] = $this->model->get_select_data_with_params(array('id'=>'in (select a.group_id from affiliate a inner join `user` u on (u.id=a.user_id) where a.user_id='.Session::get('user_id').' and approved=\'Yes\')')); 
+		$d["record"] = $this->model->find_by_subquery(array('id'=>'in (select a.group_id from affiliate a inner join `user` u on (u.id=a.user_id) where a.user_id='.Session::get('user_id').' and approved=\'Yes\')'),true); 
 		$this->set($d);
 
 		$this->render('list_groups');
