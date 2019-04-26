@@ -45,6 +45,9 @@
               }else{
                      $form_group=$controller->auto_build_view('info',$this_group,$this_group);
               }
+
+              $form_group=str_replace('groups/index/','groups/list_groups/',$form_group);
+              // groups/index/
                      Session::set('group_id',$this_group['id']);
 
                      $button_add_note='<div class="btn-group dropleft ml-auto">
