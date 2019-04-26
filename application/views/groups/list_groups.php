@@ -30,13 +30,13 @@ function generate_content($controller, $filename = null, $record = null)
 }
 
 function generate_table($controller,$record){
-var_dump($record);
+
     // auto_build_list_content
     // $record= Model::get_sql_data('SELECT * FROM notification WHERE user_to_id='.Session::get('user_id').' ORDER BY shipping_date DESC');
     $notifi_table=' <div class="row container">
     <div class="col-12">
             <table id="notif" class="table table-striped table-hover w-100 display responsive">'
-            .$controller->view->auto_build_list_content($record, true, true).'
+            .$controller->view->auto_build_list_content($record, true, Session::get('user_id')===$record['leader_id']).'
                   </table>
     </div>
     </div>';
