@@ -4,13 +4,6 @@
                     $record['leader_id']=Session::get('user_id'); 
                     
                     $form_group=$controller->view->auto_build_form_content($record,false);
-                    // $form_group=$controller->auto_build_view('form',$record,$record);
-
-                    //  Session::set('group_id',$this_group['id']);
-
-                    //  $tile_affiliate='<div class="d-flex">Affiliate<button class="btn btn-primary ml-auto" id="add_affiliate"
-                    //  data-toggle="modal" data-target="#modal-affiliate"><i class="fas fa-plus"></i></button></div>';
-                    //  $title_note='<div class="d-flex">Group´s Notes'.$button_add_note.'</div>';
                      
                      $html_result=file_get_contents(__DIR__.'/create_body.html');
 
