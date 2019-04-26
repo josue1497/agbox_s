@@ -9,7 +9,8 @@ class groupsController  extends Controller{
 	 * @return void
 	 */
     function index(){
-		$this->action_index(new Group(),true);
+		//$this->action_index(new Group(),true);
+		echo 'ok';
     }
 	
 	/**
