@@ -53,6 +53,20 @@ class groupsController  extends Controller{
 		$this->model->get_by_id($id);
 		$d["record"] = $this->model->get_by_id($id);
 
+		if(!empty($_POST) && isset($_POST['name'])){
+			$this->model->after_save($_POST,$d["record"]['id']);
+			$group=array_merge($d["record"],$_POST);
+			$this->update_user_role_group();
+			if($this->model::save_record($this->model,$group)){
+			header("location: ".CoreUtils::base_url().'index/index');
+		}
+		}
+
+		
+		$tmp = $this->model->before_render_form($d["record"],$d["record"]['id']);
+				if(isset($tmp))
+					$d["record"] = $tmp;
+
 		$this->set($d);
 		$this->render('group_information');
 	}

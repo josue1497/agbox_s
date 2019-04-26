@@ -95,7 +95,7 @@ class Group_User_Role extends Model{
         public static function set_group_lider($group_id,$user_id){
         /* obtener el id del rol lider*/
         $model = new Role();
-        $lider_role=$model->get_by_property(array('name'=>'Lider'));
+        $lider_role=$model->get_by_property(array('value'=>'L'));
         $lider_role_id = ($lider_role != null ? $lider_role['id'] : 1 );
         
         $m = new Group_User_Role(); 

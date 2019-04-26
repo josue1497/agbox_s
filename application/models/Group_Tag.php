@@ -35,7 +35,8 @@ class Group_Tag extends Model{
 	public static function update_group_tags($new_tags,$group_id){
 		$model = new Group_Tag();
 		/* borrar las relacions previas antes de hacer nuevas relaciones */
-		$model->delete($group_id);
+		Model::execute_update("delete from ". $model->table_name. " where group_id = ".$group_id);
+		//$model->delete($group_id);
 		/* crear nuevas relaciones */
 		foreach($new_tags as $new_tag_id){
 			$model->create(array('group_id'=>$group_id,'tag_id'=>$new_tag_id));
