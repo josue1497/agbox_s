@@ -34,10 +34,29 @@ $(document).ready(function () {
     });
 
     $('.slide-panels-one').slick({
-        infinite: true,
-        speed: 1000,
+        centerMode: true,
+        centerPadding: '140px',
         slidesToShow: 1,
-        slidesToScroll: 1
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    arrows: true,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    arrows: true,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                }
+            }
+        ]
     });
 });
 
@@ -49,20 +68,13 @@ $('#group_info_modal').on('show.bs.modal', function (event) {
 
     $.post("{{ URI_DATA }}", { 'group_id': group_id }, function (data, status) {
         var members = '';
-        var leader = '';
         $.each(data, function (point, item) {
-            if ('Lider' !== item.role_name) {
-                members += "<li class=\"list-group-item\"><span>" + item.user_name + "</span>&nbsp;-&nbsp;<span>" + item.role_name + "</span></li>"
-            } else {
-                leader += "<li class=\"list-group-item\">" + item.user_name + "<\/li>"
-            }
+            members += "<li class=\"list-group-item\"><span>" + item.user_name + "</span>&nbsp;-&nbsp;<span>" + item.role_name + "</span></li>"
 
-
-            console.log(item);
         });
 
         $('#member-list').html(members);
-        $('#leader-list').html(leader);
+        // $('#leader-list').html(leader);
 
         leader = '';
         members = '';
@@ -92,7 +104,7 @@ $('#completed-note-info-modal').on('show.bs.modal', function (event) {
         .fail(function () {
             alert("Ha ocurrido un Error.");
         });
-   
+
     var modal = $(this);
     modal.find('.modal-title').text(title);
     modal.find('#summary').text(summary);
@@ -119,50 +131,50 @@ $('#note-info-modal').on('show.bs.modal', function (event) {
 
     $('#complete-button').on('click', function () {
 
-        if (message=prompt("¿Esta seguro de haber completado esta asignación?",'Escriba un comentario para completar.')) {
-            $.post("{{ COMPLETE_ASSINGMENT }}", { 'note_id': $('#assingment_id').val(),'message':message }, function (data) {
+        if (message = prompt("¿Esta seguro de haber completado esta asignación?", 'Escriba un comentario para completar.')) {
+            $.post("{{ COMPLETE_ASSINGMENT }}", { 'note_id': $('#assingment_id').val(), 'message': message }, function (data) {
                 console.log(data);
                 console.log(message);
-                if(''!==data && 'fail'!==data){
-                    $('#'+data).remove();
+                if ('' !== data && 'fail' !== data) {
+                    $('#' + data).remove();
                     $('#note-info-modal').modal('hide');
-                    if(!($("#"+group).children().length>0)){
-                        $("#"+group).append('<li class="list-group-item list-group-item-action border-0""><div class="d-flex ">'+
+                    if (!($("#" + group).children().length > 0)) {
+                        $("#" + group).append('<li class="list-group-item list-group-item-action border-0""><div class="d-flex ">' +
                             '<div class="p-2 h4 text-info" >ya no posee asignaciones Pendientes</div></div></li>');
                     }
                 }
                 // $('#add-comment-modal').modal('hide');
                 // $('#comment').val('');
-                $("#complete-button").unbind( "click" );
+                $("#complete-button").unbind("click");
             })
-            .fail(function () {
+                .fail(function () {
                     alert("Ha ocurrido un Error.");
-            });
+                });
         }
-        
+
     });
 
     $('#reasing-button').on('click', function () {
 
-        if (message=prompt("¿Esta seguro de reasignar esta tarea?",'Escriba un comentario.')) {
-            $.post("{{ REASING_ASSINGMENT }}", { 'note_id': $('#assingment_id').val(),'message':message }, function (data) {
+        if (message = prompt("¿Esta seguro de reasignar esta tarea?", 'Escriba un comentario.')) {
+            $.post("{{ REASING_ASSINGMENT }}", { 'note_id': $('#assingment_id').val(), 'message': message }, function (data) {
                 console.log(data);
                 console.log(message);
-                if(''!==data && 'fail'!==data){
-                    $('#'+data).remove();
+                if ('' !== data && 'fail' !== data) {
+                    $('#' + data).remove();
                     $('#note-info-modal').modal('hide');
-                    if(!($("#"+group).children().length>0)){
-                        $("#"+group).append('<li class="list-group-item list-group-item-action border-0""><div class="d-flex ">'+
+                    if (!($("#" + group).children().length > 0)) {
+                        $("#" + group).append('<li class="list-group-item list-group-item-action border-0""><div class="d-flex ">' +
                             '<div class="p-2 h4 text-info" >ya no posee asignaciones Pendientes</div></div></li>');
                     }
                 }
-                $("#reasing-button").unbind( "click" );
+                $("#reasing-button").unbind("click");
             })
-            .fail(function () {
+                .fail(function () {
                     alert("Ha ocurrido un Error.");
-            });
+                });
         }
-        
+
     });
 
 
@@ -194,3 +206,4 @@ $('#add-comment-modal').on('show.bs.modal', function (event) {
     modal.find('#note_id').val(note_id);
     modal.find('#author_id').val(user_id);
 });
+
