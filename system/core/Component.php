@@ -134,7 +134,17 @@
 				}else{
 					$val = (is_array($elem)&&array_key_exists('id',$elem)?$elem['id']:$elem);
 				}
-				$txt.='<option value="'.$val.'" '.($val==$value?'selected':'').'>'.$tex.'</option>';
+				/* para el caso del select multiple */
+				if(is_array($value)){
+					$find = false;
+					foreach($value as $v){
+						if($val == $v)
+							$find=true;
+					}
+					$txt.='<option value="'.$val.'" '.($find?'selected':'').'>'.$tex.'</option>';
+				}else{
+					$txt.='<option value="'.$val.'" '.($val==$value?'selected':'').'>'.$tex.'</option>';
+				}
 			}
 			return $txt;
 		}
@@ -154,13 +164,24 @@
 				'</div>';
 		}
 		
-		public static function select_field($name,$value=null,$label=null,$data=null,$etc=null){
-			return '<div class="form-group  my-1">'.
+		/**
+		 * 
+		 */
+		public static function select_field($name,$value=null,$label=null,$data=null,$etc=null,$multiple=false){
+			return '<div class="form-group">'.
 			(!empty($label)?('<label for="'.$name.'"><small>'.$label.'</small></label>'):'').
-			'<select class="form-control select2" id="'.$name.'" name="'.$name.'" '.$etc.' >'.
-			'<option value="0" '.(0==$value?'selected':'').'>Elija Opcion</option>'.
-			Component::create_options($data,(is_array($value)?(isset($value[$name])?$value[$name]:''):$value)).
+			'<select '.($multiple?'multiple':'').' class="form-control select2'.($multiple?'_multiple':'').'" id="'.$name.'" name="'.$name.'" '.$etc.' >'.
+			($multiple?'':
+				'<option value="0" '.(0==$value?'selected':'').'>Elija Opcion</option>').
+			Component::create_options($data,(is_array($value)?(isset($value[$name])?$value[$name]:($multiple?$value:'')):$value)).
 			'</select></div>';
+		}
+		
+		/**
+		 * select de multiples valores
+		 */
+		public static function select_multiple_field($name,$value=null,$label=null,$data=null,$etc=null){
+			return select_field($name,$value,$label,$data,$etc,true);
 		}
 		
 		public static function data_list($name,$data=null){

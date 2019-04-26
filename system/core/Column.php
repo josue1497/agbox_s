@@ -21,6 +21,7 @@
 		public static $COLUMN_TYPE_EMAIL='EMAIL';
 		public static $COLUMN_TYPE_PASS='PASSWORD';
 		public static $COLUMN_TYPE_SELECT='SELECT';
+		public static $COLUMN_TYPE_SELECT_MULTIPLE='SELECT_MULTIPLE';
 		public static $COLUMN_TYPE_HIDDEN='HIDDEN';
 		public static $COLUMN_TYPE_FILE='FILE';
 		public static $COLUMN_TYPE_PHOTO='PHOTO';
@@ -160,7 +161,8 @@
 				self::$COLUMN_TYPE_NUMBER,self::$COLUMN_TYPE_PASS,
 				self::$COLUMN_TYPE_SELECT,self::$COLUMN_TYPE_TEXTAREA,
 				self::$COLUMN_TYPE_DATE,self::$COLUMN_TYPE_ICONPICKER,
-				self::$COLUMN_TYPE_FILE,self::$COLUMN_TYPE_PHOTO
+				self::$COLUMN_TYPE_FILE,self::$COLUMN_TYPE_PHOTO,
+				self::$COLUMN_TYPE_SELECT_MULTIPLE
 			);
 			foreach($valid_types as $valid_type)
 				if($valid_type == $this->column_type)
