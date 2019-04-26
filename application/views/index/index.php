@@ -141,7 +141,7 @@ function build_line($list_lines, $group_id,$pending=false){
                     'note-info-modal" data-note="'. $line['id'].'" 
                     data-title="'. $line['title'].'"  data-summary="'. $line['summary'].'"
                     data-group="'. $group_id.'" >' . $line['title'] . '</div>
-                    <div class="p-2"><small><b>' . strftime ( "%d %b %g" , strtotime($line['finish_date'])) . '</b></small></div>
+                    <div class="p-2"><small><b>' . @strftime ( "%d %b %g" , @strtotime($line['finish_date'])) . '</b></small></div>
                     <div class="ml-auto p-2">
                         <div class="d-flex flex-row">
                             <div class="mx-2" >

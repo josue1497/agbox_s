@@ -401,7 +401,7 @@
 				$notification_html.='<a class="dropdown-item d-flex align-items-center" onclick="toReadNotification(\''.$uri_to.'\',\''.$to_read.'\',\''.$notification['id'].'\');">
 							'.self::get_notification_icon($notification['notification_type'],$notification['read']).'
 							<div>
-								<div class="small text-gray-500">'.date("F j, Y, g:i a", strtotime($notification['shipping_date'])).'</div>
+								<div class="small text-gray-500">'. @date("F j, Y, g:i a", @strtotime($notification['shipping_date'])).'</div>
 									<span class="'.$text.'">'.$notification['message'].'</span>
 							</div>
 						</a>';
