@@ -57,7 +57,7 @@ class groupsController  extends Controller{
 			$this->model->after_save($_POST,$d["record"]['id']);
 			$group=array_merge($d["record"],$_POST);
 			$this->update_user_role_group();
-			if($this->model::save_record($this->model,$group)){
+			if(Group::save_record($this->model,$group)){
 			header("location: ".CoreUtils::base_url().'index/index');
 		}
 		}
