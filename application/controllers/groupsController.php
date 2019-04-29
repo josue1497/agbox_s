@@ -120,7 +120,7 @@ class groupsController  extends Controller{
 			$data=$_POST;
 			if($this->model->create($data)){
 				$group_record = (new Group)->findByPoperty(array('name'=>$data['name']));
-				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id'],'group_id'=>$group_record['id']),true)){
+				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id'],'group_id'=>$group_record['id'],'role_id'=>Role::get_member_id()),true)){
 						$this->update_user_role_group();
 				}
 				if(isset($data['user_affiliate'])){

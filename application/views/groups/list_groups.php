@@ -9,7 +9,7 @@ function generate_content($controller, $filename = null, $record = null)
     $table=generate_table($controller,$this_record);
     $table=str_replace('edit','group_information',$table);
 
-    $table=str_replace('btn btn-secondary','group_information',$table);
+    $table=str_replace('btn btn-secondary','d-none',$table);
 
     $title='<div class="d-flex align-items-center">Tus Grupos
             <div class=" ml-auto">
@@ -36,7 +36,7 @@ function generate_table($controller,$record){
     $notifi_table=' <div class="row container">
     <div class="col-12">
             <table id="notif" class="table table-striped table-hover w-100 display responsive">'
-            .$controller->view->auto_build_list_content($record, true, Session::get('user_id')===$record['leader_id']).'
+            .$controller->view->auto_build_list_content($record).'
                   </table>
     </div>
     </div>';
