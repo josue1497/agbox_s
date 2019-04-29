@@ -13,8 +13,9 @@
 		{{ intelix_todo_styles }} 
 </head>
 
-<body id="page-top">
+<body>
   <!-- Page Wrapper -->
+  <div  id="page-top">
   <div id="wrapper">
 		{{ intelix_todo_side }}
     <!-- Content Wrapper -->
@@ -32,6 +33,7 @@
     </div>
     <!-- End of Content Wrapper -->
 
+  </div>
   </div>
   <!-- End of Page Wrapper -->
 

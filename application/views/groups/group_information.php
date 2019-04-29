@@ -41,13 +41,19 @@
              
 
               if($is_leader){
-                     $form_group=$controller->auto_build_view('form',$this_group,$this_group);
+                     $form_group=$controller->view->auto_build_form_content($this_group,false);
+                     $form_group.=' <div class="d-flex flex-row justify-content-center">
+                                   <button class="btn btn-primary m-2">Guardar</button>
+                                   <a class="btn btn-secondary m-2 text-white">Cancelar</a>
+                                   <div class="btn bg-danger text-white m-2" onclick="if(confirm(\'¿Desea eliminar este grupo?\')){delete_group(1)}">Eliminar Grupo</div>
+                              </div>';
               }else{
                      $form_group=$controller->auto_build_view('info',$this_group,$this_group);
               }
 
               $form_group=str_replace('groups/index/','groups/list_groups/',$form_group);
-              // groups/index/
+           
+             
                      Session::set('group_id',$this_group['id']);
 
                      $button_add_note='<div class="btn-group dropleft ml-auto">
@@ -141,6 +147,10 @@
                                    });
 
                             });
+
+                            function delete_group(group_id){
+                                   alert(group_id);
+                            }
 
                             ");
                      }

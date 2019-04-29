@@ -9,7 +9,9 @@ function generate_content($controller, $filename = null, $record = null)
     $table=generate_table($controller,$this_record);
     $table=str_replace('edit','group_information',$table);
 
-    $title='<div class="d-flex">grupos
+    $table=str_replace('btn btn-secondary','d-none',$table);
+
+    $title='<div class="d-flex align-items-center">Tus Grupos
             <div class=" ml-auto">
             <a class="btn btn-primary" href="'.SERVER_DIR.'groups/create_group" '.Component::set_tooltip_info("Crea un Grupo").'><i class="fas fa-plus"></i></a>
             <a class="btn btn-primary" href="'.SERVER_DIR.'affiliate/items" '.Component::set_tooltip_info("Afiliate a un Grupo").'><i class="fas fa-user-plus"></i></a>
