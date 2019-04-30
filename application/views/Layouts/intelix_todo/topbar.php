@@ -7,16 +7,18 @@
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="width:50%;">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" >
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+
+          <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 mw-100 " style="width:50%;">
+          
+          <div class="input-group">
+            <input type="text" class="form-control border-top-0 border-left-0 rounded-0 border-primary" placeholder="Buscar... ">
+            <div class="input-group-append">
+              <button class="btn btn-primary">
+                <i class="fa fa-search"></i>
+              </button>
+          </div>
+          </div>
+  </div>
 
 		  <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -26,16 +28,16 @@
                 <i class="fas fa-search fa-fw"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
+                <div class="form-inline mr-auto w-100 ">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control bg-light border-0 small rounded-0" placeholder="Buscar..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
                       </button>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
             </li>
 
@@ -55,7 +57,7 @@
                   <div class="mh-100 overflow-auto">
                   {{ NOTIFICATION_DIV }}
                   </div>
-                  <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                  <a class="dropdown-item text-center small text-gray-500" href="{{ URL_NOTIFICATION }}">Mostrar Todas</a>
                 </div>
                 <!--
                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -95,11 +97,11 @@
               </div> 
             </li>
 
-            <!-- Nav Item - Messages -->
+            <!-- Nav Item - Messages 
              <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
-                 <!-- Counter - Messages  -->
+                 <!-- Counter - Messages  
                 <span class="badge badge-secondary badge-counter">7</span>
               </a>
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
@@ -150,9 +152,11 @@
               </div>
             </li>
 
-            <div class="topbar-divider d-none d-sm-block"></div>
+           
 
             <!-- Nav Item - User Information -->
+
+            <div class="topbar-divider d-none d-sm-block"></div>
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user_name }}</span>
@@ -162,20 +166,20 @@
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="{{ base_url }}user/profile">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                  Perfil
                 </a>
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
+                  Configuraciones
                 </a>
                 <a class="dropdown-item" href="#">
                   <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
+                  Registro de Actividad
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
+                  Cerrar Sesión
                 </a>
               </div>
             </li>
@@ -190,15 +194,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h5 class="modal-title  text-white" id="exampleModalLabel">Ready to Leave?</h5>
+          <h5 class="modal-title  text-white" id="exampleModalLabel">¿Listo para irse?</h5>
           <button class="close  text-white" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-body">¿Esta seguro que desea cerrar su sesion en este navegador?</div>
         <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-			<a class="btn btn-primary" href="{{ base_url }}index/login">Logout</a>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+			<a class="btn btn-primary" href="{{ base_url }}index/login">Aceptar</a>
         </div>
       </div>
     </div>

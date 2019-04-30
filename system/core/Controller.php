@@ -126,7 +126,11 @@
 			$this->view_processor->set_styles(CoreUtils::get_layout_template_content('styles',$this->layout));
 			$this->view_processor->set_scripts(CoreUtils::get_layout_template_content('scripts',$this->layout).
 					( isset($this->view) ? ('<script>'.$this->view->get_script_js().'</script>'):''));
-			$this->view_processor->set_footer(CoreUtils::get_layout_template_content('footer',$this->layout));
+			$this->view_processor->set_footer(
+			    str_replace(
+					'{{ FOOTER_INFO }}',
+					php_version(),
+					CoreUtils::get_layout_template_content('footer',$this->layout)));
 			
 			/* render */
 			echo $this->set_general_data($this->view_processor->build_view(),$filename);
@@ -226,7 +230,10 @@
 					CoreUtils::get_user_notification(),
 					$html_view);
 			
-
+			$html_view = str_replace(
+					'{{ URL_NOTIFICATION }}',
+					SERVER_DIR.'notification/show_all',
+					$html_view);
 				
 				return $html_view;
 		}
@@ -337,6 +344,11 @@
 		function action_list($obj,$auto_build=false,$filename){
 			$this->init($obj);
 			$d['records'] = $this->model->showAllRecords();
+			if(method_exists($this->model,'before_render_list')){
+				$tmp = $this->model->before_render_list($d["records"]);
+				if(isset($tmp))
+					$d["records"] = $tmp;
+			}
 			$this->set($d);
 			$this->render($filename,$auto_build);
 		}
@@ -344,9 +356,25 @@
 			$this->init($obj);
 			$d["record"]['form_action'] = 'Agregar';
 			if (isset($post[$this->model->name_fields[0]])){
+				if(method_exists($this->model,'before_save')){
+					$tmp = $this->model->before_save($post);
+					if(isset($tmp))
+						$post = $tmp;
+				}
 				if ($this->model->create($post)){
+					if(method_exists($this->model,'after_save')){
+						$row = $this->model->get_by_property($post);
+						$tmp = $this->model->after_save($post,$row[$this->model->name_fields[0]]);
+						if(isset($tmp))
+							$post = $tmp;
+					}
 					header("Location: " . WEBROOT .  $this->model->table_name."/index");
 				}
+			}
+			if(method_exists($this->model,'before_render_form')){
+				$tmp = $this->model->before_render_form($d["record"]);
+				if(isset($tmp))
+					$d["record"] = $tmp;
 			}
 			$this->set($d);
 			$this->render("form",$auto_build);
@@ -355,17 +383,40 @@
 			$this->init($obj);
 			$d["record"] = $this->model->get_by_id($id);
 			$d["record"]['form_action'] = 'Editar';
+			
 			if (isset($post[$this->model->name_fields[0]])){
+				if(method_exists($this->model,'before_save')){
+					$tmp = $this->model->before_save($post,$id);
+					if(isset($tmp))
+						$post = $tmp;
+				}
 				if ($this->model->edit($id,$post)){
+					if(method_exists($this->model,'after_save')){
+						$tmp = $this->model->after_save($post,$id);
+						if(isset($tmp))
+							$post = $tmp;
+					}
 					header("Location: " . WEBROOT .  $this->model->table_name."/index");
 				}
 			}
+			if(method_exists($this->model,'before_render_form')){
+				$tmp = $this->model->before_render_form($d["record"],$id);
+				if(isset($tmp))
+					$d["record"] = $tmp;
+			}
+			
 			$this->set($d);
 			$this->render("form",$auto_build);
 		}
 		function action_delete($id,$obj){
 			$this->init($obj);
+			if(method_exists($this->model,'before_delete')){
+				$this->model->before_delete($id);
+			}
 			if ($this->model->delete($id)){
+				if(method_exists($this->model,'after_delete')){
+					$this->model->after_delete($id);
+				}
 				header("Location: " . WEBROOT .  $this->model->table_name."/index");
 			}
 		}

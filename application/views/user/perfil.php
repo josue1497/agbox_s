@@ -149,8 +149,7 @@ function generate_affiliate_table($user_id){
 	r.name as 'role' , r.id as role_id 
 	from `affiliate` a inner join `user` u on(a.user_id=u.id) 
 	inner join groups g on (g.id=a.group_id)
-	inner join group_user_role gur on (gur.group_id=g.id and u.id=gur.user_id)
-	inner join `role` r on (r.id=gur.role_id) 
+	left join `role` r on (r.id=a.role_id) 
 	where a.user_id=? and a.approved='Yes'",array('user_id'=>$user_id));
 	
 	$table_affilates='<table class="table table-striped table-hover w-100 display responsive data-table">

@@ -54,86 +54,15 @@ class affiliateController extends Controller{
 	function items(){
 		$this->init(new Affiliate());
 		
-        $js=" Vue.component('affiliate-component',{
-            props : ['group_photo',
-                    'name',
-                    'user',
-                    'id'],
-            template : `<div class=\"col-md-3 p-3 m-2\">
-                            <div class=\"card rounded \" style=\"width: 18rem;\">
-                            <div class=\"d-flex justify-content-center\">
-                                <img class=\"card-img-top img-fluid image img-group\"  alt=\"Card image cap\"  v-bind:id=\"id\"/>
-                            </div>
-                            <div class=\"card-body\">
-                                   <h5 class=\"card-title text-center\">{{name}}</h5>
-                                   <hr />
-                                   <div class=\"d-flex justify-content-center\">
-                                           <button v-bind:m_id=\"id\" class=\"btn btn-primary\" v-on:click=\"sendAffiliationNotification(id,user);affiliated(id);\">Solicitar Afiliacion</button>
-                                   </div>
-                                </div>
-                            </div>`,
-            methods:{
-                sendAffiliationNotification: function(group_id, user_id){
-                var jqxhr = $.post( \"{{ URI_INSERT }}\",
-                                {user_id:user_id, group_id:group_id}, function(data, status) {
-
-                                    console.log(data);
-                                        })
-                        .fail(function() {
-                            alert( \"Ha ocurrido un Error.\" );
-                                        });
-                    },
-                getGroupPhoto: function(group_photo,id){
-                    var jqxhr = $.post( \"".SERVER_DIR."affiliate/get_img\",
-                                {group_photo:group_photo}, function(data, status) {
-                        if(group_photo===\"\" || group_photo==null){
-                            document.getElementById(id).src='https://i.ibb.co/pKgD4mH/image-group.png'
-                            
-                        }else{
-                       document.getElementById(id).src=data;
-                        }
-                                        })
-                        .fail(function() {
-                            alert( \"Ha ocurrido un Error.\" );
-                                        });
-                                      
-                    },
-                    affiliated: function (e){
-											console.log(e);
-											$('[m_id='+e+']').attr('id','m_'+e);
-											$('#m_'+e).attr('class', 'btn btn-success');
-                      $('#m_'+e).text('Solicitado');
-                      $('#m_'+e).attr('disabled','disabled');
-                    }},
-created:function () { 
-   this.getGroupPhoto(this.group_photo, this.id);
-    },
-
-       });
-var urlPosts = '{{ URI_DATA }}';
-var app = new Vue({
-  el: '#app',
-  created: function() {
-    this.getData()
-},
-  data : { groups: [],fill:false,load:false },
-  methods: {
-    getData: function() {
-        axios.get(urlPosts).then(response => {
-        this.fill=!response.data.length>0;
-        this.groups = response.data;
-        this.load=false;
-    });
-    }
-      }
-});";
+        $js=file_get_contents(JS_DIR . 'affiliate.js');
         $js = str_replace('{{ URI_DATA }}',SERVER_DIR."affiliate".'/get_data',$js);
         $js = str_replace('{{ URI_INSERT }}',SERVER_DIR."affiliate".'/insert_data',$js);
+        $js = str_replace('{{ PHOTO_GETTING }}',SERVER_DIR."affiliate/get_img",$js);
 
 
         $this->view->add_script_js($js);
 
-        $this->model->table_label = 'Afiliacion a Grupos';
+        $this->model->table_label = 'Afiliación a Grupos';
         $this->render("items");
 
     }
@@ -148,8 +77,7 @@ var app = new Vue({
     function insert_data(){  
 				$this->model = new Affiliate();
 
-				$gur = new Group_User_Role();
-				$user_to=$gur->get_user_by_role('L',$_POST['group_id']);
+				$user_to=$this->model->get_user_by_role('L',$_POST['group_id']);
 
 				$entity_to=Model::get_sql_data("select max(id)+1 as 'id' from affiliate");
         $affiliate_id=intval($entity_to[0]['id']);
@@ -194,7 +122,7 @@ var app = new Vue({
                           'role_id'=>$data['role_id']);
 
       
-      $req1=Group_User_Role::set_user_role($affiliate_record['group_id']
+      $req1=Affiliate::set_user_role($affiliate_record['group_id']
                 ,$affiliate_record['user_id'],$data['role_id']);
       if($req1){
         $affiliate_record['approved']=$data['approved'];
@@ -243,7 +171,7 @@ var app = new Vue({
       $affiliate_record['approved']=$data['approved'];
 
 
-      $leader_record= Group_User_Role::get_user_by_role('L',$affiliate_record['group_id']);
+      $leader_record= Affiliate::get_user_by_role('L',$affiliate_record['group_id']);
       $leader_id= $leader_record['id'];
 
       $user_model=new User();
@@ -255,7 +183,7 @@ var app = new Vue({
       if($data['approved']==='Yes'){
         if($affiliate_model->edit($affiliate_record['id'],$affiliate_record)){
         
-          if(Group_User_Role::set_user_role($affiliate_record['group_id'],
+          if(Affiliate::set_user_role($affiliate_record['group_id'],
                                             $affiliate_record['user_id'],
                                             $role_id)){
               Notification::create_notification(array('user_to_id'=>$leader_id,
@@ -286,6 +214,58 @@ var app = new Vue({
       }
 
     }
+
+    public function get_user_affiliate(){
+
+      $user_record = Model::get_sql_data("select u.id, CONCAT(u.names,' ',u.lastnames) text from `user` u where id in (select a.user_id from 
+                                    affiliate a inner join groups g on (a.group_id=g.id) 
+                                    where a.group_id=? and a.approved='Yes')", array('group_id'=>$_POST['group_id']));
+
+      echo json_encode($user_record);
+    }
+
+    /* metodos agregads de group_user_roleController */
+
+    public function update_group_user_role(){
+		$data = $_POST;
+
+		$group_name=Group::get_group_name($data['group-id']);
+		$role_name=Role::get_role_name($data['group_user_role']);
+
+		if(Affiliate::set_user_role($data['group-id'],$data['user-id'],$data['group_user_role'])){
+			if(Notification::create_notification(array('user_to_id'=>$data['user-id'], 
+				'message'=>'Su rol dentro del grupo '.$group_name.' ha cambiado',			
+				'entity_id'=>$data['group-id'],
+				'notification_type'=>Notification::$CHANGE_ROLE,
+				'controller_to'=>'groups/group_information',
+				'read'=>Notification::$NO))){
+				echo $data['affiliate-id'];
+			}else{
+				echo 'fail';
+			}
+		}else{
+			echo 'fail';
+		}
+	}
+
+	public function desaffiliate_group_user_role(){
+		$data = $_POST;
+		$group_name=Group::get_group_name($data['group-id']);
+		if(Affiliate::delete_group_user_role($data['user-id'],$data['group-id'],$data['group_user_role'])
+					&& Affiliate::delete_affiliation($data['affiliate-id'])){
+			if(Notification::create_notification(array('user_to_id'=>$data['user-id'], 
+			'message'=>'Usted fue Desafiliado del grupo '.$group_name.'',
+			'entity_id'=>'','notification_type'=>Notification::$DESAFFILIATE_USER,
+			'controller_to'=>'#',
+			'read'=>Notification::$NO))){
+						echo $data['affiliate-id'];
+			}else{
+				echo 'fail';
+			}
+		}else{
+			echo 'fail';
+		}
+	}
 
 }
 

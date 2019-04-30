@@ -29,7 +29,7 @@
 
 		$c = new Controller();
               $c->init($user_model);
-              $leader_user=Group_User_Role::get_user_by_role('L',$this_group['id']);
+              $leader_user=Affiliate::get_user_by_role('L',$this_group['id']);
               $is_leader=$leader_user['id']===Session::get('user_id');
 
              
@@ -45,6 +45,9 @@
               }else{
                      $form_group=$controller->auto_build_view('info',$this_group,$this_group);
               }
+
+              $form_group=str_replace('groups/index/','groups/list_groups/',$form_group);
+              // groups/index/
                      Session::set('group_id',$this_group['id']);
 
                      $button_add_note='<div class="btn-group dropleft ml-auto">
@@ -96,7 +99,7 @@
                             $('#save-button').click(function(){
 
                                    var role = $('#group_user_role option:selected').text();
-                                   $.post( '".SERVER_DIR."group_user_role/update_group_user_role',$('#form-user').serialize(), function( data ) {
+                                   $.post( '".SERVER_DIR."affiliate/update_group_user_role',$('#form-user').serialize(), function( data ) {
                                           
                                           console.log(data);
                                           if(''!==data && 'fail'!==data){
@@ -111,7 +114,7 @@
 
                             $('#desaffiliate-button').click(function(){
                                    if(confirm('¿Esta seguro que desea Desafiliar este usuario?')){
-                                   $.post( '".SERVER_DIR."group_user_role/desaffiliate_group_user_role',$('#form-user').serialize(), function( data ) {
+                                   $.post( '".SERVER_DIR."affiliate/desaffiliate_group_user_role',$('#form-user').serialize(), function( data ) {
                                           
                                           console.log(data);
                                           if(''!==data && 'fail'!==data){
@@ -152,8 +155,7 @@ function generate_affiliate_table($group_id, $is_leader){
        r.name as 'role', r.id  as 'role_id'  
        from `affiliate` a inner join `user` u on(a.user_id=u.id) 
        inner join groups g on (g.id=a.group_id)
-       inner join group_user_role gur on (gur.group_id=g.id and u.id=gur.user_id)
-       inner join `role` r on (r.id=gur.role_id) 
+       left join `role` r on (r.id=a.role_id) 
        where a.group_id=? and a.approved='Yes'",array('group_id'=>$group_id));
        
        $table_affilates='<table class="table table-striped table-hover w-100 display responsive data-table">

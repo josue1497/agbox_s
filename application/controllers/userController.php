@@ -45,7 +45,7 @@ class userController extends Controller{
 			$status = $affiliate_model->delete($affiliate_row['id']);
 		}
 		
-		$gur_model = new Group_User_Role();
+		$gur_model = new Affiliate();
 		$params['role_id']=$role_id;
 		$gur_row = $gur_model->get_by_property($params);
 

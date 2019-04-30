@@ -6,7 +6,7 @@ function generate_content($controller, $filename = null, $record = null)
 
     $html_result = file_get_contents(__DIR__ . '/note_information.html');
 
-    Group_User_Role::is_leader($this_note['group_id'],Session::get('user_id'));    
+    Affiliate::is_leader($this_note['group_id'],Session::get('user_id'));    
 
     $note_card=generate_note_card($this_note);
     $approved_card=generate_note_comment_table($this_note['id']);

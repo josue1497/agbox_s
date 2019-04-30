@@ -20,43 +20,43 @@ class Message extends Model{
                     ->set_visible_form(false),
 
                 (new Column('message'))
-                    ->set_label('message')
+                    ->set_label('mensaje')
                     ->set_name_key(),
 
                 (new Column('user_to'))
-                    ->set_label('user to')
+                    ->set_label('De')
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
                     ->set_fk_entity(new User())
                     ->set_visible_grid(false),
 
                 (new Column('user_from'))
-                    ->set_label('user to')
+                    ->set_label('Para')
                     ->set_type(Column::$COLUMN_TYPE_SELECT)
                     ->set_fk_entity(new User())
                     ->set_visible_grid(false),
 
                 (new Column('controller_to'))
-                    ->set_label('controller_to')
+                    ->set_label('Controlador')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
                     ->set_visible_grid(false),
 
                 (new Column('entity_id'))
-                    ->set_label('entity_id')
+                    ->set_label('Entidad para')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
                     ->set_visible_grid(false),
 
                 (new Column('message_type'))
-                    ->set_label('message type')
+                    ->set_label('Tipo de Mensaje')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
                     ->set_visible_grid(false),
 
                 (new Column('shipping_date'))
-                    ->set_label('shipping_date')
+                    ->set_label('Fecha de Envio')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
                     ->set_visible_grid(false),
 
                 (new Column('read'))
-                    ->set_label('read')
+                    ->set_label('Leido')
                     ->set_type(Column::$COLUMN_TYPE_TEXT)
                     ->set_visible_grid(false)                
             )

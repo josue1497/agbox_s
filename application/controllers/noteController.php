@@ -244,16 +244,15 @@ class noteController extends Controller{
 			$user_id = $note_record['performer_id'];
 			$group_id = $note_record['group_id'];
 			$note_record['status_id']=Status::get_complete_status();
-			$leader_id=Group_User_Role::get_user_by_role('L',$group_id);
+			$leader_id=Affiliate::get_user_by_role('L',$group_id);
 
 			if(Model::save_record($this->model,$note_record)){
 					Note_Comment::create_comment($id,$user_id, $message_complete);
 					Notification::create_notification(array('user_to_id'=>$leader_id['id'],
-																									'message'=>'Asignacion completada',
-																									'entity_id'=>$id,
-																									'notification_type'=>Notification::$ASSINGMENT_COMPLETE,
-																									'controller_to'=>'note/assigment_complete',
-																									'read'=>Notification::$NO));
+					'message'=>'Asignacion completada',	'entity_id'=>$id,
+					'notification_type'=>Notification::$ASSINGMENT_COMPLETE,
+					'controller_to'=>'note/assigment_complete',
+					'read'=>Notification::$NO));
 					echo $id;
 			}else{
 				echo 'fail';
@@ -270,7 +269,7 @@ class noteController extends Controller{
 			$user_id = $note_record['performer_id'];
 			$group_id = $note_record['group_id'];
 			$note_record['status_id']=Status::get_paused_status();
-			$leader_id=Group_User_Role::get_user_by_role('L',$group_id);
+			$leader_id=Affiliate::get_user_by_role('L',$group_id);
 			$note_record['performer_id']=$leader_id;
 
 			if(Model::save_record($this->model,$note_record)){
