@@ -10,14 +10,16 @@
 
           <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 mw-100 " style="width:50%;">
           
-          <div class="input-group">
-            <input type="text" class="form-control border-top-0 border-left-0 rounded-0 border-primary" placeholder="Buscar... ">
+          <form action="{{ base_url }}search/query" method="post">
+		  <div class="input-group">
+            <input name="q" type="text" class="form-control border-top-0 border-left-0 rounded-0 border-primary" placeholder="Buscar... ">
             <div class="input-group-append">
               <button class="btn btn-primary">
                 <i class="fa fa-search"></i>
               </button>
+			</div>
           </div>
-          </div>
+		  </form>
   </div>
 
 		  <!-- Topbar Navbar -->

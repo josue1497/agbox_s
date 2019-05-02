@@ -96,8 +96,7 @@ $('#completed-note-info-modal').on('show.bs.modal', function (event) {
 
     $.post("{{ COMMMENT_DATA }}", { 'note_id': note_id }, function (data, status) {
         var members = data;
-
-        $('#comment_content').html(members);
+        $('#comment_content2').html(members);
 
     })
         .fail(function () {
@@ -120,7 +119,7 @@ $('#note-info-modal').on('show.bs.modal', function (event) {
 
     $.post("{{ COMMMENT_DATA }}", { 'note_id': note_id }, function (data, status) {
         var members = data;
-
+        
         $('#comment_content').html(members);
 
     })

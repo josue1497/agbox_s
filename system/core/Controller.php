@@ -126,7 +126,11 @@
 			$this->view_processor->set_styles(CoreUtils::get_layout_template_content('styles',$this->layout));
 			$this->view_processor->set_scripts(CoreUtils::get_layout_template_content('scripts',$this->layout).
 					( isset($this->view) ? ('<script>'.$this->view->get_script_js().'</script>'):''));
-			$this->view_processor->set_footer(CoreUtils::get_layout_template_content('footer',$this->layout));
+			$this->view_processor->set_footer(
+			    str_replace(
+					'{{ FOOTER_INFO }}',
+					date("Y"),
+					CoreUtils::get_layout_template_content('footer',$this->layout)));
 			
 			/* render */
 			echo $this->set_general_data($this->view_processor->build_view(),$filename);
@@ -230,7 +234,6 @@
 					'{{ URL_NOTIFICATION }}',
 					SERVER_DIR.'notification/show_all',
 					$html_view);
-
 				
 				return $html_view;
 		}

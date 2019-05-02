@@ -48,6 +48,11 @@ function generate_content($controller, $filename = null, $record = null){
     $completadas='<div class="p-3 h3 text-center text-info">No posee asignaciones Completadas</div>';
   }
 
+  $cerradas = get_closed_notes($list);
+  if(empty($cerradas)){
+    $cerradas='<div class="p-3 h3 text-center text-info">No posee asignaciones cerradas</div>';
+  }
+
 
   $html_result = file_get_contents(__DIR__ . '/index.html');
 
@@ -55,7 +60,9 @@ function generate_content($controller, $filename = null, $record = null){
 
   $html_result = str_replace('{{ PENDINGS_NOTES }}', CoreUtils::add_new_card($pendientes, 'Pendientes', "9"), $html_result);
 
-    $html_result = str_replace('{{ completed_notes }}', CoreUtils::add_new_card($completadas, 'Completadas', "9"), $html_result);
+  $html_result = str_replace('{{ completed_notes }}', CoreUtils::add_new_card($completadas, 'Completadas', "9"), $html_result);
+
+  $html_result = str_replace('{{ closed_notes }}', CoreUtils::add_new_card($cerradas, 'Cerradas', "9"), $html_result);
 
   return $html_result;
 }
@@ -67,11 +74,15 @@ function generate_content($controller, $filename = null, $record = null){
  * @return type
  */
 function get_pending_notes($list_group){
-	return get_notes($list_group,true);
+	return get_notes($list_group,'P');
 }
 
 function get_completed_notes($list_group){
-	return get_notes($list_group);
+	return get_notes($list_group,'CO');
+}
+
+function get_closed_notes($list_group){
+	return get_notes($list_group,'C');
 }
 
 /**
@@ -81,23 +92,22 @@ function get_completed_notes($list_group){
  * @param type $note_status 
  * @return type
  */
-function get_notes($list_group,$pending=false){
+function get_notes($list_group,$pending){
   $function_result = '';
   $note_model = new Note();
   $user_id = Session::get('user_id');
   foreach ($list_group as $group) {
+    $query="select n.id ,n.title, n.finish_date, n.group_id , n.summary,
+    g.name from note n 
+    inner join note_type nt on (nt.id=n.note_type_id)
+    inner join status s on (s.id=n.status_id)
+    inner join `user` u on (n.performer_id=u.id)
+    inner join groups g on (g.id=n.group_id)
+    where n.performer_id=" . $user_id . " and g.id=" . $group['group_id'] .
+    " and s.value='".$pending."' and nt.value='AS'
+    order by n.finish_date";
 
-    $note_list = Model::get_sql_data(
-      "select n.id ,n.title, n.finish_date, n.group_id , n.summary,
-      g.name from note n 
-      inner join note_type nt on (nt.id=n.note_type_id)
-      inner join status s on (s.id=n.status_id)
-      inner join `user` u on (n.performer_id=u.id)
-      inner join groups g on (g.id=n.group_id)
-      where n.performer_id=" . $user_id . " and g.id=" . $group['group_id'] .
-      ($pending ? " and s.value='P'":" and s.value<>'P'")." and nt.value='AS'
-      order by n.finish_date"
-    );
+    $note_list = Model::get_sql_data($query);
     if (!empty($note_list)) {
       $function_result .= build_groups($group, $note_list,$pending);
     }else{
@@ -132,7 +142,7 @@ function build_groups($group, $list, $pending=false){
   return $result;
 }
 
-function build_line($list_lines, $group_id,$pending=false){
+function build_line($list_lines, $group_id,$pending){
   $result = '';
   
   setlocale(LC_ALL,"es_ES");
@@ -140,7 +150,7 @@ function build_line($list_lines, $group_id,$pending=false){
     $result .= '<li class="list-group-item list-group-item-action border-0" id="'.$line['id'].'">
                 <div class="d-flex ">
                     <div class="p-2" data-toggle="modal" data-target="#'.
-                    ($pending?'':'completed-').
+                    (build_buttons($pending)?'':'completed-').
                     'note-info-modal" data-note="'. $line['id'].'" 
                     data-title="'. $line['title'].'"  data-summary="'. $line['summary'].'"
                     data-group="'. $group_id.'" >' . $line['title'] . '</div>
@@ -148,7 +158,7 @@ function build_line($list_lines, $group_id,$pending=false){
                     <div class="ml-auto p-2">
                         <div class="d-flex flex-row">
                             <div class="mx-2" >
-                              '.($pending?'<a  data-toggle="modal" data-target="#add-comment-modal" data-note="'. $line['id'].'" 
+                              '.(build_buttons($pending)?'<a  data-toggle="modal" data-target="#add-comment-modal" data-note="'. $line['id'].'" 
                                    data-title="'. $line['title'].'" data-author="'.Session::get('user_id').'" >
                                   <i class="fas fa-comments fa-lg text-secondary" '.Component::set_tooltip_info("Añadir comentario de Avance").'></i>
                               </a>':'').'
@@ -160,4 +170,10 @@ function build_line($list_lines, $group_id,$pending=false){
   }
 
   return $result;
+}
+
+function build_buttons($status){
+
+  return $status==Status::get_pending_status();
+
 }

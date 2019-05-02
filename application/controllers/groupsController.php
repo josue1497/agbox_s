@@ -58,7 +58,7 @@ class groupsController  extends Controller{
 			$group=array_merge($d["record"],$_POST);
 			$this->update_user_role_group();
 			if($this->model::save_record($this->model,$group)){
-			header("location: ".CoreUtils::base_url().'index/index');
+			header("location: ".CoreUtils::base_url().'groups/group_information/'.$id);
 		}
 		}
 
@@ -118,8 +118,6 @@ class groupsController  extends Controller{
 
 		if(isset($_POST) && isset($_POST['name'])){
 			$data=$_POST;
-			// echo json_encode($_FILES);
-			// echo json_encode($data);
 			if($this->model->create($data)){
 				$group_record = (new Group)->findByPoperty(array('name'=>$data['name']));
 				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id'],'group_id'=>$group_record['id'],'role_id'=>Role::get_leader_id()),true)){

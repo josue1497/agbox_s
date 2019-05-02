@@ -57,6 +57,7 @@
 			[5, 10, 25, 50, -1],
 			[5, 10, 25, 50, "All"]
 		],
+		"ordering": false,
 		"language": {
 			"lengthMenu": "Mostrar _MENU_ lineas",
 			"zeroRecords": "Lo siento, no hay datos para mostrar",

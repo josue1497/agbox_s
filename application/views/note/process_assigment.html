@@ -20,11 +20,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="form-user" onsubmit="return false;">
-            <input type="hidden" class="form-control" id="note-id" name="affiliate-id">
+          <form id="form-sent" onsubmit="return false;">
+            <input type="hidden" class="form-control" id="note-id" name="note-id">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Comentario:</label>
-              <input type="text" class="form-control" id="user-name">
+              <input type="text" class="form-control" id="comment" name="comment">
             </div>
               {{ USERS }}
           </form>
@@ -49,17 +49,17 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="form-user" onsubmit="return false;">
-            <input type="hidden" class="form-control" id="note-id" name="affiliate-id">
+          <form id="close-form" onsubmit="return false;">
+            <input type="hidden" class="form-control" id="note-id" name="note-id">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Comentario:</label>
-              <input type="text" class="form-control" id="user-name">
+              <input type="text" class="form-control" id="close-comment" name="close-comment">
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="send-button">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="send-button2">Cerrar</button>
         </div>
       </div>
     </div>

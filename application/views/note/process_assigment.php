@@ -4,17 +4,21 @@ function generate_content($controller, $filename = null, $record = null)
 
     $this_note=$controller->vars['record'];
 
-    $html_result = file_get_contents(__DIR__ . '/assigment_reasing.html');
+    $html_result = file_get_contents(__DIR__ . '/process_assigment.html');
     $note_card=generate_note_card($this_note);
     $approved_card=generate_note_comment_table($this_note['id']);
 
     $html_result = str_replace('{{ NOTE_INFO }}', CoreUtils::add_new_card($note_card, 'Información '), $html_result);
 	// $html_result = str_replace('profile-img', 'profile-img-info d-flex justify-content-center', $html_result);
-  $html_result = str_replace('{{ APPROVE_USERS }}', CoreUtils::add_new_card($approved_card, 'Comentarios'), $html_result);
+    $html_result = str_replace('{{ APPROVE_USERS }}', CoreUtils::add_new_card($approved_card, 'Comentarios'), $html_result);
   
-  $html_result = str_replace('{{ USERS }}', generate_select_user($this_note['group_id']), $html_result);
+   $html_result = str_replace('{{ USERS }}', generate_select_user($this_note['group_id']), $html_result);
 	// $html_result=str_replace('{{ APPROVE_BUTTON }}',generate_button_approve($this_note['id'], Session::get('user_id')),$html_result);
 
+    $js= file_get_contents(JS_DIR.'note.js');
+    $js= str_replace('{{ REASING }}',SERVER_DIR.'note/assigment_reasing',$js);
+    $js= str_replace('{{ CLOSED }}',SERVER_DIR.'note/assigment_complete',$js);
+    $controller->view->add_script_js($js);
     return $html_result;
 }
 
@@ -54,7 +58,7 @@ function generate_note_card($note){
 function generate_note_comment_table($note_id){
   $note_group=Model::get_sql_data("SELECT nc.note_id ,concat(u.names,' ',u.lastnames) as 'user_names', nc.date_comment, nc.comment 
   from note_comment nc inner join `user` u on (u.id=nc.author_id) 
-  where note_id=?",array('note_id'=>$note_id));
+  where note_id=? order by nc.date_comment desc",array('note_id'=>$note_id));
 
 
 	$table_notes='<table class="table table-striped table-hover w-100 display responsive data-table">
@@ -81,7 +85,7 @@ function generate_note_comment_table($note_id){
 
 function generate_select_user($group_id){
 
-  $users=Model::get_sql_data("select * from user where id not in (select user_id from affiliate where group_id=? and approved='Yes')",array('group_id'=>$group_id));
+  $users=Model::get_sql_data("select * from user where id in (select user_id from affiliate where group_id=? and approved='Yes')",array('group_id'=>$group_id));
 
   $html='<div class="form-group">
   <label for="user_approved_id">Reasignar a:</label>
