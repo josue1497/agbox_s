@@ -118,10 +118,13 @@ class groupsController  extends Controller{
 
 		if(isset($_POST) && isset($_POST['name'])){
 			$data=$_POST;
+			// echo json_encode($_FILES);
+			// echo json_encode($data);
 			if($this->model->create($data)){
 				$group_record = (new Group)->findByPoperty(array('name'=>$data['name']));
-				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id'],'group_id'=>$group_record['id'],'role_id'=>Role::get_member_id()),true)){
+				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id'],'group_id'=>$group_record['id'],'role_id'=>Role::get_leader_id()),true)){
 						$this->update_user_role_group();
+						$this->model->after_save($_POST,$group_record['id']);
 				}
 				if(isset($data['user_affiliate'])){
 						foreach($data['user_affiliate'] as $user){
@@ -129,7 +132,7 @@ class groupsController  extends Controller{
 						}
 				}
 				if($pass){
-					echo $group_record['id'];
+					header("location: ".CoreUtils::base_url().'groups/group_information/'.$group_record['id']);
 				}				
 			}
 		}else{
@@ -147,7 +150,7 @@ class groupsController  extends Controller{
 		inner join affiliate a on (a.group_id=g.id)
 		inner join `user` u on (u.id=a.user_id) 
 		left join `role` r on (r.id=a.role_id)
-		where g.id=?", array('group_id'=>$id));
+		where g.id=? and a.approved='Yes'", array('group_id'=>$id));
 
 		header('Content-Type: application/json');
   	echo json_encode($group_record,JSON_PRETTY_PRINT);

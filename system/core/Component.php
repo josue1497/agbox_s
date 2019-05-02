@@ -60,7 +60,7 @@
 				 <img id="'.$name.'_photo" class=" img-fluid" src="'.(!empty($value)?(''.Component::img_to_base64(UPLOADS_DIR.$value).'"'):'https://t4.ftcdn.net/jpg/02/15/84/43/240_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"').
                      'alt="" />'.
 			' <div class="file btn btn-lg btn-info">'.
-			' Change Photo <input type="file" '.
+			' Change Photo <input type="file" class="form-control" '.
 			'id="'.$name.'" '.
 			(!empty($file_accept)?('accept="'.$file_accept.'"'):'').
 			'name="'.$name.'" '.
