@@ -68,9 +68,9 @@
                      </div>
                    </div>';
 
-                     $tile_affiliate='<div class="d-flex">Affiliate'.($is_leader?'<button class="btn btn-primary ml-auto" id="add_affiliate"
+                     $tile_affiliate='<div class="d-flex align-items-center">Participantes'.($is_leader?'<button class="btn btn-primary ml-auto" id="add_affiliate"
                      data-toggle="modal" data-target="#modal-affiliate"><i class="fas fa-plus"></i></button>':'</div>');
-                     $title_note='<div class="d-flex">Group´s Notes'.$button_add_note.'</div>';
+                     $title_note='<div class="d-flex align-items-center">Notas'.$button_add_note.'</div>';
                      
                      $html_result=file_get_contents(__DIR__.'/body.html');
                      

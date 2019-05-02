@@ -3,7 +3,7 @@
 <!--
 <script src="{{ base_url }}application/views/Layouts/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 -->
-<script src="{{ base_url }}application/views/Layouts/scripts/jquery.3.3.1.min.js"></script>
+
 <!-- jQuery CDN - - >
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- Bootstrap CDN - - >
@@ -27,18 +27,17 @@
 
 <script src="{{ base_url }}application/views/Layouts/scripts/functions.js"></script>
 
-<script src="{{ base_url }}application/views/Layouts/DataTables/datatables.js"></script>
+<script src="{{ base_url }}application/views/Layouts/DataTables/datatables.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script> -->
 
 <script src="{{ base_url }}application/views/Layouts/scripts/select2.full.js"></script>
-
-<!-- <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script> -->
 
 <script src="{{ base_url }}application/views/Layouts/scripts/vue.js"></script>
 
 <script src="{{ base_url }}application/views/Layouts/scripts/axios.js"></script>
 
 <script type="text/javascript" src="{{ base_url }}application/views/Layouts/slick/slick.min.js"></script>
+
 
 <script>
 	$('.select2').select2({
@@ -48,19 +47,41 @@
 	$('.select2_multiple').select2({
 		placeholder: 'Select an option',
 		width: '100%',
-		tags:true
+		tags: true
 	});
-	
 </script>
 
 <script>
 	$('.data-table').DataTable({
-		"lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]]
+		"lengthMenu": [
+			[5, 10, 25, 50, -1],
+			[5, 10, 25, 50, "All"]
+		],
+		"language": {
+			"lengthMenu": "Mostrar _MENU_ lineas",
+			"zeroRecords": "Lo siento, no hay datos para mostrar",
+			"info": "Pagina _PAGE_ de _PAGES_",
+			"infoEmpty": "Registros no encontrados",
+			"infoFiltered": "(Filtrados desde _MAX_ registros totales)",
+			"search": "<i class=\"fas fa-search\"></i>",
+			"paginate": {
+				"first": "Primero",
+				"last": "Último",
+				"next": "<i class=\"fas fa-angle-double-right\"></i>",
+				"previous": "<i class=\"fas fa-angle-double-left\"></i>"
+			},
+		}
 	});
 </script>
 
 <script>
 	$(function() {
 		$('[data-toggle="tooltip"]').tooltip()
+	});
+</script>
+
+<script>
+	$(function() {
+		$('[data-toggle="popover"]').popover()
 	});
 </script>

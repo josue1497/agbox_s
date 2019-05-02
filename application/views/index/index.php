@@ -6,7 +6,7 @@ function generate_content($controller, $filename = null, $record = null){
     "select gur.group_id,g.name,g.group_photo,g.description
 		from groups g 
 		inner join affiliate gur on g.id=gur.group_id 
-    where gur.user_id=?";
+    where gur.user_id=? and gur.approved='Yes'";
 
   $list = Model::get_sql_data($sql_groups, array('user_id' => Session::get('user_id')));
   $list_html = "";
@@ -27,8 +27,8 @@ function generate_content($controller, $filename = null, $record = null){
               </div>
               <a class="text-decoration-none" href="#' . $map['group_id'] . '">
                 <div class="d-flex justify-content-center">
-                  <div class="mt-1">
-                    <div class="h6 mb-0 font-weight-bold text-gray-800"><p class="h6 text-center">' . $map['name'] . '</p></div>
+                  <div class="mt-1 w-100">
+                    <div class="h6 mb-0 font-weight-bold text-gray-800 mw-100"  '.Component::set_tooltip_info($map['name']).'><p class="h6 text-center text-truncate">' . $map['name'] . '</p></div>
                   </div>
                 </div>
                 </a>
@@ -114,7 +114,9 @@ function build_groups($group, $list, $pending=false){
     <div class="row">
       <div class="col-6 d-flex justify-content-center">
         <a href="' . SERVER_DIR . 'groups/group_information/' . $group['group_id'] . '" class="text-decoration-none">
-          <h3 class="text-mutted ml-2">' . $group['name'] . '</h3>
+          <div class="w-100">
+            <h3 class="text-mutted ml-2 text-truncate">' . $group['name'] . '</h3>
+          </div>  
         </a>
       </div>
     </div>
@@ -148,7 +150,7 @@ function build_line($list_lines, $group_id,$pending=false){
                             <div class="mx-2" >
                               '.($pending?'<a  data-toggle="modal" data-target="#add-comment-modal" data-note="'. $line['id'].'" 
                                    data-title="'. $line['title'].'" data-author="'.Session::get('user_id').'" >
-                                  <i class="fas fa-comment-alt-edit fa-lg text-secondary" '.Component::set_tooltip_info("Añadir comentario de Avance").'></i>
+                                  <i class="fas fa-comments fa-lg text-secondary" '.Component::set_tooltip_info("Añadir comentario de Avance").'></i>
                               </a>':'').'
                             </div>
                         </div>

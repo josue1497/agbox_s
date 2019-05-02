@@ -2,7 +2,7 @@
 $(document).ready(function () {
     $('.slide-cont').slick({
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 1000,
         slidesToShow: 8,
         slidesToScroll: 4,
@@ -74,7 +74,6 @@ $('#group_info_modal').on('show.bs.modal', function (event) {
         });
 
         $('#member-list').html(members);
-        // $('#leader-list').html(leader);
 
         leader = '';
         members = '';

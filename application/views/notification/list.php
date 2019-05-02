@@ -10,7 +10,21 @@ function generate_content($controller, $filename = null, $record = null)
         "scrollCollapse": true,
         "ordering": false,
         "searching": false,
-        "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]]
+        "lengthMenu": [[5,10, 25, 50, -1], [5,10, 25, 50, "All"]],
+        "language": {
+			"lengthMenu": "Mostrar _MENU_ lineas",
+			"zeroRecords": "Lo siento, no hay datos para mostrar",
+			"info": "Pagina _PAGE_ de _PAGES_",
+			"infoEmpty": "Registros no encontrados",
+			"infoFiltered": "(Filtrados desde _MAX_ registros totales)",
+			"search": "<i class=\"fas fa-search\"></i>",
+			"paginate": {
+				"first": "Primero",
+				"last": "Último",
+				"next": "<i class=\"fas fa-angle-double-right\"></i>",
+				"previous": "<i class=\"fas fa-angle-double-left\"></i>"
+            }
+        }
     } );');
 
     return $html_result;
