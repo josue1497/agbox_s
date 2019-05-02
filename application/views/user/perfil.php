@@ -68,7 +68,7 @@ function generate_content($controller, $filename = null, $record = null)
 	$user_card = str_replace('container', '', $user_card);
 	$groups_card = str_replace('container', '', $groups_card);
 
-	$tile_affiliate='<div class="d-flex">Groups
+	$tile_affiliate='<div class="d-flex align-items-center">Mis Grupos
 		<button class="btn btn-primary ml-auto" id="add_affiliate" onclick="location.href=\''.CoreUtils::base_url().'affiliate/items/'.Session::get('user_id').'\'"><i class="fas fa-plus"></i></button></div>';
 
 		$button_add_note='<div class="btn-group dropleft ml-auto">
@@ -82,13 +82,13 @@ function generate_content($controller, $filename = null, $record = null)
 		<a class="dropdown-item" href="'.SERVER_DIR.'note/create_agenda_point">Punto de Agenda</a>
 		</div>
 	  </div>';
-	$title_note='<div class="d-flex">User´s Notes'.$button_add_note.'</div>';
+	$title_note='<div class="d-flex align-items-center">Mis Notas'.$button_add_note.'</div>';
 			 
 	
 
 	// $user_card = str_replace('col-md-12 col-md-offset-2', 'col-lg-6 mb-4', $user_card);
 	// $groups_card = str_replace('col-md-12 col-md-offset-2', 'col-lg-6 mb-4', $groups_card);
-	$html_result = str_replace('{{ USER_CARD }}', CoreUtils::add_new_card($user_card, 'User information '), $html_result);
+	$html_result = str_replace('{{ USER_CARD }}', CoreUtils::add_new_card($user_card, 'Información de Usuario '), $html_result);
 	$html_result = str_replace('profile-img', 'profile-img-info d-flex justify-content-center', $html_result);
 	$html_result = str_replace('{{ GROUPS_CARD }}', CoreUtils::add_new_card($groups_card, $tile_affiliate), $html_result);
 	$html_result = str_replace('{{ NOTES_USER }}', CoreUtils::add_new_card($notes_card, $title_note), $html_result);

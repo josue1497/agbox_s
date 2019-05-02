@@ -275,7 +275,7 @@ class noteController extends Controller{
 			if(Model::save_record($this->model,$note_record)){
 					Note_Comment::create_comment($id,$user_id, $message_complete);
 					Notification::create_notification(array('user_to_id'=>$leader_id['id'],
-																									'message'=>'Solicitud de reasignacion de tarea',
+																									'message'=>'Solicitud de reasignación',
 																									'entity_id'=>$id,
 																									'notification_type'=>Notification::$ASSINGMENT_REASING,
 																									'controller_to'=>'note/assigment_reasing',

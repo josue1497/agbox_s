@@ -16,6 +16,11 @@ function generate_content($controller, $filename = null, $record = null)
     if(isset($controller->vars['records']))
         $record = $controller->vars['records'];
 
+        $model_note->set_fields_values('group_id',(new Group)->get_select_data_with_params(
+            array('id'=>'in (select a.group_id from affiliate a inner join `user` u on (u.id=a.user_id) 
+                        where a.user_id='.Session::get('user_id').' and approved=\'Yes\')')
+                    )); 
+
     $form_card=$controller->view->auto_build_form_content($record);
     $form_card = str_replace('m-1 btn btn-secondary','d-none disable', $form_card);
    
@@ -26,7 +31,7 @@ function generate_content($controller, $filename = null, $record = null)
     // $note_card=generate_note_card($this_note);
     // $approved_card=generate_note_approved_table($this_note['id']);
 
-    $html_result = str_replace('{{ FORM }}', CoreUtils::add_new_card($form_card, 'Compromiso'), $html_result);
+    $html_result = str_replace('{{ FORM }}', CoreUtils::add_new_card($form_card, 'Acuerdo'), $html_result);
     // $html_result = str_replace('<a id="link_cancel" href="/abx_app/note/index/" class="m-1 btn btn-secondary ">
     //                 <i class="fas fa-times-circle "></i><span> Cancelar </span></a>','', $html_result);
 	$html_result=str_replace('{{ APPROVE_USERS }}',CoreUtils::add_new_card($select_user, 'Aprobadores'),$html_result);

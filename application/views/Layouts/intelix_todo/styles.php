@@ -30,11 +30,19 @@
 
 
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/styles/select2.min.css" />
-<link href="https://pro-next.fontawesome.com/releases/v5.8.1/css/all.css" data-prerender="keep" rel="stylesheet">
+<link href="{{ base_url }}application/views/Layouts/styles/all.css">
 
 
 <link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/slick/slick-theme.css"/>
+
+<script src="{{ base_url }}application/views/Layouts/scripts/jquery.3.3.1.min.js"></script>
+
+<script>
+$(window).on('load',function() {
+ $(".loader").hide();
+});
+</script>
 
 <!-- <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/> -->

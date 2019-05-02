@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
   <!-- Page Wrapper -->
   <div  id="page-top">
   <div id="wrapper">
@@ -23,6 +24,7 @@
 
       <!-- Main Content -->
       <div id="content" class="bg-light ">
+      <div class="loader"></div>
 		{{ intelix_todo_topbar }}
 		<!-- --- BEGIN CARD ---- -->
 		{{ intelix_todo_content }}

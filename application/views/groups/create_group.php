@@ -15,21 +15,16 @@
 
                     //  $controller->view->add_script_js("
                     //       $('#save-group-button').click(function(){
-                    //           if(validateFields()){
-                    //               $.post( '".SERVER_DIR."groups/create_group',
+                    //         $.post( '".SERVER_DIR."groups/create_group',
                     //         $('#form-group').serialize(), function( data ) {
                     //                console.log(data);
                     //                if(''!==data && 'fail'!==data){
-                    //                 $('#save-group-button').unbind('click');
                     //                    location.href='".SERVER_DIR."groups/group_information/'+data+'';
                     //                }else{
                     //                   alert('fail');   
                     //                }
                     //              });
-                         
-                    //           } 
-                    //         });
-                            
+                    //       });
                     //        ");
 
                      return $html_result;
