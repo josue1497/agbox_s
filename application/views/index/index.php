@@ -11,6 +11,18 @@ function generate_content($controller, $filename = null, $record = null){
   $list = Model::get_sql_data($sql_groups, array('user_id' => Session::get('user_id')));
   $list_html = "";
 
+   $controller->view->add_script_js("
+   		function show_for(item){
+   			if(item == 0){
+  				$('.group_note').show();
+  				$('.ver_todo').hide();
+  			}else{
+  				$('.group_note').hide();
+  				$('.group_note_'+item).show();
+  				$('.ver_todo').show();
+  			}
+  		}");
+
   foreach ($list as $map) {
     $photo = $map['group_photo'] ? Component::img_to_base64(UPLOADS_DIR . $map['group_photo']) : 'https://i.ibb.co/pKgD4mH/image-group.png';
     $list_html .= '
@@ -19,13 +31,15 @@ function generate_content($controller, $filename = null, $record = null){
               <div class="d-flex flex-column">
               <div class="d-flex justify-content-center">
                 <div class="d-flex align-items-center">
-                  <a class="text-decoration-none" href="#' . $map['group_id'] . '">
+                <!-- ancla -->
+                  <a class="text-decoration-none" href="javascript:show_for(' . $map['group_id'] . ')">
                      <i class="fas fa-2x text-gray-300"><img class="img-profile rounded-circle img-profile-user" src="' . $photo . '"></i>&nbsp;&nbsp;</a>
                   <a href="#" data-toggle="modal" data-target="#group_info_modal" data-group-name="' . $map['name'] . '"
                   data-group-id="' . $map['group_id'] . '" data-group-desc="' . $map['description'] . '" ><i class="fas fa-ellipsis-v text-secondary" '.Component::set_tooltip_info("información rápida").'></i></a>
                 </div>
               </div>
-              <a class="text-decoration-none" href="#' . $map['group_id'] . '">
+              <!-- ancla -->
+              <a class="text-decoration-none" href="javascript:show_for(' . $map['group_id'] . ')">
                 <div class="d-flex justify-content-center">
                   <div class="mt-1 w-100">
                     <div class="h6 mb-0 font-weight-bold text-gray-800 mw-100"  '.Component::set_tooltip_info($map['name']).'><p class="h6 text-center text-truncate">' . $map['name'] . '</p></div>
@@ -58,11 +72,12 @@ function generate_content($controller, $filename = null, $record = null){
 
   $html_result = str_replace('{{ groups_horizontal_list }}', $list_html, $html_result);
 
-  $html_result = str_replace('{{ PENDINGS_NOTES }}', CoreUtils::add_new_card($pendientes, 'Pendientes', "9"), $html_result);
+  $html_result = str_replace('{{ PENDINGS_NOTES }}', CoreUtils::add_new_card($pendientes, 'Pendientes  <a class="ver_todo" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>', "9"), $html_result);
 
-  $html_result = str_replace('{{ completed_notes }}', CoreUtils::add_new_card($completadas, 'Completadas', "9"), $html_result);
+  $html_result = str_replace('{{ completed_notes }}', CoreUtils::add_new_card($completadas, 'Completadas  <a  class="ver_todo" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>', "9"), $html_result);
 
-  $html_result = str_replace('{{ closed_notes }}', CoreUtils::add_new_card($cerradas, 'Cerradas', "9"), $html_result);
+  $html_result = str_replace('{{ closed_notes }}', CoreUtils::add_new_card($cerradas, 
+  	'Cerradas  <a  class="ver_todo" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>', "9"), $html_result);
 
   return $html_result;
 }
@@ -119,7 +134,7 @@ function get_notes($list_group,$pending){
 }
 
 function build_groups($group, $list, $pending=false){
-  $result = '<div class="row my-2">
+  $result = '<div class="row my-2 group_note group_note_'.$group['group_id'].'">
   <div class="col-12">
     <div class="row">
       <div class="col-6 d-flex justify-content-center">
