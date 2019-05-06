@@ -72,12 +72,12 @@ function generate_content($controller, $filename = null, $record = null){
 
   $html_result = str_replace('{{ groups_horizontal_list }}', $list_html, $html_result);
 
-  $html_result = str_replace('{{ PENDINGS_NOTES }}', CoreUtils::add_new_card($pendientes, 'Pendientes  <a class="ver_todo" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>', "9"), $html_result);
+  $html_result = str_replace('{{ PENDINGS_NOTES }}', CoreUtils::add_new_card($pendientes, 'Pendientes  <a class="ver_todo text-secondary" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>'), $html_result);
 
-  $html_result = str_replace('{{ completed_notes }}', CoreUtils::add_new_card($completadas, 'Completadas  <a  class="ver_todo" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>', "9"), $html_result);
+  $html_result = str_replace('{{ completed_notes }}', CoreUtils::add_new_card($completadas, 'Completadas  <a  class="ver_todo text-secondary" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>'), $html_result);
 
   $html_result = str_replace('{{ closed_notes }}', CoreUtils::add_new_card($cerradas, 
-  	'Cerradas  <a  class="ver_todo" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>', "9"), $html_result);
+  	'Cerradas  <a  class="ver_todo text-secondary" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>'), $html_result);
 
   return $html_result;
 }

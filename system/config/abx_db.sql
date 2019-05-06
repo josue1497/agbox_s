@@ -760,3 +760,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `user_level`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+
+DROP TABLE IF EXISTS item_index_page;
+CREATE TABLE `item_index_page` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='tabla de los Los iconos que se mostraran en la apgina inicial' AUTO_INCREMENT=1 ;
