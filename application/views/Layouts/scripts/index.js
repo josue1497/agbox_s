@@ -2,7 +2,7 @@
 $(document).ready(function () {
     $('.slide-cont').slick({
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 1000,
         slidesToShow: 8,
         slidesToScroll: 4,
@@ -74,7 +74,6 @@ $('#group_info_modal').on('show.bs.modal', function (event) {
         });
 
         $('#member-list').html(members);
-        // $('#leader-list').html(leader);
 
         leader = '';
         members = '';
@@ -97,8 +96,7 @@ $('#completed-note-info-modal').on('show.bs.modal', function (event) {
 
     $.post("{{ COMMMENT_DATA }}", { 'note_id': note_id }, function (data, status) {
         var members = data;
-
-        $('#comment_content').html(members);
+        $('#comment_content2').html(members);
 
     })
         .fail(function () {
@@ -121,7 +119,7 @@ $('#note-info-modal').on('show.bs.modal', function (event) {
 
     $.post("{{ COMMMENT_DATA }}", { 'note_id': note_id }, function (data, status) {
         var members = data;
-
+        
         $('#comment_content').html(members);
 
     })

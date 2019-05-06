@@ -57,8 +57,8 @@ class groupsController  extends Controller{
 			$this->model->after_save($_POST,$d["record"]['id']);
 			$group=array_merge($d["record"],$_POST);
 			$this->update_user_role_group();
-			if(Group::save_record($this->model,$group)){
-			header("location: ".CoreUtils::base_url().'index/index');
+			if($this->model::save_record($this->model,$group)){
+			header("location: ".CoreUtils::base_url().'groups/group_information/'.$id);
 		}
 		}
 
@@ -120,16 +120,17 @@ class groupsController  extends Controller{
 			$data=$_POST;
 			if($this->model->create($data)){
 				$group_record = (new Group)->findByPoperty(array('name'=>$data['name']));
-				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id'],'group_id'=>$group_record['id']),true)){
+				if(Affiliate::create_new_affiliate(array('user_id'=>$data['leader_id'],'group_id'=>$group_record['id'],'role_id'=>Role::get_leader_id()),true)){
 						$this->update_user_role_group();
+						$this->model->after_save($_POST,$group_record['id']);
 				}
 				if(isset($data['user_affiliate'])){
 						foreach($data['user_affiliate'] as $user){
-							$pass=Affiliate::create_new_affiliate(array('user_id'=>$user,'group_id'=>$group_record['id']));
+							$pass=Affiliate::create_new_affiliate(array('user_id'=>$user,'group_id'=>$group_record['id'],'role_id'=>Role::get_member_id()));
 						}
 				}
 				if($pass){
-					echo $group_record['id'];
+					header("location: ".CoreUtils::base_url().'groups/group_information/'.$group_record['id']);
 				}				
 			}
 		}else{
@@ -142,12 +143,12 @@ class groupsController  extends Controller{
 		$data=$_POST;
 		$id=$_POST['group_id'];
 		
-		$group_record = Model::get_sql_data("select CONCAT(u.names,' ',u.lastnames) user_name, r.name role_name
+		$group_record = Model::get_sql_data("select CONCAT(u.names,' ',u.lastnames) user_name, r.name role_name, g.description
 		from groups g 
 		inner join affiliate a on (a.group_id=g.id)
 		inner join `user` u on (u.id=a.user_id) 
 		left join `role` r on (r.id=a.role_id)
-		where g.id=?", array('group_id'=>$id));
+		where g.id=? and a.approved='Yes'  order by r.id", array('group_id'=>$id));
 
 		header('Content-Type: application/json');
   	echo json_encode($group_record,JSON_PRETTY_PRINT);
@@ -157,7 +158,7 @@ class groupsController  extends Controller{
 		$this->init(new Group());
 
 		$this->init($this->model);
-		$d["record"] = $this->model->get_select_data_with_params(array('id'=>'in (select a.group_id from affiliate a inner join `user` u on (u.id=a.user_id) where a.user_id='.Session::get('user_id').' and approved=\'Yes\')')); 
+		$d["record"] = $this->model->find_by_subquery(array('id'=>'in (select a.group_id from affiliate a inner join `user` u on (u.id=a.user_id) where a.user_id='.Session::get('user_id').' and approved=\'Yes\')'),true); 
 		$this->set($d);
 
 		$this->render('list_groups');

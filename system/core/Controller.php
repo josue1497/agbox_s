@@ -129,7 +129,11 @@
 			$this->view_processor->set_footer(
 			    str_replace(
 					'{{ FOOTER_INFO }}',
+<<<<<<< HEAD
 					'',
+=======
+					date("Y"),
+>>>>>>> qa
 					CoreUtils::get_layout_template_content('footer',$this->layout)));
 			
 			/* render */

@@ -54,15 +54,15 @@ class Role extends Model{
 	}
 
 	public static function get_leader_id(){
-		return get_role_id('L');
+		return Role::get_role_id('L');
 	}
 
 	public static function get_admin_id(){
-		return get_role_id('A');
+		return Role::get_role_id('A');
 	}
 
 	public static function get_member_id(){
-		return get_role_id('M');
+		return Role::get_role_id('M');
 	}
 }
 ?>

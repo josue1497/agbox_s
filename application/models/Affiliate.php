@@ -165,12 +165,11 @@ class Affiliate extends Model
         if($record!=null){
         /* si ya tiene lider, se cambia el user_id al registro del lider del grupo*/
             $record['user_id']=$user_id;
-            $status = $m->edit($record['id'],$record);
-        echo 'Actualizado: '.$status;
+            return $m->edit($record['id'],$record);
         }else{
         /* si no existe el registro se crea */
             $params['user_id']=$user_id;
-            $status = $m->create($params);
+            return $m->create($params);
         }
     }
 

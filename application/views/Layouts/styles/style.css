@@ -163,17 +163,20 @@
 div.dataTables_wrapper div.dataTables_filter input {
     margin-left: 0.5em;
     display: inline-block;
-    width: 70% !important;
+    width: 85% !important;
 }
 
-/* .modal{
-    display: block !important; /* I added this to see the modal, you don't need this 
-}
+/*Loading page*/
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 999999999;
+	transition: 1s;
+	background: url(../imgs/loader.gif) center no-repeat #fff;
+	overflow: hidden;
+	/* background: #000000; */
 
-.modal-dialog{
-    overflow-y: initial !important
 }
-.modal-body{
-    height: 250px;
-    overflow-y: auto;
-} */

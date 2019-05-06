@@ -11,7 +11,7 @@ class Notification extends Model{
     public static $NEW_ASSIGNMENT = 'new_assignment';
     public static $ASSINGMENT_COMPLETE = 'assingment_complete';
     public static $ASSINGMENT_REASING = 'assingment_reasing';
-    
+    public static $CLOSE_ASSIGNMENT = 'close_assignment';
 
  
     public static $YES = 'Y';

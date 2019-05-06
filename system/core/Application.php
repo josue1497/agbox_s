@@ -23,4 +23,5 @@ define('DB_PASS','12345678');
 
 require_once(ROOT.'system/core/Autoloader.php');
 Autoloader::register();
+
 ?>
