@@ -78,6 +78,8 @@ function generate_content($controller, $filename = null, $record = null){
 
   $html_result = str_replace('{{ closed_notes }}', CoreUtils::add_new_card($cerradas, 
   	'Cerradas  <a  class="ver_todo text-secondary" style="display:none;" href="javascript:show_for(0)" >(ver todo)</a>'), $html_result);
+ 
+    $html_result = str_replace('{{ menu_icons }}', build_icons(Session::get('user_id')), $html_result);
 
   return $html_result;
 }
@@ -191,4 +193,39 @@ function build_buttons($status){
 
   return $status==Status::get_pending_status();
 
+}
+
+function build_icons ($user_id){
+
+  $query = 'select m.* from menu m inner join item_index_page ip on (ip.menu_id=m.menu_id)
+  where ip.user_id=?';
+
+  $icons = Model::get_sql_data($query, array('user_id'=>$user_id));
+
+  $html='';
+  foreach($icons as $icon){
+    $html.='<div class="col-6">
+    <div class="card bg-transparent border-0">
+      <div class="d-flex flex-column">
+        <div class="d-flex justify-content-center">
+          <div class="d-flex align-items-center justify-content-center">
+            <!-- ancla -->
+            <a class="text-decoration-none" href="'.SERVER_DIR.$icon['url'].'"
+              tabindex="0">
+              <div class="icon-circle-index bg-info d-flex align-items-center justify-content-center ">
+              <div><i class="'.$icon['icon'].' text-white fa-2x"></i></div>
+                  </div>
+              <h6 class="text-center my-1 text-secondary">'.$icon['title'].'</h6>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>';
+  }
+
+ 
+
+
+  return $html;
 }

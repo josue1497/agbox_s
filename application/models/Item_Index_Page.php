@@ -31,25 +31,32 @@ class Item_Index_Page extends Model{
     }
 
     public static function get_icons($user_id){
-        return Model::get_sql_data('SELECT
-        M.*,
-        IIT.FIRST_MENU_ID,
-        IIT.FIFTH_MENU_ID,
-        IIT.FOURTH_MENU_ID,
-        IIT.SECOND_MENU_ID,
-        IIT.SIXTH_MENU_ID,
-        IIT.THIRD_MENU_ID
-    FROM
-        MENU M
-    INNER JOIN ITEM_INDEX_PAGE IIT ON
-        (M.MENU_ID IN (IIT.FIRST_MENU_ID,
-        IIT.FIFTH_MENU_ID,
-        IIT.FOURTH_MENU_ID,
-        IIT.SECOND_MENU_ID,
-        IIT.SIXTH_MENU_ID,
-        IIT.THIRD_MENU_ID))
-    WHERE
-        IIT.USER_ID = ?',array('user_id'=>$user_id));
+        return Model::get_sql_data('select
+        m.*,
+        iit.first_menu_id,
+        iit.fifth_menu_id,
+        iit.fourth_menu_id,
+        iit.second_menu_id,
+        iit.sixth_menu_id,
+        iit.third_menu_id
+    from
+        menu m
+    inner join item_index_page iit on
+        (m.menu_id in (iit.first_menu_id,
+        iit.fifth_menu_id,
+        iit.fourth_menu_id,
+        iit.second_menu_id,
+        iit.sixth_menu_id,
+        iit.third_menu_id))
+    where
+        iit.user_id = ?',array('user_id'=>$user_id));
+    }
+
+    public static function create_new_icon($menu_id,$user_id){
+        $model = new Item_Index_Page();
+
+        return Model::save_record($model, array('menu_id'=>$menu_id,'user_id'=>$user_id));
+
     }
 
 }

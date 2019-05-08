@@ -3,7 +3,7 @@ function generate_content($controller,$filename=null,$record=null){
 
     $html_result=file_get_contents(__DIR__."/user_configuration.html");
 
-    $html_group_icons='<div class="row to">
+    $html_group_icons='<div class="row to m-2">
     <div class="col-6 from my-1" id="origin">
             '.get_user_available_for_user().'
     </div>
@@ -33,23 +33,26 @@ function generate_content($controller,$filename=null,$record=null){
             
         $( '#origin' ).clone(true,true).appendTo( '.to' );
 
-        
-
-        // $('.from')
-        //     .children('select')
-        //     // call destroy to revert the changes made by Select2
-        //     .select2('destroy')
-        //     .end()
-        //     .append(
-        //         // clone the row and insert it in the DOM
-        //         $('#content')
-        //         .children('select')
-        //         .first()
-        //         .clone()
-        //     );
-
         $('.to').children('.from').children('select').select2();
 
+    });
+
+    $('#save-new-icon').click(function(){
+        var icons = new Array();
+
+        $('select.fa').each(function(){
+            icons.push($(this).val());
+        });
+
+        $.post( '".SERVER_DIR."configuration/save_index_icons',
+      {'info':icons,'user_id':'".Session::get('user_id')."'}, function( data ) {
+               console.log(data);
+               if(''!==data && 'fail'!==data){
+                   location.href='".SERVER_DIR."index/index';
+               }else{
+                  alert('fail');   
+               }
+             });
     });
 });");
 
@@ -57,13 +60,13 @@ function generate_content($controller,$filename=null,$record=null){
 }
 
 function get_user_available_for_user(){
-    $query ="SELECT M.* FROM 
-    MENU M INNER JOIN PERMISSION P ON (P.MENU_ID=M.MENU_ID)
-            INNER JOIN USER_LEVEL UL ON (UL.ID=P.USER_LEVEL_ID)
-            INNER JOIN `USER` U ON (U.USER_LEVEL_ID=UL.ID)
-            WHERE U.ID=?";
+    $query ="select m.* from 
+    menu m inner join permission p on (p.menu_id=m.menu_id)
+            inner join user_level ul on (ul.id=p.user_level_id)
+            inner join `user` u on (u.user_level_id=ul.id)
+            where u.id=?";
 
-    $query_admin ="SELECT M.* FROM MENU M ";
+    $query_admin ="select m.* from menu m ";
     
     $level = Session::get('role_id')==='1';
     $menu_records=Model::get_sql_data($level?$query_admin:$query,array('user_id'=>Session::get('user_id')));
