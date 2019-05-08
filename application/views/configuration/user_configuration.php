@@ -64,7 +64,7 @@ function get_user_available_for_user(){
     menu m inner join permission p on (p.menu_id=m.menu_id)
             inner join user_level ul on (ul.id=p.user_level_id)
             inner join `user` u on (u.user_level_id=ul.id)
-            where u.id=?";
+            where u.id=? and m.url not in ('','#')";
 
     $query_admin ="select m.* from menu m ";
     
