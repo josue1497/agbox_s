@@ -19,7 +19,7 @@
 <!-- Font Awesome -->
 <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"> -->
 <!-- fav-icon -->
-<link rel="shortcut icon" type="image/x-icon" href="{{ base_url }}application/views/Layouts/imgs/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="{{ base_url }}application/views/Layouts/imgs/favicon.png">
 
 <!-- for icon picker -->
 <!-- Bootstrap-Iconpicker -->

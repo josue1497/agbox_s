@@ -208,3 +208,8 @@ body::-webkit-scrollbar-thumb {
     -ms-flex-pack: center;
     justify-content: center;
 }
+
+.fa{ 
+	font-family: 'Lato', 'Font Awesome 5 Free';
+	font-weight: 900;
+}

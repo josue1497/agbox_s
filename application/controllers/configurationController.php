@@ -1,7 +1,7 @@
 <?php
 
 // Controlador para configuraciones de Usuario
-class configurationController
+class configurationController extends Controller
 {
 
     /**
@@ -14,6 +14,6 @@ class configurationController
         $this->init(new User());
 
         $this->model->table_label = 'Configuracion';
-        $this->render("configuration");
+        $this->render("user_configuration");
     }
 }
