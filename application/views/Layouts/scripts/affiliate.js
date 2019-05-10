@@ -93,7 +93,6 @@ $('#group_info_modal').on('show.bs.modal', function (event) {
 
         $('#member-list').html(members);
         $('#description-g').text(desc);
-        // $('#leader-list').html(leader);
 
         leader = '';
         members = '';

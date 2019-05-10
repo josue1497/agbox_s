@@ -338,4 +338,15 @@ class noteController extends Controller{
 		$this->set($d);
 		$this->render('process_assigment');
 	}
+
+	public function worksheet(){
+		$this->init(new Note());
+
+		// if(!empty($_POST)){
+		// 	echo json_encode($_POST);
+		// }
+
+		$this->render('worksheet');
+	}
+
 }

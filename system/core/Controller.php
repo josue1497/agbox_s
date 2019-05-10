@@ -171,7 +171,7 @@
 					<a class="collapse-item" href="{{ base_url }}menu/index">Menu</a>
 					<a class="collapse-item" href="{{ base_url }}permission/index">Permisos</a>
 					<a class="collapse-item" href="{{ base_url }}user/index">Usuarios</a>
-					<a class="collapse-item" href="{{ base_url }}user_level/index">Niveles</a></a>
+					<a class="collapse-item" href="{{ base_url }}user_Level/index">Niveles</a></a>
 					<a class="collapse-item" href="{{ base_url }}param/index">Parametros</a></a>
 					<a class="collapse-item" href="{{ base_url }}query_console/index">Consola sql update</a>
 					<a class="collapse-item" href="{{ base_url }}query_console/select_query">Consola sql select</a>
