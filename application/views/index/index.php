@@ -191,7 +191,7 @@ function build_line($list_lines, $group_id,$pending){
 
 function build_buttons($status){
 
-  return $status==Status::get_pending_status();
+  return Status::get_status_id($status)==Status::get_pending_status();
 
 }
 

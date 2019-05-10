@@ -112,7 +112,7 @@
                                           $('#role'+data).text(role);
                                           $('#modal-user').modal('hide');
                                           }else{
-                                          alert('fail');   
+                                                 maketoast('danger', 'Error!', 'ha ocurrido un Error.');    
                                           $('#modal-user').modal('hide'); 
                                           }
                                    });
@@ -124,10 +124,10 @@
                                           
                                           console.log(data);
                                           if(''!==data && 'fail'!==data){
-                                          $('#'+data).remove();
-                                          $('#modal-user').modal('hide');
+                                                 $('#'+data).remove();
+                                                 $('#modal-user').modal('hide');
                                           }else{
-                                          alert('fail');  
+                                                 maketoast('danger', 'Error!', 'ha ocurrido un Error.'); 
                                           $('#modal-user').modal('hide');  
                                           }
                                    });
@@ -139,9 +139,9 @@
                                           
                                           console.log(data);
                                           if(''!==data && 'fail'!==data){
-                                          $('#modal-affiliate').modal('hide');
+                                                 $('#modal-affiliate').modal('hide');
                                           }else{
-                                          alert('Ha ocurrido un Error!');  
+                                                 maketoast('danger', 'Error!', 'ha ocurrido un Error.');  
                                           $('#modal-affiliate').modal('hide');  
                                           }
                                    });

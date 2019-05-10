@@ -33,7 +33,7 @@ Vue.component('affiliate-component', {
             var jqxhr = $.post("{{ PHOTO_GETTING }}",
                 { group_photo: group_photo }, function (data, status) {
                     if (group_photo === "" || group_photo == null) {
-                        document.getElementById(id).src = 'https://i.ibb.co/pKgD4mH/image-group.png'
+                        document.getElementById(id).src = '{{ IMGS_GRUP }}'
 
                     } else {
                         document.getElementById(id).src = data;

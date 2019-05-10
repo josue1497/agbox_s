@@ -25,6 +25,8 @@
 <!-- Bootstrap-Iconpicker Bundle -->
 <script src="{{ base_url }}application/views/Layouts/vendor/icon-picker/js/bootstrap-iconpicker.bundle.min.js"></script>
 
+<script src="{{ base_url }}application/views/Layouts/scripts/jquery.toaster.js"></script>
+
 <script src="{{ base_url }}application/views/Layouts/scripts/functions.js"></script>
 
 <script src="{{ base_url }}application/views/Layouts/DataTables/datatables.min.js"></script>
@@ -85,4 +87,7 @@
 	$(function() {
 		$('[data-toggle="popover"]').popover()
 	});
+</script>
+
+<script>
 </script>

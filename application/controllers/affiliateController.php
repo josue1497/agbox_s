@@ -59,7 +59,9 @@ class affiliateController extends Controller{
         $js = str_replace('{{ URI_INSERT }}',SERVER_DIR."affiliate".'/insert_data',$js);
         $js = str_replace('{{ PHOTO_GETTING }}',SERVER_DIR."affiliate/get_img",$js);
         $js = str_replace('{{ URI_MEMBERS }}',SERVER_DIR."groups/get_group_members",$js);
+        $js = str_replace('{{ IMGS_GRUP }}',Component::img_to_base64(IMG_DIR.'image-group.png'),$js);
 
+        
         $this->view->add_script_js($js);
 
         $this->model->table_label = 'Afiliación a Grupos';
