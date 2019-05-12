@@ -16,7 +16,7 @@
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image2r">
+              <div class="col-lg-6 d-none d-lg-block bg-login-image2r" style="height: 80vh;">
               		<img src="{{ base_url }}application/views/Layouts/imgs/int_2.jpg"
               			 style="height:100%;width:100%;"/>
               	</div>

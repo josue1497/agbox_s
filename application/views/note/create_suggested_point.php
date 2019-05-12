@@ -15,6 +15,11 @@ function generate_content($controller, $filename = null, $record = null)
     if(isset($controller->vars['records']))
         $record = $controller->vars['records'];
 
+        $model_note->set_fields_values('group_id',(new Group)->get_select_data_with_params(
+            array('id'=>'in (select a.group_id from affiliate a inner join `user` u on (u.id=a.user_id) 
+                        where a.user_id='.Session::get('user_id').' and approved=\'Yes\')')
+                    )); 
+
     $form_card=$controller->view->auto_build_form_content($record);
     $form_card = str_replace('m-1 btn btn-secondary','d-none disable', $form_card);
    

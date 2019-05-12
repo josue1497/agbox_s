@@ -27,7 +27,8 @@ class Group extends Model
                     ->set_label('Nombre de grupo')
                     ->set_name_key()
                     ->set_unike_key()
-                    ->set_type(Column::$COLUMN_TYPE_TEXT),
+                    ->set_type(Column::$COLUMN_TYPE_TEXT)
+                    ->set_field_html('is_required="true" ') ,
 
                 (new Column('description'))
                     ->set_label('Propósito del grupo')

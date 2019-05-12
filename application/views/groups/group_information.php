@@ -41,13 +41,19 @@
              
 
               if($is_leader){
-                     $form_group=$controller->auto_build_view('form',$this_group,$this_group);
+                     $form_group=$controller->view->auto_build_form_content($this_group,false);
+                     $form_group.=' <div class="d-flex flex-row justify-content-center">
+                                   <button class="btn btn-primary m-2">Guardar</button>
+                                   <a class="btn btn-secondary m-2 text-white">Cancelar</a>
+                                   <div class="btn bg-danger text-white m-2" onclick="if(confirm(\'¿Desea eliminar este grupo?\')){delete_group(1)}">Eliminar Grupo</div>
+                              </div>';
               }else{
                      $form_group=$controller->auto_build_view('info',$this_group,$this_group);
               }
 
               $form_group=str_replace('groups/index/','groups/list_groups/',$form_group);
-              // groups/index/
+           
+             
                      Session::set('group_id',$this_group['id']);
 
                      $button_add_note='<div class="btn-group dropleft ml-auto">
@@ -62,13 +68,13 @@
                      </div>
                    </div>';
 
-                     $tile_affiliate='<div class="d-flex">Affiliate'.($is_leader?'<button class="btn btn-primary ml-auto" id="add_affiliate"
+                     $tile_affiliate='<div class="d-flex align-items-center">Participantes'.($is_leader?'<button class="btn btn-primary ml-auto" id="add_affiliate"
                      data-toggle="modal" data-target="#modal-affiliate"><i class="fas fa-plus"></i></button>':'</div>');
-                     $title_note='<div class="d-flex">Group´s Notes'.$button_add_note.'</div>';
+                     $title_note='<div class="d-flex align-items-center">Notas'.$button_add_note.'</div>';
                      
                      $html_result=file_get_contents(__DIR__.'/body.html');
                      
-                     $html_result=str_replace('{{ FORM_GROUP }}',CoreUtils::add_new_card($form_group,'Group'),$html_result);
+                     $html_result=str_replace('{{ FORM_GROUP }}',CoreUtils::add_new_card($form_group,'Grupo'),$html_result);
                      $html_result=str_replace('profile-img','profile-img-info',$html_result);
                      $html_result=str_replace('{{ AFFILIATES_USERS }}',CoreUtils::add_new_card($table_affilates,$tile_affiliate),$html_result);
                      $html_result=str_replace('{{ NOTES_GROUP }}',CoreUtils::add_new_card( $table_notes,$title_note),$html_result);
@@ -141,6 +147,10 @@
                                    });
 
                             });
+
+                            function delete_group(group_id){
+                                   alert(group_id);
+                            }
 
                             ");
                      }

@@ -251,7 +251,7 @@ class noteController extends Controller{
 					Notification::create_notification(array('user_to_id'=>$leader_id['id'],
 					'message'=>'Asignacion completada',	'entity_id'=>$id,
 					'notification_type'=>Notification::$ASSINGMENT_COMPLETE,
-					'controller_to'=>'note/assigment_complete',
+					'controller_to'=>'note/process_assigment',
 					'read'=>Notification::$NO));
 					echo $id;
 			}else{
@@ -275,10 +275,10 @@ class noteController extends Controller{
 			if(Model::save_record($this->model,$note_record)){
 					Note_Comment::create_comment($id,$user_id, $message_complete);
 					Notification::create_notification(array('user_to_id'=>$leader_id['id'],
-																									'message'=>'Solicitud de reasignacion de tarea',
+																									'message'=>'Solicitud de reasignación',
 																									'entity_id'=>$id,
 																									'notification_type'=>Notification::$ASSINGMENT_REASING,
-																									'controller_to'=>'note/assigment_reasing',
+																									'controller_to'=>'note/process_assigment',
 																									'read'=>Notification::$NO));
 					echo $id;
 			}else{
@@ -287,19 +287,47 @@ class noteController extends Controller{
 		}
 	}
 
-	public function assigment_complete($id){
-		$this->init(new Note());
-		$d["record"] = $this->model->get_by_id($id);
+	public function assigment_complete(){
+		$this->init(new Note());	
+		if(isset($_POST) && isset($_POST['note-id'])){
+			$this_note = $this->model->get_by_id($_POST['note-id']);
+			$this_note['status_id']=Status::get_close_status();
+			$last_user=Session::get('user_id');
+			if(Model::save_record($this->model,$this_note)){
+				Notification::create_notification(array('user_to_id'=>$this_note['performer_id'], 
+																			'message'=>'Tu asignacion fue cerrada.', 
+																			'entity_id'=>$this_note['id'], 
+																			'notification_type'=>Notification::$CLOSE_ASSIGNMENT, 
+																			'controller_to'=>'note/note_information', 
+																			'read'=>Notification::$NO));
+				Note_Comment::create_comment($this_note['id'],$last_user,$_POST['close-comment']);
+			}
+		}
 
-		// if(isset($_POST)){
-		// 	header("location: ".CoreUtils::base_url().'index/index');
-		// }
-
-		$this->set($d);
-		$this->render('assigment_complete');
 	}
 
-	public function assigment_reasing($id){
+	public function assigment_reasing(){
+		$this->init(new Note());
+			if(isset($_POST) && isset($_POST['note-id'])){
+				$this_note = $this->model->get_by_id($_POST['note-id']);
+				$this_note['status_id']=Status::get_pending_status();
+				$last_user=Session::get('user_id');
+				$this_note['performer_id']=$_POST['user_to_affiliate_id'];
+
+				if(Model::save_record($this->model,$this_note)){
+					Notification::create_notification(array('user_to_id'=>$this_note['performer_id'], 
+																				'message'=>'Tienes una nueva asignacion pendiente', 
+																				'entity_id'=>$this_note['id'], 
+																				'notification_type'=>Notification::$NEW_ASSIGNMENT, 
+																				'controller_to'=>'note/note_information', 
+																				'read'=>Notification::$NO));
+					Note_Comment::create_comment($this_note['id'],$last_user,$_POST['comment']);
+				}
+			}
+
+	}
+
+	public function process_assigment($id){
 		$this->init(new Note());
 		$d["record"] = $this->model->get_by_id($id);
 
@@ -308,6 +336,6 @@ class noteController extends Controller{
 		// }
 
 		$this->set($d);
-		$this->render('assigment_reasing');
+		$this->render('process_assigment');
 	}
 }

@@ -307,10 +307,12 @@ class View{
 				}
 			}
 			$list_tbody .= "<td class='text-center'>" . ($this->model->crud_config['can_update'] ?
-					Component::edit_button($this->model->table_name, $row[$this->model->id_field]) : '') . ($this->model->crud_config['can_delete'] ?
-					Component::delete_button($this->model->table_name, $row[$this->model->id_field]) : '') .
+						Component::edit_button($this->model->table_name, $row[$this->model->id_field]) : '') . 
+					($this->model->crud_config['can_delete'] ?
+						Component::delete_button($this->model->table_name, $row[$this->model->id_field]) : '') .
 				"</td>" .
 				"</tr>";
+
 		}
 		return $list_tbody . "</tbody>";
 	}

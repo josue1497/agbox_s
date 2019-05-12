@@ -2,7 +2,7 @@
 $(document).ready(function () {
     $('.slide-cont').slick({
         dots: true,
-        infinite: true,
+        infinite: false,
         speed: 1000,
         slidesToShow: 8,
         slidesToScroll: 4,
@@ -34,26 +34,30 @@ $(document).ready(function () {
     });
 
     $('.slide-panels-one').slick({
-        centerMode: true,
-        centerPadding: '140px',
+        dots: false,
+        infinite: true,
+        speed: 300,
         slidesToShow: 1,
+        adaptiveHeight: true,
         responsive: [
             {
                 breakpoint: 768,
                 settings: {
-                    arrows: true,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 1
+                    dots: false,
+                    infinite: true,
+                    speed: 300,
+                    slidesToShow: 1,
+                    adaptiveHeight: true,
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
-                    arrows: true,
-                    centerMode: true,
-                    centerPadding: '40px',
-                    slidesToShow: 1
+                    dots: false,
+                    infinite: true,
+                    speed: 300,
+                    slidesToShow: 1,
+                    adaptiveHeight: true,
                 }
             }
         ]
@@ -74,7 +78,6 @@ $('#group_info_modal').on('show.bs.modal', function (event) {
         });
 
         $('#member-list').html(members);
-        // $('#leader-list').html(leader);
 
         leader = '';
         members = '';
@@ -97,8 +100,7 @@ $('#completed-note-info-modal').on('show.bs.modal', function (event) {
 
     $.post("{{ COMMMENT_DATA }}", { 'note_id': note_id }, function (data, status) {
         var members = data;
-
-        $('#comment_content').html(members);
+        $('#comment_content2').html(members);
 
     })
         .fail(function () {
@@ -205,7 +207,7 @@ $('#add-comment-modal').on('show.bs.modal', function (event) {
                 alert("Ha ocurrido un Error.");
             });
 
-            $("#send-comment").unbind("click");
+        $("#send-comment").unbind("click");
     });
 
     var modal = $(this)

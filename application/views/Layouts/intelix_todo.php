@@ -13,8 +13,10 @@
 		{{ intelix_todo_styles }} 
 </head>
 
-<body id="page-top">
+<body>
+
   <!-- Page Wrapper -->
+  <div  id="page-top">
   <div id="wrapper">
 		{{ intelix_todo_side }}
     <!-- Content Wrapper -->
@@ -22,6 +24,7 @@
 
       <!-- Main Content -->
       <div id="content" class="bg-light ">
+      <div class="loader"></div>
 		{{ intelix_todo_topbar }}
 		<!-- --- BEGIN CARD ---- -->
 		{{ intelix_todo_content }}
@@ -32,6 +35,7 @@
     </div>
     <!-- End of Content Wrapper -->
 
+  </div>
   </div>
   <!-- End of Page Wrapper -->
 
