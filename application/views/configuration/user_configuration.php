@@ -1,10 +1,19 @@
 <?php
-function generate_content($controller,$filename=null,$record=null){
+function generate_content($controller, $filename = null, $record = null)
+{
 
-    $html_result=file_get_contents(__DIR__."/user_configuration.html");
+    $html_result = file_get_contents(__DIR__ . "/user_configuration.html");
 
-    $html_group_icons='<div class="row to m-2">
-            '.get_icons(Session::get('user_id')).'
+    $controller->model->hide_form_column('user_id');
+
+    $form_params = $controller->view->auto_build_form_content($record, false);
+
+    $form_params .= ' <div class="d-flex flex-row justify-content-center">
+                          <button class="btn btn-primary m-2">Guardar</button>
+                     </div>';
+
+    $html_group_icons = '<div class="row to m-2">
+            ' . get_icons(Session::get('user_id')) . '
 </div>';
 
     // $select_menu=;
@@ -14,7 +23,7 @@ function generate_content($controller,$filename=null,$record=null){
     <button class="btn btn-primary m-1" id="save-new-icon"><i class="fas fa-save"></i></button>
     </div></div> ';
 
-    $title='<div class="d-flex align-items-center">Iconos de acceso rápido
+    $title = '<div class="d-flex align-items-center">Iconos de acceso rápido
     <button class="btn btn-info ml-auto" data-toggle="popover" title="Ayuda" 
             data-content="En este apartado usted podra seleccionar<br>que opciones estaran disponibles 
             directamente<br>en la página principal de la aplicación" data-trigger="focus" data-html="true">
@@ -22,10 +31,20 @@ function generate_content($controller,$filename=null,$record=null){
     </button>
     </div>';
 
-    
+    $title_setting = '<div class="d-flex align-items-center">Parametros de la Aplicación
+    <button class="btn btn-info ml-auto" data-toggle="popover" title="Ayuda" 
+            data-content="En este apartado usted podra seleccionar<br>
+            las configuraciones que tendra la aplicacion durante su uso<br>
+            como por ejemplo:<br>
+            El idioma, la zona horaria, el formato de fecha a mostrar" data-trigger="focus" data-html="true">
+        <i class="fas fa-question text-white"></i>
+    </button>
+    </div>';
 
-    $html_result=str_replace('{{ INDEX_ICONS }}',CoreUtils::add_new_card($html_group_icons.$buttons,$title),$html_result);
-    // $html_result=str_replace('{{ ADD_ICON }}',$buttons,$html_result);
+
+
+    $html_result = str_replace('{{ INDEX_ICONS }}', CoreUtils::add_new_card($html_group_icons . $buttons, $title), $html_result);
+    $html_result = str_replace('{{ PARAMS_APP }}', CoreUtils::add_new_card($form_params, $title_setting), $html_result);
 
     $controller->view->add_script_js("
     $(document).ready(function () {
@@ -52,12 +71,12 @@ function generate_content($controller,$filename=null,$record=null){
 
       
 
-        $.post( '".SERVER_DIR."configuration/save_index_icons',
-      {'info':icons,'user_id':'".Session::get('user_id')."'}, function( data ) {
+        $.post( '" . SERVER_DIR . "configuration/save_index_icons',
+      {'info':icons,'user_id':'" . Session::get('user_id') . "'}, function( data ) {
                console.log(data);
                if(''!==data && 'fail'!==data){
                 maketoast('success', 'Exitoso!', 'Se ha Guardado su configuración'); 
-                location.href='".SERVER_DIR."index/index';
+                location.href='" . SERVER_DIR . "index/index';
 
                }else{
                 maketoast('danger', 'Error!', 'No se ha Guardado la Configuración'); 
@@ -69,48 +88,48 @@ function generate_content($controller,$filename=null,$record=null){
     return $html_result;
 }
 
-function get_user_available_for_user($menu_id=null){
-    $query ="select m.* from 
+function get_user_available_for_user($menu_id = null)
+{
+    $query = "select m.* from 
     menu m inner join permission p on (p.menu_id=m.menu_id)
             inner join user_level ul on (ul.id=p.user_level_id)
             inner join `user` u on (u.user_level_id=ul.id)
             where u.id=? and m.url not in ('','#')";
 
-    $query_admin ="select m.* from menu m ";
-    
-    $level = Session::get('role_id')==='1';
-    $menu_records=Model::get_sql_data($level?$query_admin:$query,array('user_id'=>Session::get('user_id')));
+    $query_admin = "select m.* from menu m ";
 
-    $html='<div class="col-6 from my-1" id="origin">
+    $level = Session::get('role_id') === '1';
+    $menu_records = Model::get_sql_data($level ? $query_admin : $query, array('user_id' => Session::get('user_id')));
+
+    $html = '<div class="col-6 from my-1" id="origin">
     <select name="menus" class="form-control fa"><option value="">Seleccione una Opción</option>';
-    foreach($menu_records as $menu){
-        $html.=' <option value="'.$menu['menu_id'].'" '.($menu_id!=null && $menu['menu_id']===$menu_id? ' selected ':'').'><span class"'.$menu['icon'].'"></span>'.$menu['title'].'</option>';
+    foreach ($menu_records as $menu) {
+        $html .= ' <option value="' . $menu['menu_id'] . '" ' . ($menu_id != null && $menu['menu_id'] === $menu_id ? ' selected ' : '') . '><span class"' . $menu['icon'] . '"></span>' . $menu['title'] . '</option>';
     }
-    $html.='</select></div>
+    $html .= '</select></div>
 ';
-return $html;
-
+    return $html;
 }
 
-function get_icons($user_id){
+function get_icons($user_id)
+{
     $query = 'select m.* from menu m inner join item_index_page ip on (ip.menu_id=m.menu_id)
     where ip.user_id=?';
 
     $icons = Model::get_sql_data($query, array('user_id' => $user_id));
 
-    $html='';
+    $html = '';
 
-    if(!empty($icons)){
-        foreach($icons as $icon){
-            $html.=get_user_available_for_user($icon['menu_id']);
+    if (!empty($icons)) {
+        foreach ($icons as $icon) {
+            $html .= get_user_available_for_user($icon['menu_id']);
         }
-    }else{
-        $html.=get_user_available_for_user();
+    } else {
+        $html .= get_user_available_for_user();
     }
 
     return $html;
 }
 
-function build_select($icons){
-
-}
+function build_select($icons)
+{ }

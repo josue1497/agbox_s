@@ -331,10 +331,6 @@ class noteController extends Controller{
 		$this->init(new Note());
 		$d["record"] = $this->model->get_by_id($id);
 
-		// if(isset($_POST)){
-		// 	header("location: ".CoreUtils::base_url().'index/index');
-		// }
-
 		$this->set($d);
 		$this->render('process_assigment');
 	}

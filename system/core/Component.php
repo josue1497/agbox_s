@@ -128,11 +128,17 @@
 		public static function create_options($data,$value,$for_list=false){
 			$txt='';
 			foreach($data as $elem){
+
 				$tex = (is_array($elem)&&array_key_exists('name',$elem)?$elem['name']:$elem);
 				if($for_list==true){
 					$val=$tex;
 				}else{
 					$val = (is_array($elem)&&array_key_exists('id',$elem)?$elem['id']:$elem);
+				}
+
+				if(is_array($elem)&&!array_key_exists('name',$elem)&&!array_key_exists('id',$elem)){
+					$val=key($elem);
+					$tex=$elem[$val];
 				}
 				/* para el caso del select multiple */
 				if(is_array($value)){

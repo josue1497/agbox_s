@@ -357,6 +357,22 @@
 			$this->column_values=$values;
 			return $this;
 		}
+
+		/**
+		 *  Establece un array de valores temporal en la columna cuando sea necesario
+		 * 
+		 * @param type $values 
+		 * @return column
+		 */
+		public function set_alter_values($values){
+			$result=[];
+			foreach($values as $key => $value){
+				$result[]= array($key=>$value);
+			}
+
+			$this->column_values=$values;
+			return $this;
+		}
 		/**
 		 * Ebtiene el array de valores temporal de la columna, si existe
 		 * 
