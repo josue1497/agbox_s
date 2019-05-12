@@ -213,3 +213,9 @@ body::-webkit-scrollbar-thumb {
 	font-family: 'Lato', 'Font Awesome 5 Free';
 	font-weight: 900;
 }
+
+.alert{
+	z-index: 100000 !important;
+	top:5% !important;
+	width: 30% !important;
+}

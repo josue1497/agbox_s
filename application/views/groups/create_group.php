@@ -13,20 +13,6 @@
                      $html_result=str_replace('profile-img','profile-img-info',$html_result);
                      $html_result=str_replace('{{ AFFILIATES_USERS }}',CoreUtils::add_new_card($select_user,'Miembros'),$html_result);
 
-                    //  $controller->view->add_script_js("
-                    //       $('#save-group-button').click(function(){
-                    //         $.post( '".SERVER_DIR."groups/create_group',
-                    //         $('#form-group').serialize(), function( data ) {
-                    //                console.log(data);
-                    //                if(''!==data && 'fail'!==data){
-                    //                    location.href='".SERVER_DIR."groups/group_information/'+data+'';
-                    //                }else{
-                    //                   alert('fail');   
-                    //                }
-                    //              });
-                    //       });
-                    //        ");
-
                      return $html_result;
 }
 function generate_select_user(){

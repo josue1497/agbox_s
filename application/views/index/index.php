@@ -24,7 +24,7 @@ function generate_content($controller, $filename = null, $record = null){
   		}");
 
   foreach ($list as $map) {
-    $photo = $map['group_photo'] ? Component::img_to_base64(UPLOADS_DIR . $map['group_photo']) : 'https://i.ibb.co/pKgD4mH/image-group.png';
+    $photo = $map['group_photo'] ? Component::img_to_base64(UPLOADS_DIR . $map['group_photo']) : Component::img_to_base64(IMG_DIR.'image-group.png');
     $list_html .= '
 		<div class="col-3">
             <div class="card bg-transparent border-0">
@@ -191,7 +191,7 @@ function build_line($list_lines, $group_id,$pending){
 
 function build_buttons($status){
 
-  return $status==Status::get_pending_status();
+  return Status::get_status_id($status)==Status::get_pending_status();
 
 }
 

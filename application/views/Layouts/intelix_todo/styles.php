@@ -24,8 +24,6 @@
 <!-- for icon picker -->
 <!-- Bootstrap-Iconpicker -->
 <link rel="stylesheet" href="{{ base_url }}application/views/Layouts/vendor/icon-picker/css/bootstrap-iconpicker.min.css"/>
-<!--  - - >
-<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 <!-- Bootstrap-Iconpicker -->
 
 
@@ -37,6 +35,8 @@
 <link rel="stylesheet" type="text/css" href="{{ base_url }}application/views/Layouts/slick/slick-theme.css"/>
 
 <script src="{{ base_url }}application/views/Layouts/scripts/jquery.3.3.1.min.js"></script>
+
+<script src="{{ base_url }}application/views/Layouts/scripts/bootstable.js"></script>
 
 <script>
 $(window).on('load',function() {

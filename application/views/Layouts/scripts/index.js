@@ -145,12 +145,13 @@ $('#note-info-modal').on('show.bs.modal', function (event) {
                             '<div class="p-2 h4 text-info" >ya no posee asignaciones Pendientes</div></div></li>');
                     }
                 }
+                maketoast('success', 'Exito!', 'Comentario enviado con exito.'); 
                 // $('#add-comment-modal').modal('hide');
                 // $('#comment').val('');
                 $("#complete-button").unbind("click");
             })
                 .fail(function () {
-                    alert("Ha ocurrido un Error.");
+                    maketoast('danger', 'Error!', 'Ha ocurrido un Error.'); 
                 });
         }
 
@@ -173,7 +174,7 @@ $('#note-info-modal').on('show.bs.modal', function (event) {
                 $("#reasing-button").unbind("click");
             })
                 .fail(function () {
-                    alert("Ha ocurrido un Error.");
+                    maketoast('danger', 'Error!', 'No se ha podido reasignar este elemento.'); 
                 });
         }
 
@@ -202,9 +203,11 @@ $('#add-comment-modal').on('show.bs.modal', function (event) {
             console.log(data);
             $('#add-comment-modal').modal('hide');
             $('#comment').val('');
+            maketoast('success', 'Exito!', 'Comentario enviado con exito.'); 
+
         })
             .fail(function () {
-                alert("Ha ocurrido un Error.");
+                maketoast('danger', 'Error!', 'Ha ocurrido un Error.'); 
             });
 
         $("#send-comment").unbind("click");

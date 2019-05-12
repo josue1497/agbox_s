@@ -1,5 +1,5 @@
 <?php
-class user_LevelController extends Controller{
+class user_levelController extends Controller{
     function index(){
 		$this->action_index(new User_Level(),true);
     }
