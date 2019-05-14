@@ -9,6 +9,14 @@ class permissionController extends Controller{
     function edit($id){
 		$this->action_edit($id,new Permission(),$_POST,true);
     }
+	/**
+	 * metdo accion edit que genera una tabla editable de registros
+	 * 
+	 * @return void
+	 */
+    function edit_table(){
+		$this->action_edit_table(new Permission(),true);
+    }
     public function delete($id){
 		$this->action_delete($id,new Permission());
 	}

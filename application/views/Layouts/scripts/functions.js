@@ -109,3 +109,14 @@ function maketoast(priority, title, message) {
 
     $.toaster(options);
 }
+
+function editable_switch_off(table_name){
+	$('.'+table_name+'_field_row').hide();
+	$('.'+table_name+'_label_row').show();
+}
+
+function editable_switch_on(table_name,i){
+	editable_switch_off(table_name);
+	$('.'+table_name+'_label_row_'+i).hide();
+	$('.'+table_name+'_field_row_'+i).show();
+}

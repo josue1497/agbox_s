@@ -42,7 +42,14 @@
 									'" style="display:block;">'.
 						 		$this->view->generate_item_list($records).
 						 	'</div>';
-				}else if('info'){
+				}else if($filename=='edit_table'){
+					/*
+					var_dump($this->view->editable_list_content($records));
+					die;
+					*/
+					return $this->view->generate_editable_list(
+								$this->view->editable_list_content($records));
+				} else if($filename == 'info'){
 					return $this->view->auto_build_info_content($record);
 				}
 			/* si el archivo/accion es distinto a los definidos */
@@ -337,6 +344,9 @@
 		*/
 		function action_index($obj,$auto_build=false){
 			$this->action_list($obj,$auto_build,'index');
+		}
+		function action_edit_table($obj,$auto_build=false){
+			$this->action_list($obj,$auto_build,'edit_table');
 		}
 		function action_items($obj,$auto_build=false){
 			$this->action_list($obj,$auto_build,'items');

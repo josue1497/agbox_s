@@ -218,6 +218,35 @@ class View{
 	}
 	
 	/**
+	* metodo para crear una tabla de datos editable
+	* @param editable_list_content contenido de la tabla de datos
+	*/
+	public function generate_editable_list($editable_list_content){
+		
+		return ($this->model->crud_config['can_create'] ?
+				Component::add_button($this->model->table_name) : '') .
+		"<div class='row col-md-12 centered'>" .
+			"<table id='table_".$this->model->table_name."' ".
+			"class='table table-striped custab table-sm data-table'>" .
+			$editable_list_content .
+			"</table>" .
+			"</div>";
+	}
+	
+	/**
+		 * metodo para construir contenido de la vista de listado automaticamente,
+	 	 * desde los datos del modelo
+		 * 
+		 * @param type $data 
+		 * @return type
+		 */
+	public function editable_list_content($data){
+		return $this->auto_build_list_thead() .
+			$this->editable_list_tbody($data);
+	}
+
+	
+	/**
 		 * metodo para construir vista de listado automaticamente,
 		 * desde los datos del modelo
 		 * 
@@ -277,6 +306,78 @@ class View{
 			"</thead>";
 	}
 
+	/**
+		 * metodo para construir cuerpo del contenido de la vista de listado automaticamente,
+		 * desde los datos del modelo
+		 * 
+		 * @param type $data 
+		 * @return type
+		 */
+	public function editable_list_tbody($data){
+		$list_tbody = "<tbody>";
+		$i = 0;
+		foreach ($data as $row) {
+			++$i;
+			$list_tbody .= "<tr  class='".$this->model->table_name."_row_".$i."' 
+			".($this->model->crud_config['can_update'] ? 
+				/*" onmouseover='editable_switch_on(\"".$this->model->table_name."\",".$i.")' ".
+				" onmouseout='editable_switch_off(\"".$this->model->table_name."\",".$i.")'  ".*/
+				" onclick='editable_switch_on(\"".$this->model->table_name."\",".$i.")' " : "").
+				">" .
+				"<td>" . $i . "</td>";
+				
+			foreach ($this->model->table_fields as $list_field) {
+				if ($list_field->get_visible_grid()) {
+					$list_tbody .= "<td>";
+					//if($list_field->get_type()==Column::$COLUMN_TYPE_SELECT)
+					if ($list_field->get_foreing_key()) {
+						$select_data = $list_field->get_fk_entity()->get_select_data($row[$list_field->get_name()]);
+						$value = $select_data[0]['name'] ;
+						$text =  $select_data[0]['name'] ;
+					} else if ($list_field->get_type() == Column::$COLUMN_TYPE_PASS) {
+						$value = $row[$list_field->get_name()] ;
+						$text = (str_repeat('*', strlen($row[$list_field->get_name()]))) ;
+					} else if (Column::$COLUMN_TYPE_ICONPICKER) {
+						$value = $row[$list_field->get_name()] ;
+						$text = $row[$list_field->get_name()] . " <i class='" . $row[$list_field->get_name()] . "'></i>";
+					} else {
+						$value = $row[$list_field->get_name()] ;
+						$text = $row[$list_field->get_name()] ;
+					}
+					
+					$list_field->set_label('');
+					
+					$list_tbody .= 
+						"<div class='".$this->model->table_name."_label_row 
+							".$this->model->table_name."_label_row_".$i."' >". 
+							$text ."</div>" . 
+						"<div class='".$this->model->table_name."_field_row 
+							".$this->model->table_name."_field_row_".$i."' style='display:none;'>".
+							$this->build_element($list_field, array($list_field->get_name() => $value))."</div>";
+					$list_tbody .= "</td>";
+				}
+			}
+			$list_tbody .= "<td class='text-center'>" . ($this->model->crud_config['can_update'] ?
+						"<div  class='".$this->model->table_name."_field_row 
+							".$this->model->table_name."_field_row_".$i."' style='display:none;'>".
+							('<a id="link_cancel" 
+								href="javascript:editable_switch_off(\''.$this->model->table_name.'\')" 
+								class="m-1 btn btn-secondary ">
+								<i class="fas fa-times-circle "></i></a>').
+							Component::save_button($this->model->table_name, $row[$this->model->id_field]) 
+							."</div>" : '') .
+					($this->model->crud_config['can_delete'] ?
+						"<div class='".$this->model->table_name."_label_row 
+							".$this->model->table_name."_label_row_".$i."' >". 
+							Component::delete_button($this->model->table_name, $row[$this->model->id_field]) 
+							."</div>" : '') .
+				"</td>" ;
+				
+			$list_tbody .= "</tr>";
+		}
+		return $list_tbody . "</tbody>";
+	}
+	
 	/**
 		 * metodo para construir cuerpo del contenido de la vista de listado automaticamente,
 		 * desde los datos del modelo
