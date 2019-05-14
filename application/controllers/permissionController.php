@@ -17,6 +17,12 @@ class permissionController extends Controller{
     function edit_table(){
 		$this->action_edit_table(new Permission(),true);
     }
+	
+	
+	public function save_edit_table(){
+		return Model::save_record(new Permission(),$_POST);
+	}
+	
     public function delete($id){
 		$this->action_delete($id,new Permission());
 	}

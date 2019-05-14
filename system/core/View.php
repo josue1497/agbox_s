@@ -320,9 +320,9 @@ class View{
 			++$i;
 			$list_tbody .= "<tr  class='".$this->model->table_name."_row_".$i."' 
 			".($this->model->crud_config['can_update'] ? 
-				/*" onmouseover='editable_switch_on(\"".$this->model->table_name."\",".$i.")' ".
-				" onmouseout='editable_switch_off(\"".$this->model->table_name."\",".$i.")'  ".*/
-				" onclick='editable_switch_on(\"".$this->model->table_name."\",".$i.")' " : "").
+				/*" onmouseover='editable_switch_on(\"".SERVER_DIR."\",\"".$this->model->table_name."\",".$i.")' ".
+				" onmouseout='editable_switch_off(\"".SERVER_DIR."\",\"".$this->model->table_name."\",".$i.")'  ".*/
+				" onclick='editable_switch_on(\"".SERVER_DIR."\",\"".$this->model->table_name."\",".$i.")' " : "").
 				">" .
 				"<td>" . $i . "</td>";
 				
@@ -358,7 +358,7 @@ class View{
 							".$this->model->table_name."_".$list_field->get_name()."_label_row_".$i."' >". 
 							$text ."</div>" . 
 						"<div class='".$this->model->table_name."_field_row 
-							".$this->model->table_name."_field_row_".$i."' style='display:none;'>".
+							".$this->model->table_name."_field_row_".$i."' row_index='".$i."' style='display:none;'>".
 							$this->build_element($list_field, array($list_field->get_name() => $value))."</div>";
 					$list_tbody .= "</td>";
 				}
@@ -375,11 +375,11 @@ class View{
 						"<div  class='".$this->model->table_name."_field_row 
 							".$this->model->table_name."_field_row_".$i."' style='display:none;'>".
 							('<a id="link_cancel" 
-								href="javascript:editable_switch_off(\''.$this->model->table_name.'\','.$i.')" 
+								href="javascript:editable_switch_off(\''.SERVER_DIR.'\',\''.$this->model->table_name.'\','.$i.')" 
 								class="m-1 btn btn-secondary ">
 								<i class="fas fa-times-circle "></i></a>').
-							Component::save_button($this->model->table_name, $row[$this->model->id_field]) 
-							."</div>" : '') .
+							//Component::save_button($this->model->table_name, $row[$this->model->id_field]) .
+							"</div>" : '') .
 					($this->model->crud_config['can_delete'] ?
 						"<div class='".$this->model->table_name."_label_row 
 							".$this->model->table_name."_label_row_".$i."' >". 

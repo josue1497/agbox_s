@@ -111,7 +111,7 @@ function maketoast(priority, title, message) {
 }
 
 /************ funciones para tablas editables *********/
-function validate_save(class_label){
+function validate_save(class_label,table_name,server_dir){
 	var inputs = $('.'+class_label+' :input');
 	var updated = 0;
 	for(i=0;i<inputs.length;i++){
@@ -120,13 +120,21 @@ function validate_save(class_label){
 			
 			console.log('inputs:'+inputs.length);
 			console.log($('.'+class_label+' :input').serialize());
+			
+			$.post( server_dir + table_name +'/save_edit_table',
+				$('.'+class_label+' :input').serialize(), 
+				function( data ) {
+					console.log(data);
+					console.log('ya persistio');
+			});
+
 			/* si manda a actualizar, marcar como actualizado y romper el for para no recorrer todos los campos innecesariamente*/
 			updated=1;
 			break;
 		}
 	}
 	/* si se actualiza el registro, actualizar los oldvalue de esa linea para evitar que se quede pegado */
-	if(updated=1){
+	if(updated==1){
 		for(i=0;i<inputs.length;i++){
 			if(updated == 1 && $(inputs[i]).attr('old_value')!=$(inputs[i]).attr('new_value')){
 				$(inputs[i]).attr('old_value',$(inputs[i]).attr('new_value'));
@@ -135,17 +143,22 @@ function validate_save(class_label){
 	}
 }
 
-function editable_switch_off(table_name,i){
+var old_i = -1;
+
+function editable_switch_off(server_dir,table_name,old_i,i){
 	if(!$('.'+table_name+'_field_row_'+i).is(':visible')){
 		$('.'+table_name+'_field_row').hide();
 		$('.'+table_name+'_label_row').show();
 		console.log('calling save validation');
-		validate_save(table_name+'_row_'+i);
+		validate_save(table_name+'_row_'+old_i,table_name,server_dir);
 	}
 }
 
-function editable_switch_on(table_name,i){
-	editable_switch_off(table_name,i);
+function editable_switch_on(server_dir,table_name,i){
+	if(old_i == -1)
+		old_i = i;
+	editable_switch_off(server_dir,table_name,old_i,i);
+	old_i = i;
 	$('.'+table_name+'_label_row_'+i).hide();
 	$('.'+table_name+'_field_row_'+i).show();
 }
