@@ -346,10 +346,15 @@ class View{
 					}
 					
 					$list_field->set_label('');
+					$list_field->set_field_html(' 
+						onblur="update_label(\''.$this->model->table_name."_".$list_field->get_name()."_label_row_".$i.'\',$(this).val())" 
+						onkeyup="update_label(\''.$this->model->table_name."_".$list_field->get_name()."_label_row_".$i.'\',$(this).val())" 
+						onchange="update_label(\''.$this->model->table_name."_".$list_field->get_name()."_label_row_".$i.'\',$(this).val())" ');
 					
 					$list_tbody .= 
 						"<div class='".$this->model->table_name."_label_row 
-							".$this->model->table_name."_label_row_".$i."' >". 
+							".$this->model->table_name."_label_row_".$i."
+							".$this->model->table_name."_".$list_field->get_name()."_label_row_".$i."' >". 
 							$text ."</div>" . 
 						"<div class='".$this->model->table_name."_field_row 
 							".$this->model->table_name."_field_row_".$i."' style='display:none;'>".

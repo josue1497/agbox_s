@@ -120,3 +120,7 @@ function editable_switch_on(table_name,i){
 	$('.'+table_name+'_label_row_'+i).hide();
 	$('.'+table_name+'_field_row_'+i).show();
 }
+
+function update_label(class_label,value){
+	$('.'+class_label).html(value);
+}
