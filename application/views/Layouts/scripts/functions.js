@@ -110,17 +110,49 @@ function maketoast(priority, title, message) {
     $.toaster(options);
 }
 
-function editable_switch_off(table_name){
-	$('.'+table_name+'_field_row').hide();
-	$('.'+table_name+'_label_row').show();
+/************ funciones para tablas editables *********/
+function validate_save(class_label){
+	var inputs = $('.'+class_label+' :input');
+	var updated = 0;
+	for(i=0;i<inputs.length;i++){
+		if($(inputs[i]).attr('old_value')!=$(inputs[i]).attr('new_value')){
+			console.log('actualizar: '+class_label);
+			
+			console.log('inputs:'+inputs.length);
+			console.log($('.'+class_label+' :input').serialize());
+			/* si manda a actualizar, marcar como actualizado y romper el for para no recorrer todos los campos innecesariamente*/
+			updated=1;
+			break;
+		}
+	}
+	/* si se actualiza el registro, actualizar los oldvalue de esa linea para evitar que se quede pegado */
+	if(updated=1){
+		for(i=0;i<inputs.length;i++){
+			if(updated == 1 && $(inputs[i]).attr('old_value')!=$(inputs[i]).attr('new_value')){
+				$(inputs[i]).attr('old_value',$(inputs[i]).attr('new_value'));
+			}
+		}
+	}
+}
+
+function editable_switch_off(table_name,i){
+	if(!$('.'+table_name+'_field_row_'+i).is(':visible')){
+		$('.'+table_name+'_field_row').hide();
+		$('.'+table_name+'_label_row').show();
+		console.log('calling save validation');
+		validate_save(table_name+'_row_'+i);
+	}
 }
 
 function editable_switch_on(table_name,i){
-	editable_switch_off(table_name);
+	editable_switch_off(table_name,i);
 	$('.'+table_name+'_label_row_'+i).hide();
 	$('.'+table_name+'_field_row_'+i).show();
 }
 
-function update_label(class_label,value){
+function update_label(class_label,value,e){
 	$('.'+class_label).html(value);
+	e.attr('new_value',value);
+	//console.log('old_value: '+e.attr('old_value')+' | new_value: '+e.attr('new_value'));
 }
+/*********** ***********/

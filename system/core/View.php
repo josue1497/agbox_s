@@ -347,9 +347,10 @@ class View{
 					
 					$list_field->set_label('');
 					$list_field->set_field_html(' 
-						onblur="update_label(\''.$this->model->table_name."_".$list_field->get_name()."_label_row_".$i.'\',$(this).val())" 
-						onkeyup="update_label(\''.$this->model->table_name."_".$list_field->get_name()."_label_row_".$i.'\',$(this).val())" 
-						onchange="update_label(\''.$this->model->table_name."_".$list_field->get_name()."_label_row_".$i.'\',$(this).val())" ');
+						onblur="update_label(\''.$this->model->table_name."_".$list_field->get_name()."_label_row_".$i.'\',$(this).val(),$(this))" 
+						onkeyup="update_label(\''.$this->model->table_name."_".$list_field->get_name()."_label_row_".$i.'\',$(this).val(),$(this))" 
+						onchange="update_label(\''.$this->model->table_name."_".$list_field->get_name()."_label_row_".$i.'\',$(this).val(),$(this))" 
+						old_value="'.$value.'" new_value="'.$value.'" ');
 					
 					$list_tbody .= 
 						"<div class='".$this->model->table_name."_label_row 
@@ -362,11 +363,19 @@ class View{
 					$list_tbody .= "</td>";
 				}
 			}
-			$list_tbody .= "<td class='text-center'>" . ($this->model->crud_config['can_update'] ?
+			
+			$list_tbody .= "<td class='text-center'>" . 
+				('<input 
+				type="hidden" 
+				name="'.$this->model->id_field.'" 
+				id="'.$this->model->id_field.'"
+				value="'.$row[$this->model->id_field].'"				
+				/>').
+					($this->model->crud_config['can_update'] ?
 						"<div  class='".$this->model->table_name."_field_row 
 							".$this->model->table_name."_field_row_".$i."' style='display:none;'>".
 							('<a id="link_cancel" 
-								href="javascript:editable_switch_off(\''.$this->model->table_name.'\')" 
+								href="javascript:editable_switch_off(\''.$this->model->table_name.'\','.$i.')" 
 								class="m-1 btn btn-secondary ">
 								<i class="fas fa-times-circle "></i></a>').
 							Component::save_button($this->model->table_name, $row[$this->model->id_field]) 
