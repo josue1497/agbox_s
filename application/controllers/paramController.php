@@ -27,6 +27,11 @@ class paramController  extends Controller{
     function edit_table(){
 		$this->action_edit_table(new Param(),true);
     }
+	
+	public function save_edit_table(){
+		return Model::save_record(new Param(),$_POST);
+	}
+	
     /**
     * metodo accion create que genera el form para agregar registros
     * 

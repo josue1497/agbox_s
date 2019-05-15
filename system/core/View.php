@@ -222,9 +222,15 @@ class View{
 	* @param editable_list_content contenido de la tabla de datos
 	*/
 	public function generate_editable_list($editable_list_content){
-		
+		return 
+		($this->model->crud_config['can_create'] ?
+		'<a id="link_create" href="javascript:add_row(\''.SERVER_DIR.'\',\''.$this->model->table_name.'\')" class="m-1 btn btn-primary "><i class="fas fa-plus "></i></a>'
+		:'').
+		/*
 		return ($this->model->crud_config['can_create'] ?
-				Component::add_button($this->model->table_name) : '') .
+				Component::add_button($this->model->table_name)
+				: '') .
+		*/
 		"<div class='row col-md-12 centered'>" .
 			"<table id='table_".$this->model->table_name."' ".
 			"class='table table-striped custab table-sm data-table'>" .
@@ -324,7 +330,7 @@ class View{
 				" onmouseout='editable_switch_off(\"".SERVER_DIR."\",\"".$this->model->table_name."\",".$i.")'  ".*/
 				" onclick='editable_switch_on(\"".SERVER_DIR."\",\"".$this->model->table_name."\",".$i.")' " : "").
 				">" .
-				"<td>" . $i . "</td>";
+				"<td><div class='tr_index' ><span>" . $i . "</span></div></td>";
 				
 			foreach ($this->model->table_fields as $list_field) {
 				if ($list_field->get_visible_grid()) {
@@ -353,12 +359,18 @@ class View{
 						old_value="'.$value.'" new_value="'.$value.'" ');
 					
 					$list_tbody .= 
-						"<div class='".$this->model->table_name."_label_row 
+						"<div 
+							class='".$this->model->table_name."_label_row 
 							".$this->model->table_name."_label_row_".$i."
-							".$this->model->table_name."_".$list_field->get_name()."_label_row_".$i."' >". 
+							".$this->model->table_name."_".$list_field->get_name()."_label_row_".$i."' 
+							field_name='".$list_field->get_name()."'>". 
 							$text ."</div>" . 
-						"<div class='".$this->model->table_name."_field_row 
-							".$this->model->table_name."_field_row_".$i."' row_index='".$i."' style='display:none;'>".
+						"<div 
+							class='".$this->model->table_name."_field_row 
+							".$this->model->table_name."_field_row_".$i."' 
+							field_name='".$list_field->get_name()."
+							row_index='".$i."' 
+							style='display:none;'>".
 							$this->build_element($list_field, array($list_field->get_name() => $value))."</div>";
 					$list_tbody .= "</td>";
 				}
@@ -389,7 +401,12 @@ class View{
 				
 			$list_tbody .= "</tr>";
 		}
-		return $list_tbody . "</tbody>";
+		return $list_tbody . "</tbody> 
+			<input type='hidden' 
+			name='".$this->model->table_name."_rows' 
+			id='".$this->model->table_name."_rows'
+			value='".$i."'
+			/>";
 	}
 	
 	/**

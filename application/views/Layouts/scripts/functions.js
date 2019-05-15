@@ -168,4 +168,78 @@ function update_label(class_label,value,e){
 	e.attr('new_value',value);
 	//console.log('old_value: '+e.attr('old_value')+' | new_value: '+e.attr('new_value'));
 }
+
+function add_row(server_dir,table_name){
+	var tope = $('#'+table_name+'_rows').val();
+	console.log('tope: '+tope);	
+	
+	var next_id = (parseInt(tope)+1);
+	console.log('next_id: '+next_id);
+
+	var $tr =  $('.'+table_name+'_row_'+tope);
+	var $clone = $tr.clone();
+	
+	$clone.find('.tr_index').html(next_id);
+	$clone.find(':input').val('');
+	
+	$clone.find(':text').val('');
+	$clone.find('.'+table_name+'_label_row').html('');
+	
+	$clone.find('.'+table_name+'_label_row_'+tope).each(function(){
+		console.log('elemento: '+$(this).attr('field_name'));
+		
+		console.log('addClass: '+table_name+'_label_row_'+next_id);
+		$(this).addClass(table_name+'_label_row_'+next_id);
+		console.log('removeClass: '+table_name+'_label_row_'+tope);
+		$(this).removeClass(table_name+'_label_row_'+tope);
+		
+		console.log('addClass: '+table_name+'_'+$(this).attr('field_name')+'_label_row_'+next_id);
+		$(this).addClass(table_name+'_'+$(this).attr('field_name')+'_label_row_'+next_id);
+		console.log('removeClass: '+table_name+'_'+$(this).attr('field_name')+'_label_row_'+tope);
+		$(this).removeClass(table_name+'_'+$(this).attr('field_name')+'_label_row_'+tope);
+		
+	});
+	
+	$clone.find('.'+table_name+'_field_row_'+tope).each(function(){
+		
+		console.log('addClass: '+table_name+'_field_row_'+next_id);
+		$(this).addClass(table_name+'_field_row_'+next_id);
+		console.log('removeClass: '+table_name+'_field_row_'+tope);
+		$(this).removeClass(table_name+'_field_row_'+tope);
+		
+		$(this).attr('row_index',next_id);
+		
+		$(this).find(':input').each(function(){
+			$(this).attr('onblur','');	
+			$(this).blur(function(){
+				update_label(table_name+'_'+$(this).attr('name')+ '_label_row_'+next_id,$(this).val(),$(this));
+			});
+			$(this).attr('onchange','');	
+			$(this).change(function(){
+				update_label(table_name+'_'+$(this).attr('name')+ '_label_row_'+next_id,$(this).val(),$(this));
+			});
+			$(this).attr('onkeyup','');	
+			$(this).keyup(function(){
+				update_label(table_name+'_'+$(this).attr('name')+ '_label_row_'+next_id,$(this).val(),$(this));
+			});
+		})
+		
+	});
+	
+	
+	console.log('addClass: '+table_name+'_row_'+next_id);
+	$clone.addClass(table_name+'_row_'+next_id);
+	console.log('removeClass: '+table_name+'_row_'+tope);
+	$clone.removeClass(table_name+'_row_'+tope);
+	
+	$clone.attr('onclick','');	
+	$clone.click(function(){
+		editable_switch_on(server_dir,table_name,next_id);
+	});
+	
+	
+	$tr.after($clone);
+	
+	//copy tr, add tr to tbody, increment ids, increment tope
+}
 /*********** ***********/
