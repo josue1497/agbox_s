@@ -17,10 +17,17 @@ class configurationController extends Controller
 
        if(!empty($_POST)){
            $data=$_POST;
-           $res= array_merge($d["record"],$data);
+           if($d["record"]){
+               $res= array_merge($d["record"],$data);
+           }
+            else{
+                 $res=$data;
+                 $res['user_id']=Session::get('user_id');
+            }
+               
 
             if($this->model->save_record($this->model,$res)){
-                header("location: ".CoreUtils::base_url().'configuration');
+                header("location: ".CoreUtils::base_url().'index/index');
             }
        }
        

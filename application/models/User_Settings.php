@@ -55,4 +55,10 @@ class User_Settings extends Model{
 		
 		$this->init();
 	}
+
+	public static function count_user_settings($user_id){
+		$record = Model::get_sql_data("select COUNT(*) as cant from user_settings where user_id=?", array('id'=>$user_id) , false);
+
+			return $record['cant'];
+	}
 }
