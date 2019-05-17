@@ -149,7 +149,10 @@
                             });
 
                             function delete_group(group_id){
-                                   alert(group_id);
+                                   $.post( '".SERVER_DIR."groups/delete_group',
+                                          {'group_id':'".$this_group['id']."'}, function( data ) {
+                                                 maketoast('success', 'Exitoso!', data);
+                                          });
                             }
 
                             ");

@@ -83,7 +83,11 @@ class Session {
         Session::set('username',$user_record['username']);
         Session::set('user_profile_photo',$user_record['profile_photo']);
         Session::set('role_id',$user_record['user_level_id']);
-        Session::set('lan',$user_record['lan']);
+        Session::set('date_format_primary',$user_record['date_format_primary']);
+        Session::set('date_format_short',$user_record['date_format_short']);
+        Session::set('first_day_week',$user_record['first_day_week']);
+        Session::set('locale',$user_record['locale']);
+        Session::set('language',$user_record['language']);
     }
 	
 	/**

@@ -43,10 +43,19 @@ class indexController extends Controller{
 		if(isset($_POST['login_user'])){
 			$this->record = array();
 
-			$row = $this->model->get_by_property(array('username'=>$_POST['email']));
+			// $row = $this->model->get_by_property(array('username'=>$_POST['email']));
+			$record = Model::get_sql_data("select u.*,df.value as date_format_primary,df2.value date_format_short, d.value as first_day_week,l.locale as 'locale', l.value as 'language' from `user` u 
+			inner join user_settings us on (us.user_id=u.id)
+			inner join `date_format` df on (df.id=us.date_format_id)
+			inner join `date_format` df2 on (df2.id=us.date_format_short_id)
+			inner join `day` d on (us.first_day_week_id=d.id)
+			inner join `language` l on (l.id=us.language_id)
+			where u.username=? or u.mail=?", array('username'=>$_POST['email'],'mail'=>$_POST['email']));
+
+			$row = $record[0];
+
 			if(isset($row) && isset($row['id'])){
 				if($row['password'] == $_POST['password']){
-					$row['lan']=isset($_POST['language'])?$_POST['language']:'';
 					Session::set_user_session_data($row);
 					header('location: '.CoreUtils::base_url().'index/index');
 				}else{
