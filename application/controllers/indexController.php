@@ -25,6 +25,10 @@ class indexController extends Controller{
 
 		$this->view->add_script_js($js);
 
+	if(User_Settings::count_user_settings(Session::get('user_id'))==='0'){
+			header("location: ".CoreUtils::base_url().'configuration');
+		}
+
 	if(Affiliate::count_affilate_groups(Session::get('user_id'))==='0'){
 		header("location: ".CoreUtils::base_url().'affiliate/items');
 	}
@@ -44,15 +48,20 @@ class indexController extends Controller{
 			$this->record = array();
 
 			// $row = $this->model->get_by_property(array('username'=>$_POST['email']));
-			$record = Model::get_sql_data("select u.*,df.value as date_format_primary,df2.value date_format_short, d.value as first_day_week,l.locale as 'locale', l.value as 'language' from `user` u 
+			$record = Model::get_sql_data("select u.*,df.value as date_format_primary,df2.value date_format_short,
+			 d.value as first_day_week,l.locale as 'locale', l.value as 'language' from `user` u 
 			inner join user_settings us on (us.user_id=u.id)
 			inner join `date_format` df on (df.id=us.date_format_id)
 			inner join `date_format` df2 on (df2.id=us.date_format_short_id)
 			inner join `day` d on (us.first_day_week_id=d.id)
 			inner join `language` l on (l.id=us.language_id)
-			where u.username=? or u.mail=?", array('username'=>$_POST['email'],'mail'=>$_POST['email']));
+			where u.username=? or u.mail=?", array('username'=>$_POST['email'],'mail'=>$_POST['email']) , false);
 
-			$row = $record[0];
+			$row = empty($record)? $this->model->get_by_property(array('username'=>$_POST['email'])):$record;
+
+			if(!$row){
+				$row = $this->model->get_by_property(array('mail'=>$_POST['email']));
+			}
 
 			if(isset($row) && isset($row['id'])){
 				if($row['password'] == $_POST['password']){

@@ -75,19 +75,19 @@ class Session {
     public static function set_user_session_data($user_record){
 		Session::getNdelete('log_out');
 		Session::set('logged_in',true);
-		Session::set('user_id',$user_record['id']);
-        Session::set('user_email',$user_record['mail']);        
-        Session::set('username',$user_record['username']);
-        Session::set('user_names',$user_record['names']);
-        Session::set('user_lastnames',$user_record['lastnames']);
-        Session::set('username',$user_record['username']);
-        Session::set('user_profile_photo',$user_record['profile_photo']);
-        Session::set('role_id',$user_record['user_level_id']);
-        Session::set('date_format_primary',$user_record['date_format_primary']);
-        Session::set('date_format_short',$user_record['date_format_short']);
-        Session::set('first_day_week',$user_record['first_day_week']);
-        Session::set('locale',$user_record['locale']);
-        Session::set('language',$user_record['language']);
+		Session::set('user_id',isset($user_record['id'])?$user_record['id']:'');
+        Session::set('user_email',isset($user_record['mail'])?$user_record['mail']:'');        
+        Session::set('username',isset($user_record['username'])?$user_record['username']:'');
+        Session::set('user_names',isset($user_record['names'])?$user_record['names']:'');
+        Session::set('user_lastnames',isset($user_record['lastnames'])?$user_record['lastnames']:'');
+        Session::set('username',isset($user_record['username'])?$user_record['username']:'');
+        Session::set('user_profile_photo',isset($user_record['profile_photo'])?$user_record['profile_photo']:'');
+        Session::set('role_id',isset($user_record['user_level_id'])?$user_record['user_level_id']:'');
+        Session::set('date_format_primary',isset($user_record['date_format_primary'])?$user_record['date_format_primary']:'');
+        Session::set('date_format_short',isset($user_record['date_format_short'])?$user_record['date_format_short']:'');
+        Session::set('first_day_week',isset($user_record['first_day_week'])?$user_record['first_day_week']:'');
+        Session::set('locale',isset($user_record['locale'])?$user_record['locale']:'');
+        Session::set('language',isset($user_record['language'])?$user_record['language']:'');
     }
 	
 	/**
@@ -101,7 +101,12 @@ class Session {
 		Session::delete('user_id');
 		Session::delete('role_id');
 		Session::delete('user_email');
-		Session::delete('lan');
+        Session::delete('lan');
+        Session::delete('date_format_primary');
+        Session::delete('date_format_short');
+        Session::delete('first_day_week');
+        Session::delete('locale');
+        Session::delete('language');
     }
 }
 ?>

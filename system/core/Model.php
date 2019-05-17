@@ -390,7 +390,7 @@ class Model
 	/**
 	*
 	*/
-	public static function get_sql_data($sql, array $params=null){
+	public static function get_sql_data($sql, array $params=null, $all=true){
 		$req = Database::getBdd()->prepare($sql);
 
 		$i=1;
@@ -401,7 +401,10 @@ class Model
 	}
 
 		$req->execute();
-		return $req->fetchAll(PDO::FETCH_ASSOC);
+		if($all){
+			return $req->fetchAll(PDO::FETCH_ASSOC);
+		}
+		return $req->fetch(PDO::FETCH_ASSOC);
 
 	}
 
