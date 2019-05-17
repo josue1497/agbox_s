@@ -164,12 +164,8 @@ class groupsController  extends Controller{
 		$this->render('list_groups');
 	}
 
-
+	public function delete_group(){
+					echo json_encode($_POST);
+	}
 }
-
- 
-						 
-					
-					
-					
 ?>

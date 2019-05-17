@@ -11,8 +11,20 @@ class configurationController extends Controller
      */
     public function index()
     {
-        $this->init(new User());
+        $this->init(new User_Settings());
 
+        $d["record"] = $this->model->get_by_property(array('user_id'=>Session::get('user_id')));
+
+       if(!empty($_POST)){
+           $data=$_POST;
+           $res= array_merge($d["record"],$data);
+
+            if($this->model->save_record($this->model,$res)){
+                header("location: ".CoreUtils::base_url().'configuration');
+            }
+       }
+       
+		$this->set($d);
         $this->model->table_label = 'Configuracion';
         $this->render("user_configuration");
     }

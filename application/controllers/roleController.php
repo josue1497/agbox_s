@@ -22,14 +22,23 @@ class roleController extends Controller{
     }
     
     /**
-	 * metdo accion edit que genra el form para editar registros
+	 * metdo accion edit que genera el form para editar registros
 	 * 
 	 * @return void
 	 */
     function edit($id){
 		$this->action_edit($id,new Role(),$_POST,true);
     }
-
+	
+	/**
+	 * metdo accion edit que genera una tabla editable de registros
+	 * 
+	 * @return void
+	 */
+    function edit_table(){
+		$this->action_edit_table(new Role(),true);
+    }
+	
     /**
 	 * metodo accion delete que elimina un registro
 	 * @return type
