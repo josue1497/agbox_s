@@ -47,7 +47,7 @@ function generate_select_user(){
     $html='<div class="form-group">
     <select multiple required name="user_approved_id[]" id="user_approved_id" class="form-control select2">';
     foreach($users as $user){
-        $html.=' <option value="'.$user['id'].'">'.$user['names'].' '.$user['lastnames'].'</option>';
+        $html.=' <option value="'.$user['id'].'" selected>'.$user['names'].' '.$user['lastnames'].'</option>';
     }
     $html.='</select>
 </div>';

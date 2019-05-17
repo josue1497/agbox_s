@@ -76,7 +76,7 @@ function generate_content($controller, $filename = null, $record = null)
                console.log(data);
                if(''!==data && 'fail'!==data){
                 maketoast('success', 'Exitoso!', 'Se ha Guardado su configuración'); 
-                location.href='" . SERVER_DIR . "index/index';
+                // location.href='" . SERVER_DIR . "index/index';
 
                }else{
                 maketoast('danger', 'Error!', 'No se ha Guardado la Configuración'); 
